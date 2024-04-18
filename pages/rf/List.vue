@@ -67,7 +67,7 @@ const pageCount = computed(() => {
 <template>
 	<yhlx-main-container>
 		<template v-slot:append>
-			<CustomerAdd location="Toolbar"/>
+			<CustomerAdd/>
 		</template>
 		<v-data-table
 			style="flex: 1;"

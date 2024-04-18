@@ -24,10 +24,17 @@ const icon = ref("")
 
 onMounted(() => {
 	console.log(props.location);
-	if (props.businessType?.startsWith("Add")) {
+	if (props.businessType === "Add") {
 		color.value = "warning";
 		icon.value = "mdi-plus";
-	} else {
+	}
+	else if (props.businessType === "Primary") {
+		color.value = "success";
+	}
+	else if (props.businessType === "Close") {
+		color.value = "error";
+	}
+	else {
 		color.value = 'success'
 	}
 })
