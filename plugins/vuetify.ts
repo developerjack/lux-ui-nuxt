@@ -142,6 +142,7 @@ export default defineNuxtPlugin((app) => {
     defaults: {
       VBtn: {
         rounded: "md",
+	      class: "text-none",
       },
       VCheckbox: {
         color: "primary",

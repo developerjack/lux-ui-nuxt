@@ -8,7 +8,7 @@ import { Icon } from "@iconify/vue";
 const router = useRouter();
 
 const handleLogout = () => {
-  router.push("auth/login");
+  router.push("/auth/login");
 };
 
 const navs = [

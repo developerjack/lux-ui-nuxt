@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 const openGithubSite = () => {
-  window.open("https://github.com/yangjiakai", "_blank");
+  window.open("https://github.com/developerjack", "_blank");
 };
 </script>
 
@@ -21,12 +21,12 @@ const openGithubSite = () => {
         <v-btn class="mr-2" size="40" color="white" icon>
           <Icon width="30" icon="line-md:github-loop" />
         </v-btn>
-        Yang J.K.
+        Li Yuanhan
       </v-card-title>
       <v-card-subtitle> </v-card-subtitle>
       <v-card-text>
         <div><b>Github:</b></div>
-        <div>github.com/yangjiakai</div>
+        <div>github.com/developerjack</div>
       </v-card-text>
       <v-card-actions>
         <v-btn
