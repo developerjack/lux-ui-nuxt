@@ -2,7 +2,7 @@
 	<v-btn v-if="location === 'Toolbar' && icon.length > 0" icon>
 		<v-icon :color="color" :icon="icon" size="large" />
 	</v-btn>
-	<v-btn v-else :color="color" v-bind="props">
+	<v-btn v-else :color="color" :variant="variant" class="px-4" v-bind="props">
 		<slot/>
 	</v-btn>
 	
@@ -19,20 +19,22 @@ const props = defineProps({
 		default: 'Body'
 	},
 });
-const color = ref("")
-const icon = ref("")
+const color = ref("");
+const icon = ref("");
+const variant = ref("");
 
 onMounted(() => {
-	console.log(props.location);
 	if (props.businessType === "Add") {
 		color.value = "warning";
 		icon.value = "mdi-plus";
 	}
 	else if (props.businessType === "Primary") {
 		color.value = "success";
+		variant.value = "elevated";
 	}
 	else if (props.businessType === "Close") {
 		color.value = "error";
+		variant.value = "tonal";
 	}
 	else {
 		color.value = 'success'

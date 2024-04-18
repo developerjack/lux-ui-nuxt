@@ -14,9 +14,7 @@
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="error" @click="dialog = false" variant="tonal" class="px-4">
-						Close
-					</v-btn>
+					<yhlx-btn business-type="Close" variant="text" @click="dialog = false">Close</yhlx-btn>
 					<yhlx-btn business-type="Primary" @click="dialog = false">Save</yhlx-btn>
 				</v-card-actions>
 			</v-container>
@@ -25,11 +23,9 @@
 </template>
 <script setup lang="ts">
 import YhlxBtn from "@/components/YhlxBtn.vue";
-import {Icon} from "@iconify/vue";
 const props = defineProps({
 	location: String, // 参考YhlxBtn
 	title: String, // 按钮标题
 });
-
 const dialog = ref(false);
 </script>
