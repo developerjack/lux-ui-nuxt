@@ -1,4 +1,3 @@
-
 export default [
   {
     icon: "solar:streets-bold-duotone",
@@ -8,12 +7,12 @@ export default [
       {
         icon: "solar:slider-minimalistic-horizontal-line-duotone",
         text: "Customer",
-        link: "/customer/list",
+        link: "/customer/customer",
       },
 	    {
 		    icon: "solar:list-up-bold-duotone",
 		    text: "RF Card",
-		    link: "/rf/list",
+		    link: "/customer/rf",
 	    }
     ],
   },

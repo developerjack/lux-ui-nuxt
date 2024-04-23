@@ -7,6 +7,7 @@ import menuWidget from "./menus/widget.menu";
 import menuChart from "./menus/chart.menu";
 import menuTable from "./menus/table.menu";
 import menuCustomer from "./menus/customer.menu";
+import systemMenu from "./menus/system.menu";
 import Menu = NavigationConfig.Menu;
 
 function getCurrentMenu(items: Menu[], path: string) : Menu {
@@ -40,6 +41,11 @@ export default {
 	  {
 		  text: "Customer",
 		  items: menuCustomer,
+	  },
+	  
+	  {
+			text: "System",
+		  items: systemMenu
 	  },
 
     {

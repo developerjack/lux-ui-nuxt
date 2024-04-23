@@ -22,7 +22,7 @@
 	</v-dialog>
 </template>
 <script setup lang="ts">
-import YhlxBtn from "@/components/YhlxBtn.vue";
+import YhlxBtn from "@/components/common/YhlxBtn.vue";
 const props = defineProps({
 	location: String, // 参考YhlxBtn
 	title: String, // 按钮标题

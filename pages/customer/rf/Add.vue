@@ -1,5 +1,5 @@
 <template>
-	<yhlx-add-dialog location="Toolbar" title="Add Customer">
+	<yhlx-add-dialog location="Toolbar" title="Add RF Card">
 		<template v-slot:content>
 			<v-row>
 				<v-col cols="12" sm="6">

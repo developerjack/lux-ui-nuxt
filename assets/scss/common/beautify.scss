@@ -73,6 +73,9 @@
   color: rgba(var(--v-theme-grey-800)) !important;
   font-weight: bold !important;
   font-size: 18px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cursor-pointer {
