@@ -74,8 +74,6 @@ const total = ref(0);
 const itemsPerPage = ref(10);
 const headers = ref([
 	{ title: "Transaction Id", key: "transactionId" },
-	{ title: "Customer", key: "customerName" },
-	{ title: "Email", key: "customerEmail" },
 	{ title: "Location", key: "locationName" },
 	{ title: "Charging Station", key: "chargingStationName" },
 	{ title: "Energy", key: "energy" },
