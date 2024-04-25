@@ -11,7 +11,9 @@
 				</v-btn>
 			</v-toolbar>
 			<v-divider />
-			<slot />
+			<div class="overflow-hidden">
+				<slot />
+			</div>
 		</v-card>
 	</div>
 </template>

@@ -16,4 +16,10 @@ export default [
 			}
 		],
 	},
+	{
+		icon: "solar:library-bold-duotone",
+		text: "Agency",
+		regex: /^\/landing/,
+		link: "/agency",
+	},
 ];

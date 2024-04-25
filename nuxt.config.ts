@@ -1,5 +1,6 @@
 import { createResolver } from "@nuxt/kit";
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import { viteMockServe } from "vite-plugin-mock";
 
 const { resolve } = createResolver(import.meta.url);
 // PWA Config
@@ -30,6 +31,10 @@ export default defineNuxtConfig({
           vuetify({
             styles: { configFile: resolve("/assets/scss/variables.scss") },
           }));
+				config.plugins.push(viteMockServe({
+					logger: false,
+					mockPath: "./mock/",
+				}))
       });
     },
     ['@nuxtjs/google-fonts', {

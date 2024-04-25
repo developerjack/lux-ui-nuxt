@@ -62,7 +62,7 @@ const permissions = ref([
 		<template v-slot:append>
 			<yhlx-btn business-type="Add" location="Toolbar" />
 		</template>
-		<div class="h-full d-flex overflow-hidden">
+		<div class="h-full d-flex">
 			<v-list class="left px-1 py-4">
 				<v-list-item v-for="(item, i) in menuItems" :key="i" :value="item" color="primary" rounded="shaped">
 					<v-list-item-title class="font-weight-bold" v-text="item.title" />

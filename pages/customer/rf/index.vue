@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import CustomerAdd from './Add.vue';
+const router = useRouter();
 const page = ref(1);
 const itemsPerPage = ref(5);
 const headers = ref([
@@ -62,6 +63,9 @@ const desserts = ref([
 const pageCount = computed(() => {
   return Math.ceil(desserts.value.length / itemsPerPage.value);
 });
+function rowClick(event: PointerEvent, { item }) {
+	router.push("rf/" + item.idTag);
+}
 </script>
 
 <template>
@@ -74,10 +78,12 @@ const pageCount = computed(() => {
 			v-model:page="page"
 			:headers="headers"
 			:items="desserts"
-			:items-per-page="itemsPerPage">
+			:items-per-page="itemsPerPage"
+			@click:row="rowClick"
+		>
 			<template v-slot:bottom>
 				<div class="text-center pt-2 pb-4">
-					<v-pagination v-model="page" :length="pageCount"></v-pagination>
+					<v-pagination v-model="page" :length="pageCount" />
 				</div>
 			</template>
 		</v-data-table>
