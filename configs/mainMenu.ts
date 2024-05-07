@@ -81,6 +81,16 @@ export default {
     }
   ],
 	getCurrentMenu() : Menu {
-		return getCurrentMenu(this.menu, useRouter().currentRoute.value.path);
+		let path = useRouter().currentRoute.value.path;
+		let menu = getCurrentMenu(this.menu, path);
+		while (!menu || !menu.text) {
+			if (!path.concat("/")) {
+				break;
+			}
+			const idx = path.lastIndexOf("/");
+			path = path.substring(0, idx);
+			menu = getCurrentMenu(this.menu, path);
+		}
+		return menu;
 	}
 };

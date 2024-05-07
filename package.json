@@ -16,6 +16,7 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/google-fonts": "^3.0.2",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
+    "@types/mockjs": "^1.0.10",
     "@vitest/ui": "^1.0.1",
     "eslint": "^8.55.0",
     "happy-dom": "^12.9.0",

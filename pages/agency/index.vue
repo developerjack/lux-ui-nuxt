@@ -83,7 +83,6 @@ const pageCount = computed(() => {
 			<CustomerAdd location="Toolbar"/>
 		</template>
 		<v-data-table
-			style="flex: 1;"
 			v-model:page="page"
 			:headers="headers"
 			:items="desserts"

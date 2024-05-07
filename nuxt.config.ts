@@ -34,6 +34,7 @@ export default defineNuxtConfig({
 				config.plugins.push(viteMockServe({
 					logger: false,
 					mockPath: "./mock/",
+					watchFiles: false
 				}))
       });
     },
