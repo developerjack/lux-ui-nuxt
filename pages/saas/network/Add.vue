@@ -1,18 +1,18 @@
 <template>
-	<yhlx-add-dialog location="Toolbar" title="Add Agency">
+	<yhlx-add-dialog location="Toolbar" title="Add Network">
 		<template v-slot:content>
 			<v-row>
-				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Email*" placeholder="johndoe@gmail.com" hint="Please enter email, the email as login info." required />
-				</v-col>
-				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Password*" type="password" required></yhlx-text-field>
-				</v-col>
 				<v-col cols="12" sm="6">
 					<yhlx-text-field label="Name*" required />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Phone number" hint="example of persistent helper text" required />
+					<v-autocomplete :items="['Internal', 'External']" label="Type*" variant="outlined" />
+				</v-col>
+				<v-col cols="12" sm="6">
+					<v-autocomplete :items="['eMSP', 'CPO']" label="Network Type*" variant="outlined" />
+				</v-col>
+				<v-col cols="12" sm="6">
+					<yhlx-text-field label="Description" required />
 				</v-col>
 			</v-row>
 		</template>

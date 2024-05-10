@@ -20,7 +20,6 @@ const props = defineProps({
           <v-list-item
             v-if="!menuItem.items"
             :to="menuItem.link"
-            density="compact"
             color="primary"
           >
             <template v-slot:prepend>
@@ -49,7 +48,6 @@ const props = defineProps({
               v-for="subMenuItem in menuItem.items"
               :key="subMenuItem.key"
               :to="subMenuItem.link"
-              density="compact"
               color="primary"
             >
               <template v-slot:prepend>

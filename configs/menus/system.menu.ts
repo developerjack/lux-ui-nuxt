@@ -2,24 +2,22 @@ export default [
 	{
 		icon: "solar:streets-bold-duotone",
 		text: "Admin",
-		regex: /^\/landing/,
 		items: [
 			{
 				icon: "solar:slider-minimalistic-horizontal-line-duotone",
 				text: "Admin",
-				link: "/admin/admin",
+				link: "/system/admin/admin",
 			},
 			{
 				icon: "solar:list-up-bold-duotone",
 				text: "Role",
-				link: "/admin/role",
+				link: "/system/admin/role",
 			}
 		],
 	},
 	{
 		icon: "solar:library-bold-duotone",
-		text: "Agency",
-		regex: /^\/landing/,
-		link: "/agency",
+		text: "Agent",
+		link: "/system/agent",
 	},
 ];

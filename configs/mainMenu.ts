@@ -6,7 +6,8 @@ import menuWidget from "./menus/widget.menu";
 // import menuForm from "./menus/form.menu";
 import menuChart from "./menus/chart.menu";
 import menuTable from "./menus/table.menu";
-import menuCustomer from "./menus/customer.menu";
+import menuSaaS from "./menus/saas.menu";
+import menuEMSP from "./menus/emsp.menu";
 import menuSystem from "./menus/system.menu";
 import Menu = NavigationConfig.Menu;
 
@@ -39,8 +40,13 @@ export default {
     },
 	  
 	  {
-		  text: "Customer",
-		  items: menuCustomer,
+		  text: "SaaS",
+		  items: menuSaaS,
+	  },
+	  
+	  {
+		  text: "eMSP",
+		  items: menuEMSP,
 	  },
 	  
 	  {
