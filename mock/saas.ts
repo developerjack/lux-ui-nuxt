@@ -1,5 +1,5 @@
 import { apiPageResult } from "./mock";
-
+import { countryNameEnums, currencyNameEnums, statusNameEnums, networkTypeEnums, belongTypeEnums } from "@/data/data";
 
 const MockAPI = [
 	{
@@ -8,9 +8,23 @@ const MockAPI = [
 		response: () => {
 			return apiPageResult({
 				"name": "@name",
-				"type|1": ['Internal', 'External'],
-				"networkType|1": ['eMSP', 'CPO'],
+				"belongType|1": belongTypeEnums,
+				"networkType|1": networkTypeEnums,
 				"description": "The network from China.",
+			});
+		}
+	},
+	{
+		url: "/api/saas/emsp",
+		method: "get",
+		response: () => {
+			return apiPageResult({
+				"name": "@name",
+				"countryName|1": countryNameEnums,
+				"partyId|1": ["YHLX", "ICS", "EMES", "HBC", "NEO"],
+				"currency|1": currencyNameEnums,
+				"expiryTime": "@datetime('yyyy-MM-dd')",
+				"status|1": statusNameEnums,
 			});
 		}
 	},

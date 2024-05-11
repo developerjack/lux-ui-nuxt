@@ -15,10 +15,10 @@
 					<yhlx-text-field label="Phone number" hint="example of persistent helper text" required />
 				</v-col>
 				<v-col cols="12">
-					<v-autocomplete :items="[
+					<yhlx-select :items="[
             'Admin', 'Operator', 'Maintainer', 'Accountant', 'Device Manager',
              'Auditor', 'Company Manager',
-          ]" label="Role" multiple variant="outlined" />
+          ]" label="Role" multiple />
 				</v-col>
 			</v-row>
 		</template>
@@ -28,4 +28,5 @@
 <script setup lang="ts">
 import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
 import YhlxTextField from "@/components/common/YhlxTextField.vue";
+import YhlxSelect from "@/components/common/YhlxSelect.vue";
 </script>

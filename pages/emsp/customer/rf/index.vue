@@ -1,7 +1,7 @@
 <template>
 	<yhlx-main-container>
 		<template v-slot:append>
-			<CustomerAdd/>
+			<DialogAdd/>
 		</template>
 		<v-data-table :headers="headers" :items="items" @click:row="rowClick" />
 	</yhlx-main-container>
@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
-import CustomerAdd from './Add.vue';
+import DialogAdd from './Add.vue';
 import axios from "axios";
 
 const router = useRouter();

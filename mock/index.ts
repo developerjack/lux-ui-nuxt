@@ -1,5 +1,6 @@
 import { apiMergeResult, apiPageResult } from "./mock";
 import saas from "./saas";
+import { statusNameEnums } from "@/data/data";
 
 const MockAPI = [
 	{
@@ -11,7 +12,7 @@ const MockAPI = [
 				"email": "@email",
 				"phoneNumber": "@phone",
 				"age|20-30": 23,
-				"status|1": ['Enable', 'Disable'],
+				"status|1": statusNameEnums,
 			});
 		}
 	},
@@ -25,7 +26,7 @@ const MockAPI = [
 				"customerName": "@name",
 				"customerEmail": "@email",
 				"expiryTime": "@datetime('yyyy-MM-dd')",
-				"status|1": ['Enable', 'Disable'],
+				"status|1": statusNameEnums,
 			});
 		}
 	},
@@ -69,7 +70,7 @@ const MockAPI = [
 				"name": "@name",
 				"email": "@email",
 				"phoneNumber": "@phone",
-				"status|1": ['Enable', 'Disable'],
+				"status|1": statusNameEnums,
 			});
 		}
 	},
@@ -82,7 +83,7 @@ const MockAPI = [
 				"email": "@email",
 				"phoneNumber": "@phone",
 				"authNumber|1-10": 3,
-				"status|1": ['Enable', 'Disable'],
+				"status|1": statusNameEnums,
 			});
 		}
 	},

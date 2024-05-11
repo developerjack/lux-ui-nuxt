@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CustomerAdd from './Add.vue';
+import DialogAdd from './Add.vue';
 import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
 
@@ -20,7 +20,7 @@ axios.get('/api/agent').then(response => {
 <template>
 	<yhlx-main-container>
 		<template v-slot:append>
-			<CustomerAdd location="Toolbar"/>
+			<DialogAdd location="Toolbar"/>
 		</template>
 		<v-data-table :headers="headers" :items="items" />
 	</yhlx-main-container>

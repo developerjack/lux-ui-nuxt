@@ -1,18 +1,21 @@
 <template>
-	<yhlx-add-dialog location="Toolbar" title="Add Network">
+	<yhlx-add-dialog location="Toolbar" title="Add eMSP">
 		<template v-slot:content>
 			<v-row>
 				<v-col cols="12" sm="6">
 					<yhlx-text-field label="Name*" required />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-select :items="['Internal', 'External']" label="Type*" />
+					<yhlx-select label="Country*" :items="countryNameEnums" />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-select :items="['eMSP', 'CPO']" label="Network Type*" variant="outlined" />
+					<yhlx-text-field label="Party ID*" required />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Description" required />
+					<yhlx-select label="Currency*" :items="currencyNameEnums" />
+				</v-col>
+				<v-col cols="12" sm="6">
+					<yhlx-text-field label="Expiry Time" type="date" />
 				</v-col>
 			</v-row>
 		</template>
@@ -23,4 +26,5 @@
 import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
 import YhlxTextField from "@/components/common/YhlxTextField.vue";
 import YhlxSelect from "@/components/common/YhlxSelect.vue";
+import { countryNameEnums, currencyNameEnums } from "@/data/data";
 </script>
