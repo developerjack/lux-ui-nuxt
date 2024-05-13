@@ -1,5 +1,5 @@
 import { apiPageResult } from "./mock";
-import { countryNameEnums, currencyNameEnums, statusNameEnums, networkTypeEnums, belongTypeEnums } from "@/data/data";
+import { countryNameEnums, currencyNameEnums, statusNameEnums, networkTypeEnums, belongTypeEnums, companyTypeEnums } from "@/data/data";
 
 const MockAPI = [
 	{
@@ -23,6 +23,7 @@ const MockAPI = [
 				"countryName|1": countryNameEnums,
 				"partyId|1": ["YHLX", "ICS", "EMES", "HBC", "NEO"],
 				"currency|1": currencyNameEnums,
+				"companyType|1": companyTypeEnums,
 				"expiryTime": "@datetime('yyyy-MM-dd')",
 				"status|1": statusNameEnums,
 			});

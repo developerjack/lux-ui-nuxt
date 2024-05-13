@@ -16,9 +16,7 @@
 							<v-col cols="2" class="font-weight-bold">Expiry Time</v-col>
 							<v-col cols="4">2024-12-01</v-col>
 							<v-col cols="2" class="font-weight-bold">Status</v-col>
-							<v-col cols="4">
-								<v-switch v-model="cardStatus" :label="`${cardStatus}`" false-value="Disable" true-value="Enable" hide-details color="primary" />
-							</v-col>
+							<v-col cols="4">Enable</v-col>
 						</v-row>
 					</template>
 				</v-expansion-panel>
@@ -29,7 +27,7 @@
 				</v-expansion-panel>
 				<v-expansion-panel title="Transactions">
 					<template v-slot:text>
-						<v-data-table :headers="headers" :items="items" items-per-page="10" />
+						<v-data-table :headers="headers" :items="items" />
 					</template>
 				</v-expansion-panel>
 			</v-expansion-panels>
@@ -42,7 +40,6 @@ import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
 
 const panel = ref([0, 1, 2]);
-const cardStatus = ref('Enable');
 
 // 统计
 const statisticsHeaders = ref([
@@ -74,11 +71,4 @@ axios.get('/api/transaction').then(response => {
 </script>
 
 <style scoped lang="scss">
-.info {
-	padding: 20px 12px;
-	.v-col {
-		display: flex;
-		align-items: center;
-	}
-}
 </style>

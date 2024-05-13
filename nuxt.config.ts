@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     '/**': { ssr: false }
   },
   modules: [
-
+		"nuxt-icons",
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     async (options, nuxt) => {
@@ -35,7 +35,7 @@ export default defineNuxtConfig({
 					logger: false,
 					mockPath: "./mock/",
 					watchFiles: false
-				}))
+				}));
       });
     },
     ['@nuxtjs/google-fonts', {

@@ -65,10 +65,10 @@ export default {
       text: "UI",
       items: menuUI,
     },
-    {
-      text: "Auth",
-      items: menuAuth,
-    },
+    // {
+    //   text: "Auth",
+    //   items: menuAuth,
+    // },
     {
       text: "Widgets",
       items: menuWidget,
@@ -81,10 +81,10 @@ export default {
       text: "Chart",
       items: menuChart,
     },
-    {
-      text: "Table",
-      items: menuTable,
-    }
+    // {
+    //   text: "Table",
+    //   items: menuTable,
+    // }
   ],
 	getCurrentMenu() : Menu {
 		let path = useRouter().currentRoute.value.path;

@@ -15,9 +15,5 @@ export default [
 			}
 		],
 	},
-	{
-		icon: "solar:library-bold-duotone",
-		text: "Agent",
-		link: "/system/agent",
-	},
+	
 ];

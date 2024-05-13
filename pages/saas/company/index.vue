@@ -16,6 +16,7 @@ const headers = ref([
 	{ title: "Country", key: "countryName" },
 	{ title: "Party ID", key: "partyId" },
 	{ title: "Currency", key: "currency" },
+	{ title: "Type", key: "companyType" },
 	{ title: "Expiry Time", key: "expiryTime" },
 	{ title: "Status", key: "status" },
 ]);

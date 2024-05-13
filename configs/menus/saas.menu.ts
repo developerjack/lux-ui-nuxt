@@ -6,12 +6,12 @@ export default [
 	},
 	{
 		icon: "solar:library-bold-duotone",
-		text: "eMSP",
-		link: "/saas/emsp",
+		text: "eMSP/CPO",
+		link: "/saas/company",
 	},
 	{
 		icon: "solar:library-bold-duotone",
-		text: "CPO",
-		link: "/saas/cpo",
+		text: "Agent",
+		link: "/saas/agent",
 	},
 ];

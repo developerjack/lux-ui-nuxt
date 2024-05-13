@@ -5,6 +5,7 @@
 -->
 <script setup lang="ts">
 import GithubCard from "@/components/app/main-sidebar/GithubCard.vue";
+import SystemCard from "@/components/app/main-sidebar/SystemCard.vue";
 import MainMenu from "@/components/app/main-sidebar/MainMenu.vue";
 import configs from "@/configs";
 
@@ -51,6 +52,9 @@ const navigation = ref(configs.mainMenu);
 <!--    <template v-slot:append>-->
 <!--      <GithubCard />-->
 <!--    </template>-->
+	  <template v-slot:append>
+		  <SystemCard />
+	  </template>
   </v-navigation-drawer>
 </template>
 

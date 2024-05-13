@@ -1,9 +1,12 @@
 <template>
-	<yhlx-add-dialog location="Toolbar" title="Add eMSP">
+	<yhlx-add-dialog location="Toolbar" title="Add eMSP/CPO">
 		<template v-slot:content>
 			<v-row>
 				<v-col cols="12" sm="6">
 					<yhlx-text-field label="Name*" required />
+				</v-col>
+				<v-col cols="12" sm="6">
+					<yhlx-select label="Type*" :items="companyTypeEnums" />
 				</v-col>
 				<v-col cols="12" sm="6">
 					<yhlx-select label="Country*" :items="countryNameEnums" />
@@ -26,5 +29,5 @@
 import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
 import YhlxTextField from "@/components/common/YhlxTextField.vue";
 import YhlxSelect from "@/components/common/YhlxSelect.vue";
-import { countryNameEnums, currencyNameEnums } from "@/data/data";
+import { countryNameEnums, currencyNameEnums, companyTypeEnums } from "@/data/data";
 </script>

@@ -3,7 +3,7 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<v-data-table :headers="headers" :items="items" />
+		<v-data-table :headers="headers" :items="items" @click:row="rowClick" />
 	</yhlx-main-container>
 </template>
 
@@ -11,6 +11,7 @@
 import DialogAdd from './Add.vue';
 import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
+const router = useRouter();
 
 // 用户列表
 const headers = ref([
@@ -24,4 +25,7 @@ const items = ref([]);
 axios.get('/api/customer').then(response => {
 	items.value = response.data.data.content;
 });
+function rowClick(event: PointerEvent, { item }) {
+	router.push(`customer/${item.id}`);
+}
 </script>
