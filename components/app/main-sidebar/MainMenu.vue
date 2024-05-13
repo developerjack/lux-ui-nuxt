@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
+import { ref } from 'vue'
 
 const props = defineProps({
   menu: {
@@ -7,9 +8,10 @@ const props = defineProps({
     default: () => [],
   },
 });
+const open = ref(['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
 </script>
 <template>
-  <v-list nav dense>
+  <v-list nav dense v-model="open">
     <template v-for="menuArea in props.menu" :key="menuArea.key">
       <div v-if="menuArea.key || menuArea.text" class="pa-1 mt-2 text-overline">
         {{ menuArea.text }}
@@ -30,7 +32,7 @@ const props = defineProps({
               class="font-weight-bold"
             ></v-list-item-title>
           </v-list-item>
-          <v-list-group v-else :value="menuItem.items">
+          <v-list-group :active="menuItem.isActive" v-else :value="menuItem.text" :key="menuItem.text">
             <!-- subMenu activator -->
             <template v-slot:activator="{ props }">
               <v-list-item v-bind="props" color="primary">

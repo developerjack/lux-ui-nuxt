@@ -1,5 +1,6 @@
 export default [
 	{
+		isActive: true,
 		icon: "solar:streets-bold-duotone",
 		text: "Admin",
 		items: [

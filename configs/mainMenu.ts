@@ -31,7 +31,7 @@ export default {
       text: "",
       items: [
         {
-
+          isActive: false,
           text: "Dashboard",
           link: "/",
           icon: "solar:widget-line-duotone",

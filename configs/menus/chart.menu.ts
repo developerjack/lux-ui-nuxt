@@ -1,6 +1,7 @@
 
 export default [
   {
+    isActive: true,
     icon: "solar:streets-bold-duotone",
     text: "Chart Pages",
     regex: /^\/landing/,

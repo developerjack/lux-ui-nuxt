@@ -1,6 +1,7 @@
 
 export default [
   {
+    isActive: true,
     icon: "solar:streets-bold-duotone",
     text: "Landing Pages",
     regex: /^\/landing/,

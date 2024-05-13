@@ -52,9 +52,9 @@ const navigation = ref(configs.mainMenu);
 <!--    <template v-slot:append>-->
 <!--      <GithubCard />-->
 <!--    </template>-->
-	  <template v-slot:append>
+	  <!--<template v-slot:append>
 		  <SystemCard />
-	  </template>
+	  </template>-->
   </v-navigation-drawer>
 </template>
 
