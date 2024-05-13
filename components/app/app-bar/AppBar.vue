@@ -10,51 +10,68 @@ import SystemCard from "@/components/app/main-sidebar/SystemCard.vue";
 import { ArrowDown } from '@element-plus/icons-vue'
 import UserMenu from "./UserMenu.vue";
 import { useAppStore } from "@/stores/app";
+import { ref } from "vue"
+
 const appStore = useAppStore();
+
+let title = ref("Iocharger")
+let type = ref("SAAS")
+const list = ref([{
+  title:'Iocharger',
+  type:'SAAS'
+},{
+  title:'ICS',
+  type:'eMSP'
+},{
+  title:'Iocharger',
+  type:'CPO'
+},{
+  title:'demo',
+  type:'demo'
+}])
+
+const changeTitle = (item) => {
+  title = item.title
+  type = item.type
+  appStore.setMenuType(item.type)
+}
 </script>
 
 <template>
   <v-app-bar>
     <v-app-bar-nav-icon @click="appStore.toggleSidebar"></v-app-bar-nav-icon>
-    <el-dropdown>
-      <span class="el-dropdown-link">
-        <div class="headBox">
-          <v-btn class="type-icon" size="38" icon>
-            SAAS
+    <div class="text-center">
+      <v-menu
+        open-on-hover
+      >
+        <template v-slot:activator="{ props }">
+          <v-btn
+            color="primary"
+            v-bind="props"
+            style="font-size:14px"
+          >
+            <div style="line-height:36px">
+              {{title}}
+              <span class="box">{{type}}</span>
+            </div>
           </v-btn>
-          <div style="display: flex; align-items: center;">
-              Iocharger
-          </div>
-          <el-icon class="el-icon--right" style="margin-top:12px">
-            <arrow-down />
-          </el-icon>
-        </div>
-      </span>
-      <template #dropdown>
-        <el-dropdown-menu>
-          <el-dropdown-item>
-            <div class="headBox">
-              <v-btn class="type-icon" size="38" icon>
-                eMSP
-              </v-btn>
-              <div style="display: flex; align-items: center;">
-                ICS
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(item, index) in list"
+            :key="index"
+            @click="changeTitle(item)"
+          >
+            <v-list-item-title style="font-size:12px;">
+              <div style="line-height:36px">
+                {{ item.title }}
+                <span class="box">{{ item.type }}</span>
               </div>
-            </div>
-          </el-dropdown-item>
-          <el-dropdown-item>
-            <div class="headBox">
-              <v-btn class="type-icon" size="38" icon>
-                CPO
-              </v-btn>
-              <div style="display: flex; align-items: center;">
-                Iocharger
-              </div>
-            </div>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
     <v-spacer></v-spacer>
     <v-btn icon>
       <v-badge dot color="success">
@@ -87,11 +104,17 @@ const appStore = useAppStore();
   display:flex;
 }
 .type-icon {
-	font-size: 12px;
+	font-size: 8px;
 	font-weight: bold;
 //	color: rgb(var(--v-theme-primary)) !important;
   background-color: rgb(var(--v-theme-primary)) !important;
   color:white;
-  margin-right:4px;
+}
+.box{
+  font-size:10px;
+  margin: 0 auto !important;
+  line-height:36px;
+  color:white;
+  background-color:#51A77C;
 }
 </style>

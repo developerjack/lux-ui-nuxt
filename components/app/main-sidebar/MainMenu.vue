@@ -1,18 +1,45 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import { ref } from 'vue'
-
+import { reactive,watch  } from 'vue'
+import { useAppStore } from "@/stores/app";
+const appStore = useAppStore();
 const props = defineProps({
   menu: {
     type: Array<any>,
     default: () => [],
   },
 });
-const open = ref(['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
+
+
+let menuList = reactive({myList:[]})
+menuList.myList.push(...props.menu)
+watch(()=>appStore.menuType, (newValue, oldValue) => {
+    console.log('appStore',appStore.menuType)
+    const arr = props.menu.slice(1)
+    console.log(arr)
+    if(appStore.menuType=='demo'){
+      menuList.myList = [props.menu[0]]
+      menuList.myList.push(...props.menu.slice(4))
+    }else if(appStore.menuType=='CPO'){
+      menuList.myList = [props.menu[0]]
+      menuList.myList.push(props.menu[3])
+    }
+    arr.forEach(item=>{
+      if(item.text==''||item.text.toUpperCase()==appStore.menuType.toUpperCase()){
+        menuList.myList = [props.menu[0]]
+        menuList.myList.push(item)
+        console.log(menuList)
+      }
+    })
+
+})
+
+
+const open = reactive(['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
 </script>
 <template>
   <v-list nav dense v-model="open">
-    <template v-for="menuArea in props.menu" :key="menuArea.key">
+    <template v-for="menuArea in menuList.myList" :key="menuArea.key">
       <div v-if="menuArea.key || menuArea.text" class="pa-1 mt-2 text-overline">
         {{ menuArea.text }}
       </div>
