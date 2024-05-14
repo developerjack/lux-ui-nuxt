@@ -1,6 +1,6 @@
 import { apiMergeResult, apiPageResult } from "./mock";
 import saas from "./saas";
-import { statusNameEnums } from "@/data/data";
+import { statusNameEnums, networkTypeEnums, companyNameEnums, emspNetworkNameEnums, cpoNetworkNameEnums } from "@/data/data";
 
 const MockAPI = [
 	{
@@ -85,6 +85,24 @@ const MockAPI = [
 				"phoneNumber": "@phone",
 				"authNumber|1-10": 3,
 				"status|1": statusNameEnums,
+			});
+		}
+	},
+	{
+		url: "/api/agreement",
+		method: "get",
+		response: () => {
+			return apiPageResult({
+				"id|+1": 1,
+				"emspName|1": companyNameEnums,
+				"emspNetworkName|1": emspNetworkNameEnums,
+				"cpoName|1": companyNameEnums,
+				"cpoNetworkName|1": cpoNetworkNameEnums,
+				"contactName": "@name",
+				"contactEmail": "@email",
+				"contactPhone": "@phone",
+				"validFrom": "@datetime('yyyy-MM-dd')",
+				"validTo": "@datetime('yyyy-MM-dd')",
 			});
 		}
 	},

@@ -13,7 +13,7 @@ import axios from "axios";
 
 const headers = ref([
 	{ title: "Name", key: "name" },
-	{ title: "Type", key: "networkType" },
+	{ title: "Type", key: "belongType" },
 	{ title: "Network Type", key: "networkType" },
 	{ title: "Description", key: "description" },
 ]);

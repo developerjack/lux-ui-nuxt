@@ -1,5 +1,5 @@
 import { apiPageResult } from "./mock";
-import { countryNameEnums, currencyNameEnums, statusNameEnums, networkTypeEnums, belongTypeEnums, companyTypeEnums } from "@/data/data";
+import { networkNameEnums, countryNameEnums, currencyNameEnums, statusNameEnums, networkTypeEnums, belongTypeEnums, companyTypeEnums, companyNameEnums } from "@/data/data";
 
 const MockAPI = [
 	{
@@ -7,7 +7,7 @@ const MockAPI = [
 		method: "get",
 		response: () => {
 			return apiPageResult({
-				"name": "@name",
+				"name|1": networkNameEnums,
 				"belongType|1": belongTypeEnums,
 				"networkType|1": networkTypeEnums,
 				"description": "The network from China.",
@@ -19,7 +19,7 @@ const MockAPI = [
 		method: "get",
 		response: () => {
 			return apiPageResult({
-				"name": "@name",
+				"name|1": companyNameEnums,
 				"countryName|1": countryNameEnums,
 				"partyId|1": ["YHLX", "ICS", "EMES", "HBC", "NEO"],
 				"currency|1": currencyNameEnums,
