@@ -16,13 +16,11 @@ menuList.myList.push(...props.menu)
 watch(()=>appStore.menuType, (newValue, oldValue) => {
     const arr = props.menu.slice(1)
     open.openList = []
-    open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
+    getData()
+    // open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
     if(appStore.menuType=='demo'){
       menuList.myList = [props.menu[0]]
       menuList.myList.push(...props.menu.slice(4))
-    }else if(appStore.menuType=='CPO'){
-      menuList.myList = [props.menu[0]]
-      menuList.myList.push(props.menu[3])
     }
     arr.forEach(item=>{
       if(item.text==''||item.text.toUpperCase()==appStore.menuType.toUpperCase()){
@@ -32,12 +30,22 @@ watch(()=>appStore.menuType, (newValue, oldValue) => {
     })
 
 })
+const getData = ()=>{
+  props.menu.forEach(item=>{
+    item.items.forEach(element=>{
+      if(element.items){
+        open.openList.push(element.text)
+      }
+    })
+  })
+}
 let open = reactive({openList:[]})
 let sortList = reactive([])
 onMounted(()=>{
   sortList = []
   open.openList = []
-  open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
+  getData()
+  // open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
   sortList = open.openList
 })
 // open.value = ['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages']
