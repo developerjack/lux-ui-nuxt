@@ -11,6 +11,7 @@ import configs from "@/configs";
 
 import { useAppStore } from "@/stores/app";
 import { Icon } from "@iconify/vue";
+const router = useRouter();
 const appStore = useAppStore();
 const navigation = ref(configs.mainMenu);
 </script>
@@ -27,7 +28,7 @@ const navigation = ref(configs.mainMenu);
 
     <template v-slot:prepend>
       <v-card height="100" class="d-flex align-center justify-center">
-        <img width="160" src="@/assets/images/logo.svg" alt="" />
+        <img width="160" src="@/assets/images/logo.svg" alt="" class="headImage" @click="()=>{router.push('/')}"/>
       </v-card>
     </template>
 <!--    <template v-slot:prepend>-->
@@ -66,5 +67,8 @@ const navigation = ref(configs.mainMenu);
   font-size: 2rem;
   font-weight: 600;
   color: rgba(var(--v-theme-primary));
+}
+.headImage{
+  cursor: pointer;
 }
 </style>

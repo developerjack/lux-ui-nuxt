@@ -1,6 +1,5 @@
 export default [
   {
-    isActive: true,
     icon: "solar:library-bold-duotone",
     text: "UI Components",
     regex: /^\/ui/,

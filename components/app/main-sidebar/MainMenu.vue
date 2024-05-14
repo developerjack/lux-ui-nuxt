@@ -14,9 +14,9 @@ const props = defineProps({
 let menuList = reactive({myList:[]})
 menuList.myList.push(...props.menu)
 watch(()=>appStore.menuType, (newValue, oldValue) => {
-    console.log('appStore',appStore.menuType)
     const arr = props.menu.slice(1)
-    console.log(arr)
+    open.openList = []
+    open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
     if(appStore.menuType=='demo'){
       menuList.myList = [props.menu[0]]
       menuList.myList.push(...props.menu.slice(4))
@@ -28,17 +28,37 @@ watch(()=>appStore.menuType, (newValue, oldValue) => {
       if(item.text==''||item.text.toUpperCase()==appStore.menuType.toUpperCase()){
         menuList.myList = [props.menu[0]]
         menuList.myList.push(item)
-        console.log(menuList)
       }
     })
 
 })
+let open = reactive({openList:[]})
+let sortList = reactive([])
+onMounted(()=>{
+  sortList = []
+  open.openList = []
+  open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
+  sortList = open.openList
+})
+// open.value = ['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages']
+
+const clickWhat = (value) => {
+  console.log(value)
+  // open.openList.push(...value.slice(0,value.length/2-1))
+  if(value.length !== 1){
+    sortList = []
+    open.openList = []
+    open.openList.push(...value)
+    sortList = open.openList
+  }else{
+    open.openList = sortList
+  }
+}
 
 
-const open = reactive(['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
 </script>
 <template>
-  <v-list nav dense v-model="open">
+  <v-list nav dense v-model:opened="open.openList" @update:opened="clickWhat($event)">
     <template v-for="menuArea in menuList.myList" :key="menuArea.key">
       <div v-if="menuArea.key || menuArea.text" class="pa-1 mt-2 text-overline">
         {{ menuArea.text }}
@@ -59,7 +79,7 @@ const open = reactive(['Customer','Admin','Landing Pages','UI Components','Widge
               class="font-weight-bold"
             ></v-list-item-title>
           </v-list-item>
-          <v-list-group :active="menuItem.isActive" v-else :value="menuItem.text" :key="menuItem.text">
+          <v-list-group v-else :value="menuItem.text" :key="menuItem.text">
             <!-- subMenu activator -->
             <template v-slot:activator="{ props }">
               <v-list-item v-bind="props" color="primary">

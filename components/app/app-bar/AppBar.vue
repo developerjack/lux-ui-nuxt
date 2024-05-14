@@ -52,8 +52,9 @@ const changeTitle = (item) => {
           >
             <div style="line-height:36px">
               {{title}}
-              <span class="box">{{type}}</span>
+              <v-chip label density="comfortable" color="primary" size="x-small" style="font-size:8px">{{ type }}</v-chip>
             </div>
+            <v-icon size="small" style="height: 100%; color: #51A77C;">mdi-chevron-down</v-icon>
           </v-btn>
         </template>
         <v-list>
@@ -65,7 +66,7 @@ const changeTitle = (item) => {
             <v-list-item-title style="font-size:12px;">
               <div style="line-height:36px">
                 {{ item.title }}
-                <span class="box">{{ item.type }}</span>
+                <v-chip label density="comfortable" color="primary" size="x-small" style="font-size:8px">{{ item.type }}</v-chip>
               </div>
             </v-list-item-title>
           </v-list-item>

@@ -1,6 +1,5 @@
 export default [
   {
-    isActive: true,
     icon: "solar:figma-bold-duotone",
     text: "Widget",
     regex: /^\/widget/,
