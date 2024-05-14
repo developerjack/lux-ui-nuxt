@@ -51,9 +51,8 @@ onMounted(()=>{
 // open.value = ['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages']
 
 const clickWhat = (value) => {
-  console.log(value)
   // open.openList.push(...value.slice(0,value.length/2-1))
-  if(value.length !== 1){
+  if(value.length > 1){
     sortList = []
     open.openList = []
     open.openList.push(...value)

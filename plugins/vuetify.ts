@@ -6,8 +6,7 @@ import * as directives from "vuetify/directives";
 import * as labsComponents from 'vuetify/labs/components'
 import { createVueI18nAdapter } from "vuetify/locale/adapters/vue-i18n";
 import { createI18n, useI18n } from "vue-i18n";
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
+
 import messages from '@/locales/messages';
 import Vue3Toasity, { type ToastContainerOptions } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -155,8 +154,6 @@ export default defineNuxtPlugin((app) => {
   app.vueApp.use(vuetify);
   app.vueApp.use(i18n);
   app.vueApp.use(VueApexCharts);
-  
-  app.vueApp.use(ElementPlus);
   app.vueApp.use(
     Vue3Toasity,
     {

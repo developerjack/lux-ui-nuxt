@@ -7,7 +7,6 @@
 import LanguageSwitcher from "./LanguageSwitcher.vue";
 import ThemeToggle from "./ThemeToggle.vue";
 import SystemCard from "@/components/app/main-sidebar/SystemCard.vue";
-import { ArrowDown } from '@element-plus/icons-vue'
 import UserMenu from "./UserMenu.vue";
 import { useAppStore } from "@/stores/app";
 import { ref } from "vue"
