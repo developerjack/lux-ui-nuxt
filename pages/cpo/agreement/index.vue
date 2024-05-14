@@ -1,7 +1,17 @@
+<template>
+	<yhlx-main-container>
+		<template v-slot:append>
+			<DialogAdd location="Toolbar"/>
+		</template>
+		<v-data-table :headers="headers" :items="items" @click:row="rowClick"/>
+	</yhlx-main-container>
+</template>
+
 <script setup lang="ts">
 import DialogAdd from './Add.vue';
 import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
+const router = useRouter();
 
 const headers = ref([
 	{ title: "eMSP Name", key: "emspName" },
@@ -17,13 +27,8 @@ axios.get('/api/agreement').then(response => {
 	items.value = response.data.data.content;
 });
 
-</script>
+function rowClick(event: PointerEvent, { item }) {
+	router.push(`agreement/${item.id}`);
+}
 
-<template>
-	<yhlx-main-container>
-		<template v-slot:append>
-			<DialogAdd location="Toolbar"/>
-		</template>
-		<v-data-table :headers="headers" :items="items" />
-	</yhlx-main-container>
-</template>
+</script>
