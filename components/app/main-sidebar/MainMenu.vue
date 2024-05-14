@@ -11,18 +11,18 @@ const props = defineProps({
 });
 
 
-let menuList = reactive({myList:[]})
-menuList.myList.push(...props.menu)
-watch(()=>appStore.menuType, (newValue, oldValue) => {
-    const arr = props.menu.slice(1)
+let menuList = reactive({myList:[]}) // 防止响应式被覆盖
+menuList.myList.push(...props.menu) // 将数据变为响应式
+watch(()=>appStore.menuType, (newValue, oldValue) => { // 是否切换导航栏选项
+    const arr = props.menu.slice(1) //  菜单的首项(Dashboard)默认每个选项都存在 
     open.openList = []
     getData()
     // open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
-    if(appStore.menuType=='demo'){
+    if(appStore.menuType=='demo'){ // 选择demo则呈现剩下所有菜单项
       menuList.myList = [props.menu[0]]
       menuList.myList.push(...props.menu.slice(4))
     }
-    arr.forEach(item=>{
+    arr.forEach(item=>{// 呈现选择的对应菜单项
       if(item.text==''||item.text.toUpperCase()==appStore.menuType.toUpperCase()){
         menuList.myList = [props.menu[0]]
         menuList.myList.push(item)
@@ -30,8 +30,8 @@ watch(()=>appStore.menuType, (newValue, oldValue) => {
     })
 
 })
-const getData = ()=>{
-  props.menu.forEach(item=>{
+const getData = ()=>{ // 取出数据中所有有两层嵌套的text作为菜单默认展开的列表
+  props.menu.forEach(item=>{ 
     item.items.forEach(element=>{
       if(element.items){
         open.openList.push(element.text)
@@ -40,32 +40,16 @@ const getData = ()=>{
   })
 }
 let open = reactive({openList:[]})
-let sortList = reactive([])
+let sortList = reactive([]) // 一个收集当前展开的菜单的列表，以支持点击子项后菜单不会收缩
 onMounted(()=>{
   sortList = []
-  open.openList = []
   getData()
   // open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
   sortList = open.openList
 })
-// open.value = ['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages']
-
-const clickWhat = (value) => {
-  // open.openList.push(...value.slice(0,value.length/2-1))
-  if(value.length > 1){
-    sortList = []
-    open.openList = []
-    open.openList.push(...value)
-    sortList = open.openList
-  }else{
-    open.openList = sortList
-  }
-}
-
-
 </script>
 <template>
-  <v-list nav dense v-model:opened="open.openList" @update:opened="clickWhat($event)">
+  <v-list nav dense v-model:opened="open.openList" open-strategy="multiple">
     <template v-for="menuArea in menuList.myList" :key="menuArea.key">
       <div v-if="menuArea.key || menuArea.text" class="pa-1 mt-2 text-overline">
         {{ menuArea.text }}
