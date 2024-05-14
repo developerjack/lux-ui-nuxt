@@ -14,6 +14,7 @@ const props = defineProps({
 let menuList = reactive({myList:[]}) // 防止响应式被覆盖
 menuList.myList.push(...props.menu) // 将数据变为响应式
 watch(()=>appStore.menuType, (newValue, oldValue) => { // 是否切换导航栏选项
+    console.log('newValue',newValue)
     const arr = props.menu.slice(1) //  菜单的首项(Dashboard)默认每个选项都存在 
     open.openList = []
     getData()
@@ -21,6 +22,8 @@ watch(()=>appStore.menuType, (newValue, oldValue) => { // 是否切换导航栏�
     if(appStore.menuType=='demo'){ // 选择demo则呈现剩下所有菜单项
       menuList.myList = [props.menu[0]]
       menuList.myList.push(...props.menu.slice(4))
+    }else if(appStore.menuType==''){
+      menuList.myList = [...props.menu]
     }
     arr.forEach(item=>{// 呈现选择的对应菜单项
       if(item.text==''||item.text.toUpperCase()==appStore.menuType.toUpperCase()){

@@ -14,6 +14,11 @@ import { Icon } from "@iconify/vue";
 const router = useRouter();
 const appStore = useAppStore();
 const navigation = ref(configs.mainMenu);
+const goHome = ()=>{
+  appStore.setMenuType("")
+  router.push('/')
+}
+
 </script>
 
 <template>
@@ -28,7 +33,7 @@ const navigation = ref(configs.mainMenu);
 
     <template v-slot:prepend>
       <v-card height="100" class="d-flex align-center justify-center">
-        <img width="160" src="@/assets/images/logo.svg" alt="" class="headImage" @click="()=>{router.push('/')}"/>
+        <img width="160" src="@/assets/images/logo.svg" alt="" style="cursor: pointer;" @click="goHome"/>
       </v-card>
     </template>
 <!--    <template v-slot:prepend>-->
@@ -67,8 +72,5 @@ const navigation = ref(configs.mainMenu);
   font-size: 2rem;
   font-weight: 600;
   color: rgba(var(--v-theme-primary));
-}
-.headImage{
-  cursor: pointer;
 }
 </style>
