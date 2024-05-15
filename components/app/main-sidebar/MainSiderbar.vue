@@ -29,37 +29,16 @@ const goHome = ()=>{
     <!-- ---------------------------------------------- -->
     <!---Top Area -->
     <!-- ---------------------------------------------- -->
-
     <template v-slot:prepend>
       <v-card height="100" class="d-flex align-center justify-center">
         <img width="160" src="@/assets/images/logo.svg" alt="" style="cursor: pointer;" @click="goHome"/>
       </v-card>
     </template>
-<!--    <template v-slot:prepend>-->
-<!--      <RouterLink to="/">-->
-<!--        <v-card height="100" class="logo-card">-->
-<!--          <h1 class="logo-text h-full">-->
-<!--            <Icon class="mr-2" width="40" icon="solar:plain-bold-duotone" />-->
-<!--            <span>Lux-UI</span>-->
-<!--          </h1>-->
-<!--        </v-card>-->
-<!--      </RouterLink>-->
-<!--    </template>-->
-
     <!-- ---------------------------------------------- -->
     <!---Menu Area -->
     <!-- ---------------------------------------------- -->
     <main-menu :menu="navigation.menu"></main-menu>
 
-    <!-- ---------------------------------------------- -->
-    <!---Bottom Area -->
-    <!-- ---------------------------------------------- -->
-<!--    <template v-slot:append>-->
-<!--      <GithubCard />-->
-<!--    </template>-->
-	  <!--<template v-slot:append>
-		  <SystemCard />
-	  </template>-->
   </v-navigation-drawer>
 </template>
 

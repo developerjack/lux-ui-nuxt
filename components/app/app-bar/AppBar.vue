@@ -116,7 +116,6 @@ const changeTitle = (item) => {
 .type-icon {
 	font-size: 8px;
 	font-weight: bold;
-//	color: rgb(var(--v-theme-primary)) !important;
   background-color: rgb(var(--v-theme-primary)) !important;
   color:white;
 }
