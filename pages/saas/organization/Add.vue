@@ -6,7 +6,7 @@
 					<yhlx-text-field label="Name*" required />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-select label="Type*" :items="orgTypeEnums" />
+					<yhlx-select label="Role*" :items="orgRoleEnums" multiple />
 				</v-col>
 				<v-col cols="12" sm="6">
 					<yhlx-select label="Country*" :items="countryNameEnums" />
@@ -29,5 +29,5 @@
 import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
 import YhlxTextField from "@/components/common/YhlxTextField.vue";
 import YhlxSelect from "@/components/common/YhlxSelect.vue";
-import { countryNameEnums, currencyNameEnums, orgTypeEnums } from "@/data/data";
+import { countryNameEnums, currencyNameEnums, orgRoleEnums } from "@/data/data";
 </script>

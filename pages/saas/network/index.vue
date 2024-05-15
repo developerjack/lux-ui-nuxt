@@ -15,6 +15,7 @@ const headers = ref([
 	{ title: "Name", key: "name" },
 	{ title: "Type", key: "belongType" },
 	{ title: "Role", key: "roles" },
+	{ title: "Status", key: "status" },
 	{ title: "Description", key: "description" },
 ]);
 const items = ref([]);

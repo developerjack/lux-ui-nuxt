@@ -1,5 +1,5 @@
 import { apiPageResult } from "./mock";
-import { networkNameEnums, countryNameEnums, currencyNameEnums, statusNameEnums, networkRoleEnums, belongTypeEnums, orgTypeEnums, orgNameEnums } from "@/data/data";
+import { networkNameEnums, countryNameEnums, currencyNameEnums, statusNameEnums, networkRoleEnums, belongTypeEnums, networkStatusEnums, orgNameEnums } from "@/data/data";
 
 const MockAPI = [
 	{
@@ -10,6 +10,7 @@ const MockAPI = [
 				"name|1": networkNameEnums,
 				"belongType|1": belongTypeEnums,
 				"roles|1": ['eMSP', 'CPO', 'eMSP, CPO'],
+				"status|1": networkStatusEnums,
 				"description": "The network from China.",
 			});
 		}
