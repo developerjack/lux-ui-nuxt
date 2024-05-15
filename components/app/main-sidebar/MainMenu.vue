@@ -9,12 +9,9 @@ const props = defineProps({
     default: () => [],
   },
 });
-
-
 let menuList = reactive({myList:[]}) // 防止响应式被覆盖
 menuList.myList.push(...props.menu) // 将数据变为响应式
 watch(()=>appStore.menuType, (newValue, oldValue) => { // 是否切换导航栏选项
-    console.log('newValue',newValue)
     const arr = props.menu.slice(1) //  菜单的首项(Dashboard)默认每个选项都存在 
     open.openList = []
     getData()
@@ -45,6 +42,8 @@ const getData = ()=>{ // 取出数据中所有有两层嵌套的text作为菜单
 let open = reactive({openList:[]})
 let sortList = reactive([]) // 一个收集当前展开的菜单的列表，以支持点击子项后菜单不会收缩
 onMounted(()=>{
+  menuList.myList = [props.menu[0]]
+  menuList.myList.push(...props.menu.slice(1,2))
   sortList = []
   getData()
   // open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
