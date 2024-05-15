@@ -11,6 +11,7 @@
 import DialogAdd from './Add.vue';
 import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
+import { Random } from 'mockjs';
 const router = useRouter();
 
 const headers = ref([
@@ -24,6 +25,11 @@ const headers = ref([
 const items = ref([]);
 axios.get('/api/agreement').then(response => {
 	items.value = response.data.data.content;
+	items.value.forEach(item=>{
+		if(Math.random() > 0.7){
+			item.validTo = 'Indefinite'
+		}
+	})
 });
 
 function rowClick(event: PointerEvent, { item }) {
