@@ -7,6 +7,7 @@ const MockAPI = [
 		method: "get",
 		response: () => {
 			return apiPageResult({
+				"id|+1": 1,
 				"name|1": networkNameEnums,
 				"belongType|1": belongTypeEnums,
 				"networkType|1": networkTypeEnums,
@@ -19,6 +20,7 @@ const MockAPI = [
 		method: "get",
 		response: () => {
 			return apiPageResult({
+				"id|+1": 1,
 				"name|1": companyNameEnums,
 				"countryName|1": countryNameEnums,
 				"partyId|1": ["YHLX", "ICS", "EMES", "HBC", "NEO"],

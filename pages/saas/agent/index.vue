@@ -3,6 +3,8 @@ import DialogAdd from './Add.vue';
 import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
 
+const router = useRouter();
+
 const headers = ref([
 	{ title: "Name", key: "name" },
 	{ title: "Email", key: "email", align: "start" },
@@ -15,6 +17,10 @@ axios.get('/api/agent').then(response => {
 	items.value = response.data.data.content;
 });
 
+function rowClick(event: PointerEvent, { item }) {
+	router.push(`agent/${item.id}`);
+}
+
 </script>
 
 <template>
@@ -22,6 +28,6 @@ axios.get('/api/agent').then(response => {
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<v-data-table :headers="headers" :items="items" />
+		<v-data-table :headers="headers" :items="items" @click:row="rowClick"/>
 	</yhlx-main-container>
 </template>
