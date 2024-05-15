@@ -10,7 +10,7 @@ export const useAppStore = defineStore({
   }),
   persist: [
     {
-      paths: ["theme"],
+      paths: ["theme","menuType"],
       storage: localStorage,
     },
   ],

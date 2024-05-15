@@ -12,7 +12,17 @@ import { useAppStore } from "@/stores/app";
 import { ref } from "vue"
 
 const appStore = useAppStore();
-
+onMounted(()=>{
+  if(appStore.menuType !== ''){
+    type = appStore.menuType
+    list.value.forEach(item => {
+      if(item.type==type){
+        title = item.title
+      }
+    });
+  }
+  console.log(type)
+})
 let title = ref("Iocharger")
 let type = ref("SAAS")
 const list = ref([{
