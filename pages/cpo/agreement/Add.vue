@@ -3,7 +3,7 @@
 		<template v-slot:content>
 			<v-row>
 				<v-col cols="12" sm="6">
-					<yhlx-select label="eMSP*" :items="companyNameEnums" />
+					<yhlx-select label="eMSP*" :items="orgNameEnums" />
 				</v-col>
 				<v-col cols="12" sm="6">
 					<yhlx-select label="eMSP Network*" :items="emspNetworkNameEnums" />
@@ -32,5 +32,5 @@
 import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
 import YhlxTextField from "@/components/common/YhlxTextField.vue";
 import YhlxSelect from "@/components/common/YhlxSelect.vue";
-import { companyNameEnums, emspNetworkNameEnums, moduleImplEnums } from "@/data/data";
+import { orgNameEnums, emspNetworkNameEnums, moduleImplEnums } from "@/data/data";
 </script>
