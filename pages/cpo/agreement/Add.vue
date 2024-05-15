@@ -15,6 +15,12 @@
 					<yhlx-text-field label="Valid To" type="date" />
 				</v-col>
 				<v-col cols="12">
+					<yhlx-text-field label="Versions URL" />
+				</v-col>
+				<v-col cols="12" sm="6">
+					<yhlx-text-field label="Integration Token*" required />
+				</v-col>
+				<v-col cols="12">
 					<yhlx-select label="Module*" :items="moduleImplEnums" multiple />
 				</v-col>
 			</v-row>

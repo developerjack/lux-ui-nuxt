@@ -22,6 +22,9 @@
 							Valid From
 							Valid To
 							
+							Versions URL
+							Integration Token
+							
 							Modules
 							
 							

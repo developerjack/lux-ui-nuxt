@@ -6,7 +6,6 @@ import * as directives from "vuetify/directives";
 import * as labsComponents from 'vuetify/labs/components'
 import { createVueI18nAdapter } from "vuetify/locale/adapters/vue-i18n";
 import { createI18n, useI18n } from "vue-i18n";
-
 import messages from '@/locales/messages';
 import Vue3Toasity, { type ToastContainerOptions } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
