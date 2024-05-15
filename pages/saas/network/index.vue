@@ -16,7 +16,7 @@ const headers = ref([
 	{ title: "Type", key: "belongType" },
 	{ title: "Role", key: "roles" },
 	{ title: "Status", key: "status" },
-	{ title: "Description", key: "description" },
+	{ title: "Notes", key: "notes" },
 ]);
 const items = ref([]);
 axios.get('/api/saas/network').then(response => {
