@@ -6,7 +6,7 @@ export const useAppStore = defineStore({
   state: () => ({
     theme: 'light',
     mainSidebar: true,
-    menuType:'',
+    menuType:'SAAS',
   }),
   persist: [
     {

@@ -15,7 +15,6 @@ const router = useRouter();
 const appStore = useAppStore();
 const navigation = ref(configs.mainMenu);
 const goHome = ()=>{
-  appStore.setMenuType("")
   router.push('/')
 }
 
