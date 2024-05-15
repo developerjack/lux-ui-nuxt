@@ -12,7 +12,7 @@
 					<yhlx-text-field label="Name*" required />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Phone number" required />
+					<yhlx-text-field label="Phone Number" required />
 				</v-col>
 				<v-col cols="12">
 					<yhlx-select :items="[
@@ -20,7 +20,7 @@
           ]" label="Country" multiple />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Authorization number" hint="The number of operator the agent can develop" required />
+					<yhlx-text-field label="Authorization Number" hint="The number of operator the agent can develop" required />
 				</v-col>
 			</v-row>
 		</template>

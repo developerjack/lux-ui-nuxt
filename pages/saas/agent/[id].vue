@@ -6,9 +6,9 @@
 					<template v-slot:text>
 						<v-row class="info">
 							<v-col cols="2" class="font-weight-bold">Name</v-col>
-							<v-col cols="4">LiHua</v-col>
-							<v-col cols="2" class="font-weight-bold">Authorizations</v-col>
-							<v-col cols="4">66</v-col>
+							<v-col cols="4">Li Yuanhan</v-col>
+							<v-col cols="2" class="font-weight-bold">Authorizations Number</v-col>
+							<v-col cols="4">23</v-col>
 							<v-col cols="2" class="font-weight-bold">Email</v-col>
 							<v-col cols="4">liyh@iocharger.com</v-col>
 							<v-col cols="2" class="font-weight-bold">Phone Number</v-col>
@@ -18,16 +18,6 @@
 						</v-row>
 					</template>
 				</v-expansion-panel>
-				<!-- <v-expansion-panel title="Statistics">
-					<template v-slot:text>
-						<v-data-table-virtual :headers="statisticsHeaders" :items="statisticsItems" />
-					</template>
-				</v-expansion-panel>
-				<v-expansion-panel title="Transactions">
-					<template v-slot:text>
-						<v-data-table :headers="headers" :items="items" />
-					</template>
-				</v-expansion-panel> -->
 			</v-expansion-panels>
 		</div>
 	</yhlx-main-container>
@@ -35,36 +25,8 @@
 
 <script setup lang="ts">
 import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
-import axios from "axios";
 
-const panel = ref([0, 1, 2]);
-
-// 统计
-const statisticsHeaders = ref([
-	{ title: "Month", key: "time" },
-	{ title: "Duration(hour)", key: "duration" },
-	{ title: "Energy(kWh)", key: "energy" },
-	{ title: "Cost($)", key: "cost" },
-	{ title: "Times", key: "times" },
-]);
-const statisticsItems = ref([]);
-axios.get('/api/rf/statistic/FFFFFFFF').then(response => {
-	statisticsItems.value = response.data.data;
-});
-
-// 充电记录
-const headers = ref([
-	{ title: "Transaction Id", key: "transactionId" },
-	{ title: "Location", key: "locationName" },
-	{ title: "Charging Station", key: "chargingStationName" },
-	{ title: "Energy", key: "energy" },
-	{ title: "Start Time", key: "startTime" },
-	{ title: "End Time", key: "endTime" },
-]);
-const items = ref([]);
-axios.get('/api/transaction').then(response => {
-	items.value = response.data.data.content;
-});
+const panel = ref([0]);
 
 </script>
 

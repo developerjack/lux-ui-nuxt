@@ -12,7 +12,7 @@
 					<yhlx-text-field label="Name*" required />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Phone number" hint="example of persistent helper text" required />
+					<yhlx-text-field label="Phone Number" hint="example of persistent helper text" required />
 				</v-col>
 				<v-col cols="12">
 					<yhlx-select :items="[

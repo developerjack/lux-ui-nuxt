@@ -12,7 +12,7 @@ const MockAPI = [
 				"belongType|1": belongTypeEnums,
 				"roles|1": ['eMSP', 'CPO', 'eMSP, CPO'],
 				"status|1": networkStatusEnums,
-				"description": "The network from China.",
+				"notes": "The network from China.",
 			});
 		}
 	},
