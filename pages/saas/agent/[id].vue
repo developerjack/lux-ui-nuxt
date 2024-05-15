@@ -5,39 +5,20 @@
 				<v-expansion-panel title="Details">
 					<template v-slot:text>
 						<v-row class="info">
-							<v-col cols="12">CPO</v-col>
 							<v-col cols="2" class="font-weight-bold">Name</v-col>
-							<v-col cols="4">ICS</v-col>
-							<v-col cols="2" class="font-weight-bold">Network</v-col>
-							<v-col cols="4">Incar eMSP</v-col>
-							<v-col cols="2" class="font-weight-bold">Contact</v-col>
-							<v-col cols="4">Daniel Anderson</v-col>
-							<v-col cols="2" class="font-weight-bold">Contact Email</v-col>
+							<v-col cols="4">LiHua</v-col>
+							<v-col cols="2" class="font-weight-bold">Authorizations</v-col>
+							<v-col cols="4">66</v-col>
+							<v-col cols="2" class="font-weight-bold">Email</v-col>
 							<v-col cols="4">liyh@iocharger.com</v-col>
-							<v-col cols="2" class="font-weight-bold">Contact Phone</v-col>
-							<v-col cols="4">18259622542</v-col>
-							<v-col cols="12"></v-col>
-							<v-col cols="12">eMSP</v-col>
-							<v-col cols="2" class="font-weight-bold">Name</v-col>
-							<v-col cols="4">ICS</v-col>
-							<v-col cols="2" class="font-weight-bold">Network</v-col>
-							<v-col cols="4">EVOASIS eMSP</v-col>
-							<v-col cols="2" class="font-weight-bold">Contact</v-col>
-							<v-col cols="4">Daniel Anderson</v-col>
-							<v-col cols="2" class="font-weight-bold">Contact Email</v-col>
-							<v-col cols="4">liyh@iocharger.com</v-col>
-							<v-col cols="2" class="font-weight-bold">Contact Phone</v-col>
-							<v-col cols="4">18259622542</v-col>
-							<v-col cols="2" class="font-weight-bold"></v-col>
-							<v-col cols="12"></v-col>
-							<v-col cols="2" class="font-weight-bold">Valid From</v-col>
-							<v-col cols="4">1999-10-15</v-col>
-							<v-col cols="2" class="font-weight-bold">Valid To</v-col>
-							<v-col cols="4">2021-10-15</v-col>
+							<v-col cols="2" class="font-weight-bold">Phone Number</v-col>
+							<v-col cols="4">18526854125</v-col>
+							<v-col cols="2" class="font-weight-bold">Status</v-col>
+							<v-col cols="4">Disabled</v-col>
 						</v-row>
 					</template>
 				</v-expansion-panel>
-				<v-expansion-panel title="Statistics">
+				<!-- <v-expansion-panel title="Statistics">
 					<template v-slot:text>
 						<v-data-table-virtual :headers="statisticsHeaders" :items="statisticsItems" />
 					</template>
@@ -46,7 +27,7 @@
 					<template v-slot:text>
 						<v-data-table :headers="headers" :items="items" />
 					</template>
-				</v-expansion-panel>
+				</v-expansion-panel> -->
 			</v-expansion-panels>
 		</div>
 	</yhlx-main-container>

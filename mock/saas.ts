@@ -7,6 +7,7 @@ const MockAPI = [
 		method: "get",
 		response: () => {
 			return apiPageResult({
+				"id|+1": 1,
 				"name|1": networkNameEnums,
 				"belongType|1": belongTypeEnums,
 				"roles|1": ['eMSP', 'CPO', 'eMSP, CPO'],
@@ -20,6 +21,7 @@ const MockAPI = [
 		method: "get",
 		response: () => {
 			return apiPageResult({
+				"id|+1": 1,
 				"name|1": orgNameEnums,
 				"countryName|1": countryNameEnums,
 				"partyId|1": ["YHLX", "ICS", "EMES", "HBC", "NEO"],
