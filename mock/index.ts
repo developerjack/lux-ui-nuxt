@@ -1,6 +1,6 @@
 import { apiMergeResult, apiPageResult } from "./mock";
 import saas from "./saas";
-import { statusNameEnums, networkTypeEnums, companyNameEnums, emspNetworkNameEnums, cpoNetworkNameEnums } from "@/data/data";
+import { statusNameEnums, networkRoleEnums, orgNameEnums, emspNetworkNameEnums, cpoNetworkNameEnums } from "@/data/data";
 
 const MockAPI = [
 	{
@@ -95,9 +95,9 @@ const MockAPI = [
 		response: () => {
 			return apiPageResult({
 				"id|+1": 1,
-				"emspName|1": companyNameEnums,
+				"emspName|1": orgNameEnums,
 				"emspNetworkName|1": emspNetworkNameEnums,
-				"cpoName|1": companyNameEnums,
+				"cpoName|1": orgNameEnums,
 				"cpoNetworkName|1": cpoNetworkNameEnums,
 				"contactName": "@name",
 				"contactEmail": "@email",

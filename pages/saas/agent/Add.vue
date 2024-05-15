@@ -20,7 +20,7 @@
           ]" label="Country" multiple />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Authorization number" hint="The number of eMSP/CPO the agent can develop" required />
+					<yhlx-text-field label="Authorization number" hint="The number of organization the agent can develop" required />
 				</v-col>
 			</v-row>
 		</template>

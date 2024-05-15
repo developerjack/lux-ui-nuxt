@@ -1,5 +1,5 @@
 import { apiPageResult } from "./mock";
-import { networkNameEnums, countryNameEnums, currencyNameEnums, statusNameEnums, networkTypeEnums, belongTypeEnums, companyTypeEnums, companyNameEnums } from "@/data/data";
+import { networkNameEnums, countryNameEnums, currencyNameEnums, statusNameEnums, networkRoleEnums, belongTypeEnums, networkStatusEnums, orgNameEnums } from "@/data/data";
 
 const MockAPI = [
 	{
@@ -10,22 +10,23 @@ const MockAPI = [
 				"id|+1": 1,
 				"name|1": networkNameEnums,
 				"belongType|1": belongTypeEnums,
-				"networkType|1": networkTypeEnums,
+				"roles|1": ['eMSP', 'CPO', 'eMSP, CPO'],
+				"status|1": networkStatusEnums,
 				"description": "The network from China.",
 			});
 		}
 	},
 	{
-		url: "/api/saas/emsp",
+		url: "/api/saas/organization",
 		method: "get",
 		response: () => {
 			return apiPageResult({
 				"id|+1": 1,
-				"name|1": companyNameEnums,
+				"name|1": orgNameEnums,
 				"countryName|1": countryNameEnums,
 				"partyId|1": ["YHLX", "ICS", "EMES", "HBC", "NEO"],
 				"currency|1": currencyNameEnums,
-				"companyType|1": companyTypeEnums,
+				"role|1": ['eMSP', 'CPO', 'eMSP, CPO'],
 				"expiryTime": "@datetime('yyyy-MM-dd')",
 				"status|1": statusNameEnums,
 			});

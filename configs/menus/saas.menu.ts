@@ -6,8 +6,8 @@ export default [
 	},
 	{
 		icon: "solar:library-bold-duotone",
-		text: "eMSP/CPO",
-		link: "/saas/company",
+		text: "Organization",
+		link: "/saas/organization",
 	},
 	{
 		icon: "solar:library-bold-duotone",

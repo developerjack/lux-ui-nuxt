@@ -16,12 +16,12 @@ const headers = ref([
 	{ title: "Country", key: "countryName" },
 	{ title: "Party ID", key: "partyId" },
 	{ title: "Currency", key: "currency" },
-	{ title: "Type", key: "companyType" },
+	{ title: "Role", key: "role" },
 	{ title: "Expiry Time", key: "expiryTime" },
 	{ title: "Status", key: "status" },
 ]);
 const items = ref([]);
-axios.get('/api/saas/emsp').then(response => {
+axios.get('/api/saas/organization').then(response => {
 	items.value = response.data.data.content;
 });
 
