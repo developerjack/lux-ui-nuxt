@@ -14,10 +14,9 @@ menuList.myList.push(...props.menu) // 将数据变为响应式
 watch(()=>appStore.menuType, (newValue, oldValue) => { // 是否切换导航栏选项
     open.openList = []
     getData()
-    // open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
     if(appStore.menuType=='demo'){ // 选择demo则呈现剩下所有菜单项
       menuList.myList = [props.menu[0]]
-      menuList.myList.push(...props.menu.slice(4))
+      menuList.myList.push(...props.menu.slice(5))
     }else if(appStore.menuType==''){
       menuList.myList = [...props.menu]
     }
@@ -33,24 +32,29 @@ const getData = ()=>{ // 取出数据中所有有两层嵌套的text作为菜单
     })
   })
 }
-
 const getMenu = () => { // 获取所选类型的对应菜单
   const arr = props.menu.slice(1)
   arr.forEach(item=>{// 呈现选择的对应菜单项
-    if(item.text==''||item.text.toUpperCase()==appStore.menuType.toUpperCase()){
+    if(item.text.toUpperCase()==appStore.menuType.toUpperCase()){
       menuList.myList = [props.menu[0]]
       menuList.myList.push(item)
     }
+    if(item.text=='System'&&appStore.menuType=='SAAS'){
+        if(menuList.myList.length === props.menu.length){
+          menuList.myList = [props.menu[0]]
+          menuList.myList.push(item)
+        }else{
+          menuList.myList.push(item)
+        }
+      }
   })
 }
-
 let open = reactive({openList:[]})
 let sortList = reactive([]) // 一个收集当前展开的菜单的列表，以支持点击子项后菜单不会收缩
 onMounted(()=>{
   getMenu()
   sortList = []
   getData()
-  // open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
   sortList = open.openList
 })
 </script>

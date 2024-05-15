@@ -5,35 +5,25 @@
 				<v-expansion-panel title="Details">
 					<template v-slot:text>
 						<v-row class="info">
-							<v-col cols="12">CPO</v-col>
-							<v-col cols="2" class="font-weight-bold">Name</v-col>
+							<v-col cols="2" class="font-weight-bold">eMSP Name</v-col>
 							<v-col cols="4">ICS</v-col>
-							<v-col cols="2" class="font-weight-bold">Network</v-col>
-							<v-col cols="4">Incar eMSP</v-col>
+							<v-col cols="2" class="font-weight-bold">Country</v-col>
+							<v-col cols="4">China</v-col>
+							<v-col cols="2" class="font-weight-bold">Country Code</v-col>
+							<v-col cols="4">CN</v-col>
+							<v-col cols="2" class="font-weight-bold">Part ID</v-col>
+							<v-col cols="4">EMES</v-col>
 							<v-col cols="2" class="font-weight-bold">Contact</v-col>
 							<v-col cols="4">Daniel Anderson</v-col>
 							<v-col cols="2" class="font-weight-bold">Contact Email</v-col>
 							<v-col cols="4">liyh@iocharger.com</v-col>
 							<v-col cols="2" class="font-weight-bold">Contact Phone</v-col>
 							<v-col cols="4">18259622542</v-col>
-							<v-col cols="12"></v-col>
-							<v-col cols="12">eMSP</v-col>
-							<v-col cols="2" class="font-weight-bold">Name</v-col>
-							<v-col cols="4">ICS</v-col>
-							<v-col cols="2" class="font-weight-bold">Network</v-col>
-							<v-col cols="4">EVOASIS eMSP</v-col>
-							<v-col cols="2" class="font-weight-bold">Contact</v-col>
-							<v-col cols="4">Daniel Anderson</v-col>
-							<v-col cols="2" class="font-weight-bold">Contact Email</v-col>
-							<v-col cols="4">liyh@iocharger.com</v-col>
-							<v-col cols="2" class="font-weight-bold">Contact Phone</v-col>
-							<v-col cols="4">18259622542</v-col>
-							<v-col cols="2" class="font-weight-bold"></v-col>
-							<v-col cols="12"></v-col>
+							<v-col cols="6"></v-col>
 							<v-col cols="2" class="font-weight-bold">Valid From</v-col>
-							<v-col cols="4">1999-10-15</v-col>
+							<v-col cols="4">2020-10-15</v-col>
 							<v-col cols="2" class="font-weight-bold">Valid To</v-col>
-							<v-col cols="4">2021-10-15</v-col>
+							<v-col cols="4">2030-10-15</v-col>
 						</v-row>
 					</template>
 				</v-expansion-panel>

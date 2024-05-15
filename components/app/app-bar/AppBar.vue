@@ -6,13 +6,21 @@
 <script setup lang="ts">
 import LanguageSwitcher from "./LanguageSwitcher.vue";
 import ThemeToggle from "./ThemeToggle.vue";
-import SystemCard from "@/components/app/main-sidebar/SystemCard.vue";
 import UserMenu from "./UserMenu.vue";
 import { useAppStore } from "@/stores/app";
-import { ref } from "vue"
 
 const appStore = useAppStore();
-
+onMounted(()=>{
+  if(appStore.menuType !== ''){
+    type = appStore.menuType
+    list.value.forEach(item => {
+      if(item.type==type){
+        title = item.title
+      }
+    });
+  }
+  console.log(type)
+})
 let title = ref("Iocharger")
 let type = ref("SAAS")
 const list = ref([{
@@ -22,7 +30,7 @@ const list = ref([{
   title:'ICS',
   type:'eMSP'
 },{
-  title:'Iocharger',
+  title:'EMES',
   type:'CPO'
 },{
   title:'demo',
@@ -106,7 +114,6 @@ const changeTitle = (item) => {
 .type-icon {
 	font-size: 8px;
 	font-weight: bold;
-//	color: rgb(var(--v-theme-primary)) !important;
   background-color: rgb(var(--v-theme-primary)) !important;
   color:white;
 }

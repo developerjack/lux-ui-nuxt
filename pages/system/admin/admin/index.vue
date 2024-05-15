@@ -15,7 +15,7 @@ import axios from "axios";
 const headers = ref([
 	{ title: "Name", key: "name" },
 	{ title: "Email", key: "email", align: "start" },
-	{ title: "Phone number", key: "phoneNumber", sortable: false },
+	{ title: "Phone Number", key: "phoneNumber", sortable: false },
 	{ title: "Status", key: "status" },
 ]);
 const items = ref([]);

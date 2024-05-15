@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host 0.0.0.0",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "generate": "nuxt generate",
