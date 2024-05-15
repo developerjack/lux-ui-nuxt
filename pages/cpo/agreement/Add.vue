@@ -6,22 +6,19 @@
 					<yhlx-select label="eMSP*" :items="orgNameEnums" />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-select label="eMSP Network*" :items="emspNetworkNameEnums" />
+					<yhlx-text-field label="Contact" />
+				</v-col>
+				<v-col cols="12" sm="6">
+					<yhlx-text-field label="Contact Email" />
+				</v-col>
+				<v-col cols="12" sm="6">
+					<yhlx-text-field label="Contact Phone" />
 				</v-col>
 				<v-col cols="12" sm="6">
 					<yhlx-text-field label="Valid From*" type="date" />
 				</v-col>
 				<v-col cols="12" sm="6">
 					<yhlx-text-field label="Valid To" type="date" />
-				</v-col>
-				<v-col cols="12">
-					<yhlx-text-field label="Versions URL" />
-				</v-col>
-				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Integration Token*" required />
-				</v-col>
-				<v-col cols="12">
-					<yhlx-select label="Module*" :items="moduleImplEnums" multiple />
 				</v-col>
 			</v-row>
 		</template>
@@ -32,5 +29,5 @@
 import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
 import YhlxTextField from "@/components/common/YhlxTextField.vue";
 import YhlxSelect from "@/components/common/YhlxSelect.vue";
-import { orgNameEnums, emspNetworkNameEnums, moduleImplEnums } from "@/data/data";
+import { orgNameEnums, networkNameEnums, moduleImplEnums } from "@/data/data";
 </script>

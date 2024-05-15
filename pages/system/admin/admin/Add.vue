@@ -17,7 +17,7 @@
 				<v-col cols="12">
 					<yhlx-select :items="[
             'Admin', 'Operator', 'Maintainer', 'Accountant', 'Device Manager',
-             'Auditor', 'Organization Manager',
+             'Auditor', 'operator Manager',
           ]" label="Role" multiple />
 				</v-col>
 			</v-row>

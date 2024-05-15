@@ -17,7 +17,7 @@ const MockAPI = [
 		}
 	},
 	{
-		url: "/api/saas/organization",
+		url: "/api/saas/operator",
 		method: "get",
 		response: () => {
 			return apiPageResult({

@@ -31,7 +31,7 @@ const menuItems = ref([
 		count: 3,
 	},
 	{
-		title: "Organization Manager",
+		title: "operator Manager",
 		count: 118,
 	},
 ]);
