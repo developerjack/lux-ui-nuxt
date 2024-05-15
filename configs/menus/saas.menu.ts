@@ -6,8 +6,8 @@ export default [
 	},
 	{
 		icon: "solar:library-bold-duotone",
-		text: "Organization",
-		link: "/saas/organization",
+		text: "Operator",
+		link: "/saas/operator",
 	},
 	{
 		icon: "solar:library-bold-duotone",

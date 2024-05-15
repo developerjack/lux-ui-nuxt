@@ -14,8 +14,7 @@ import axios from "axios";
 const router = useRouter();
 
 const headers = ref([
-	{ title: "eMSP Name", key: "emspName" },
-	{ title: "eMSP Network", key: "emspNetworkName" },
+	{ title: "eMSP", key: "emspName" },
 	{ title: "Contact", key: "contactName" },
 	{ title: "Contact Email", key: "contactEmail" },
 	{ title: "Contact Phone", key: "contactPhone" },

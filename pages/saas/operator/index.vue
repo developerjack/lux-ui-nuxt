@@ -21,12 +21,12 @@ const headers = ref([
 	{ title: "Status", key: "status" },
 ]);
 const items = ref([]);
-axios.get('/api/saas/organization').then(response => {
+axios.get('/api/saas/operator').then(response => {
 	items.value = response.data.data.content;
 });
 
 const rowClick = (event,{item}) => {
-	router.push(`company/${item.id}`)
+	router.push(`operator/${item.id}`)
 }
 
 </script>
