@@ -12,7 +12,7 @@
 					<yhlx-text-field label="Name*" required />
 				</v-col>
 				<v-col cols="12" sm="6" md="4">
-					<yhlx-text-field label="Phone number" required />
+					<yhlx-text-field label="Phone Number" required />
 				</v-col>
 				<v-col cols="12" sm="6" md="4">
 					<yhlx-select :items="['0-17', '18-29', '30-54', '54+']" label="Age" required />

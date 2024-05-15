@@ -6,10 +6,8 @@
 <script setup lang="ts">
 import LanguageSwitcher from "./LanguageSwitcher.vue";
 import ThemeToggle from "./ThemeToggle.vue";
-import SystemCard from "@/components/app/main-sidebar/SystemCard.vue";
 import UserMenu from "./UserMenu.vue";
 import { useAppStore } from "@/stores/app";
-import { ref } from "vue"
 
 const appStore = useAppStore();
 
@@ -22,7 +20,7 @@ const list = ref([{
   title:'ICS',
   type:'eMSP'
 },{
-  title:'Iocharger',
+  title:'EMES',
   type:'CPO'
 },{
   title:'demo',
