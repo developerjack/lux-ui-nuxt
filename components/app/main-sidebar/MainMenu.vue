@@ -12,7 +12,6 @@ const props = defineProps({
 let menuList = reactive({myList:[]}) // 防止响应式被覆盖
 menuList.myList.push(...props.menu) // 将数据变为响应式
 watch(()=>appStore.menuType, (newValue, oldValue) => { // 是否切换导航栏选项
-    const arr = props.menu.slice(1) //  菜单的首项(Dashboard)默认每个选项都存在 
     open.openList = []
     getData()
     // open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
@@ -22,12 +21,7 @@ watch(()=>appStore.menuType, (newValue, oldValue) => { // 是否切换导航栏�
     }else if(appStore.menuType==''){
       menuList.myList = [...props.menu]
     }
-    arr.forEach(item=>{// 呈现选择的对应菜单项
-      if(item.text==''||item.text.toUpperCase()==appStore.menuType.toUpperCase()){
-        menuList.myList = [props.menu[0]]
-        menuList.myList.push(item)
-      }
-    })
+    getMenu()
 
 })
 const getData = ()=>{ // 取出数据中所有有两层嵌套的text作为菜单默认展开的列表
@@ -39,11 +33,21 @@ const getData = ()=>{ // 取出数据中所有有两层嵌套的text作为菜单
     })
   })
 }
+
+const getMenu = () => { // 获取所选类型的对应菜单
+  const arr = props.menu.slice(1)
+  arr.forEach(item=>{// 呈现选择的对应菜单项
+    if(item.text==''||item.text.toUpperCase()==appStore.menuType.toUpperCase()){
+      menuList.myList = [props.menu[0]]
+      menuList.myList.push(item)
+    }
+  })
+}
+
 let open = reactive({openList:[]})
 let sortList = reactive([]) // 一个收集当前展开的菜单的列表，以支持点击子项后菜单不会收缩
 onMounted(()=>{
-  menuList.myList = [props.menu[0]]
-  menuList.myList.push(...props.menu.slice(1,2))
+  getMenu()
   sortList = []
   getData()
   // open.openList.push(...['Customer','Admin','Landing Pages','UI Components','Widget','Chart Pages'])
