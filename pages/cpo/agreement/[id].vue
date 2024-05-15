@@ -6,19 +6,19 @@
 					<template v-slot:text>
 						<v-row class="info">
 							<v-col cols="2" class="font-weight-bold">eMSP Name</v-col>
-							<v-col cols="4">ICS</v-col>
+							<v-col cols="4">Iocharger</v-col>
 							<v-col cols="2" class="font-weight-bold">Country</v-col>
 							<v-col cols="4">China</v-col>
 							<v-col cols="2" class="font-weight-bold">Country Code</v-col>
 							<v-col cols="4">CN</v-col>
 							<v-col cols="2" class="font-weight-bold">Part ID</v-col>
-							<v-col cols="4">EMES</v-col>
+							<v-col cols="4">IOC</v-col>
 							<v-col cols="2" class="font-weight-bold">Contact</v-col>
-							<v-col cols="4">Daniel Anderson</v-col>
+							<v-col cols="4">Li Yuanhan</v-col>
 							<v-col cols="2" class="font-weight-bold">Contact Email</v-col>
 							<v-col cols="4">liyh@iocharger.com</v-col>
 							<v-col cols="2" class="font-weight-bold">Contact Phone</v-col>
-							<v-col cols="4">18259622542</v-col>
+							<v-col cols="4">18059289854</v-col>
 							<v-col cols="6"></v-col>
 							<v-col cols="2" class="font-weight-bold">Valid From</v-col>
 							<v-col cols="4">2020-10-15</v-col>
