@@ -29,7 +29,6 @@
 							<v-col cols="2" class="font-weight-bold">Contact Phone</v-col>
 							<v-col cols="4">18259622542</v-col>
 							<v-col cols="2" class="font-weight-bold"></v-col>
-							<v-col cols="4"></v-col>
 							<v-col cols="12"></v-col>
 							<v-col cols="2" class="font-weight-bold">Valid From</v-col>
 							<v-col cols="4">1999-10-15</v-col>
