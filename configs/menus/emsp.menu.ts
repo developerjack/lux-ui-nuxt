@@ -15,4 +15,9 @@ export default [
 	    }
     ],
   },
+	{
+		icon: "solar:library-bold-duotone",
+		text: "Agreement",
+		link: "/emsp/agreement",
+	},
 ];

@@ -4,7 +4,7 @@ export const statusNameEnums = ['Enable', 'Disable'];
 export const networkRoleEnums = ['eMSP', 'CPO'];
 export const orgRoleEnums = ['eMSP', 'CPO'];
 export const belongTypeEnums = ['Internal', 'External'];
-export const orgNameEnums = ['Iocharger', 'ICS', 'EMES', 'HBC', 'EVTap', 'Ocular', 'Entratek', 'NEO', 'Prime'];
+export const operatorNameEnums = ['Iocharger', 'ICS', 'EMES', 'HBC', 'EVTap', 'Ocular', 'Entratek', 'NEO', 'Prime'];
 export const networkNameEnums = ['Internal', 'Green Flux', 'EVOASIS', 'exploren', 'Incar'];
 export const moduleImplEnums = [
 	'Locations-Sender', 'Sessions-Sender', 'CDRs-Sender', 'Tariffs-Sender', 'Tokens-Sender', 'Commands-Sender', 'ChargingProfiles-Sender',

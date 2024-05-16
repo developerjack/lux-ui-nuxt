@@ -3,7 +3,7 @@
 		<template v-slot:content>
 			<v-row>
 				<v-col cols="12" sm="6">
-					<yhlx-select label="eMSP*" :items="operatorNameEnums" />
+					<yhlx-select label="CPO*" :items="operatorNameEnums" />
 				</v-col>
 				<v-col cols="12" sm="6">
 					<yhlx-text-field label="Contact" />
