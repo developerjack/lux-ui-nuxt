@@ -1,5 +1,5 @@
 <template>
-	<yhlx-main-container>
+	<yhlx-main-container :items="headItems">
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
@@ -25,15 +25,18 @@ const headers = ref([
 const items = ref([]);
 axios.get('/api/agreement').then(response => {
 	items.value = response.data.data.content;
-	items.value.forEach(item=>{
-		if(Math.random() > 0.7){
-			item.validTo = 'Indefinite'
-		}
-	})
 });
 
 function rowClick(event: PointerEvent, { item }) {
 	router.push(`agreement/${item.id}`);
 }
-
+const headItems = ref([])
+onMounted(()=>{
+	headers.value.forEach(item=>{
+		headItems.value.push({
+			text:item.title,
+			value:item.key
+		})
+	})
+})
 </script>

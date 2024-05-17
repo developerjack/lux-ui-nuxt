@@ -1,5 +1,5 @@
 <template>
-	<yhlx-main-container>
+	<yhlx-main-container :items="headItems">
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
@@ -31,5 +31,13 @@ const items = ref([]);
 axios.get('/api/admin').then(response => {
 	items.value = response.data.data.content;
 });
-
+const headItems = ref([])
+onMounted(()=>{
+	headers.value.forEach(item=>{
+		headItems.value.push({
+			text:item.title,
+			value:item.key
+		})
+	})
+})
 </script>

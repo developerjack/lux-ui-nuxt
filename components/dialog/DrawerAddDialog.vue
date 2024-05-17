@@ -15,7 +15,7 @@
 			<slot name="content"></slot>
 			<div style="width: 100%;height: 50px;position: fixed;bottom:0;line-height:45px">
 				<v-divider></v-divider>
-				<yhlx-btn business-type="Close" variant="text" @click="drawer = false" style="margin-left:65%">Close</yhlx-btn>
+				<yhlx-btn business-type="Close" variant="text" @click="drawer = false">Close</yhlx-btn>
 				<yhlx-btn business-type="Primary" @click="drawer = false" >Save</yhlx-btn>
 			</div>
 		</v-navigation-drawer>

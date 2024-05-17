@@ -1,5 +1,5 @@
 <template>
-	<yhlx-main-container>
+	<yhlx-main-container :items="headItems">
 		<template v-slot:append>
 			<DialogAdd/>
 		</template>
@@ -38,6 +38,15 @@ axios.get('/api/rf').then(response => {
 function rowClick(event: PointerEvent, { item }) {
 	router.push(`rf/${item.idTag}`);
 }
+const headItems = ref([])
+onMounted(()=>{
+	headers.value.forEach(item=>{
+		headItems.value.push({
+			text:item.title,
+			value:item.key
+		})
+	})
+})
 </script>
 
 <style scoped lang="scss"></style>

@@ -1,5 +1,5 @@
 <template>
-	<yhlx-main-container>
+	<yhlx-main-container :items="headItems">
 		<template v-slot:append>
 			<yhlx-btn business-type="Add" location="Toolbar" @click="openDrawer"></yhlx-btn>
 		</template>
@@ -37,7 +37,15 @@ const items = ref([]);
 axios.get('/api/saas/operator').then(response => {
 	items.value = response.data.data.content;
 });
-
+const headItems = ref([])
+onMounted(()=>{
+	headers.value.forEach(item=>{
+		headItems.value.push({
+			text:item.title,
+			value:item.key
+		})
+	})
+})
 const rowClick = (event,{item}) => {
 	router.push(`operator/${item.id}`)
 }

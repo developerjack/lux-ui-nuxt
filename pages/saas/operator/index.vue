@@ -1,5 +1,5 @@
 <template>
-	<yhlx-main-container>
+	<yhlx-main-container :items="headItems">
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
@@ -37,5 +37,13 @@ axios.get('/api/saas/operator').then(response => {
 const rowClick = (event,{item}) => {
 	router.push(`operator/${item.id}`)
 }
-
+const headItems = ref([])
+onMounted(()=>{
+	headers.value.forEach(item=>{
+		headItems.value.push({
+			text:item.title,
+			value:item.key
+		})
+	})
+})
 </script>
