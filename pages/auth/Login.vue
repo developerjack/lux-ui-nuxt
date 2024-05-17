@@ -1,7 +1,9 @@
 
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-
+import axios from "axios";
+import { useAppStore } from "@/stores/app";
+const appStore = useAppStore();
 definePageMeta({
   layout: "auth",
 });
@@ -18,11 +20,17 @@ const isFormValid = ref(true);
 // show password field
 const showPassword = ref(false);
 const loginWithEmailAndPassword = async (email: string, password: string) => {
-  router.push("/");
+  axios.post('/api/Login').then(res=>{
+    localStorage.setItem('token',res.data.token)
+    router.push('/')
+  })
 };
 
 const loginWithGoogle = async () => {
-  router.push("/");
+  axios.post('/api/Login').then(res=>{
+    localStorage.setItem('token',res.data.token)
+    router.push('/')
+  })
 };
 
 const handleLogin = async () => {
@@ -31,7 +39,6 @@ const handleLogin = async () => {
     isLoading.value = true;
     isSignInDisabled.value = true;
     loginWithEmailAndPassword(email.value, password.value);
-
   } else {
     console.log("no");
   }
@@ -64,7 +71,14 @@ const resetErrors = () => {
   errorMessages.value = "";
 };
 
-
+onMounted(()=>{
+  appStore.setMenuType('SAAS')
+  if(localStorage.getItem("token")===null){
+    return
+  }
+  
+  router.push('/')
+})
 </script>
 <template>
   <v-card color="white" class="pa-3 ma-3" elevation="3">

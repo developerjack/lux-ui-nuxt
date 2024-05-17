@@ -1,8 +1,8 @@
 <template>
-    <v-card class="overflow-auto float-card" v-if="!props.isHide">
+    <v-card class="overflow-auto float-card">
 
         <v-list style="padding: 0 !important;width: 200px">
-            <v-list-item v-show="props.items || false" class="font-weight-bold">{{"Columns"}}</v-list-item>
+            <v-list-item class="font-weight-bold" v-show="props.items || false">{{"Columns"}}</v-list-item>
             <v-list-item
                 v-for="item in props.items"
                 :key="item.value"
@@ -10,7 +10,7 @@
                 style="height:30px !important;min-height:none !important;position: relative;"
             >
                 <label>{{item.text}}</label>
-                <input class="check-box-class" type="checkbox" :value="item.value" name="selected" @click="toggleSelection(item.value)">
+                <input class="check-box-class" type="checkbox" :value="item.value" v-model="checked.myCheck" name="selected">
             </v-list-item>
             <v-divider />
             <v-list-item
@@ -34,11 +34,14 @@
 </template>
 <script setup lang="ts">
 import YhlxBtn from "@/components/common/YhlxBtn.vue";
+import { useAppStore } from "@/stores/app";
+const appStore = useAppStore();
 const props = defineProps({
     isHide: Boolean, // 是否显示
     items: Array // 表头
 });
 const selected = ref([])
+const checked = reactive({myCheck:[]})
 const operateItem = ref([
     {
         text:'Clear Filters',
@@ -49,21 +52,19 @@ const operateItem = ref([
         value:'reset'
     },
 ])
+watch(props.items,()=>{
+    props.items.forEach(item=>{
+        checked.myCheck.push(item.value)
+    })
+})
+
 const Refresh = ref({
     text:'Refresh Table',
     value:'refresh'
 })
-function toggleSelection(value) {
-    if (selected.value.includes(value)) {
-        selected.value = selected.value.filter(item => item !== value);
-    } else {
-        selected.value.push(value);
-    }
-    console.log(selected.value);
-}
 
-watch(selected,()=>{
-    console.log(selected)
+watch(()=>checked.myCheck,()=>{
+    appStore.setColumns(checked.myCheck)
 })
 </script>
 <style lang="scss" scoped>
@@ -79,9 +80,5 @@ watch(selected,()=>{
     right: 16px;
     top: 18px;
     
-}
-.v-list-item input[type="checkbox"]:checked {
-  background-color: blue !important; /* 修改选中后的背景色为蓝色 */
-  border-color: green !important;  /* 修改选中后的边框颜色为绿色 */
 }
 </style>

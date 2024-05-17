@@ -70,10 +70,10 @@ export default {
       text: "UI",
       items: menuUI,
     },
-    // {
-    //   text: "Auth",
-    //   items: menuAuth,
-    // },
+    {
+      text: "Auth",
+      items: menuAuth,
+    },
     {
       text: "Widgets",
       items: menuWidget,

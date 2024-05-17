@@ -37,8 +37,22 @@ const items = ref([]);
 axios.get('/api/saas/operator').then(response => {
 	items.value = response.data.data.content;
 });
+const arr = ref([])
+watch(()=>appStore.Columns,()=>{
+	console.log(appStore.Columns)
+	headers.value = []
+	appStore.Columns.forEach(item=>{
+		const index = arr.value.findIndex(header=>header.key===item)
+		if(index !==-1){
+			arr.value[index].index = index
+			headers.value.push(arr.value[index])
+		}
+		headers.value.sort((a, b) => a.index - b.index)
+	})
+})
 const headItems = ref([])
 onMounted(()=>{
+	arr.value = headers.value
 	headers.value.forEach(item=>{
 		headItems.value.push({
 			text:item.title,
