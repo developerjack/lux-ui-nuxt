@@ -3,7 +3,16 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<v-data-table :headers="headers" :items="items" />
+		<v-data-table :headers="headers" :items="items">
+			<template v-slot:item.status="{ value }">
+				<v-chip
+					:color="value=='Enable' ? 'green' : 'red'"
+					class="text-uppercase"
+					size="small"
+					label
+				>{{ value }}</v-chip>
+			</template>
+		</v-data-table>
 	</yhlx-main-container>
 </template>
 
