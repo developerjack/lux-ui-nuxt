@@ -1,6 +1,7 @@
 <template>
   <v-card class="overflow-auto" style="box-shadow: none; width: 720px;position: absolute;top;top: 50%;right: 50%;transform: translate(50%, -50%);">
 			<v-container>
+                <img width="160" src="@/assets/images/logo.svg" alt="" style="width: 320px"/>
 				<v-card-text>
 					<v-form v-model="valid">
                         <v-container>

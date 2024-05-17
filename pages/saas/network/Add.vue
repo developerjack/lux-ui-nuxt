@@ -1,5 +1,8 @@
 <template>
 	<drawer-add-dialog>
+		<template v-slot:head>
+			<v-card text="Add NetWork"></v-card>
+		</template>
 		<template v-slot:content>
 			<v-form v-model="valid">
 				<v-container>
