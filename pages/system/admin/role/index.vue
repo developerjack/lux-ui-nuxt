@@ -79,7 +79,7 @@ const permissions = ref([
 							<yhlx-text-field label="Title*" required />
 						</v-col>
 						<v-col cols="12" sm="6">
-							<yhlx-text-field label="Description" />
+							<yhlx-text-field label="Notes" />
 						</v-col>
 					</v-row>
 				</YhlxCard>
