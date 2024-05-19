@@ -38,7 +38,7 @@ axios.get('/api/saas/operator').then(response => {
 	items.value = response.data.data.content;
 });
 
-const rowClick = (event,{item}) => {
+const rowClick = (event, {item}) => {
 	router.push(`operator/${item.id}`)
 }
 const openDrawer = () => {
