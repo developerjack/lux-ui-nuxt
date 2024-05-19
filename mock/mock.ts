@@ -2,6 +2,13 @@ import Mock from "mockjs";
 Mock.Random.extend({
 	phone: function () {
 		return this.pick(['139', '135', '189']) + Mock.mock(/\d{8}/);
+	},
+	optionalDatetime(format?: string) {
+		if (Math.random() < 0.7) {
+			return Mock.Random.date(format);
+		} else {
+			return "Indefinite";
+		}
 	}
 });
 
@@ -26,3 +33,5 @@ export const apiMergeResult = (json:any) : any => {
 		message: "success"
 	}, json);
 }
+
+//

@@ -11,23 +11,26 @@
 import DialogAdd from './Add.vue';
 import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
+import { Random } from 'mockjs';
 const router = useRouter();
 
 const headers = ref([
-	{ title: "eMSP", key: "operatorName" },
-	{ title: "Contact", key: "contactName" },
-	{ title: "Contact Email", key: "contactEmail" },
-	{ title: "Contact Phone", key: "contactPhone" },
-	{ title: "Valid From", key: "validFrom" },
-	{ title: "Valid To", key: "validTo" },
+	{ title: "Name", key: "name" },
+	{ title: "Min", key: "min" },
+	{ title: "Max", key: "max" },
+	{ title: "Start Time", key: "startTime" },
+	{ title: "End Time", key: "endTime" },
+	{ title: "Update Time", key: "updateTime" },
+	{ title: "Status", key: "status" },
+	{ title: "Notes", key: "notes" },
 ]);
 const items = ref([]);
-axios.get('/api/agreement').then(response => {
+axios.get('/api/cpo/tariff').then(response => {
 	items.value = response.data.data.content;
 });
 
 function rowClick(event: PointerEvent, { item }) {
-	router.push(`agreement/${item.id}`);
+	router.push(`tariff/${item.id}`);
 }
 
 </script>

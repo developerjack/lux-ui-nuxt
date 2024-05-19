@@ -27,7 +27,7 @@ const MockAPI = [
 				"partyId|1": ["YHLX", "ICS", "EMES", "HBC", "NEO"],
 				"currency|1": currencyNameEnums,
 				"role|1": ['eMSP', 'CPO', 'eMSP, CPO'],
-				"expiryTime": "@datetime('yyyy-MM-dd')",
+				"expiryTime": "@optionalDatetime('yyyy-MM-dd')",
 				"status|1": statusNameEnums,
 			});
 		}
