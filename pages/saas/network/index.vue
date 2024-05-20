@@ -1,9 +1,8 @@
 <template>
 	<yhlx-main-container :items="headItems">
 		<template v-slot:append>
-			<yhlx-btn business-type="Add" location="Toolbar" @click="openDrawer"></yhlx-btn>
+			<DialogAdd location="Toolbar"/>
 		</template>
-		<DialogAdd/>
 		<v-data-table :headers="headers" :items="items" @click:row="rowClick">
 			<template v-slot:item.status="{ value }">
 				<v-chip
@@ -61,7 +60,7 @@ onMounted(()=>{
 	})
 })
 const rowClick = (event,{item}) => {
-	router.push(`operator/${item.id}`)
+	router.push(`network/${item.id}`)
 }
 const openDrawer = () => {
 	appStore.setAddDrawer(true)

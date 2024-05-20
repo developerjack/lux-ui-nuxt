@@ -3,6 +3,8 @@ import { Icon } from "@iconify/vue";
 import { reactive,watch  } from 'vue'
 import { useAppStore } from "@/stores/app";
 const appStore = useAppStore();
+const router = useRouter();
+
 const props = defineProps({
   menu: {
     type: Array<any>,
@@ -47,6 +49,11 @@ const getMenu = () => { // 获取所选类型的对应菜单
       }
   })
 }
+const path = ref('')
+router.afterEach((to, from) => {
+  path.value = to.fullPath
+  // 在这里可以处理路由变化后的逻辑
+});
 let open = reactive({openList:[]})
 onMounted(()=>{
   getMenu()
@@ -66,6 +73,7 @@ onMounted(()=>{
             v-if="!menuItem.items"
             :to="menuItem.link"
             color="primary"
+            :class="{ 'active': path.startsWith(menuItem.link) && menuItem.link !== '/' , 'v-list-item--active': path.startsWith(menuItem.link) && menuItem.link !== '/'}"
           >
             <template v-slot:prepend>
               <Icon class="mx-2 mr-5" width="20" :icon="menuItem.icon" />
@@ -94,6 +102,7 @@ onMounted(()=>{
               :key="subMenuItem.key"
               :to="subMenuItem.link"
               color="primary"
+              :class="{ 'active': path.startsWith(subMenuItem.link) && subMenuItem.link !== '/' , 'v-list-item--active': path.startsWith(subMenuItem.link) && subMenuItem.link !== '/'}"
             >
               <template v-slot:prepend>
                 <Icon class="mx-2 mr-5" width="20" :icon="subMenuItem.icon" />
@@ -113,5 +122,8 @@ onMounted(()=>{
 <style scoped>
 .v-list-group .v-list-item {
   padding-left: 8px !important;
+}
+.active{
+  color: rgb(var(--v-theme-primary)) !important;
 }
 </style>

@@ -1,9 +1,8 @@
 <template>
-	<drawer-add-dialog>
-		<template v-slot:head>
-			<v-card text="Add NetWork"></v-card>
-		</template>
+	<drawer-add-dialog location="Toolbar">
 		<template v-slot:content>
+			<v-card text="Add NetWork"></v-card>
+			<v-divider></v-divider>
 			<v-form v-model="valid">
 				<v-container>
 					<v-row>
