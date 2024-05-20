@@ -3,6 +3,22 @@ import { networkNameEnums, countryNameEnums, currencyNameEnums, statusNameEnums,
 
 const MockAPI = [
 	{
+		url: "/api/cpo/location",
+		method: "get",
+		response: () => {
+			return apiPageResult({
+				"id": "@string('upper', 36)",
+				"name": "@name",
+				"evseNumber|1-20": 10,
+				"state": "福建省",
+				"city": "厦门市",
+				"address": "集美区软件园3期商场1楼",
+				"published": "Yes",
+				"status|1": statusNameEnums,
+			});
+		}
+	},
+	{
 		url: "/api/cpo/tariff",
 		method: "get",
 		response: () => {
