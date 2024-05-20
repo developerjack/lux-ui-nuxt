@@ -3,22 +3,29 @@
 		<template v-slot:content>
 			<v-row>
 				<v-col cols="12" sm="6">
-					<yhlx-select label="eMSP*" :items="operatorNameEnums" />
+					<yhlx-text-field label="Name" />
+				</v-col>
+				<v-col cols="12" sm="6"/>
+				<v-col cols="12" sm="6">
+					<yhlx-text-field label="Min Cost" />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Contact" />
+					<yhlx-text-field label="Max Cost" />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Contact Email" />
+					<yhlx-text-field label="Start Time" type="date" />
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Contact Phone" />
+					<yhlx-text-field label="End Time" type="date"/>
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Valid From*" type="date" />
+					<yhlx-text-field label="Update Time" type="date"/>
 				</v-col>
 				<v-col cols="12" sm="6">
-					<yhlx-text-field label="Valid To" type="date" />
+					<yhlx-select label="Status" :items="['Enable','Disable']" />
+				</v-col>
+				<v-col cols="12" sm="12">
+					<yhlx-text-field label="Notes" />
 				</v-col>
 			</v-row>
 		</template>

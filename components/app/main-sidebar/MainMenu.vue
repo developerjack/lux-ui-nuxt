@@ -56,6 +56,7 @@ router.afterEach((to, from) => {
 });
 let open = reactive({openList:[]})
 onMounted(()=>{
+  path.value = router.currentRoute.value.fullPath
   getMenu()
   getData()
 })

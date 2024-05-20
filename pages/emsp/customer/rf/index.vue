@@ -28,7 +28,7 @@ axios.get('/api/rf').then(response => {
 	items.value = response.data.data.content;
 });
 const arr = ref([])
-watch(()=>appStore.Columns,()=>{
+watch(appStore.Columns,()=>{
 	console.log(appStore.Columns)
 	headers.value = []
 	appStore.Columns.forEach(item=>{

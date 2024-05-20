@@ -22,7 +22,7 @@ function rowClick(event: PointerEvent, { item }) {
 	router.push(`agent/${item.id}`);
 }
 const arr = ref([])
-watch(()=>appStore.Columns,()=>{
+watch(appStore.Columns,()=>{
 	headers.value = []
 	appStore.Columns.forEach(item=>{
 		const index = arr.value.findIndex(header=>header.key===item)

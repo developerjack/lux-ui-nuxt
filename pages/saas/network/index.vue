@@ -37,8 +37,7 @@ axios.get('/api/saas/operator').then(response => {
 	items.value = response.data.data.content;
 });
 const arr = ref([])
-watch(()=>appStore.Columns,()=>{
-	console.log(appStore.Columns)
+watch(appStore.Columns,()=>{
 	headers.value = []
 	appStore.Columns.forEach(item=>{
 		const index = arr.value.findIndex(header=>header.key===item)

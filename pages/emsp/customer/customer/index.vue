@@ -32,7 +32,7 @@ function rowClick(event: PointerEvent, { item }) {
 	router.push(`customer/${item.id}`);
 }
 const arr = ref([])
-watch(()=>appStore.Columns,()=>{
+watch(appStore.Columns,()=>{
 	console.log(appStore.Columns)
 	headers.value = []
 	appStore.Columns.forEach(item=>{

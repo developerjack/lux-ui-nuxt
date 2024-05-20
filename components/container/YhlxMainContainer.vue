@@ -1,6 +1,6 @@
 <template>
 	<div class="app-wrapper">
-		<v-card class="h-full app-card" rounded="xl" style="display: flex; flex-direction: column;position: relative;">
+		<v-card class="h-full app-card card-class" rounded="xl">
 			<v-toolbar class="px-5">
 				<Icon v-if="menu.icon" width="30" class="text-primary mx-4" :icon="menu.icon"/>
 				<h4 class="card-title">{{ menu.text }}</h4>
@@ -10,7 +10,7 @@
 					<v-icon>mdi-dots-vertical</v-icon>
 				</v-btn>
 			</v-toolbar>
-			<editDialog v-show="isHide" :items="props.items"></editDialog>
+			<yhlx-more-dialog v-show="isHide" :items="props.items"></yhlx-more-dialog>
 			<v-divider />
 			<div class="overflow-hidden">
 				<slot />
@@ -23,9 +23,8 @@
 import { Icon } from "@iconify/vue";
 import Menu = NavigationConfig.Menu;
 import mainMenu from "@/configs/mainMenu";
-import editDialog from '@/components/dialog/editDialog.vue'
+import YhlxMoreDialog from '@/components/dialog/YhlxMoreDialog'
 import { useAppStore } from "@/stores/app";
-const router = useRouter()
 const appStore = useAppStore();
 const props = defineProps({
 	items: Array // 编辑框的表头列表
@@ -35,16 +34,16 @@ const isHide = ref(false)
 const showEditDialog = () => {
 	isHide.value = !isHide.value
 }
-onMounted(()=>{
-  if(!localStorage.getItem("token")){
-    router.push('/auth/login')
-  }
-})
 </script>
 
 <style scoped>
 .app-wrapper {
 	height: calc(100vh - 64px);
 	padding: 20px;
+}
+.card-class{
+	display: flex;
+	flex-direction: column;
+	position: relative;
 }
 </style>

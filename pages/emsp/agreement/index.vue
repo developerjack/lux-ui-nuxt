@@ -31,7 +31,7 @@ axios.get('/api/agreement').then(response => {
 function rowClick(event: PointerEvent, { item }) {
 	router.push(`agreement/${item.id}`);
 }
-watch(()=>appStore.Columns,()=>{
+watch(appStore.Columns,()=>{
 	console.log(appStore.Columns)
 	headers.value = []
 	appStore.Columns.forEach(item=>{

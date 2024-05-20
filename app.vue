@@ -6,10 +6,13 @@
   </div>
 </template>
 <script setup lang="ts">
+const list = ref(['/','/auth/login','Register']) // 假定不用验证的页面为这些
 const router = useRouter();
-router.afterEach((to, from) => {
-  // to and from are both route objects.
-  console.log('router.to.path',to.fullPath)
-  console.log('router.from.path',from.fullPath)
+router.beforeEach((to, from, next) => {
+  if(list.value.indexOf(to.fullPath)==-1 && !localStorage.getItem("token")){
+    router.push('/auth/login')
+  }else{
+    next()
+  }
 })
 </script>

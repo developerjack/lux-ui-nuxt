@@ -35,7 +35,8 @@ export const useAppStore = defineStore({
       this.addDrawer = addDrawer
     },
     setColumns(Columns: Array<string>){
-      this.Columns = Columns
+      this.Columns.splice(0)
+      this.Columns.push(...Columns)
     },
     setTheme(theme: string) {
       this.theme = theme

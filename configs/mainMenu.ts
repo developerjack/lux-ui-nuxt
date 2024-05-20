@@ -5,7 +5,7 @@ import menuAuth from "./menus/auth.menu";
 import menuWidget from "./menus/widget.menu";
 // import menuForm from "./menus/form.menu";
 import menuChart from "./menus/chart.menu";
-import menuTable from "./menus/table.menu";
+// import menuTable from "./menus/table.menu";
 import menuSaaS from "./menus/saas.menu";
 import menuEMSP from "./menus/emsp.menu";
 import menuCPO from "./menus/cpo.menu";
@@ -39,57 +39,17 @@ export default {
       ],
     },
 	  
-	  {
-		  text: "SaaS",
-		  items: menuSaaS,
-	  },
-	  
-	  {
-		  text: "eMSP",
-		  items: menuEMSP,
-	  },
-	  
-	  {
-		  text: "CPO",
-		  items: menuCPO,
-	  },
-	  
-	  {
-			text: "System",
-		  items: menuSystem
-	  },
-
-    {
-      text: "Landing",
-      items: [
-        ...menuLanding,
-
-      ],
-    },
-    {
-      text: "UI",
-      items: menuUI,
-    },
-    {
-      text: "Auth",
-      items: menuAuth,
-    },
-    {
-      text: "Widgets",
-      items: menuWidget,
-    },
-    // {
-    //   text: "Form",
-    //   items: menuForm,
-    // },
-    {
-      text: "Chart",
-      items: menuChart,
-    },
-    // {
-    //   text: "Table",
-    //   items: menuTable,
-    // }
+	  ...menuSaaS,
+	  ...menuEMSP,
+	  ...menuCPO,
+	  ...menuSystem,
+    ...menuLanding,
+    ...menuUI,
+    ...menuAuth,
+    ...menuWidget,
+    ...menuChart,
+    // ...menuForm,
+    // ...menuTable,
   ],
 	getCurrentMenu() : Menu {
 		let path = useRouter().currentRoute.value.path;

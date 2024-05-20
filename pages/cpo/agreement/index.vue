@@ -30,7 +30,7 @@ axios.get('/api/agreement').then(response => {
 	items.value = response.data.data.content;
 });
 
-watch(()=>appStore.Columns,()=>{
+watch(appStore.Columns,()=>{
 	console.log(appStore.Columns)
 	headers.value = []
 	appStore.Columns.forEach(item=>{
