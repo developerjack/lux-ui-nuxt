@@ -4,7 +4,7 @@
 			<v-expansion-panels v-model="panel" multiple="true" class="px-4 py-6">
 				<v-expansion-panel title="Details">
 					<template v-slot:text>
-						<v-row class="info">
+						<v-row>
 							<v-col cols="2" class="font-weight-bold">ID Tag</v-col>
 							<v-col cols="4">9F5D4F8C</v-col>
 							<v-col cols="2" class="font-weight-bold">Card Name</v-col>

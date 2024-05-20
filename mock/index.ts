@@ -1,5 +1,6 @@
 import { apiMergeResult, apiPageResult } from "./mock";
 import saas from "./saas";
+import cpo from "./cpo";
 import { statusNameEnums, networkRoleEnums, operatorNameEnums, networkNameEnums } from "@/data/data";
 
 const MockAPI = [
@@ -26,7 +27,7 @@ const MockAPI = [
 				"name": "@name",
 				"customerName": "@name",
 				"customerEmail": "@email",
-				"expiryTime": "@datetime('yyyy-MM-dd')",
+				"expiryTime": "@optionalDatetime('yyyy-MM-dd')",
 				"status|1": statusNameEnums,
 			});
 		}
@@ -100,11 +101,12 @@ const MockAPI = [
 				"contactEmail": "@email",
 				"contactPhone": "@phone",
 				"validFrom": "@datetime('yyyy-MM-dd')",
-				"validTo": "@datetime('yyyy-MM-dd')",
+				"validTo": "@optionalDatetime('yyyy-MM-dd')",
 			});
 		}
 	},
-	...saas
+	...saas,
+	...cpo
 ]
 
 export default MockAPI
