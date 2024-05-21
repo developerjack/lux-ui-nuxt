@@ -29,6 +29,13 @@
 					</template>
 				</v-expansion-panel>
 			</v-expansion-panels>
+			<v-expansion-panels v-model="map" multiple="true" class="px-4 py-6">
+				<v-expansion-panel title="Map">
+					<template v-slot:text>
+						<MapContainer></MapContainer>
+					</template>
+				</v-expansion-panel>
+			</v-expansion-panels>
 		</div>
 	</yhlx-main-container>
 </template>
@@ -36,8 +43,9 @@
 <script setup lang="ts">
 import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
-
+import MapContainer from '@/components/common/MapContainer.vue'
 const panel = ref([0]);
+const map = ref([0]);
 
 </script>
 

@@ -78,7 +78,7 @@
 							<v-col cols="2" class="font-weight-bold">Time Price</v-col>
 							<v-col cols="10">20 CNY/hour(step: 10 minute)</v-col>
 						</v-row>
-<!--						<v-row>-->
+<!--						<v-row> 每个item都可以选择约束条件-->   
 <!--							<v-col cols="12">&#45;&#45;&#45;&#45; Tariff Item full demo</v-col>-->
 <!--							-->
 <!--							<v-col cols="2" class="font-weight-bold">Restrictions</v-col>-->

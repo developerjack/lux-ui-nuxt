@@ -11,15 +11,12 @@ import { useAppStore } from "@/stores/app";
 
 const appStore = useAppStore();
 onMounted(()=>{
-  if(appStore.menuType !== ''){
-    type = appStore.menuType
-    list.value.forEach(item => {
-      if(item.type==type){
-        title = item.title
-      }
-    });
-  }
-  console.log(type)
+  type.value = appStore.menuType
+  list.value.forEach(item => {
+    if(item.type==type){
+      title.value = item.title
+    }
+  })
 })
 let title = ref("Iocharger")
 let type = ref("SAAS")
@@ -38,8 +35,8 @@ const list = ref([{
 }])
 
 const changeTitle = (item) => {
-  title = item.title
-  type = item.type
+  title.value = item.title
+  type.value = item.type
   appStore.setMenuType(item.type)
 }
 </script>

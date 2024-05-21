@@ -28,6 +28,7 @@
     "vuetify": "^3.4.8"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@iconify/vue": "^4.1.1",
     "@mdi/font": "^7.2.96",
     "@nuxt/test-utils": "^3.8.1",

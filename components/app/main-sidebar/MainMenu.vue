@@ -11,8 +11,8 @@ const props = defineProps({
     default: () => [],
   },
 });
-let menuList = reactive({myList:[]}) // 防止响应式被覆盖
-menuList.myList.push(...props.menu)
+let menuList = reactive([]) // 防止响应式被覆盖
+menuList.push(...props.menu)
 watch(()=>appStore.menuType, (newValue, oldValue) => { // 是否切换导航栏选项
     open.openList = []
     getData()
@@ -30,21 +30,21 @@ const getData = ()=>{ // 取出数据中所有有两层嵌套的text作为菜单
 }
 const getMenu = () => { // 获取所选类型的对应菜单
   if(appStore.menuType=='demo'){ // 选择demo则呈现剩下所有菜单项
-      menuList.myList = [props.menu[0]]
-      menuList.myList.push(...props.menu.slice(5))
+      menuList = [props.menu[0]]
+      menuList.push(...props.menu.slice(5))
     }
   const arr = props.menu.slice(1)
   arr.forEach(item=>{// 呈现选择的对应菜单项
     if(item.text.toUpperCase()==appStore.menuType.toUpperCase()){
-      menuList.myList = [props.menu[0]]
-      menuList.myList.push(item)
+      menuList = [props.menu[0]]
+      menuList.push(item)
     }
     if(item.text=='System'&&appStore.menuType=='SAAS'){
-        if(menuList.myList.length === props.menu.length){
-          menuList.myList = [props.menu[0]]
-          menuList.myList.push(item)
+        if(menuList.length === props.menu.length){
+          menuList = [props.menu[0]]
+          menuList.push(item)
         }else{
-          menuList.myList.push(item)
+          menuList.push(item)
         }
       }
   })
@@ -52,7 +52,6 @@ const getMenu = () => { // 获取所选类型的对应菜单
 const path = ref('')
 router.afterEach((to, from) => {
   path.value = to.fullPath
-  // 在这里可以处理路由变化后的逻辑
 });
 let open = reactive({openList:[]})
 onMounted(()=>{
@@ -63,7 +62,7 @@ onMounted(()=>{
 </script>
 <template>
   <v-list nav dense v-model:opened="open.openList" open-strategy="multiple">
-    <template v-for="menuArea in menuList.myList" :key="menuArea.key">
+    <template v-for="menuArea in menuList" :key="menuArea.key">
       <div v-if="menuArea.key || menuArea.text" class="pa-1 mt-2 text-overline">
         {{ menuArea.text }}
       </div>
