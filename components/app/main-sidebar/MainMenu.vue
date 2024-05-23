@@ -11,15 +11,15 @@ const props = defineProps({
     default: () => [],
   },
 });
-let menuList = reactive([]) // 防止响应式被覆盖
+let menuList = reactive([])
 menuList.push(...props.menu)
-watch(()=>appStore.menuType, (newValue, oldValue) => { // 是否切换导航栏选项
+watch(()=>appStore.menuType, (newValue, oldValue) => {
     open.openList = []
     getData()
     getMenu()
 
 })
-const getData = ()=>{ // 取出数据中所有有两层嵌套的text作为菜单默认展开的列表
+const getData = ()=>{ 
   props.menu.forEach(item=>{ 
     item.items.forEach(element=>{
       if(element.items){
@@ -28,13 +28,13 @@ const getData = ()=>{ // 取出数据中所有有两层嵌套的text作为菜单
     })
   })
 }
-const getMenu = () => { // 获取所选类型的对应菜单
-  if(appStore.menuType=='demo'){ // 选择demo则呈现剩下所有菜单项
+const getMenu = () => {
+  if(appStore.menuType=='demo'){ 
       menuList = [props.menu[0]]
       menuList.push(...props.menu.slice(5))
     }
   const arr = props.menu.slice(1)
-  arr.forEach(item=>{// 呈现选择的对应菜单项
+  arr.forEach(item=>{
     if(item.text.toUpperCase()==appStore.menuType.toUpperCase()){
       menuList = [props.menu[0]]
       menuList.push(item)
@@ -62,12 +62,12 @@ onMounted(()=>{
 </script>
 <template>
   <v-list nav dense v-model:opened="open.openList" open-strategy="multiple">
-    <template v-for="menuArea in menuList" :key="menuArea.key">
+    <template v-for="menuArea in menuList" :key="menuArea.text">
       <div v-if="menuArea.key || menuArea.text" class="pa-1 mt-2 text-overline">
         {{ menuArea.text }}
       </div>
       <template v-if="menuArea.items">
-        <template v-for="menuItem in menuArea.items" :key="menuItem.key">
+        <template v-for="menuItem in menuArea.items" :key="menuItem.text">
           <!-- menu level 1 -->
           <v-list-item
             v-if="!menuItem.items"
@@ -99,7 +99,7 @@ onMounted(()=>{
             <!-- menu level 2 -->
             <v-list-item
               v-for="subMenuItem in menuItem.items"
-              :key="subMenuItem.key"
+              :key="subMenuItem.text"
               :to="subMenuItem.link"
               color="primary"
               :class="{ 'active': path.startsWith(subMenuItem.link) && subMenuItem.link !== '/' , 'v-list-item--active': path.startsWith(subMenuItem.link) && subMenuItem.link !== '/'}"

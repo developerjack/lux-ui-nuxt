@@ -24,15 +24,11 @@
 							<v-col cols="4">Enable</v-col>
 							<v-col cols="2" class="font-weight-bold">Notes</v-col>
 							<v-col cols="10">This is charging location biggest in China.</v-col>
-							
+							<v-col cols="2" class="font-weight-bold">Map</v-col>
+							<v-col cols="12">
+								<map-container></map-container>
+							</v-col>
 						</v-row>
-					</template>
-				</v-expansion-panel>
-			</v-expansion-panels>
-			<v-expansion-panels v-model="map" multiple="true" class="px-4 py-6">
-				<v-expansion-panel title="Map">
-					<template v-slot:text>
-						<MapContainer></MapContainer>
 					</template>
 				</v-expansion-panel>
 			</v-expansion-panels>
@@ -45,7 +41,6 @@ import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
 import MapContainer from '@/components/common/MapContainer.vue'
 const panel = ref([0]);
-const map = ref([0]);
 
 </script>
 

@@ -35,9 +35,6 @@
 				<v-col cols="12" sm="6">
 					<yhlx-text-field label="EVSE Number" type="number"/>
 				</v-col>
-				<!-- <v-col cols="12" sm="6">
-					<yhlx-select label="Status" :items="['Disable','Enable']" />
-				</v-col> -->
 				<v-col cols="12" sm="6">
 					<v-combobox
 					variant="outlined"
@@ -52,6 +49,10 @@
 				<v-col cols="12" sm="12">
 					<yhlx-text-field label="Note" />
 				</v-col>
+				<v-col cols="12" sm="12" class="font-weight-bold">Location:  </v-col><!--<span>{{Location}}</span>-->
+				<v-col cols="12" sm="12">
+					<map-container @getLocationName="getLocationName" :height="400"></map-container>
+				</v-col>
 			</v-row>
 		</template>
 	</yhlx-add-dialog>
@@ -61,6 +62,7 @@
 import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
 import YhlxTextField from "@/components/common/YhlxTextField.vue";
 import YhlxSelect from "@/components/common/YhlxSelect.vue";
+import MapContainer from '@/components/common/MapContainer.vue'
 import { operatorNameEnums,ChineseProvince } from "@/data/data";
 const select = ref(null)
 const province = ref([])
@@ -74,6 +76,10 @@ const handleProvinceChange = () => {
 	selectedCity.value = ''
 	cities.value = ChineseProvince.find(item=>item.province == selectedProvince.value).cities
 	console.log()
+}
+const Location = ref('')
+const getLocationName = (selectedAddress) => {
+	Location.value = selectedAddress
 }
 onMounted(()=>{
 	ChineseProvince.forEach(element => {
