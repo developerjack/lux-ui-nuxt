@@ -24,7 +24,7 @@
 				<v-col cols="12" sm="12">
 					<yhlx-text-field label="Notes" />
 				</v-col>
-				<v-col cols="12" class="font-weight-bold">Restrictions</v-col>
+				<v-col cols="12" class="font-weight-bold">Restrictions And Price</v-col>
 				<v-col cols="12" sm="12">
 					<v-card>
 						<v-tabs
@@ -32,76 +32,32 @@
 						bg-color="primary"
 						>
 						<v-tab v-for="(item,index) in props.demoList" :value="index" :key="index">Item {{index}}</v-tab>
-						<!-- <v-tab value="two">Item 2</v-tab>
-						<v-tab value="three">Item 3</v-tab>
-						<v-tab value="four">Item 4</v-tab>
-						<v-tab value="five">Item 5</v-tab> -->
 						</v-tabs>
 						<v-card-text>
 							<v-window v-model="selected">
 								<v-window-item v-for="(item,index) in props.demoList" :value="index" :key="index">
 									<v-row>
-										<v-col cols="2" class="font-weight-bold">Restrictions</v-col>
-										{{item}}
-										<v-col cols="10">
-											<b v-if="item[0].isAble">Day:</b> {{item[0].value}} <b v-if="item[0].isAble">Time:</b>{{item[1].value}}<br/>
-											<b v-if="item[2].isAble">Energy:</b>{{item[2].value}}<b v-if="item[3].isAble">Duration:</b>{{item[3].value}}<b v-if="item[4].isAble">Current:</b>{{item[4].value}}<b v-if="item[5].isAble">Power:</b>{{item[5].value}}<br/>
-											<b v-if="item[6].isAble">Reservation:</b>{{item[6].value}}<br/>
-										</v-col>
-									</v-row>
-								</v-window-item>
-
-								<!-- <v-window-item value="two">
-									<v-row>
 										<v-col cols="4" class="font-weight-bold">Restrictions</v-col>
 										<v-col cols="8">
-											<b>Day:</b> Monday, TuesDay, Wednesday, Thursday, Friday <b>Time:</b> 00:00 to 10:00<br/>
+											<b v-if="item[0].start !='' && item[0].end != ''">Day:</b><span class="restriction-item">{{item[0].value}}</span> 
+											<b v-if="item[1].start !='' && item[1].end != ''">Time:</b><span class="restriction-item">{{getFinalString(item[1])}}</span><br/>
+											<b v-if="item[2].start !='' && item[2].end != ''">Energy:</b><span class="restriction-item">{{getFinalString(item[2])}}</span>
+											<b v-if="item[3].start !='' && item[3].end != ''">Duration:</b><span class="restriction-item">{{getFinalString(item[3])}}</span><br/>
+											<b v-if="item[4].start !='' && item[4].end != ''">Current:</b><span class="restriction-item">{{getFinalString(item[4])}}</span>
+											<b v-if="item[5].start !='' && item[5].end != ''">Power:</b><span class="restriction-item">{{getFinalString(item[5])}}</span><br/>
+											<b v-if="item[6].start !='' && item[6].end != ''">Reservation:</b><span class="restriction-item">{{item[6].start}}</span>
+											<b v-if="item[6].start !='' && item[6].end != ''">Expires:</b><span class="restriction-item">{{item[6].end }}</span> <!-- + ' ' + item[6].suffix-->
 										</v-col>
-										<v-col cols="4" class="font-weight-bold">Time Price</v-col>
-										<v-col cols="8">20 CNY/hour(step: 10 minute)</v-col>
-										<v-col cols="4" class="font-weight-bold">ParkingTime Price</v-col>
-										<v-col cols="8">5 CNY/hour(step: 30 minute)</v-col>
+										<v-col cols="4" class="font-weight-bold" v-if="item[7].value !=''">Energy Price</v-col>
+										<v-col cols="8"  v-if="item[7].value !=''">{{item[7].value + ' ' + item[7].suffix + ' (step: 0.1 kWh)'}}</v-col>
+										<v-col cols="4" class="font-weight-bold" v-if="item[8].value !=''">Flat Price</v-col>
+										<v-col cols="8"  v-if="item[8].value !=''">{{item[8].value + ' ' + item[8].suffix}}</v-col>
+										<v-col cols="4" class="font-weight-bold" v-if="item[9].value !=''">ParkingTime Price</v-col>
+										<v-col cols="8" v-if="item[9].value !=''">{{item[9].value + ' ' + item[9].suffix + ' (step: 30 minute)'}}</v-col>
+										<v-col cols="4" class="font-weight-bold" v-if="item[10].value !=''">Time Price</v-col>
+										<v-col cols="8" v-if="item[10].value !=''">{{item[10].value + ' ' + item[10].suffix + ' (step: 10 minute)'}}</v-col>
 									</v-row>
 								</v-window-item>
-
-								<v-window-item value="three">
-									<v-row>
-										<v-col cols="4" class="font-weight-bold">Restrictions</v-col>
-										<v-col cols="8">
-											<b>Day:</b> Monday, TuesDay, Wednesday, Thursday, Friday <b>Time:</b> 10:00 to 18:00<br/>
-										</v-col>
-										<v-col cols="4" class="font-weight-bold">Energy Price</v-col>
-										<v-col cols="8">1.8 CNY/kWh (step: 0.1 kWh)</v-col>
-										<v-col cols="4" class="font-weight-bold">ParkingTime Price</v-col>
-										<v-col cols="8">8 CNY/hour(step: 30 minute)</v-col>
-									</v-row>
-								</v-window-item>
-								<v-window-item value="four">
-									<v-row>
-										<v-col cols="4" class="font-weight-bold">Restrictions</v-col>
-										<v-col cols="8">
-											<b>Day:</b> Monday, TuesDay, Wednesday, Thursday, Friday <b>Time:</b> 18:00 to 00:00<br/>
-										</v-col>
-										<v-col cols="4" class="font-weight-bold">Time Price</v-col>
-										<v-col cols="8">20 CNY/hour(step: 10 minute)</v-col>
-										<v-col cols="4" class="font-weight-bold">ParkingTime Price</v-col>
-										<v-col cols="8">5 CNY/hour(step: 30 minute)</v-col>
-									</v-row>
-								</v-window-item>
-								<v-window-item value="five">
-									<v-row>
-										<v-col cols="4" class="font-weight-bold">Restrictions</v-col>
-										<v-col cols="8">
-											<b>Day:</b> Saturday, Sunday
-										</v-col>
-										<v-col cols="4" class="font-weight-bold">Energy Price</v-col>
-										<v-col cols="8">1.2 CNY/kWh (step: 0.1 kWh)</v-col>
-										<v-col cols="4" class="font-weight-bold">ParkingTime Price</v-col>
-										<v-col cols="8">5 CNY/hour(step: 30 minute)</v-col>
-										<v-col cols="4" class="font-weight-bold">Time Price</v-col>
-										<v-col cols="8">20 CNY/hour(step: 10 minute)</v-col>
-									</v-row>
-								</v-window-item> -->
 							</v-window>
 						</v-card-text>
 						<v-card-text class="text-center">
@@ -109,7 +65,7 @@
 								business-type="Close"
 								variant="text"
 								@click="removeItem"
-							>Remove Tab</yhlx-btn>
+							>Remove Item</yhlx-btn>
 							<v-divider
 								class="mx-4"
 								vertical
@@ -118,7 +74,7 @@
 								business-type="Primary"
 								variant="text"
 								@click="openDialog"
-							>Add Tab</yhlx-btn>
+							>Add Item</yhlx-btn>
 						</v-card-text>
 					</v-card>
 				</v-col>
@@ -140,20 +96,32 @@ const props = defineProps({
     default: () => [],
   },
 })
-const selected = ref('')
-watch(selected,()=>{
-	console.log(selected)
+const selected = ref(0)
+watch(props.demoList,()=>{
+	console.log('props.demoList',props.demoList)
+	selected.value = 0
 })
 const removeItem = () => {
-	emits('removeItem',selected)
+	emits('removeItem',selected.value)
 }
 const openDialog = () => {
 	emits('openDialog')
+}
+const getFinalString = (obj)=>{
+	return obj.start !='' && obj.end != '' ? obj.start + ' to ' + obj.end + ' ' + obj.suffix : ''
 }
 </script>
 <style lang="scss" scoped>
 .bg-primary{
 	background-color: white !important;
 	color: black !important;
+}
+.restriction-item{
+	display: inline-block;
+	width: 100px;
+}
+b{
+	display: inline-block !important;
+	width: 90px;
 }
 </style>
