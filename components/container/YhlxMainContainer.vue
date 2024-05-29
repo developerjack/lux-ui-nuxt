@@ -12,7 +12,7 @@
 			</v-toolbar>
 			<yhlx-more-dialog v-show="isHide" :items="props.items"></yhlx-more-dialog>
 			<v-divider />
-			<div class="overflow-hidden">
+			<div class="overflow-auto">
 				<slot />
 			</div>
 		</v-card>
