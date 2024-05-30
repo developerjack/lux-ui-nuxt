@@ -1,16 +1,16 @@
 <template>
 	<div class="app-wrapper">
-		<v-card class="h-full app-card card-class" rounded="xl">
+		<v-card class="h-full app-card" rounded="xl">
 			<v-toolbar class="px-5">
 				<Icon v-if="menu.icon" width="30" class="text-primary mx-4" :icon="menu.icon"/>
 				<h4 class="card-title">{{ menu.text }}</h4>
 				<v-spacer></v-spacer>
 				<slot name="append" />
-				<v-btn icon @click="showEditDialog">
+				<v-btn icon @click="showMoreDialog">
 					<v-icon>mdi-dots-vertical</v-icon>
 				</v-btn>
 			</v-toolbar>
-			<yhlx-more-dialog v-show="isHide" :items="props.items"></yhlx-more-dialog>
+			<yhlx-more-dialog v-show="isHide" :data-headers="props.dataHeaders" />
 			<v-divider />
 			<div class="overflow-auto">
 				<slot />
@@ -23,15 +23,13 @@
 import { Icon } from "@iconify/vue";
 import Menu = NavigationConfig.Menu;
 import mainMenu from "@/configs/mainMenu";
-import YhlxMoreDialog from '@/components/dialog/YhlxMoreDialog'
-import { useAppStore } from "@/stores/app";
-const appStore = useAppStore();
+import YhlxMoreDialog from '@/components/dialog/YhlxMoreDialog.vue'
 const props = defineProps({
-	items: Array // 编辑框的表头列表
+	dataHeaders: Array // 编辑框的表头列表
 })
 const menu: Menu = mainMenu.getCurrentMenu();
 const isHide = ref(false)
-const showEditDialog = () => {
+const showMoreDialog = () => {
 	isHide.value = !isHide.value
 }
 </script>
@@ -39,11 +37,6 @@ const showEditDialog = () => {
 <style scoped>
 .app-wrapper {
 	height: calc(100vh - 64px);
-	padding: 20px;
-}
-.card-class{
-	display: flex;
-	flex-direction: column;
-	position: relative;
+	padding: 16px;
 }
 </style>

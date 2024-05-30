@@ -1,7 +1,7 @@
 <template>
 	<register-add-dialog location="Toolbar" title="Add Operator">
 		<template v-slot:content>
-			<v-row>
+			<v-row class="form">
 				<v-col cols="12" sm="6">
 					<yhlx-text-field label="Name*" required />
 				</v-col>

@@ -1,7 +1,7 @@
 <template>
 	<yhlx-add-dialog location="Toolbar" title="Add Agent">
 		<template v-slot:content>
-			<v-row>
+			<v-row class="form">
 				<v-col cols="12" sm="6">
 					<yhlx-text-field label="Email*" placeholder="johndoe@gmail.com" hint="Please enter email, the email as login info." required />
 				</v-col>

@@ -1,22 +1,12 @@
 <template>
-	<yhlx-main-container :items="headItems">
+	<yhlx-main-container :data-headers="headItems">
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<v-data-table :headers="headers" :items="items" @click:row="rowClick">
-			<template v-slot:item.status="{ value }">
-				<v-chip
-					:color="value=='Enable' ? 'green' : 'red'"
-					class="text-uppercase"
-					size="small"
-					label
-				>{{ value }}</v-chip>
-			</template>
-		</v-data-table>
+		<v-data-table :headers="headers" :items="items" @click:row="rowClick" />
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
-import YhlxBtn from "@/components/common/YhlxBtn.vue";
 import DialogAdd from './Add.vue';
 import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
