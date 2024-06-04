@@ -2,9 +2,9 @@
   <v-card class="overflow-auto float-card">
     <v-list density="compact">
       <v-list-item class="font-weight-bold" v-show="props.dataHeaders">Columns</v-list-item>
-      <v-list-item v-for="item in props.dataHeaders" :key="item.value" :title="item.text" @click="dataHeaderClick(item)">
+      <v-list-item v-for="item in props.dataHeaders" :key="item.key" :title="item.title" @click="dataHeaderClick(item)">
         <template #append>
-          <v-checkbox :value="item.value" v-model="checked" density="compact" hide-details readonly />
+          <v-checkbox :value="item.key" v-model="item.show" density="compact" hide-details readonly />
         </template>
       </v-list-item>
       <v-divider />
@@ -14,18 +14,37 @@
 </template>
 <script setup lang="ts">
 import { useAppStore } from "@/stores/app";
+
 const appStore = useAppStore();
 const props = defineProps({
-	dataHeaders: Array, // 表头
+	dataHeaders: Array<{ // 表头
+		key: String,
+		title: String,
+		show: String
+	}>,
 });
-const emit = defineEmits(['refreshTable']);
+
+watch(() => props.dataHeaders, () => {
+	if (props.dataHeaders instanceof Array) {
+		props.dataHeaders.forEach(item => {
+			if (item.show === undefined) {
+				item.show = item.key;
+			}
+		});
+	}
+}, {
+	immediate: true
+})
 
 const dataHeaderClick = (item: any) => {
-    const index = checked.indexOf(item.value);
-    index !== -1 ? checked.splice(index, 1) : checked.push(item.value);
+    if (item.key === item.show) {
+	    item.show = '';
+    } else {
+			item.show = item.key;
+    }
 }
-const checked = reactive([]);
 
+const emit = defineEmits(['refreshTable']);
 const operatingItems = ref([{
     label: 'Clear Filters',
     click: () => {
@@ -44,16 +63,6 @@ const operatingItems = ref([{
 		}
 	},
 ]);
-
-watch(props.dataHeaders, () => {
-  props.dataHeaders.forEach(item => {
-    checked.push(item.value)
-  })
-})
-
-watch(checked, () => {
-  appStore.setColumns(checked)
-})
 </script>
 <style lang="scss" scoped>
 .float-card {

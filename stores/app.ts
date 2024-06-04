@@ -9,7 +9,6 @@ export const useAppStore = defineStore({
     menuType:'SAAS',
     isLogin:true,
     addDrawer:false,
-    Columns:[''],
   }),
   persist: [
     {
@@ -33,10 +32,6 @@ export const useAppStore = defineStore({
     },
     setAddDrawer(addDrawer:boolean) {
       this.addDrawer = addDrawer
-    },
-    setColumns(Columns: Array<string>){
-      this.Columns.splice(0)
-      this.Columns.push(...Columns)
     },
     setTheme(theme: string) {
       this.theme = theme
