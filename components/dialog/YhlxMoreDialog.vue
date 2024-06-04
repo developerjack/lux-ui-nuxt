@@ -13,22 +13,21 @@
   </v-card>
 </template>
 <script setup lang="ts">
-import { useAppStore } from "@/stores/app";
-
-const appStore = useAppStore();
 const props = defineProps({
 	dataHeaders: Array<{ // 表头
-		key: String,
-		title: String,
-		show: String
+		key: string,
+		title: string,
+		show: string
 	}>,
 });
 
+let headersKey = `headers-${useRouter().currentRoute.value.path}`;
+const hiddenHeaders:Array<string> = JSON.parse(localStorage.getItem(headersKey) || '[]');
 watch(() => props.dataHeaders, () => {
 	if (props.dataHeaders instanceof Array) {
 		props.dataHeaders.forEach(item => {
-			if (item.show === undefined) {
-				item.show = item.key;
+			if (item.show === undefined && item.key) {
+				item.show = hiddenHeaders.indexOf(item.key) > -1 ? '' : item.key;
 			}
 		});
 	}
@@ -37,11 +36,13 @@ watch(() => props.dataHeaders, () => {
 })
 
 const dataHeaderClick = (item: any) => {
-    if (item.key === item.show) {
-	    item.show = '';
-    } else {
-			item.show = item.key;
-    }
+  if (item.key === item.show) {
+    item.show = '';
+  } else {
+		item.show = item.key;
+  }
+	const hiddenHeaders = props.dataHeaders?.filter(item => !item.show).map(item=>item.key);
+	localStorage.setItem(headersKey, JSON.stringify(hiddenHeaders));
 }
 
 const emit = defineEmits(['refreshTable']);

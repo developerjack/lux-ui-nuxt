@@ -15,7 +15,7 @@ import { useAppStore } from "@/stores/app";
 const appStore = useAppStore();
 const router = useRouter()
 const headers = ref([
-	{ title: "Name", key: "name", show: "" },
+	{ title: "Name", key: "name" },
 	{ title: "Country", key: "countryName" },
 	{ title: "Party ID", key: "partyId" },
 	{ title: "Currency", key: "currency" },
