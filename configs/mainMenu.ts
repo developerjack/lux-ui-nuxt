@@ -27,17 +27,6 @@ function getCurrentMenu(items: Menu[], path: string) : Menu {
 
 export default {
   menu: [
-    {
-      text: "",
-      items: [
-        {
-          text: "Dashboard",
-          link: "/",
-          icon: "solar:widget-line-duotone",
-        },
-      ],
-    },
-	  
 	  ...menuSaaS,
 	  ...menuEMSP,
 	  ...menuCPO,
@@ -70,8 +59,28 @@ export default {
 				return menuCPO;
 			case "eMSP":
 				return menuEMSP;
+			case "EMS":
+				return menuUI;
 			case "Demo":
 				return this.menu;
 		}
+	},
+	getCompanies() {
+		return [{
+			title:'Iocharger',
+			type:'SAAS'
+		}, {
+			title:'EMES',
+			type:'eMSP'
+		}, {
+			title:'ICS',
+			type:'CPO'
+		},{
+			title: 'Ioc EMS',
+			type: 'EMS'
+		}, {
+			title:'Demo',
+			type:'Demo'
+		}];
 	}
 };

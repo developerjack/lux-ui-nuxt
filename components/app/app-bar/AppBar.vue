@@ -20,28 +20,14 @@ onMounted(() => {
     }
   })
 })
-let title = ref("Iocharger")
-let type = ref("SAAS")
-const list = ref([{
-  title:'Iocharger',
-  type:'SAAS'
-}, {
-  title:'EMES',
-  type:'eMSP'
-}, {
-  title:'ICS',
-  type:'CPO'
-}, {
-  title:'Demo',
-  type:'Demo'
-}]);
+const list = ref(menu.getCompanies());
+let title = ref(list.value[0].title);
+let type = ref(list.value[0].type);
 
 // 选项
 const options = computed(() => {
 	return list.value.filter(item => item.title !== title.value);
 });
-
-
 
 function getDefaultLink(menus:any): string | undefined {
 	let link:string | undefined;

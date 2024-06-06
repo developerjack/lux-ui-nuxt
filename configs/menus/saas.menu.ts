@@ -1,5 +1,15 @@
 export default [
 	{
+		text: "",
+		items: [
+			{
+				icon: "solar:widget-line-duotone",
+				text: "Dashboard",
+				link: "/",
+			},
+		],
+	},
+	{
 		text:'SaaS',
 		items:[{
 			icon: "solar:library-bold-duotone",
