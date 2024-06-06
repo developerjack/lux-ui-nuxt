@@ -10,46 +10,34 @@ const router = useRouter();
 import UserMenu from "./UserMenu.vue";
 import { useAppStore } from "@/stores/app";
 import menu from "@/configs/mainMenu";
-
 const appStore = useAppStore();
-onMounted(() => {
-  type.value = appStore.menuType
-  list.value.forEach(item => {
-    if(item.type === type.value){
-      title.value = item.title
-    }
-  })
-})
+
 const list = ref(menu.getCompanies());
 let title = ref(list.value[0].title);
 let type = ref(list.value[0].type);
+
+onMounted(() => {
+	if (appStore.menuType) {
+		type.value = appStore.menuType;
+		list.value.forEach(item => {
+			if(item.type === type.value){
+				title.value = item.title
+			}
+		})
+	} else {
+		changeTitle(list.value[0]);
+	}
+})
 
 // 选项
 const options = computed(() => {
 	return list.value.filter(item => item.title !== title.value);
 });
 
-function getDefaultLink(menus:any): string | undefined {
-	let link:string | undefined;
-	for (let i = 0; i < menus.length; i++) {
-		const menu = menus[i];
-		if (menu.items && menu.items.length > 0) {
-			link = getDefaultLink(menu.items);
-		}
-		if (!link) {
-			link = menu.link;
-		}
-		if (!!link) {
-			break;
-		}
-	}
-	return link;
-}
-
 const changeTitle = (item) => {
   title.value = item.title;
   type.value = item.type;
-	const link = getDefaultLink(menu.getMenus(type.value));
+	const link = menu.getDefaultLink(menu.getMenus(type.value));
 	if (!!link) {
 		router.push(link);
 	}

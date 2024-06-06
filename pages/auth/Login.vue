@@ -16,20 +16,33 @@ const refLoginForm = ref();
 const email = ref("vuetify3-visitor@gmail.com");
 const password = ref("sfm12345");
 const isFormValid = ref(true);
+import menu from "@/configs/mainMenu";
 
 // show password field
 const showPassword = ref(false);
+const list = menu.getCompanies();
+
+function goMain() {
+	appStore.setMenuType(list[0].type);
+	const link = menu.getDefaultLink(menu.getMenus(list[0].type));
+	if (!!link) {
+		router.push(link);
+	} else {
+		router.push("/");
+	}
+}
+
 const loginWithEmailAndPassword = async (email: string, password: string) => {
   axios.post('/api/Login').then(res=>{
     localStorage.setItem('token',res.data.token)
-    router.push('/')
+	  goMain();
   })
 };
 
 const loginWithGoogle = async () => {
   axios.post('/api/Login').then(res=>{
     localStorage.setItem('token',res.data.token)
-    router.push('/')
+	  goMain();
   })
 };
 
@@ -72,12 +85,10 @@ const resetErrors = () => {
 };
 
 onMounted(()=>{
-  appStore.setMenuType('SAAS')
-  if(localStorage.getItem("token")===null){
+  if (localStorage.getItem("token") === null){
     return
   }
-  
-  router.push('/')
+	goMain();
 })
 </script>
 <template>

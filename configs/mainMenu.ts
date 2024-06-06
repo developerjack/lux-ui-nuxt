@@ -63,10 +63,15 @@ export default {
 				return menuUI;
 			case "Demo":
 				return this.menu;
+			default:
+				return [];
 		}
 	},
 	getCompanies() {
 		return [{
+			title: 'Ioc EMS',
+			type: 'EMS'
+		}, {
 			title:'Iocharger',
 			type:'SAAS'
 		}, {
@@ -75,12 +80,25 @@ export default {
 		}, {
 			title:'ICS',
 			type:'CPO'
-		},{
-			title: 'Ioc EMS',
-			type: 'EMS'
 		}, {
 			title:'Demo',
 			type:'Demo'
 		}];
+	},
+	getDefaultLink(menus:any): string | undefined {
+	let link:string | undefined;
+	for (let i = 0; i < menus.length; i++) {
+		const menu = menus[i];
+		if (menu.items && menu.items.length > 0) {
+			link = this.getDefaultLink(menu.items);
+		}
+		if (!link) {
+			link = menu.link;
+		}
+		if (!!link) {
+			break;
+		}
 	}
+	return link;
+}
 };
