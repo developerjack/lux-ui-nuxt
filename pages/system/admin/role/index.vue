@@ -92,7 +92,7 @@ const permissions = ref([
 					
 					<template v-for="(permission, index) in permissions" :key="index">
 						<h1 class="mt-8 mb-6">{{ permission.moduleName }}</h1>
-						<div class="my-5 checkbox-wrap">
+						<div class="my-5 module-checkbox-wrapper">
 							<v-checkbox v-for="item in permission.items" :key="item" v-model="selected" :label="item" :value="item" />
 						</div>
 					</template>
@@ -111,40 +111,6 @@ const permissions = ref([
 .right {
 	flex: 1;
 	overflow: auto;
-}
-
-.checkbox-wrap {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-	grid-row-gap: 16px;
-	grid-column-gap: 10px;
-	
-	:deep(.v-checkbox) {
-		display: flex;
-		width: 100%;
-		padding-right: 0 !important;
-		.v-input__control {
-			width: 100%;
-			.v-checkbox-btn {
-				flex: 1;
-				width: 100%;
-				min-height: auto;
-				border-radius: 4px;
-				padding: 4px 10px 4px 4px;
-				border: 1px solid rgba(0, 0, 0, 0.12);
-				font-weight: bold;
-				&.v-selection-control--dirty {
-					border: 1px solid rgba(var(--v-theme-primary), 0.6);
-				}
-				&:hover {
-					border: 1px solid rgba(var(--v-theme-primary), 0.6);
-				}
-				.v-label--clickable {
-					width: 100%;
-				}
-			}
-		}
-	}
 }
 
 </style>

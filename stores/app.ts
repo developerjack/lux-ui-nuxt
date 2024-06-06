@@ -1,4 +1,3 @@
-import { set } from 'nuxt/dist/app/compat/capi'
 import { defineStore } from 'pinia'
 
 export const useAppStore = defineStore({

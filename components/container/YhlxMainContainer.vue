@@ -12,7 +12,7 @@
 			</v-toolbar>
 			<yhlx-more-dialog v-show="isHide" :data-headers="props.dataHeaders" />
 			<v-divider />
-			<div class="overflow-auto">
+			<div class="app-content">
 				<slot />
 			</div>
 		</v-card>
@@ -38,5 +38,9 @@ const showMoreDialog = () => {
 .app-wrapper {
 	height: calc(100vh - 64px);
 	padding: 16px;
+}
+.app-content {
+	overflow: auto !important;
+	height: calc(100vh - 160px);
 }
 </style>

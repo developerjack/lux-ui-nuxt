@@ -52,78 +52,78 @@ export default [
           text: "Column  Chart",
           link: "/chart/columnchart",
         },
-        // Bar Chart
-        {
-          icon: "solar:chart-2-bold-duotone",
-          text: "Bar Chart",
-          link: "/chart/barchart",
-        },
-        // Pie Chart
-        {
-          icon: "solar:pie-chart-2-line-duotone",
-          text: "Pie Chart",
-          link: "/chart/piechart",
-        },
-        // Mixed Chart
-        {
-          icon: "solar:chart-2-bold-duotone",
-          text: "Mixed Chart",
-          link: "/chart/mixedchart",
-        },
-        // Timeline Chart
-        {
-          icon: "solar:chart-2-bold-duotone",
-          text: "Timeline Chart",
-          link: "/chart/timelinechart",
-        },
-        // Funnel Chart
-        {
-          icon: "solar:chart-2-bold-duotone",
-          text: "Funnel Chart",
-          link: "/chart/funnelchart",
-        },
-        // Candlestick Chart
-        {
-          icon: "solar:chart-2-bold-duotone",
-          text: "Candlestick Chart",
-          link: "/chart/candlestickchart",
-        },
-        // Scatter Charts
-        {
-          icon: "solar:chart-2-bold-duotone",
-          text: "Scatter Chart",
-          link: "/chart/scatterchart",
-        },
-        // Heatmap Charts
-        {
-          icon: "solar:chart-2-bold-duotone",
-          text: "Heatmap Chart",
-          link: "/chart/heatmapchart",
-        },
-        // Treemap Charts
-        {
-          icon: "solar:chart-2-bold-duotone",
-          text: "Treemap Chart",
-          link: "/chart/treemapchart",
-        },
-        // RadialBar Charts
-        {
-          icon: "solar:round-graph-line-duotone",
-          text: "RadialBar Chart",
-          link: "/chart/radialbarchart",
-        },
-        // Radar  Charts
-        {
-          icon: "solar:round-graph-line-duotone",
-          text: "Radar  Chart",
-          link: "/chart/radarchart",
-        },
-        // Polar Area Charts
-        {
-          icon: "solar:round-graph-line-duotone",
-          text: "Polar Area Chart",
-          link: "/chart/polarareachart",
-        }
+        // // Bar Chart
+        // {
+        //   icon: "solar:chart-2-bold-duotone",
+        //   text: "Bar Chart",
+        //   link: "/chart/barchart",
+        // },
+        // // Pie Chart
+        // {
+        //   icon: "solar:pie-chart-2-line-duotone",
+        //   text: "Pie Chart",
+        //   link: "/chart/piechart",
+        // },
+        // // Mixed Chart
+        // {
+        //   icon: "solar:chart-2-bold-duotone",
+        //   text: "Mixed Chart",
+        //   link: "/chart/mixedchart",
+        // },
+        // // Timeline Chart
+        // {
+        //   icon: "solar:chart-2-bold-duotone",
+        //   text: "Timeline Chart",
+        //   link: "/chart/timelinechart",
+        // },
+        // // Funnel Chart
+        // {
+        //   icon: "solar:chart-2-bold-duotone",
+        //   text: "Funnel Chart",
+        //   link: "/chart/funnelchart",
+        // },
+        // // Candlestick Chart
+        // {
+        //   icon: "solar:chart-2-bold-duotone",
+        //   text: "Candlestick Chart",
+        //   link: "/chart/candlestickchart",
+        // },
+        // // Scatter Charts
+        // {
+        //   icon: "solar:chart-2-bold-duotone",
+        //   text: "Scatter Chart",
+        //   link: "/chart/scatterchart",
+        // },
+        // // Heatmap Charts
+        // {
+        //   icon: "solar:chart-2-bold-duotone",
+        //   text: "Heatmap Chart",
+        //   link: "/chart/heatmapchart",
+        // },
+        // // Treemap Charts
+        // {
+        //   icon: "solar:chart-2-bold-duotone",
+        //   text: "Treemap Chart",
+        //   link: "/chart/treemapchart",
+        // },
+        // // RadialBar Charts
+        // {
+        //   icon: "solar:round-graph-line-duotone",
+        //   text: "RadialBar Chart",
+        //   link: "/chart/radialbarchart",
+        // },
+        // // Radar  Charts
+        // {
+        //   icon: "solar:round-graph-line-duotone",
+        //   text: "Radar  Chart",
+        //   link: "/chart/radarchart",
+        // },
+        // // Polar Area Charts
+        // {
+        //   icon: "solar:round-graph-line-duotone",
+        //   text: "Polar Area Chart",
+        //   link: "/chart/polarareachart",
+        // }
   
       ],
   
