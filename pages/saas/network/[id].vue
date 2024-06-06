@@ -27,12 +27,12 @@
 </template>
 
 <script setup lang="ts">
+const panel = ref([0, 1]);
 const modules = ref([
 	'Locations-Sender', 'Sessions-Sender', 'CDRs-Sender', 'Tariffs-Sender', 'Tokens-Sender', 'Commands-Sender', 'ChargingProfiles-Sender',
 	'Locations-Receiver', 'Sessions-Receiver', 'CDRs-Receiver', 'Tariffs-Receiver', 'Tokens-Receiver', 'Commands-Receiver', 'ChargingProfiles-Receiver',
 ]);
 const selected = ref(['Locations-Sender', 'Sessions-Sender', 'CDRs-Sender', 'Tariffs-Sender', 'Tokens-Sender', 'Locations-Receiver', 'Sessions-Receiver', 'CDRs-Receiver', 'Tariffs-Receiver', 'Tokens-Receiver']);
-const panel = ref([0, 1]);
 </script>
 
 <style scoped lang="scss">

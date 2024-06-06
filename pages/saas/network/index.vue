@@ -3,7 +3,7 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table :headers="headers" items-url="/api/saas/operator" @click:row="item => router.push(`network/${item.id}`)" />
+		<yhlx-data-table :headers="headers" items-url="/api/saas/network" @click:row="item => router.push(`network/${item.id}`)" />
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
@@ -11,11 +11,9 @@ import DialogAdd from './Add.vue';
 const router = useRouter()
 const headers = ref([
 	{ title: "Name", key: "name" },
-	{ title: "Country", key: "countryName" },
-	{ title: "Party ID", key: "partyId" },
-	{ title: "Currency", key: "currency" },
-	{ title: "Role", key: "role" },
-	{ title: "Expiry Time", key: "expiryTime" },
+	{ title: "Type", key: "belongType" },
+	{ title: "Role", key: "roles" },
 	{ title: "Status", key: "status" },
+	{ title: "Notes", key: "notes" },
 ]);
 </script>

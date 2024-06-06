@@ -1,6 +1,6 @@
 <template>
 	<yhlx-main-container>
-		<v-expansion-panels v-model="panel" multiple="true" class="px-4 py-6">
+		<v-expansion-panels v-model="panel" :multiple="true" class="px-4 py-6">
 			<v-expansion-panel title="Details">
 				<template v-slot:text>
 					<v-row>
@@ -28,11 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
-import axios from "axios";
-
 const panel = ref([0]);
-
 </script>
 
 <style scoped lang="scss">

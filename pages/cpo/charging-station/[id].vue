@@ -1,6 +1,6 @@
 <template>
 	<yhlx-main-container>
-		<v-expansion-panels v-model="panel" multiple="true" class="px-4 py-6">
+		<v-expansion-panels v-model="panel" :multiple="true" class="px-4 py-6">
 			<v-expansion-panel title="Details">
 				<template v-slot:text>
 					<v-row>
