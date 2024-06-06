@@ -6,14 +6,16 @@
 <script setup lang="ts">
 import LanguageSwitcher from "./LanguageSwitcher.vue";
 import ThemeToggle from "./ThemeToggle.vue";
+const router = useRouter();
 import UserMenu from "./UserMenu.vue";
 import { useAppStore } from "@/stores/app";
+import menu from "@/configs/mainMenu";
 
 const appStore = useAppStore();
-onMounted(()=>{
+onMounted(() => {
   type.value = appStore.menuType
   list.value.forEach(item => {
-    if(item.type==type){
+    if(item.type === type.value){
       title.value = item.title
     }
   })
@@ -23,21 +25,49 @@ let type = ref("SAAS")
 const list = ref([{
   title:'Iocharger',
   type:'SAAS'
-},{
-  title:'ICS',
-  type:'eMSP'
-},{
+}, {
   title:'EMES',
+  type:'eMSP'
+}, {
+  title:'ICS',
   type:'CPO'
-},{
-  title:'demo',
-  type:'demo'
-}])
+}, {
+  title:'Demo',
+  type:'Demo'
+}]);
+
+// 选项
+const options = computed(() => {
+	return list.value.filter(item => item.title !== title.value);
+});
+
+
+
+function getDefaultLink(menus:any): string | undefined {
+	let link:string | undefined;
+	for (let i = 0; i < menus.length; i++) {
+		const menu = menus[i];
+		if (menu.items && menu.items.length > 0) {
+			link = getDefaultLink(menu.items);
+		}
+		if (!link) {
+			link = menu.link;
+		}
+		if (!!link) {
+			break;
+		}
+	}
+	return link;
+}
 
 const changeTitle = (item) => {
-  title.value = item.title
-  type.value = item.type
-  appStore.setMenuType(item.type)
+  title.value = item.title;
+  type.value = item.type;
+	const link = getDefaultLink(menu.getMenus(type.value));
+	if (!!link) {
+		router.push(link);
+	}
+	appStore.setMenuType(item.type);
 }
 </script>
 
@@ -63,7 +93,7 @@ const changeTitle = (item) => {
         </template>
         <v-list>
           <v-list-item
-            v-for="(item, index) in list"
+            v-for="(item, index) in options"
             :key="index"
             @click="changeTitle(item)"
           >

@@ -61,5 +61,17 @@ export default {
 			menu = getCurrentMenu(this.menu, path);
 		}
 		return menu;
+	},
+	getMenus(menuType: string) {
+		switch (menuType) {
+			case "SAAS":
+				return menuSaaS;
+			case "CPO":
+				return menuCPO;
+			case "eMSP":
+				return menuEMSP;
+			case "Demo":
+				return this.menu;
+		}
 	}
 };

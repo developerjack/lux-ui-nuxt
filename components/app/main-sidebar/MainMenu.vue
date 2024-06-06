@@ -1,64 +1,33 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import { reactive,watch  } from 'vue'
+import menu from "@/configs/mainMenu";
 import { useAppStore } from "@/stores/app";
 const appStore = useAppStore();
 const router = useRouter();
 
-const props = defineProps({
-  menu: {
-    type: Array<any>,
-    default: () => [],
-  },
-});
-let menuList = reactive([])
-menuList.push(...props.menu)
-watch(()=>appStore.menuType, (newValue, oldValue) => {
-    open.openList = []
-    getData()
-    getMenu()
+const path = ref('');
+let open = reactive({openList: []});
+let menuList = reactive([]);
 
-})
-const getData = ()=>{ 
-  props.menu.forEach(item=>{ 
-    item.items.forEach(element=>{
-      if(element.items){
-        open.openList.push(element.text)
-      }
-    })
-  })
-}
-const getMenu = () => {
-  if(appStore.menuType=='demo'){ 
-      menuList = [props.menu[0]]
-      menuList.push(...props.menu.slice(5))
-    }
-  const arr = props.menu.slice(1)
-  arr.forEach(item=>{
-    if(item.text.toUpperCase()==appStore.menuType.toUpperCase()){
-      menuList = [props.menu[0]]
-      menuList.push(item)
-    }
-    if(item.text=='System'&&appStore.menuType=='SAAS'){
-        if(menuList.length === props.menu.length){
-          menuList = [props.menu[0]]
-          menuList.push(item)
-        }else{
-          menuList.push(item)
-        }
-      }
-  })
-}
-const path = ref('')
-router.afterEach((to, from) => {
+router.afterEach((to) => {
   path.value = to.fullPath
 });
-let open = reactive({openList:[]})
-onMounted(()=>{
-  path.value = router.currentRoute.value.fullPath
-  getMenu()
-  getData()
-})
+
+watch(() => appStore.menuType, () => {
+	path.value = router.currentRoute.value.fullPath;
+	menuList.splice(0, menuList.length);
+	menuList.push(...menu.getMenus(appStore.menuType));
+	open.openList = [];
+	menuList.forEach(item => {
+		item.items.forEach(element => {
+			if (element.items) {
+				open.openList.push(element.text);
+			}
+		})
+	});
+}, {
+	immediate: true
+});
 </script>
 <template>
   <v-list nav dense v-model:opened="open.openList" open-strategy="multiple">
@@ -123,7 +92,7 @@ onMounted(()=>{
 .v-list-group .v-list-item {
   padding-left: 8px !important;
 }
-.active{
+.active {
   color: rgb(var(--v-theme-primary)) !important;
 }
 </style>
