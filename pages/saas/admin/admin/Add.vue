@@ -1,7 +1,7 @@
 <template>
-	<register-add-dialog location="Toolbar" title="Add Admin">
+	<yhlx-add-dialog location="Toolbar" title="Add Admin">
 		<template v-slot:content>
-			<v-row>
+			<v-row class="form">
 				<v-col cols="12" sm="6">
 					<yhlx-text-field label="Email*" hint="Please enter email, the email as login info." persistent-hint required />
 				</v-col>
@@ -17,16 +17,12 @@
 				<v-col cols="12">
 					<yhlx-select :items="[
             'Admin', 'Operator', 'Maintainer', 'Accountant', 'Device Manager',
-             'Auditor', 'operator Manager',
+            'Auditor', 'operator Manager',
           ]" label="Role" multiple />
 				</v-col>
 			</v-row>
 		</template>
-	</register-add-dialog>
+	</yhlx-add-dialog>
 </template>
-
 <script setup lang="ts">
-import RegisterAddDialog from "@/components/dialog/RegisterAddDialog.vue";
-import YhlxTextField from "@/components/common/YhlxTextField.vue";
-import YhlxSelect from "@/components/common/YhlxSelect.vue";
 </script>

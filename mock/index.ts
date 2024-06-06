@@ -65,18 +65,6 @@ const MockAPI = [
 		}
 	},
 	{
-		url: "/api/admin",
-		method: "get",
-		response: () => {
-			return apiPageResult({
-				"name": "@name",
-				"email": "@email",
-				"phoneNumber": "@phone",
-				"status|1": statusNameEnums,
-			});
-		}
-	},
-	{
 		url: "/api/agreement",
 		method: "get",
 		response: () => {

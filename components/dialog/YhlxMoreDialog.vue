@@ -7,7 +7,7 @@
           <v-checkbox :value="item.key" v-model="item.show" density="compact" hide-details readonly />
         </template>
       </v-list-item>
-      <v-divider />
+      <v-divider v-show="props.dataHeaders" />
       <v-list-item v-for="item in operatingItems" :key="item.label" color="primary" :title="item.label" @click="item.click()" />
     </v-list>
   </v-card>

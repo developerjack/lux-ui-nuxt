@@ -8,7 +8,7 @@ definePageMeta({
   layout: "auth",
 });
 
-const router = useRouter()
+const router = useRouter();
 const isLoading = ref(false);
 const isSignInDisabled = ref(false);
 

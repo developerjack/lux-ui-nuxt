@@ -46,6 +46,18 @@ const MockAPI = [
 			});
 		}
 	},
+	{
+		url: "/api/saas/admin",
+		method: "get",
+		response: () => {
+			return apiPageResult({
+				"name": "@name",
+				"email": "@email",
+				"phoneNumber": "@phone",
+				"status|1": statusNameEnums,
+			});
+		}
+	},
 ]
 
 export default MockAPI

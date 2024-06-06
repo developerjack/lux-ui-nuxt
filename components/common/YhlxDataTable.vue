@@ -15,7 +15,7 @@ const props = defineProps({
 
 // 表头
 const headerItems = computed(() => {
-	return props.headers?.filter(item => item.key === item.show);
+	return props.headers?.filter(item => item.show === undefined || item.key === item.show);
 });
 
 // 内容

@@ -9,7 +9,6 @@ import menuChart from "./menus/chart.menu";
 import menuSaaS from "./menus/saas.menu";
 import menuEMSP from "./menus/emsp.menu";
 import menuCPO from "./menus/cpo.menu";
-import menuSystem from "./menus/system.menu";
 import Menu = NavigationConfig.Menu;
 
 function getCurrentMenu(items: Menu[], path: string) : Menu {
@@ -42,7 +41,6 @@ export default {
 	  ...menuSaaS,
 	  ...menuEMSP,
 	  ...menuCPO,
-	  ...menuSystem,
     ...menuLanding,
     ...menuUI,
     ...menuAuth,

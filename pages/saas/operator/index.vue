@@ -8,7 +8,7 @@
 </template>
 <script setup lang="ts">
 import DialogAdd from './Add.vue';
-const router = useRouter()
+const router = useRouter();
 const headers = ref([
 	{ title: "Name", key: "name" },
 	{ title: "Country", key: "countryName" },
