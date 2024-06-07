@@ -5,26 +5,16 @@ export default [
 			{
 				icon: "solar:widget-line-duotone",
 				text: "Dashboard",
-				link: "/saas/dashboard",
+				link: "/ems/dashboard",
 			},
 		],
 	},
 	{
-		text:'SaaS',
+		text:'EMS',
 		items:[{
 			icon: "solar:library-bold-duotone",
-			text: "Network",
-			link: "/saas/network",
-		},
-		{
-			icon: "solar:library-bold-duotone",
-			text: "Operator",
-			link: "/saas/operator",
-		},
-		{
-			icon: "solar:library-bold-duotone",
-			text: "Agent",
-			link: "/saas/agent",
+			text: "Device",
+			link: "/ems/device",
 		},
 		]
 	},
@@ -37,12 +27,12 @@ export default [
 				{
 					icon: "solar:slider-minimalistic-horizontal-line-duotone",
 					text: "Admin",
-					link: "/saas/admin/admin",
+					link: "/ems/admin/admin",
 				},
 				{
 					icon: "solar:list-up-bold-duotone",
 					text: "Role",
-					link: "/saas/admin/role",
+					link: "/ems/admin/role",
 				}
 			],
 		}]

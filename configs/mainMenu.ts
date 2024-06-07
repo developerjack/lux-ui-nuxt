@@ -9,6 +9,7 @@ import menuChart from "./menus/chart.menu";
 import menuSaaS from "./menus/saas.menu";
 import menuEMSP from "./menus/emsp.menu";
 import menuCPO from "./menus/cpo.menu";
+import menuEMS from "./menus/ems.menu";
 import Menu = NavigationConfig.Menu;
 
 function getCurrentMenu(items: Menu[], path: string) : Menu {
@@ -30,6 +31,7 @@ export default {
 	  ...menuSaaS,
 	  ...menuEMSP,
 	  ...menuCPO,
+	  ...menuEMS,
     ...menuLanding,
     ...menuUI,
     ...menuAuth,
@@ -60,7 +62,7 @@ export default {
 			case "eMSP":
 				return menuEMSP;
 			case "EMS":
-				return menuUI;
+				return menuEMS;
 			case "Demo":
 				return this.menu;
 			default:
