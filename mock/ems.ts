@@ -1,4 +1,4 @@
-import { apiPageResult } from "./mock";
+import {apiPageResult, apiPageResultMore} from "./mock";
 import { deviceStatusEnums, countryNameEnums, currencyNameEnums, statusNameEnums, networkRoleEnums, belongTypeEnums, networkStatusEnums, operatorNameEnums } from "@/data/data";
 
 const MockAPI = [
@@ -15,6 +15,34 @@ const MockAPI = [
 				"lastConnectTime|1": ["@datetime('yyyy-MM-dd HH:mm:ss')", "-"],
 				"status|1": deviceStatusEnums,
 				"notes": "The device in Xiamen.",
+			});
+		}
+	},
+	{
+		url: "/api/ems/device/history",
+		method: "get",
+		response: () => {
+			return apiPageResultMore({
+				"id|+1": 1,
+				"time|+5": 0,
+				"ia": "0.1",
+				"ib": "0.1",
+				"ic": "0.1",
+				"ua": "220.0",
+				"ub": "220.0",
+				"uc": "220.0",
+				"pa": "7.0",
+				"pb": "7.0",
+				"pc": "7.0",
+				"p": "21.0",
+				"qa": "0.0",
+				"qb": "0.0",
+				"qc": "0.0",
+				"q": "0.0",
+				"pf": "0.01",
+				"f": "50",
+				"ep+": "0.0",
+				"ep-": "0.0",
 			});
 		}
 	},

@@ -27,6 +27,13 @@ export const apiPageResult = (item:any) : any => {
 	});
 }
 
+export const apiPageResultMore = (item:any) : any => {
+	return apiResult({
+		"total": 37,
+		"content|99": [item]
+	});
+}
+
 export const apiMergeResult = (json:any) : any => {
 	return Object.assign({
 		code: 200,

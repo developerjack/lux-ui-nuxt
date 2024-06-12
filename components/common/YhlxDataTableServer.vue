@@ -3,6 +3,7 @@
 		:headers="headerItems" :loading="loading"
 		:items-length="itemsTotal" :items="items"
 		@update:options="loadItems"
+		show-select
 	/>
 </template>
 

@@ -33,10 +33,10 @@
 						</v-row>
 					</v-tabs-window-item>
 					<v-tabs-window-item value="3">
-						Three
+						<real-data />
 					</v-tabs-window-item>
 					<v-tabs-window-item value="4">
-						Four
+						<history-data />
 					</v-tabs-window-item>
 				</v-tabs-window>
 			</v-card-text>
@@ -45,6 +45,9 @@
 </template>
 
 <script setup lang="ts">
+import RealData from "./components/RealData.vue";
+import HistoryData from "./components/HistoryData.vue";
+
 const tab = ref('one');
 </script>
 

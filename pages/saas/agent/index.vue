@@ -3,7 +3,7 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server :headers="headers" items-url="/api/saas/agent" @click:row="item => router.push(`agent/${item.id}`)" />
+		<yhlx-data-table-server :headers="headers" items-url="/api/saas/agent" @click:row="(event, { item }) => router.push(`agent/${item.id}`)" />
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
