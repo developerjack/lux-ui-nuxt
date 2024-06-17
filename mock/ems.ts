@@ -37,6 +37,7 @@ const MockAPI = [
 		response: () => {
 			return apiPageResult({
 				"id|+1": 1,
+				"name": "@name",
 				"location|1": ['Xiamen', 'Beijing', 'Nanjing', 'Shanghai', '-'],
 				"gatewaySerialNumber|1": ['IOC24001', 'IOC24002', 'IOC24003', 'IOC24004', 'IOC24005', 'IOC24006'],
 				"gatewayName": "@name",

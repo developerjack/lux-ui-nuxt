@@ -6,6 +6,7 @@
 <script setup lang="ts">
 const router = useRouter();
 const headers = ref([
+	{ title: "Name", key: "name" },
 	{ title: "Location", key: "location" },
 	{ title: "Gateway Serial Number", key: "gatewaySerialNumber" },
 	{ title: "Gateway Name", key: "gatewayName" },

@@ -9,12 +9,12 @@
 
 <script setup lang="ts">
 import axios from "axios";
-import {sleep} from "@antfu/utils";
+import { sleep } from "@antfu/utils";
 const props = defineProps({
 	headers: Array<{ // 表头
-		key: String,
-		title: String,
-		show: String
+		key: string,
+		title: string,
+		show?: string
 	}>,
 	itemsUrl: String, // 数据的API地址
 });

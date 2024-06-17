@@ -17,7 +17,7 @@ const props = defineProps({
 	dataHeaders: Array<{ // 表头
 		key: string,
 		title: string,
-		show: string
+		show?: string
 	}>,
 });
 

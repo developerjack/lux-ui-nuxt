@@ -3,12 +3,13 @@
 		<v-card class="h-full app-card" rounded="xl">
 			<v-toolbar class="px-5">
 				<Icon v-if="menu.icon" width="30" class="text-primary mx-4" :icon="menu.icon"/>
-				<h4 class="card-title">{{ menu.text }}</h4>
-				<v-spacer></v-spacer>
+				<!-- Title Start -->
+				<h4 v-if="!$slots.title" class="card-title">{{ menu.text }}</h4>
+				<slot v-else name="title" />
+				<!-- Title End -->
+				<v-spacer />
 				<slot name="append" />
-				<v-btn icon @click="showMoreDialog">
-					<v-icon>mdi-dots-vertical</v-icon>
-				</v-btn>
+				<v-btn icon="mdi-dots-vertical" @click="showMoreDialog" />
 			</v-toolbar>
 			<yhlx-more-dialog v-show="isHide" :data-headers="props.dataHeaders" />
 			<v-divider />
@@ -24,9 +25,9 @@ import { Icon } from "@iconify/vue";
 import mainMenu from "~/configs/mainMenu";
 const props = defineProps({
 	dataHeaders: Array<{ // 表头
-		key: string,
 		title: string,
-		show: string
+		key: string,
+		show?: string
 	}>,
 })
 const menu: NavigationConfig.Menu = mainMenu.getCurrentMenu();

@@ -1,5 +1,8 @@
 <template>
 	<yhlx-main-container>
+		<template v-slot:title>
+		标题
+		</template>
 		<v-tabs v-model="tab">
 			<v-tab value="1">Overview</v-tab>
 			<v-tab value="2">Config</v-tab>
