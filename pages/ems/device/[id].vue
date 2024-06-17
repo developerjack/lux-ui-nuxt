@@ -3,13 +3,11 @@
 		<v-card style="margin: 8px;">
 			<v-tabs v-model="tab" color="primary">
 				<v-tab value="1">Overview</v-tab>
-				<v-tab value="2">Device Info</v-tab>
+				<v-tab value="2">Config</v-tab>
 				<v-tab value="3">Real Data</v-tab>
 				<v-tab value="4">History Data</v-tab>
 			</v-tabs>
-			
 			<v-card-text>
-			
 				<v-tabs-window v-model="tab">
 					<v-tabs-window-item value="1">
 						One

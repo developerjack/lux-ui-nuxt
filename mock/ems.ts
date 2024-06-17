@@ -1,14 +1,27 @@
-import {apiPageResult, apiPageResultMore} from "./mock";
+import {apiPageResult, apiPageResultMore, apiResult} from "./mock";
 import { deviceStatusEnums, countryNameEnums, currencyNameEnums, statusNameEnums, networkRoleEnums, belongTypeEnums, networkStatusEnums, operatorNameEnums } from "@/data/data";
 
 const MockAPI = [
 	{
-		url: "/api/ems/device",
+		url: "/api/ems/location",
+		method: "get",
+		response: () => {
+			return apiPageResult({
+				"name": "@name",
+				"address": "@city",
+				"gatewayCount|1-10": 3,
+				"notes": "This is Location.",
+			});
+		}
+	},
+	{
+		url: "/api/ems/gateway",
 		method: "get",
 		response: () => {
 			return apiPageResult({
 				"id|+1": 1,
 				"serialNumber|1": ['IOC24001', 'IOC24002', 'IOC24003', 'IOC24004', 'IOC24005', 'IOC24006'],
+				"name": "@name",
 				"location|1": ['Xiamen', 'Beijing', 'Nanjing', 'Shanghai', '-'],
 				"model|1": ['IOC_Light', 'IOC_Store', '-'],
 				"firmwareVersion|1": ['2024010101', '-'],
@@ -19,7 +32,68 @@ const MockAPI = [
 		}
 	},
 	{
-		url: "/api/ems/device/history",
+		url: "/api/ems/device",
+		method: "get",
+		response: () => {
+			return apiPageResult({
+				"id|+1": 1,
+				"location|1": ['Xiamen', 'Beijing', 'Nanjing', 'Shanghai', '-'],
+				"gatewaySerialNumber|1": ['IOC24001', 'IOC24002', 'IOC24003', 'IOC24004', 'IOC24005', 'IOC24006'],
+				"gatewayName": "@name",
+				"model|1": ['IOC_Store', 'IOC_Light'],
+			});
+		}
+	},
+	{
+		url: "/api/ems/sub-device",
+		method: "get",
+		response: () => {
+			return apiResult({
+				"total": 8,
+				"content": [
+					{ title: "Gateway", },
+					{ title: "PV", tag: 'NO.1', },
+					{ title: "Grid", },
+					{ title: "Battery", tag: 'NO.1', },
+					{ title: "Battery", tag: 'NO.2', },
+					{ title: "PCS", },
+					{ title: "Charging Station", tag: 'NO.1', },
+					{ title: "Charging Station", tag: 'NO.2', },
+				]
+			});
+		}
+	},
+	{
+		url: "/api/ems/sub-device/real",
+		method: "get",
+		response: () => {
+			return apiResult({
+				"total": 18,
+				"content": [
+					{ name: "Ia", value: "0.0A", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Ib", value: "0.0A", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Ic", value: "0.0A", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Ua", value: "220.0V", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Ub", value: "220.0V", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Uc", value: "220.0V", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Pa", value: "-", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Pb", value: "-", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Pc", value: "-", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "P", value: "0.0kW", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Qa", value: "0.0kWh", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Qb", value: "0.0kWh", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Qc", value: "0.0kWh", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "Q", value: "0.0kWh", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "PF", value: "0.01", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "F", value: "50Hz", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "EP+", value: "0.0kW", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+					{ name: "EP-", value: "0.0kW", updateTime: "@datetime('yyyy-MM-dd HH:mm:ss')" },
+				]
+			});
+		}
+	},
+	{
+		url: "/api/ems/sub-device/history",
 		method: "get",
 		response: () => {
 			return apiPageResultMore({
@@ -58,6 +132,7 @@ const MockAPI = [
 			});
 		}
 	},
+	
 ]
 
 export default MockAPI

@@ -11,11 +11,22 @@ export default [
 	},
 	{
 		text:'EMS',
-		items:[{
-			icon: "solar:library-bold-duotone",
-			text: "Device",
-			link: "/ems/device",
-		},
+		items:[
+			{
+				icon: "solar:library-bold-duotone",
+				text: "Location",
+				link: "/ems/location",
+			},
+			{
+				icon: "solar:library-bold-duotone",
+				text: "Gateway",
+				link: "/ems/gateway",
+			},
+			{
+				icon: "solar:library-bold-duotone",
+				text: "Device",
+				link: "/ems/device",
+			},
 		]
 	},
 	{

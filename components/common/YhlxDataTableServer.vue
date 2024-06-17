@@ -31,7 +31,7 @@ const items = ref([]);
 
 function loadItems({ page, itemsPerPage, sortBy }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])
 	loading.value = true;
-	sleep(1000).then(() => {
+	sleep(800).then(() => {
 		if (props.itemsUrl === undefined) {
 			loading.value = false;
 			return;

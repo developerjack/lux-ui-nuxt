@@ -118,7 +118,9 @@ html {
 }
 
 .v-row.form {
-  .v-col-sm-6, .v-col-12 {
+  margin-top: -4px;
+  padding-bottom: -4px;
+  .v-col {
     padding-top: 4px;
     padding-bottom: 4px;
   }
