@@ -21,13 +21,15 @@
 
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import Menu = NavigationConfig.Menu;
-import mainMenu from "@/configs/mainMenu";
-import YhlxMoreDialog from '@/components/dialog/YhlxMoreDialog.vue'
+import mainMenu from "~/configs/mainMenu";
 const props = defineProps({
-	dataHeaders: Array // 编辑框的表头列表
+	dataHeaders: Array<{ // 表头
+		key: string,
+		title: string,
+		show: string
+	}>,
 })
-const menu: Menu = mainMenu.getCurrentMenu();
+const menu: NavigationConfig.Menu = mainMenu.getCurrentMenu();
 const isHide = ref(false)
 const showMoreDialog = () => {
 	isHide.value = !isHide.value

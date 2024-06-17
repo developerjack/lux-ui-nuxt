@@ -35,8 +35,6 @@
 </template>
 
 <script setup lang="ts">
-import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
-import axios from "axios";
 import MapContainer from '@/components/common/MapContainer.vue'
 const panel = ref([0]);
 

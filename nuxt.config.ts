@@ -21,12 +21,12 @@ export default defineNuxtConfig({
   routeRules: {
     '/**': { ssr: false }
   },
-	components: [
-		{
-			path: '~/components',
-			pathPrefix: false,
-		},
-	],
+	// components: [
+	// 	{
+	// 		path: '~/components',
+	// 		pathPrefix: false,
+	// 	},
+	// ],
   modules: [
 		"nuxt-icons",
     '@pinia/nuxt',

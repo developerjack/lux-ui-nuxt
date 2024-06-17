@@ -59,9 +59,6 @@
 </template>
 
 <script setup lang="ts">
-import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
-import YhlxTextField from "@/components/common/YhlxTextField.vue";
-import YhlxSelect from "@/components/common/YhlxSelect.vue";
 import MapContainer from '@/components/common/MapContainer.vue'
 import { operatorNameEnums,ChineseProvince } from "@/data/data";
 const select = ref(null)

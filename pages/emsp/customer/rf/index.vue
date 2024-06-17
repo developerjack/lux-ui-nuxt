@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import DialogAdd from './Add.vue';
 import axios from "axios";
 import { useAppStore } from "@/stores/app";

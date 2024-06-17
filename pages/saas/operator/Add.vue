@@ -26,9 +26,6 @@
 </template>
 
 <script setup lang="ts">
-import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
 import RegisterAddDialog from "@/components/dialog/RegisterAddDialog.vue";
-import YhlxTextField from "@/components/common/YhlxTextField.vue";
-import YhlxSelect from "@/components/common/YhlxSelect.vue";
 import { countryNameEnums, currencyNameEnums, orgRoleEnums } from "@/data/data";
 </script>

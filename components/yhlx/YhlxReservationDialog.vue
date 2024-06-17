@@ -116,8 +116,6 @@
 </template>
 
 <script setup lang="ts">
-import YhlxBtn from "@/components/common/YhlxBtn.vue";
-import YhlxSelect from "@/components/common/YhlxSelect.vue";
 import { VTimePicker } from 'vuetify/labs/VTimePicker'
 const props = defineProps({
     dialog:{

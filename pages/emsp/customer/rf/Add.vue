@@ -14,6 +14,4 @@
 </template>
 
 <script setup lang="ts">
-import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
-import YhlxTextField from "@/components/common/YhlxTextField.vue";
 </script>

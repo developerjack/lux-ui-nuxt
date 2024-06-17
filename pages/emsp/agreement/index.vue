@@ -9,7 +9,6 @@
 
 <script setup lang="ts">
 import DialogAdd from './Add.vue';
-import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
 import { useAppStore } from "@/stores/app";
 const appStore = useAppStore();

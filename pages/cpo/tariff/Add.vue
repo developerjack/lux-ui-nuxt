@@ -84,10 +84,6 @@
 </template>
 
 <script setup lang="ts">
-import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
-import YhlxTextField from "@/components/common/YhlxTextField.vue";
-import YhlxSelect from "@/components/common/YhlxSelect.vue";
-import YhlxBtn from "@/components/common/YhlxBtn.vue";
 import { operatorNameEnums } from "@/data/data";
 const emits = defineEmits(['openDialog','removeItem'])
 const props = defineProps({

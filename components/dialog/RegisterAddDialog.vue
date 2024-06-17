@@ -22,7 +22,6 @@
 	</v-dialog>
 </template>
 <script setup lang="ts">
-import YhlxBtn from "@/components/common/YhlxBtn.vue";
 import { useAppStore } from "@/stores/app";
 const appStore = useAppStore();
 const props = defineProps({

@@ -5,8 +5,6 @@
 -->
 <script setup lang="ts">
 
-import YhlxSvgIcon from "@/components/common/YhlxSvgIcon.vue";
-
 const openGithubSite = () => {
   window.open("https://github.com/developerjack", "_blank");
 };

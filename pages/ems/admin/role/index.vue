@@ -14,7 +14,7 @@
 			</v-list>
 			<div class="right pa-5">
 	
-				<YhlxCard title="Detail">
+				<yhlx-card title="Detail">
 					<v-row>
 						<v-col cols="12" sm="6">
 							<yhlx-text-field label="Title*" required />
@@ -23,8 +23,8 @@
 							<yhlx-text-field label="Notes" />
 						</v-col>
 					</v-row>
-				</YhlxCard>
-				<YhlxCard title="Permissions" class="mt-4">
+				</yhlx-card>
+				<yhlx-card title="Permissions" class="mt-4">
 					<div class="my-6">
 						<v-card variant="outlined">
 							<v-text-field v-model="searchStr" variant="solo-filled" append-inner-icon="mdi-magnify" hide-details clearable placeholder="Search" />
@@ -37,13 +37,14 @@
 							<v-checkbox v-for="item in permission.items" :key="item" v-model="selected" :label="item" :value="item" />
 						</div>
 					</template>
-				</YhlxCard>
+				</yhlx-card>
 			</div>
 		</div>
 	</yhlx-main-container>
 </template>
 
 <script setup lang="ts">
+
 const searchStr = ref("");
 const menuItems = ref([
 	{

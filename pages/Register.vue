@@ -34,10 +34,7 @@
 		</v-card>
 </template>
 <script setup lang="ts">
-import YhlxTextField from "@/components/common/YhlxTextField.vue";
-import YhlxSelect from "@/components/common/YhlxSelect.vue";
 import { useAppStore } from "@/stores/app";
-import YhlxBtn from "@/components/common/YhlxBtn.vue";
 const dialog = ref(false);
 const appStore = useAppStore();
 onMounted(()=>{

@@ -10,9 +10,6 @@
 
 <script setup lang="ts">
 import DialogAdd from './Add.vue';
-import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
-import YhlxReservationDialog from "@/components/dialog/YhlxReservationDialog.vue";
-import YhlxBtn from "@/components/common/YhlxBtn.vue";
 import axios from "axios";
 import { Random } from 'mockjs';
 const router = useRouter();

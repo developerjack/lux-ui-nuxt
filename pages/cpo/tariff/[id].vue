@@ -103,9 +103,6 @@
 </template>
 
 <script setup lang="ts">
-import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
-import axios from "axios";
-
 const panel = ref([0]);
 
 </script>
