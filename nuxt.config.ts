@@ -13,6 +13,7 @@ const url = "https://lux-vuetify3-nuxt3.netlify.app/";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: true,
+	
   devtools: { enabled: true },
   typescript: { shim: false },
   build: { transpile: ["vuetify"] },
@@ -20,6 +21,12 @@ export default defineNuxtConfig({
   routeRules: {
     '/**': { ssr: false }
   },
+	// components: [
+	// 	{
+	// 		path: '~/components',
+	// 		pathPrefix: false,
+	// 	},
+	// ],
   modules: [
 		"nuxt-icons",
     '@pinia/nuxt',

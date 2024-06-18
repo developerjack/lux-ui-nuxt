@@ -17,7 +17,7 @@
 				<v-col cols="12" sm="6">
 					<v-autocomplete
 						variant="outlined"
-						label="State"
+						label="province"
 						v-model="selectedProvince"
 						:items="province"
 						@update:search="handleProvinceChange"
@@ -59,9 +59,6 @@
 </template>
 
 <script setup lang="ts">
-import YhlxAddDialog from "@/components/dialog/YhlxAddDialog.vue";
-import YhlxTextField from "@/components/common/YhlxTextField.vue";
-import YhlxSelect from "@/components/common/YhlxSelect.vue";
 import MapContainer from '@/components/common/MapContainer.vue'
 import { operatorNameEnums,ChineseProvince } from "@/data/data";
 const select = ref(null)

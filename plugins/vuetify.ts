@@ -3,7 +3,7 @@ import "@/assets/scss/main.scss";
 import { createVuetify } from 'vuetify'
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
-import * as labsComponents from 'vuetify/labs/components'
+import * as labsComponents from 'vuetify/labs/components';
 import { createVueI18nAdapter } from "vuetify/locale/adapters/vue-i18n";
 import { createI18n, useI18n } from "vue-i18n";
 import messages from '@/locales/messages';
@@ -126,7 +126,7 @@ export default defineNuxtPlugin((app) => {
     directives,
     components: {
       ...labsComponents,
-      ...components
+      ...components,
     },
     theme: {
       defaultTheme: "light",

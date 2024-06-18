@@ -1,4 +1,3 @@
-import { set } from 'nuxt/dist/app/compat/capi'
 import { defineStore } from 'pinia'
 
 export const useAppStore = defineStore({
@@ -6,10 +5,9 @@ export const useAppStore = defineStore({
   state: () => ({
     theme: 'light',
     mainSidebar: true,
-    menuType:'SAAS',
+    menuType: '',
     isLogin:true,
     addDrawer:false,
-    Columns:[''],
   }),
   persist: [
     {
@@ -33,9 +31,6 @@ export const useAppStore = defineStore({
     },
     setAddDrawer(addDrawer:boolean) {
       this.addDrawer = addDrawer
-    },
-    setColumns(Columns: Array<string>){
-      this.Columns = Columns
     },
     setTheme(theme: string) {
       this.theme = theme

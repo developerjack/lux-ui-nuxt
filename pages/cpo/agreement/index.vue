@@ -9,7 +9,6 @@
 
 <script setup lang="ts">
 import DialogAdd from './Add.vue';
-import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import axios from "axios";
 import { Random } from 'mockjs';
 import { useAppStore } from "@/stores/app";
@@ -30,7 +29,7 @@ axios.get('/api/agreement').then(response => {
 	items.value = response.data.data.content;
 });
 
-watch(()=>appStore.Columns,()=>{
+watch(appStore.Columns,()=>{
 	console.log(appStore.Columns)
 	headers.value = []
 	appStore.Columns.forEach(item=>{

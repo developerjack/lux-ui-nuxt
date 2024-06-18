@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import YhlxMainContainer from "@/components/container/YhlxMainContainer.vue";
 import DialogAdd from './Add.vue';
 import axios from "axios";
 import { useAppStore } from "@/stores/app";
@@ -28,7 +27,7 @@ axios.get('/api/rf').then(response => {
 	items.value = response.data.data.content;
 });
 const arr = ref([])
-watch(()=>appStore.Columns,()=>{
+watch(appStore.Columns,()=>{
 	console.log(appStore.Columns)
 	headers.value = []
 	appStore.Columns.forEach(item=>{

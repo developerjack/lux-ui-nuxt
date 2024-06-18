@@ -5,11 +5,11 @@ import menuAuth from "./menus/auth.menu";
 import menuWidget from "./menus/widget.menu";
 // import menuForm from "./menus/form.menu";
 import menuChart from "./menus/chart.menu";
-import menuTable from "./menus/table.menu";
+// import menuTable from "./menus/table.menu";
 import menuSaaS from "./menus/saas.menu";
 import menuEMSP from "./menus/emsp.menu";
 import menuCPO from "./menus/cpo.menu";
-import menuSystem from "./menus/system.menu";
+import menuEMS from "./menus/ems.menu";
 import Menu = NavigationConfig.Menu;
 
 function getCurrentMenu(items: Menu[], path: string) : Menu {
@@ -28,68 +28,17 @@ function getCurrentMenu(items: Menu[], path: string) : Menu {
 
 export default {
   menu: [
-    {
-      text: "",
-      items: [
-        {
-          text: "Dashboard",
-          link: "/",
-          icon: "solar:widget-line-duotone",
-        },
-      ],
-    },
-	  
-	  {
-		  text: "SaaS",
-		  items: menuSaaS,
-	  },
-	  
-	  {
-		  text: "eMSP",
-		  items: menuEMSP,
-	  },
-	  
-	  {
-		  text: "CPO",
-		  items: menuCPO,
-	  },
-	  
-	  {
-			text: "System",
-		  items: menuSystem
-	  },
-
-    {
-      text: "Landing",
-      items: [
-        ...menuLanding,
-
-      ],
-    },
-    {
-      text: "UI",
-      items: menuUI,
-    },
-    {
-      text: "Auth",
-      items: menuAuth,
-    },
-    {
-      text: "Widgets",
-      items: menuWidget,
-    },
-    // {
-    //   text: "Form",
-    //   items: menuForm,
-    // },
-    {
-      text: "Chart",
-      items: menuChart,
-    },
-    // {
-    //   text: "Table",
-    //   items: menuTable,
-    // }
+	  ...menuSaaS,
+	  ...menuEMSP,
+	  ...menuCPO,
+	  ...menuEMS,
+    ...menuLanding,
+    ...menuUI,
+    ...menuAuth,
+    ...menuWidget,
+    ...menuChart,
+    // ...menuForm,
+    // ...menuTable,
   ],
 	getCurrentMenu() : Menu {
 		let path = useRouter().currentRoute.value.path;
@@ -103,5 +52,55 @@ export default {
 			menu = getCurrentMenu(this.menu, path);
 		}
 		return menu;
+	},
+	getMenus(menuType: string) {
+		switch (menuType) {
+			case "SAAS":
+				return menuSaaS;
+			case "CPO":
+				return menuCPO;
+			case "eMSP":
+				return menuEMSP;
+			case "EMS":
+				return menuEMS;
+			case "Demo":
+				return this.menu;
+			default:
+				return [];
+		}
+	},
+	getCompanies() {
+		return [{
+			title: 'Ioc EMS',
+			type: 'EMS'
+		}, {
+			title:'Iocharger',
+			type:'SAAS'
+		}, {
+			title:'EMES',
+			type:'eMSP'
+		}, {
+			title:'ICS',
+			type:'CPO'
+		}, {
+			title:'Demo',
+			type:'Demo'
+		}];
+	},
+	getDefaultLink(menus:any): string | undefined {
+	let link:string | undefined;
+	for (let i = 0; i < menus.length; i++) {
+		const menu = menus[i];
+		if (menu.items && menu.items.length > 0) {
+			link = this.getDefaultLink(menu.items);
+		}
+		if (!link) {
+			link = menu.link;
+		}
+		if (!!link) {
+			break;
+		}
 	}
+	return link;
+}
 };

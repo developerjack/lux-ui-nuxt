@@ -1,73 +1,42 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import { reactive,watch  } from 'vue'
+import menu from "@/configs/mainMenu";
 import { useAppStore } from "@/stores/app";
 const appStore = useAppStore();
 const router = useRouter();
 
-const props = defineProps({
-  menu: {
-    type: Array<any>,
-    default: () => [],
-  },
-});
-let menuList = reactive({myList:[]}) // 防止响应式被覆盖
-menuList.myList.push(...props.menu)
-watch(()=>appStore.menuType, (newValue, oldValue) => { // 是否切换导航栏选项
-    open.openList = []
-    getData()
-    getMenu()
+const path = ref('');
+let open = reactive({openList: []});
+let menuList = reactive([]);
 
-})
-const getData = ()=>{ // 取出数据中所有有两层嵌套的text作为菜单默认展开的列表
-  props.menu.forEach(item=>{ 
-    item.items.forEach(element=>{
-      if(element.items){
-        open.openList.push(element.text)
-      }
-    })
-  })
-}
-const getMenu = () => { // 获取所选类型的对应菜单
-  if(appStore.menuType=='demo'){ // 选择demo则呈现剩下所有菜单项
-      menuList.myList = [props.menu[0]]
-      menuList.myList.push(...props.menu.slice(5))
-    }
-  const arr = props.menu.slice(1)
-  arr.forEach(item=>{// 呈现选择的对应菜单项
-    if(item.text.toUpperCase()==appStore.menuType.toUpperCase()){
-      menuList.myList = [props.menu[0]]
-      menuList.myList.push(item)
-    }
-    if(item.text=='System'&&appStore.menuType=='SAAS'){
-        if(menuList.myList.length === props.menu.length){
-          menuList.myList = [props.menu[0]]
-          menuList.myList.push(item)
-        }else{
-          menuList.myList.push(item)
-        }
-      }
-  })
-}
-const path = ref('')
-router.afterEach((to, from) => {
+router.afterEach((to) => {
   path.value = to.fullPath
-  // 在这里可以处理路由变化后的逻辑
 });
-let open = reactive({openList:[]})
-onMounted(()=>{
-  getMenu()
-  getData()
-})
+
+watch(() => appStore.menuType, () => {
+	path.value = router.currentRoute.value.fullPath;
+	menuList.splice(0, menuList.length);
+	menuList.push(...menu.getMenus(appStore.menuType));
+	open.openList = [];
+	menuList.forEach(item => {
+		item.items.forEach(element => {
+			if (element.items) {
+				open.openList.push(element.text);
+			}
+		})
+	});
+}, {
+	immediate: true
+});
 </script>
 <template>
   <v-list nav dense v-model:opened="open.openList" open-strategy="multiple">
-    <template v-for="menuArea in menuList.myList" :key="menuArea.key">
+    <template v-for="menuArea in menuList" :key="menuArea.text">
       <div v-if="menuArea.key || menuArea.text" class="pa-1 mt-2 text-overline">
         {{ menuArea.text }}
       </div>
       <template v-if="menuArea.items">
-        <template v-for="menuItem in menuArea.items" :key="menuItem.key">
+        <template v-for="menuItem in menuArea.items" :key="menuItem.text">
           <!-- menu level 1 -->
           <v-list-item
             v-if="!menuItem.items"
@@ -99,7 +68,7 @@ onMounted(()=>{
             <!-- menu level 2 -->
             <v-list-item
               v-for="subMenuItem in menuItem.items"
-              :key="subMenuItem.key"
+              :key="subMenuItem.text"
               :to="subMenuItem.link"
               color="primary"
               :class="{ 'active': path.startsWith(subMenuItem.link) && subMenuItem.link !== '/' , 'v-list-item--active': path.startsWith(subMenuItem.link) && subMenuItem.link !== '/'}"
@@ -123,7 +92,7 @@ onMounted(()=>{
 .v-list-group .v-list-item {
   padding-left: 8px !important;
 }
-.active{
+.active {
   color: rgb(var(--v-theme-primary)) !important;
 }
 </style>

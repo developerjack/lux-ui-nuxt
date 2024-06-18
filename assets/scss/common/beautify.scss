@@ -37,7 +37,7 @@
   overflow: hidden;
 }
 
-.landing-warpper {
+.landing-wrapper {
   border: 2px dashed #aaa;
 }
 
@@ -82,7 +82,33 @@
   cursor: pointer;
 }
 
-.scroll-warpper {
+.scroll-wrapper {
   height: calc(100vh - 64px);
   overflow-y: auto;
+}
+
+// 模块选择的样式，效果见角色管理
+.module-checkbox-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-row-gap: 16px;
+  grid-column-gap: 10px;
+  .v-checkbox {
+    display: flex;
+    width: 100%;
+    .v-input__control {
+      width: 100%;
+      .v-checkbox-btn {
+        flex: 1;
+        min-height: auto;
+        border-radius: 4px;
+        padding: 4px 10px 4px 4px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        font-weight: bold;
+        .v-label--clickable {
+          width: 100%;
+        }
+      }
+    }
+  }
 }

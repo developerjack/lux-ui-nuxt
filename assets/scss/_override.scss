@@ -116,3 +116,12 @@ html {
   // background: rgba(var(--v-theme-background)) !important;
   color: var(--toastify-text-color-dark);
 }
+
+.v-row.form {
+  margin-top: -4px;
+  padding-bottom: -4px;
+  .v-col {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
