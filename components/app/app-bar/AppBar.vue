@@ -47,40 +47,24 @@ const changeTitle = (item) => {
 
 <template>
   <v-app-bar>
-    <v-app-bar-nav-icon @click="appStore.toggleSidebar"></v-app-bar-nav-icon>
-    <div class="text-center">
-      <v-menu
-        open-on-hover
-      >
-        <template v-slot:activator="{ props }">
-          <v-btn
-            color="primary"
-            v-bind="props"
-            style="font-size:14px"
-          >
-            <div style="line-height:36px">
-              {{title}}
-              <v-chip label density="comfortable" color="primary" size="x-small" style="font-size:8px">{{ type }}</v-chip>
-            </div>
-            <v-icon size="small" style="height: 100%; color: #51A77C;">mdi-chevron-down</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item
-            v-for="(item, index) in options"
-            :key="index"
-            @click="changeTitle(item)"
-          >
-            <v-list-item-title style="font-size:12px;">
-              <div style="line-height:36px">
-                {{ item.title }}
-                <v-chip label density="comfortable" color="primary" size="x-small" style="font-size:8px">{{ item.type }}</v-chip>
-              </div>
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </div>
+    <v-app-bar-nav-icon @click="appStore.toggleSidebar" />
+    <v-menu open-on-hover>
+      <template v-slot:activator="{ props }">
+        <v-btn v-bind="props">
+          {{ title }}
+          <v-chip label density="comfortable" color="primary ml-1" size="x-small">{{ type }}</v-chip>
+          <v-icon>mdi-chevron-down</v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item v-for="(item, index) in options" :key="index" @click="changeTitle(item)">
+          <v-list-item-title>
+            {{ item.title }}
+            <v-chip label density="comfortable" color="primary" size="x-small">{{ item.type }}</v-chip>
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
     <v-spacer></v-spacer>
     <v-btn icon>
       <v-badge dot color="success">
@@ -118,7 +102,7 @@ const changeTitle = (item) => {
   background-color: rgb(var(--v-theme-primary)) !important;
   color:white;
 }
-.box{
+.box {
   font-size:10px;
   margin: 0 auto !important;
   line-height:36px;

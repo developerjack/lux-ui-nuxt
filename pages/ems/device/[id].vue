@@ -1,7 +1,21 @@
 <template>
 	<yhlx-main-container>
 		<template v-slot:title>
-		标题
+			<v-menu open-on-hover>
+				<template v-slot:activator="{ props }">
+					<v-btn v-bind="props" class="px-0">
+						<h4 class="card-title">{{ device.name }}</h4>
+						<v-icon>mdi-chevron-down</v-icon>
+					</v-btn>
+				</template>
+				<v-list>
+					<v-list-item v-for="(item, index) in devices" :key="index" @click="switchDevice(item.id)">
+						<v-list-item-title>
+							{{ item.name }}
+						</v-list-item-title>
+					</v-list-item>
+				</v-list>
+			</v-menu>
 		</template>
 		<v-tabs v-model="tab">
 			<v-tab value="1">Overview</v-tab>
@@ -46,6 +60,34 @@
 <script setup lang="ts">
 import RealData from "./components/RealData.vue";
 import HistoryData from "./components/HistoryData.vue";
+const router = useRouter();
+
+const device = ref({ id: "1", name: "Device NO.1" });
+const devices = ref([
+	{ id: "1", name: "Device NO.1" },
+	{ id: "2", name: "Device NO.2" },
+	{ id: "3", name: "Device NO.3" },
+	{ id: "4", name: "Device NO.4" },
+	{ id: "5", name: "Device NO.5" },
+]);
+
+const id = ref(router.currentRoute.value.params.id);
+watch(id, () => {
+	for (let i = 0; i < devices.value.length; i++) {
+		const item = devices.value[i];
+		if (item.id === id.value) {
+			device.value = item;
+			break;
+		}
+	}
+}, {
+	immediate: true
+})
+
+function switchDevice(itemId: string) {
+	id.value = itemId;
+	router.push(`./${itemId}`);
+}
 
 const tab = ref('one');
 </script>
