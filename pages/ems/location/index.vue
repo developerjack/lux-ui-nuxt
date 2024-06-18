@@ -3,7 +3,9 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server :headers="headers" items-url="/api/ems/location" />
+		<yhlx-data-table-server :headers="headers" items-url="/api/ems/location">
+			
+		</yhlx-data-table-server>
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">

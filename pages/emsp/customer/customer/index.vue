@@ -3,7 +3,40 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<v-data-table :headers="headers" :items="items" @click:row="rowClick">
+		<v-data-table :headers="headers" :items="tableList" @click:row="rowClick">
+			<template
+				v-slot:body="{ items }"
+			>
+				<tr>
+					<td>
+						<v-text-field variant="underlined" label="Label" @input="changeSearchName" v-model="searchName"/>
+					</td>
+					<td>
+						<v-text-field variant="underlined" label="Label" @input="changeSearchEmail" v-model="searchEmail"/>
+					</td>
+					<td> 3 </td>
+					<td> 4 </td>
+					<td>
+						<v-select
+							variant="underlined"
+							label="Select"
+							:items="['Disable', 'Enable']"
+							v-model="searchStatus"
+							clearable
+						></v-select>
+					</td>
+				</tr>
+					<tr 
+						v-for="(item, index) in items" 
+						:key="index" 
+					>
+						<td> {{item.name}} </td>
+						<td> {{item.email}} </td>
+						<td> {{item.phoneNumber}} </td>
+						<td> {{item.age}} </td>
+						<td> {{item.status}} </td>
+					</tr>
+			</template>
 		</v-data-table>
 	</yhlx-main-container>
 </template>
@@ -26,10 +59,24 @@ const headers = ref([
 const items = ref([]);
 axios.get('/api/customer').then(response => {
 	items.value = response.data.data.content;
+	tableList.value = items.value;
 });
 function rowClick(event: PointerEvent, { item }) {
 	router.push(`customer/${item.id}`);
 }
+const tableList = ref([])
+const searchName = ref('')
+function changeSearchName() {
+	tableList.value = items.value.filter(item => item.name.includes(searchName.value))
+}
+const searchEmail = ref('')
+function changeSearchEmail() {
+	tableList.value = items.value.filter(item => item.email.includes(searchEmail.value))
+}
+const searchStatus = ref('')
+watch(searchStatus,()=>{
+	tableList.value = items.value.filter(item => item.status.includes(searchStatus.value || ''))
+})
 const arr = ref([])
 watch(appStore.Columns,()=>{
 	console.log(appStore.Columns)
