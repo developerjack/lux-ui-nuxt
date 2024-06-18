@@ -122,6 +122,22 @@ const MockAPI = [
 		}
 	},
 	{
+		url: "/api/ems/alarm",
+		method: "get",
+		response: () => {
+			return apiPageResult({
+				"id|+1": 1,
+				"type|1": ["Device Offline", "Over Voltage", "Under Voltage", "High Temperature", "Weak Signal", "Other"],
+				"level|1": ["Warn", "Error"],
+				"reportTime": "@datetime('yyyy-MM-dd HH:mm:ss')",
+				"locationName|1": ['Xiamen', 'Beijing', 'Nanjing', 'Shanghai', '-'],
+				"gateway|1": ['IOC24001 (@name)', 'IOC24002 (@name)', 'IOC24003 (@name)', 'IOC24004 (@name)', 'IOC24005 (@name)', 'IOC24006 (@name)'],
+				"device|1": ["@name (IOC_Store)", "@name (IOC_Light)"],
+				"status|1": ["Undisposed", "Auto Recovery", "Manual Disposed"],
+			});
+		}
+	},
+	{
 		url: "/api/ems/admin",
 		method: "get",
 		response: () => {

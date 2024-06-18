@@ -2,7 +2,7 @@
 	<yhlx-main-container>
 		<v-tabs v-model="tab">
 			<v-tab value="1">Overview</v-tab>
-			<v-tab value="2">Device Info</v-tab>
+			<v-tab value="2">Info</v-tab>
 			<v-tab value="3">Config</v-tab>
 			<v-tab value="4">Devices</v-tab>
 		</v-tabs>
