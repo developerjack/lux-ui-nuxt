@@ -19,7 +19,7 @@
 		</template>
 		<v-tabs v-model="tab">
 			<v-tab value="1">Overview</v-tab>
-			<v-tab value="2">Config</v-tab>
+			<v-tab value="2">Info</v-tab>
 			<v-tab value="3">Real Data</v-tab>
 			<v-tab value="4">History Data</v-tab>
 		</v-tabs>
