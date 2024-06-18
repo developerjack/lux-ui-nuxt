@@ -1,5 +1,5 @@
 <template>
-	<yhlx-main-container>
+	<yhlx-main-container :key="$route.fullPath">
 		<template v-slot:title>
 			<v-menu open-on-hover>
 				<template v-slot:activator="{ props }">

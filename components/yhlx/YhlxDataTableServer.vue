@@ -4,12 +4,19 @@
 		:items-length="itemsTotal" :items="items"
 		@update:options="loadItems"
 		show-select
-	/>
+	>
+		<template
+			v-slot:body="{ items }"
+		>
+			<slot name="body" :items="items" />
+		</template>
+	</v-data-table-server>
 </template>
 
 <script setup lang="ts">
 import axios from "axios";
 import { sleep } from "@antfu/utils";
+const emits = defineEmits(["getTableItems"]);
 const props = defineProps({
 	headers: Array<{ // 表头
 		key: string,
@@ -28,7 +35,9 @@ const headerItems = computed(() => {
 const loading = ref(true);
 const itemsTotal = ref(0);
 const items = ref([]);
-
+function setTableData(data) {
+	items.value = data
+}
 function loadItems({ page, itemsPerPage, sortBy }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])
 	loading.value = true;
 	sleep(800).then(() => {
@@ -40,10 +49,14 @@ function loadItems({ page, itemsPerPage, sortBy }) { // 页数(1)，每页数量
 			itemsTotal.value = response.data.data.total;
 			items.value = response.data.data.content;
 		}).finally(() => {
+			emits('getTableItems',items.value)
 			loading.value = false;
 		});
 	})
 }
+defineExpose({ //
+	setTableData,
+})
 </script>
 
 <style scoped>
