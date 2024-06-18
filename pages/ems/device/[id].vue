@@ -21,7 +21,8 @@
 			<v-tab value="1">Overview</v-tab>
 			<v-tab value="2">Info</v-tab>
 			<v-tab value="3">Real Data</v-tab>
-			<v-tab value="4">History Data</v-tab>
+			<v-tab value="4">Line Chart</v-tab>
+			<v-tab value="5">History Data</v-tab>
 		</v-tabs>
 		<v-card-text>
 			<v-tabs-window v-model="tab">
@@ -50,6 +51,9 @@
 					<real-data />
 				</v-tabs-window-item>
 				<v-tabs-window-item value="4">
+					<line-chart />
+				</v-tabs-window-item>
+				<v-tabs-window-item value="5">
 					<history-data />
 				</v-tabs-window-item>
 			</v-tabs-window>
@@ -60,6 +64,7 @@
 <script setup lang="ts">
 import RealData from "./components/RealData.vue";
 import HistoryData from "./components/HistoryData.vue";
+import LineChart from "./components/LineChart.vue";
 const router = useRouter();
 
 const device = ref({ id: "1", name: "Device NO.1" });
