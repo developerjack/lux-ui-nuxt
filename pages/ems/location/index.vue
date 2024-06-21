@@ -3,34 +3,27 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server :headers="headers" items-url="/api/ems/location" ref="dataTableServer" @getTableItems="getTableItems">
-			<template v-slot:body="{ items }">
+		<yhlx-data-table-server :headers="headers" items-url="/api/ems/location" ref="dataTableServer" @getTableItems="getTableItems" class="emsLocationTable">
+			<template v-slot:body.prepend>
 				<tr>
 					<td></td>
-					<td>
-						<input class="itemInput" @input="changeSearchName" v-model="searchName"/>
+					<td class="search-input">
+						<v-text-field variant="outlined" class="itemInput" @input="changeSearchName" v-model="searchName"/>
 					</td>
-					<td>
-						<input class="itemInput" @input="changeSearchGatewayCount" v-model="searchgatewayCount"/>
+					<td class="search-input">
+						<v-autocomplete
+							v-model="searchgatewayCount"
+							@change="changeSearchGatewayCount"
+							:items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+							variant="outlined"
+						></v-autocomplete>
 					</td>
-					<td>
-						<input class="itemInput" @input="changeSearchAddress" v-model="searchAddress"/>
+					<td class="search-input">
+						<yhlx-time-input :multiple="false" @getPickTime="getPickTime"/>
 					</td>
-					<td>
-						<input class="itemInput" @input="changeSearchNotes" v-model="searchNotes"/>
+					<td class="search-input">
+						<yhlx-time-input :multiple="true" @getPickTime="getPickTime"/>
 					</td>
-				</tr>
-				<tr 
-					v-for="(item, index) in items" 
-					:key="index" 
-				>
-					<td style="width: 55px;height: 55px;">
-						<v-checkbox v-model="item.isSelected" @change="handleCheckboxChange(item)"></v-checkbox>
-					</td>
-					<td> {{item.name}} </td>
-					<td> {{item.gatewayCount}} </td>
-					<td> {{item.address}} </td>
-					<td> {{item.notes}} </td>
 				</tr>
 			</template>
 		</yhlx-data-table-server>
@@ -38,7 +31,7 @@
 </template>
 <script setup lang="ts">
 import DialogAdd from './Add.vue';
-const headers = ref([
+const headers = ref([	
 	{ title: "Name", key: "name" },
 	{ title: "Gateway Count", key: "gatewayCount" },
 	{ title: "Address", key: "address" },
@@ -47,36 +40,45 @@ const headers = ref([
 function getTableItems(items){
 	tableList.value = items;
 }
+
 const dataTableServer = ref(null);
 const tableList = ref([]);
 const searchName = ref('');
 const searchgatewayCount = ref('');
-const searchAddress = ref('');
-const searchNotes = ref('');
+function getPickTime(value) {
+	console.log(value)
+}
 function changeSearchName() {
 	dataTableServer.value.setTableData(tableList.value.filter(item => item.name.includes(searchName.value) ));
 }
 function changeSearchGatewayCount() {
 	dataTableServer.value.setTableData(tableList.value.filter(item => searchgatewayCount.value === '' ? true : item.gatewayCount == searchgatewayCount.value));
 }
-function changeSearchAddress() {
-	dataTableServer.value.setTableData(tableList.value.filter(item => item.address.includes(searchAddress.value) ));
-}
-function changeSearchNotes() {
-	dataTableServer.value.setTableData(tableList.value.filter(item => item.notes.includes(searchNotes.value) ));
-}
 </script>
-<style scoped>
+<style lang="scss">
+.emsLocationTable{
+	.search-input{
+		.v-input{
+			height: 32px !important;
+			.v-input__details{
+				display: none;
+			}
+			.v-field{
+				.v-field__field{
+					height: 32px;
+				}
+				.v-field__input{
+					min-height: 32px !important;
+				}
+				--v-field-input-padding-top: 0;
+				--v-field-input-padding-bottom: 0;
+			}
+		}
+	}
+}
+</style>
+<style lang="scss" scoped>
 .v-input{
 	height: 56px;
-}
-.itemInput{
-	border: 1px solid #B3B3B3;
-	height: 32px;
-	width: 80%;
-	border-radius: 5px;
-}
-.itemInput:hover{
-	border: 1px solid #646464;
 }
 </style>

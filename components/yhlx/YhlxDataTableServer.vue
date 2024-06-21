@@ -1,14 +1,18 @@
 <template>
 	<v-data-table-server
-		:headers="headerItems" :loading="loading"
-		:items-length="itemsTotal" :items="items"
+		:headers="headerItems" 
+		:loading="loading"
+		:items-length="itemsTotal" 
+		:items="items"
+		item-value="name"
 		@update:options="loadItems"
+		v-model="selected"
 		show-select
 	>
 		<template
-			v-slot:body="{ items }"
+			v-slot:body.prepend="{ items }"
 		>
-			<slot name="body" :items="items" />
+			<slot name="body.prepend" :items="items" />
 		</template>
 	</v-data-table-server>
 </template>
@@ -31,6 +35,7 @@ const headerItems = computed(() => {
 	return props.headers?.filter(item => item.show === undefined || item.key === item.show);
 });
 
+const selected = ref([]);
 // 内容
 const loading = ref(true);
 const itemsTotal = ref(0);
