@@ -7,22 +7,22 @@
 			<template v-slot:body.prepend>
 				<tr>
 					<td></td>
-					<td class="search-input">
-						<v-text-field variant="outlined" class="itemInput" @input="changeSearchName" v-model="searchName"/>
+					<td class="search-input" v-show="headers[0].show !== ''">
+						<v-text-field variant="outlined" class="itemInput" @input="changeSearchName" v-model="searchName" clearable/>
 					</td>
-					<td class="search-input">
+					<td class="search-input" v-show="headers[1].show !== ''">
 						<v-autocomplete
 							v-model="searchgatewayCount"
-							@change="changeSearchGatewayCount"
-							:items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+							:items="[...new Set(tableList.map(item => item.gatewayCount))]"
 							variant="outlined"
+							clearable
 						></v-autocomplete>
 					</td>
-					<td class="search-input">
-						<yhlx-time-input :multiple="false" @getPickTime="getPickTime"/>
+					<td class="search-input" v-show="headers[2].show !== ''">
+						<yhlx-time-input :multiple="false" @getPickTime="getPickTime" clearable/>
 					</td>
-					<td class="search-input">
-						<yhlx-time-input :multiple="true" @getPickTime="getPickTime"/>
+					<td class="search-input" v-show="headers[3].show !== ''">
+						<yhlx-time-input :multiple="true" @getPickTime="getPickTime" clearable/>
 					</td>
 				</tr>
 			</template>
@@ -40,7 +40,6 @@ const headers = ref([
 function getTableItems(items){
 	tableList.value = items;
 }
-
 const dataTableServer = ref(null);
 const tableList = ref([]);
 const searchName = ref('');
@@ -51,9 +50,9 @@ function getPickTime(value) {
 function changeSearchName() {
 	dataTableServer.value.setTableData(tableList.value.filter(item => item.name.includes(searchName.value) ));
 }
-function changeSearchGatewayCount() {
-	dataTableServer.value.setTableData(tableList.value.filter(item => searchgatewayCount.value === '' ? true : item.gatewayCount == searchgatewayCount.value));
-}
+watch(searchgatewayCount,() => {
+	dataTableServer.value.setTableData(tableList.value.filter(item => item.gatewayCount === searchgatewayCount.value || searchgatewayCount.value === null));
+})
 </script>
 <style lang="scss">
 .emsLocationTable{
@@ -75,10 +74,5 @@ function changeSearchGatewayCount() {
 			}
 		}
 	}
-}
-</style>
-<style lang="scss" scoped>
-.v-input{
-	height: 56px;
 }
 </style>

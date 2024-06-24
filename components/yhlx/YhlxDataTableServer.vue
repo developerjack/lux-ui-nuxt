@@ -9,10 +9,8 @@
 		v-model="selected"
 		show-select
 	>
-		<template
-			v-slot:body.prepend="{ items }"
-		>
-			<slot name="body.prepend" :items="items" />
+		<template v-slot:body.prepend>
+			<slot name="body.prepend"/>
 		</template>
 	</v-data-table-server>
 </template>
