@@ -8,7 +8,7 @@
 				<tr>
 					<td></td>
 					<td class="search-input" v-show="headers[0].show !== ''">
-						<v-text-field variant="outlined" class="itemInput" @input="changeSearchName" v-model="searchName" clearable/>
+						<v-text-field variant="outlined" class="itemInput" v-model="searchName" clearable/>
 					</td>
 					<td class="search-input" v-show="headers[1].show !== ''">
 						<v-autocomplete
@@ -47,9 +47,11 @@ const searchgatewayCount = ref('');
 function getPickTime(value) {
 	console.log(value)
 }
-function changeSearchName() {
-	dataTableServer.value.setTableData(tableList.value.filter(item => item.name.includes(searchName.value) ));
-}
+watch(searchName,() => {
+		console.log(searchName.value)
+		dataTableServer.value.setTableData(tableList.value.filter(item => item.name.includes(searchName.value) || searchName.value === null));
+	}
+)
 watch(searchgatewayCount,() => {
 	dataTableServer.value.setTableData(tableList.value.filter(item => item.gatewayCount === searchgatewayCount.value || searchgatewayCount.value === null));
 })
