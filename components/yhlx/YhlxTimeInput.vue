@@ -58,6 +58,12 @@
       day
     }
   }
+  function clearInput() {
+    formatDate.value = ''
+  }
+  defineExpose({
+    clearInput
+  })
 </script>
 <style lang="scss" >
 .date-picker-menu{

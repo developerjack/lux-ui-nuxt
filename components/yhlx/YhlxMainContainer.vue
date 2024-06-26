@@ -11,7 +11,7 @@
 				<slot name="append" />
 				<v-btn icon="mdi-dots-vertical" @click="showMoreDialog" />
 			</v-toolbar>
-			<yhlx-more-dialog v-show="isHide" :data-headers="props.dataHeaders" />
+			<yhlx-more-dialog v-show="isHide" :data-headers="props.dataHeaders" :operationObj="props.operationObj" @showMoreDialog="showMoreDialog"/>
 			<v-divider />
 			<div class="app-content">
 				<slot />
@@ -29,6 +29,10 @@ const props = defineProps({
 		key: string,
 		show?: string
 	}>,
+	operationObj: {
+		type: Object,
+		default: () => {}
+	}
 })
 const menu: NavigationConfig.Menu = mainMenu.getCurrentMenu();
 const isHide = ref(false)

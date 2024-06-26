@@ -1,6 +1,7 @@
 <template>
 	<v-data-table-server
-		:headers="headerItems" 
+		:headers="headerItems"
+		:items-per-page="itemsPerPage"
 		:loading="loading"
 		:items-length="itemsTotal" 
 		:items="items"
@@ -37,6 +38,7 @@ const selected = ref([]);
 // 内容
 const loading = ref(true);
 const itemsTotal = ref(0);
+const itemsPerPage = ref(10);
 const items = ref([]);
 function setTableData(data) {
 	items.value = data
@@ -52,13 +54,14 @@ function loadItems({ page, itemsPerPage, sortBy }) { // 页数(1)，每页数量
 			itemsTotal.value = response.data.data.total;
 			items.value = response.data.data.content;
 		}).finally(() => {
-			emits('getTableItems',items.value)
+			emits('getTableItems',items.value , itemsPerPage)
 			loading.value = false;
 		});
 	})
 }
 defineExpose({ //
 	setTableData,
+	loadItems
 })
 </script>
 

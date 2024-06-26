@@ -19,8 +19,12 @@ const props = defineProps({
 		title: string,
 		show?: string
 	}>,
+	operationObj: {
+		type: Object,
+		default: () => {}
+	}
 });
-
+const emits = defineEmits(['showMoreDialog']);
 let headersKey = `headers-${useRouter().currentRoute.value.path}`;
 const hiddenHeaders:Array<string> = JSON.parse(localStorage.getItem(headersKey) || '[]');
 watch(() => props.dataHeaders, () => {
@@ -45,22 +49,23 @@ const dataHeaderClick = (item: any) => {
 	localStorage.setItem(headersKey, JSON.stringify(hiddenHeaders));
 }
 
-const emit = defineEmits(['refreshTable']);
 const operatingItems = ref([{
     label: 'Clear Filters',
     click: () => {
-			console.log("Clear Filters")
+			props.operationObj.clearFilter();
+			emits('showMoreDialog');
     }
   }, {
     label: 'Reset Sorting',
 	  click: () => {
-		  console.log("Reset Sorting")
+		  props.operationObj.resetSort();
+			emits('showMoreDialog');
 	  }
   }, {
 		label: 'Refresh Table',
 		click: () => {
-			console.log("Refresh Table");
-			emit('refreshTable');
+			props.operationObj.refreshTable();
+			emits('showMoreDialog');
 		}
 	},
 ]);
