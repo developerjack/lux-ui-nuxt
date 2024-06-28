@@ -1,7 +1,7 @@
 <template>
 	<div class="app-wrapper">
-		<v-card class="h-full app-card" rounded="xl">
-			<v-toolbar class="px-5">
+		<v-card class="h-full app-card" rounded="xl" style="border-radius: 2px !important;">
+			<v-toolbar class="px-5 main-toolbar">
 				<Icon v-if="menu.icon" width="30" class="text-primary mx-4" :icon="menu.icon"/>
 				<!-- Title Start -->
 				<h4 v-if="!$slots.title" class="card-title">{{ menu.text }}</h4>
@@ -40,8 +40,19 @@ const showMoreDialog = () => {
 	isHide.value = !isHide.value
 }
 </script>
+<style lang="scss">
+.app-wrapper{
+	.app-content{
+	.v-toolbar{
+		.v-toolbar__content{
+			height: 44px !important;
+		}
+	}
+}
+}
 
-<style scoped>
+</style>
+<style lang="scss" scoped>
 .app-wrapper {
 	height: calc(100vh - 64px);
 	padding: 16px;
@@ -49,5 +60,11 @@ const showMoreDialog = () => {
 .app-content {
 	overflow: auto !important;
 	height: calc(100vh - 160px);
+	.v-toolbar {
+		.v-toolbar__content{
+			height: 44px !important;
+		}
+	}
 }
+
 </style>

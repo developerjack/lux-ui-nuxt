@@ -3,9 +3,22 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server :headers="headers" items-url="/api/ems/location" ref="dataTableServer" @getTableItems="getTableItems" class="emsLocationTable">
-			<template v-slot:body.prepend>
-				<tr>
+		<yhlx-data-table-server :headers="headers" :search="true" :showSelect="true" items-url="/api/ems/location" ref="dataTableServer" @getTableItems="getTableItems" class="emsLocationTable">
+			<template v-slot:body.prepend.name>
+				<v-text-field variant="outlined" class="itemInput" v-model="searchName" clearable/>
+			</template>
+			<template v-slot:body.prepend.address>
+				<yhlx-time-input ref="multioleTimeInput" :multiple="true" @getPickTime="getPickTime" clearable/>
+			</template>
+			<template v-slot:body.prepend.gatewayCount>
+				<v-autocomplete
+					v-model="searchgatewayCount"
+					:items="formatterGatewayCount"
+					variant="outlined"
+					clearable
+				></v-autocomplete>
+			</template>
+				<!-- <tr>
 					<td></td>
 					<td class="search-input" v-show="headers[0].show !== ''">
 						<v-text-field variant="outlined" class="itemInput" v-model="searchName" clearable/>
@@ -24,8 +37,8 @@
 					<td class="search-input" v-show="headers[3].show !== ''">
 						<yhlx-time-input ref="multioleTimeInput" :multiple="true" @getPickTime="getPickTime" clearable/>
 					</td>
-				</tr>
-			</template>
+				</tr> -->
+			
 		</yhlx-data-table-server>
 	</yhlx-main-container>
 </template>
@@ -88,6 +101,7 @@ function refreshTable() {
 function clearFilter() {
 	searchName.value = ''
 	searchgatewayCount.value = null
+	console.log(sinpleTimeInput.value)
 	multioleTimeInput.value.clearInput()
 	sinpleTimeInput.value.clearInput()
 }
@@ -115,22 +129,20 @@ watch(searchgatewayCount,() => {
 </script>
 <style lang="scss">
 .emsLocationTable{
-	.search-input{
-		.v-input{
-			height: 32px !important;
-			.v-input__details{
-				display: none;
+	.v-input{
+		height: 32px !important;
+		.v-input__details{
+			display: none;
+		}
+		.v-field{
+			.v-field__field{
+				height: 32px;
 			}
-			.v-field{
-				.v-field__field{
-					height: 32px;
-				}
-				.v-field__input{
-					min-height: 32px !important;
-				}
-				--v-field-input-padding-top: 0;
-				--v-field-input-padding-bottom: 0;
+			.v-field__input{
+				min-height: 32px !important;
 			}
+			--v-field-input-padding-top: 0;
+			--v-field-input-padding-bottom: 0;
 		}
 	}
 }

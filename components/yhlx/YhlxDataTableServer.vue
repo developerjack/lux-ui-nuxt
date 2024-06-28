@@ -8,10 +8,15 @@
 		item-value="name"
 		@update:options="loadItems"
 		v-model="selected"
-		show-select
+		:show-select="showSelect"
 	>
-		<template v-slot:body.prepend>
-			<slot name="body.prepend"/>
+		<template v-slot:body.prepend v-if="search">
+			<tr>
+				<td v-if="showSelect"></td>
+				<td v-for="(headerItem, index) in headerItems" :key="index">
+					<slot :name="'body.prepend.' + headerItem.key"></slot>
+				</td>
+			</tr>
 		</template>
 	</v-data-table-server>
 </template>
@@ -27,6 +32,14 @@ const props = defineProps({
 		show?: string
 	}>,
 	itemsUrl: String, // 数据的API地址
+	search: {
+		type: Boolean,
+		default: true
+	}, // 是否显示搜索行
+	showSelect: {
+		type: Boolean,
+		default: true
+	}
 });
 
 // 表头
@@ -65,6 +78,6 @@ defineExpose({ //
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

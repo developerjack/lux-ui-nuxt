@@ -1,5 +1,5 @@
 <template>
-	<nuxt-icon :name="iconName" :class="svgClass" />
+	<nuxt-icon :name="iconName" :class="svgClass"/>
 </template>
 
 <script setup>
