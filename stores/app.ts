@@ -6,6 +6,7 @@ export const useAppStore = defineStore({
     theme: 'light',
     mainSidebar: true,
     menuType: '',
+    isFullScreen: false,
     isLogin:true,
     addDrawer:false,
   }),
@@ -22,6 +23,9 @@ export const useAppStore = defineStore({
   actions: {
     toggleSidebar() {
       this.mainSidebar = !this.mainSidebar
+    },
+    fullScreen() {
+      this.isFullScreen = !this.isFullScreen
     },
     setIsLogin(isLogin: boolean) {
       this.isLogin = isLogin

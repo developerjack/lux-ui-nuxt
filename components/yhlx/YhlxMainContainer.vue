@@ -1,5 +1,5 @@
 <template>
-	<div class="app-wrapper">
+	<div class="app-wrapper" :style="{ 'height': !appStore.isFullScreen ? 'calc(100vh - 64px)' : '100%' }">
 		<v-card class="h-full app-card" rounded="xl" style="border-radius: 2px !important;">
 			<v-toolbar class="px-5 main-toolbar">
 				<Icon v-if="menu.icon" width="30" class="text-primary mx-4" :icon="menu.icon"/>
@@ -8,6 +8,7 @@
 				<slot v-else name="title" />
 				<!-- Title End -->
 				<v-spacer />
+				<v-btn :icon="!appStore.isFullScreen ? 'mdi-fullscreen' : 'mdi-fullscreen-exit'" @click="appStore.fullScreen"/>
 				<slot name="append" />
 				<v-btn icon="mdi-dots-vertical" @click="showMoreDialog" />
 			</v-toolbar>
@@ -23,6 +24,8 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 import mainMenu from "~/configs/mainMenu";
+import { useAppStore } from "@/stores/app";
+const appStore = useAppStore();
 const props = defineProps({
 	dataHeaders: Array<{ // 表头
 		title: string,
@@ -39,32 +42,40 @@ const isHide = ref(false)
 const showMoreDialog = () => {
 	isHide.value = !isHide.value
 }
+const fullscreen = () => {
+
+}
 </script>
 <style lang="scss">
 .app-wrapper{
-	.app-content{
-	.v-toolbar{
-		.v-toolbar__content{
+	.main-toolbar {
+		height: 44px !important;
+		&>.v-toolbar__content{
 			height: 44px !important;
 		}
 	}
 }
+.app-content{
+	height: calc(100% - 44px);
+	.v-table{
+		height: 100%;
+		&>.v-table__wrapper{
+			height: calc(100% - 62px) !important;
+		}
+	}
 }
-
 </style>
 <style lang="scss" scoped>
 .app-wrapper {
-	height: calc(100vh - 64px);
 	padding: 16px;
 }
 .app-content {
 	overflow: auto !important;
-	height: calc(100vh - 160px);
-	.v-toolbar {
-		.v-toolbar__content{
-			height: 44px !important;
-		}
-	}
 }
+.full-screen{
+	font-size: 18px;
+	cursor: pointer;
+}
+
 
 </style>

@@ -88,7 +88,7 @@ const menus = ref([
       <v-divider></v-divider>
 
       <v-list lines="three" density="compact" nav color="primary">
-        <v-list-item v-for="item in menus" :value="item.value">
+        <v-list-item v-for="(item,index) in menus" :value="item.value" :key="index">
           <div class="d-flex flex-column align-center justify-center">
             <v-icon>{{ item.icon }}</v-icon>
             <div class="text-body-2 font-weight-bold">{{ item.title }}</div>

@@ -46,7 +46,7 @@ const changeTitle = (item) => {
 </script>
 
 <template>
-  <v-app-bar>
+  <v-app-bar v-if="!appStore.isFullScreen">
     <v-app-bar-nav-icon @click="appStore.toggleSidebar" />
     <v-menu open-on-hover>
       <template v-slot:activator="{ props }">

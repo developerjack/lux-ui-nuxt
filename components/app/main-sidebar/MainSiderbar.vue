@@ -17,12 +17,12 @@ const navigation = ref(configs.mainMenu);
 const goHome = ()=>{
   router.push('/')
 }
-
 </script>
 
 <template>
   <v-navigation-drawer
     v-model="appStore.mainSidebar"
+    v-if="!appStore.isFullScreen"
     elevation="10"
     location="left"
   >
