@@ -5,14 +5,14 @@
 		</template>
 		<yhlx-data-table-server :headers="headers" :search="true" :showSelect="true" items-url="/api/ems/location" class="emsLocationTable">
 			<template v-slot:body.prepend.name>
-				<v-text-field density="density" variant="outlined" class="itemInput" v-model="searchName" clearable/>
+				<v-text-field density="compact" variant="outlined" class="itemInput" v-model="searchName" clearable/>
 			</template>
 			<template v-slot:body.prepend.address>
 				<yhlx-time-input ref="multioleTimeInput" :multiple="true" @getPickTime="getPickTime" clearable/>
 			</template>
 			<template v-slot:body.prepend.gatewayCount>
 				<v-autocomplete
-				 	density="density"
+				 	density="compact"
 					v-model="searchgatewayCount"
 					:items="[1,2,3,4]"
 					variant="outlined"
@@ -78,32 +78,9 @@ watch(searchgatewayCount,() => {
 <style lang="scss">
 .v-table{
 	.v-input{
-		.v-field{
-			.v-field__input{
-				height: 32px;
-			}
-		}
 		.v-input__details{
 			display: none;
 		}
 	}
 }
-// .emsLocationTable{
-// 	.v-input{
-// 		height: 32px !important;
-// 		.v-input__details{
-// 			display: none;
-// 		}
-// 		.v-field{
-// 			.v-field__field{
-// 				height: 32px;
-// 			}
-// 			.v-field__input{
-// 				min-height: 32px !important;
-// 			}
-// 			--v-field-input-padding-top: 0;
-// 			--v-field-input-padding-bottom: 0;
-// 		}
-// 	}
-// }
 </style>
