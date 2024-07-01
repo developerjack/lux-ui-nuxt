@@ -24,7 +24,6 @@
 <script setup lang="ts">
 import axios from "axios";
 import { sleep } from "@antfu/utils";
-const emits = defineEmits(["getTableItems"]);
 const props = defineProps({
 	headers: Array<{ // 表头
 		key: string,
@@ -67,15 +66,10 @@ function loadItems({ page, itemsPerPage, sortBy }) { // 页数(1)，每页数量
 			itemsTotal.value = response.data.data.total;
 			items.value = response.data.data.content;
 		}).finally(() => {
-			emits('getTableItems',items.value , itemsPerPage)
 			loading.value = false;
 		});
 	})
 }
-defineExpose({ //
-	setTableData,
-	loadItems
-})
 </script>
 
 <style lang="scss" scoped>

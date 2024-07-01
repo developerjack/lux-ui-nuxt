@@ -68,6 +68,10 @@ const showMoreDialog = () => {
 		margin: 0 8px;
 	}
 }
+.v-btn{
+	width: 36px !important;
+	height: 36px !important;
+}
 .full-screen{
 	font-size: 18px;
 	cursor: pointer;

@@ -40,7 +40,7 @@
       <p class="pie-list-title">设备状态</p>
       <v-row>
         <v-col cols="4">
-          <OnlineRatePie :id="'pieChart1'"></OnlineRatePie>
+          <OnlineRatePie></OnlineRatePie>
           <div class="pie-list-descript">
             <p>网关在线率</p>
             <p>在线 9 台</p>
@@ -48,7 +48,7 @@
           </div>
         </v-col>
         <v-col cols="4">
-          <OnlineRatePie :color="['#277473', '#70AA3B']" :id="'pieChart2'"></OnlineRatePie>
+          <OnlineRatePie :color="['#277473', '#70AA3B']"></OnlineRatePie>
           <div class="pie-list-descript">
             <p>网关在线率</p>
             <p>在线 9 台</p>
@@ -56,7 +56,7 @@
           </div>
         </v-col>
         <v-col cols="4">
-          <OnlineRatePie :color="['#5215AA', '#B7B842']" :id="'pieChart3'"></OnlineRatePie>
+          <OnlineRatePie :color="['#5215AA', '#B7B842']"></OnlineRatePie>
           <div class="pie-list-descript">
             <p>网关在线率</p>
             <p>在线 9 台</p>
@@ -76,9 +76,9 @@ import OnlineRatePie from './OnlineRatePie.vue'
   width: 30%;
   margin-right: 60px;
   .card-list{
-    padding: 16px;
+    padding: 16px 0;
     font-weight: 700;
-    border: 2px solid #454ABF;
+    // border: 2px solid #454ABF;
     .card-item{
       flex: 1;
       padding: 8px 16px 20px;
@@ -103,9 +103,6 @@ import OnlineRatePie from './OnlineRatePie.vue'
     }
     .pie-list-descript{
       text-align: center;
-      p{
-        margin-top: 16px;
-      }
     }
   }
 }

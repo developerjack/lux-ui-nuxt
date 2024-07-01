@@ -3,7 +3,7 @@
     <v-row no-gutters>
       <v-col class="small-card" cols="2" style="background: #F2F2FE">
         <div class="small-card-top">
-          <p>总收益</p>
+          <p>Total Revenue</p>
           <p class="unit" @click="changeUnit">{{ DateUnitText }}</p>
         </div>
         <div class="small-card-bottom" style="">
@@ -25,7 +25,7 @@
               :options="chartOptions"
               :series="chartOptions.series"
             />
-            <div style="text-align: left;margin-top: 8px;width: 50px;">
+            <div style="text-align: left;margin-top: 8px;width: 50px;margin-left: 2px">
               <p>光伏</p>
               <p>储能</p>
               <p>充电桩</p>
@@ -35,7 +35,7 @@
       </v-col>
       <v-col class="small-card" cols="2" style="background: #F5F2FD;color:#6457B8">
         <div class="small-card-top">
-          <p>太阳能</p>
+          <p>Solar Energy</p>
           <p class="unit" @click="changeUnit">{{ DateUnitText }}</p>
         </div>
         <div class="small-card-bottom">
@@ -52,8 +52,8 @@
       </v-col>
       <v-col class="small-card" cols="3" style="background: #FDEAE4;color: #EE7566">
         <div class="small-card-top">
-          <p>电池</p>
-          <p class="unit price-margin-right" @click="changeUnit">{{ DateUnitText }}</p>
+          <p>Battery</p>
+          <p class="unit" @click="changeUnit">{{ DateUnitText }}</p>
         </div>
         <div class="small-card-bottom">
           <div class="small-card-left">
@@ -75,7 +75,7 @@
       </v-col>
       <v-col class="small-card" cols="2" style="background: #EBF5FD;color: #3359A4">
         <div class="small-card-top">
-          <p>充电桩</p>
+          <p>Charging Station</p>
           <p class="unit" @click="changeUnit">{{ DateUnitText }}</p>
         </div>
         <div class="small-card-bottom">
@@ -83,7 +83,7 @@
             <Icon icon="solar:layers-minimalistic-line-duotone" width="70" />
           </div>
           <div class="small-card-right font-list">
-            <p class="price">- kWh</p>
+            <p class="price">--</p>
             <p class="descript">耗电量</p>
             <p class="price">100 元</p>
             <p class="descript">收益</p>
@@ -92,7 +92,7 @@
       </v-col>
       <v-col class="small-card" cols="2" style="background: #E4F7F6;color: #3FB4B3">
         <div class="small-card-top">
-          <p>电网</p>
+          <p>Power Grid</p>
           <p class="unit" @click="changeUnit">{{ DateUnitText }}</p>
         </div>
         <div class="small-card-bottom">
@@ -115,16 +115,20 @@ import YhlxSvgIcon from '@/components/yhlx/YhlxSvgIcon.vue'
 import { Icon } from "@iconify/vue";
 const chartOptions = {
   series: [5,5,3],
-  labels: ['光伏','储能','充电桩'],
+  labels: ['photovoltaic','储能','充电桩'],
   chart: {
-    height: 90,
+    height: 80,
     type: "donut",
-    padding: [0, 30, 0, 0]
   },
   colors: ['#0F50F9','#8642D0','#0DADFB'],
   dataLabels: { enabled: false },
   legend: {
     show: false,
+  },
+  plotOptions: {
+    pie: {
+      customScale: 0.8
+    }
   },
   grid: {
     show: false,
@@ -134,10 +138,14 @@ const chartOptions = {
   stroke: { colors: ["transparent"] },
   tooltip: { theme: "dark", fillSeriesColor: false },
 }
-const DateUnitValue = ref('')
-const DateUnitText = ref('')
+onMounted(()=>{
+
+})
+
+const DateUnitValue = ref('day')
+const DateUnitText = ref('Day')
 const DataUnitList = ref({
-  text: 'day',
+  text: 'Day',
   value: 'day'
 },{
   text: 'month',
@@ -145,7 +153,7 @@ const DataUnitList = ref({
 })
 const changeUnit = () => {
   DateUnitValue.value = 'day'
-  DateUnitText.value = 'day'
+  DateUnitText.value = 'Day'
 }
 </script>
 <style lang="scss" scoped>
@@ -156,11 +164,11 @@ const changeUnit = () => {
   padding: 16px !important;
   .small-card-top{
     display: flex;
-    .price-margin-right{
-      margin-right: 70px;
-    }
     p{
       flex: 1;
+    }
+    p:first-child{
+      flex: 3;
     }
     .unit{
       text-align: right;

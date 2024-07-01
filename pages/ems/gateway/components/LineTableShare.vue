@@ -156,4 +156,7 @@ onMounted(() => {
 .grey-background{
   background-color: #F0F0F0;
 }
+.v-table > .v-table__wrapper > table > thead > tr > th{
+  border: none !important;
+}
 </style>
