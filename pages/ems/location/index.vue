@@ -18,27 +18,6 @@
 					clearable
 				></v-autocomplete>
 			</template>
-				<!-- <tr>
-					<td></td>
-					<td class="search-input" v-show="headers[0].show !== ''">
-						<v-text-field variant="outlined" class="itemInput" v-model="searchName" clearable/>
-					</td>
-					<td class="search-input" v-show="headers[1].show !== ''">
-						<v-autocomplete
-							v-model="searchgatewayCount"
-							:items="formatterGatewayCount"
-							variant="outlined"
-							clearable
-						></v-autocomplete>
-					</td>
-					<td class="search-input" v-show="headers[2].show !== ''">
-						<yhlx-time-input ref="sinpleTimeInput" :multiple="false" @getPickTime="getPickTime" clearable/>
-					</td>
-					<td class="search-input" v-show="headers[3].show !== ''">
-						<yhlx-time-input ref="multioleTimeInput" :multiple="true" @getPickTime="getPickTime" clearable/>
-					</td>
-				</tr> -->
-			
 		</yhlx-data-table-server>
 	</yhlx-main-container>
 </template>
@@ -52,16 +31,16 @@ const headers = ref([
 ]);
 
 // 表格dom对象
-const dataTableServer = ref(null);
+const dataTableServer = ref();
 
 // 处理后的表格数据
 const tableList = ref([]);
 
 // 搜索
 const searchName = ref('');
-const searchgatewayCount = ref('');
-const sinpleTimeInput = ref(null)
-const multioleTimeInput = ref(null)
+const searchgatewayCount = ref();
+const sinpleTimeInput = ref()
+const multioleTimeInput = ref()
 
 // 分页
 const itemsTotal = ref(0);
@@ -101,7 +80,6 @@ function refreshTable() {
 function clearFilter() {
 	searchName.value = ''
 	searchgatewayCount.value = null
-	console.log(sinpleTimeInput.value)
 	multioleTimeInput.value.clearInput()
 	sinpleTimeInput.value.clearInput()
 }

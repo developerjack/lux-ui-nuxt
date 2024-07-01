@@ -4,7 +4,7 @@
       <v-col class="small-card" cols="2" style="background: #F2F2FE">
         <div class="small-card-top">
           <p>总收益</p>
-          <p class="unit">天</p>
+          <p class="unit" @click="changeUnit">{{ DateUnitText }}</p>
         </div>
         <div class="small-card-bottom" style="">
           <div class="small-card-left" style="margin-left: 0;margin-top: 8px;padding: 16px 0;flex: 3">
@@ -21,7 +21,7 @@
             <apexchart
               id="donutChart"
               type="donut"
-              :height="90"
+              height="90"
               :options="chartOptions"
               :series="chartOptions.series"
             />
@@ -36,7 +36,7 @@
       <v-col class="small-card" cols="2" style="background: #F5F2FD;color:#6457B8">
         <div class="small-card-top">
           <p>太阳能</p>
-          <p class="unit">天</p>
+          <p class="unit" @click="changeUnit">{{ DateUnitText }}</p>
         </div>
         <div class="small-card-bottom">
           <div class="small-card-left">
@@ -53,7 +53,7 @@
       <v-col class="small-card" cols="3" style="background: #FDEAE4;color: #EE7566">
         <div class="small-card-top">
           <p>电池</p>
-          <p class="unit price-margin-right">天</p>
+          <p class="unit price-margin-right" @click="changeUnit">{{ DateUnitText }}</p>
         </div>
         <div class="small-card-bottom">
           <div class="small-card-left">
@@ -76,7 +76,7 @@
       <v-col class="small-card" cols="2" style="background: #EBF5FD;color: #3359A4">
         <div class="small-card-top">
           <p>充电桩</p>
-          <p class="unit">天</p>
+          <p class="unit" @click="changeUnit">{{ DateUnitText }}</p>
         </div>
         <div class="small-card-bottom">
           <div class="small-card-left">
@@ -93,7 +93,7 @@
       <v-col class="small-card" cols="2" style="background: #E4F7F6;color: #3FB4B3">
         <div class="small-card-top">
           <p>电网</p>
-          <p class="unit">天</p>
+          <p class="unit" @click="changeUnit">{{ DateUnitText }}</p>
         </div>
         <div class="small-card-bottom">
           <div class="small-card-left">
@@ -113,15 +113,13 @@
 <script setup lang="ts">
 import YhlxSvgIcon from '@/components/yhlx/YhlxSvgIcon.vue'
 import { Icon } from "@iconify/vue";
-import OnlineRatePie from './OnlineRatePie.vue'
-
 const chartOptions = {
   series: [5,5,3],
   labels: ['光伏','储能','充电桩'],
   chart: {
-    width: '90',
+    height: 90,
     type: "donut",
-    offsetX: -10
+    padding: [0, 30, 0, 0]
   },
   colors: ['#0F50F9','#8642D0','#0DADFB'],
   dataLabels: { enabled: false },
@@ -135,6 +133,19 @@ const chartOptions = {
   },
   stroke: { colors: ["transparent"] },
   tooltip: { theme: "dark", fillSeriesColor: false },
+}
+const DateUnitValue = ref('')
+const DateUnitText = ref('')
+const DataUnitList = ref({
+  text: 'day',
+  value: 'day'
+},{
+  text: 'month',
+  value: 'month'
+})
+const changeUnit = () => {
+  DateUnitValue.value = 'day'
+  DateUnitText.value = 'day'
 }
 </script>
 <style lang="scss" scoped>
@@ -153,6 +164,7 @@ const chartOptions = {
     }
     .unit{
       text-align: right;
+      cursor: pointer;
     }
   }
   .small-card-bottom{

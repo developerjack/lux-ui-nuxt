@@ -1,8 +1,8 @@
 <template>
 	<div class="app-wrapper" :style="{ 'height': !appStore.isFullScreen ? 'calc(100vh - 64px)' : '100%' }">
 		<v-card class="h-full app-card" rounded="xl" style="border-radius: 2px !important;">
-			<v-toolbar class="px-5 main-toolbar">
-				<Icon v-if="menu.icon" width="30" class="text-primary mx-4" :icon="menu.icon"/>
+			<v-toolbar class="px-3 main-toolbar">
+				<Icon v-if="menu.icon" width="24" class="text-primary header-icon" :icon="menu.icon"/>
 				<!-- Title Start -->
 				<h4 v-if="!$slots.title" class="card-title">{{ menu.text }}</h4>
 				<slot v-else name="title" />
@@ -42,20 +42,16 @@ const isHide = ref(false)
 const showMoreDialog = () => {
 	isHide.value = !isHide.value
 }
-const fullscreen = () => {
-
-}
 </script>
 <style lang="scss">
-.app-wrapper{
-	.main-toolbar {
-		height: 44px !important;
-		&>.v-toolbar__content{
-			height: 44px !important;
-		}
+.main-toolbar {
+	height: 48px !important;
+	&>.v-toolbar__content{
+		height: 48px !important;
 	}
 }
 .app-content{
+	overflow: auto;
 	height: calc(100% - 44px);
 	.v-table{
 		height: 100%;
@@ -68,9 +64,9 @@ const fullscreen = () => {
 <style lang="scss" scoped>
 .app-wrapper {
 	padding: 16px;
-}
-.app-content {
-	overflow: auto !important;
+	.header-icon{
+		margin: 0 8px;
+	}
 }
 .full-screen{
 	font-size: 18px;
