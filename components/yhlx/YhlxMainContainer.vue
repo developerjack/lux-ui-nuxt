@@ -52,7 +52,7 @@ const showMoreDialog = () => {
 }
 .app-content{
 	overflow: auto;
-	height: calc(100% - 44px);
+	height: calc(100% - 48px);
 	.v-table{
 		height: 100%;
 		&>.v-table__wrapper{

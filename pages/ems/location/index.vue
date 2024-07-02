@@ -3,9 +3,9 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server :headers="headers" :search="true" :showSelect="true" items-url="/api/ems/location" class="emsLocationTable">
+		<yhlx-data-table-server :headers="headers" ref="serverTable" :search="true" :showSelect="true" :items-url="itemUrl" class="emsLocationTable">
 			<template v-slot:body.prepend.name>
-				<v-text-field density="compact" variant="outlined" class="itemInput" v-model="searchName" clearable/>
+				<v-text-field density="compact" @keyup="delayFilter" variant="outlined" class="itemInput" v-model="searchName" clearable/>
 			</template>
 			<template v-slot:body.prepend.address>
 				<yhlx-time-input ref="multioleTimeInput" :multiple="true" @getPickTime="getPickTime" clearable/>
@@ -13,7 +13,8 @@
 			<template v-slot:body.prepend.gatewayCount>
 				<v-autocomplete
 				 	density="compact"
-					v-model="searchgatewayCount"
+          @blur="filtertableList"
+          v-model="searchgatewayCount"
 					:items="[1,2,3,4]"
 					variant="outlined"
 					clearable
@@ -31,21 +32,32 @@ const headers = ref([
 	{ title: "Notes", key: "notes" },
 ]);
 
+const itemUrl = ref('/api/ems/location')
+
 // 搜索
 const searchName = ref('');
 const searchgatewayCount = ref();
-const sinpleTimeInput = ref()
-const multioleTimeInput = ref()
+const sinpleTimeInput = ref('')
+const multioleTimeInput = ref('')
 
 
 // 选择的时间
 function getPickTime(value) {
-	console.log(value)
+  if(value.length === 0) {
+    multioleTimeInput.value = ''
+    filtertableList()
+  }else{
+    multioleTimeInput.value = ''
+    multioleTimeInput.value = '' + value
+    filtertableList()
+  }
 }
 
 function resetSort() {
 	console.log('Reset Sorting')
 }
+
+const serverTable = ref()
 
 const operationObj = {
 	refreshTable,
@@ -55,7 +67,9 @@ const operationObj = {
 // 刷新表格
 function refreshTable() {
 	// 获取表格数据接口
+  serverTable.value.loadItems({page: 1, itemsPerPage: 10})
 }
+
 // 清空筛选
 function clearFilter() {
 	searchName.value = ''
@@ -65,14 +79,27 @@ function clearFilter() {
 }
 
 function filtertableList() {
-	// 带筛选条件调接口
+  itemUrl.value = itemUrl.value.split('?')[0]
+  itemUrl.value = itemUrl.value + '?name=' + searchName.value +
+      '&gatewayCount=' + searchgatewayCount.value +
+      '&address=' + multioleTimeInput.value || ''
+  refreshTable()
 }
-
-watch(searchName,() => {
-	// 筛选条件
+const timeId = ref()
+// function delayFilter() {
+//   clearTimeout(timeId.value)
+//   timeId.value = setTimeout(filtertableList,200)
+// }
+// const timeId = ref()
+watch(searchName, ()=>{
+  console.log('searchName')
+  clearTimeout(timeId.value)
+  timeId.value = setTimeout(filtertableList,300)
 })
-watch(searchgatewayCount,() => {
-	// 筛选条件
+watch(searchgatewayCount, ()=>{
+  console.log('searchgatewayCount')
+  clearTimeout(timeId.value)
+  timeId.value = setTimeout(filtertableList,300)
 })
 </script>
 <style lang="scss">

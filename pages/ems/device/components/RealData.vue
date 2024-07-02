@@ -8,7 +8,7 @@
 				</template>
 			</v-list-item>
 		</v-list>
-		<div class="right">
+		<div class="window-item-inner-right">
 			<v-data-table :headers="headers" :items="items" :items-per-page="9999" hide-default-footer />
 		</div>
 	</div>
@@ -44,7 +44,7 @@ axios.get("/api/ems/sub-device/real").then(response => {
 	border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.right {
+.window-item-inner-right {
 	flex: 1;
 	overflow: auto;
 }

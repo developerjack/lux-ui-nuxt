@@ -11,7 +11,7 @@
 		:show-select="showSelect"
 	>
 		<template v-slot:body.prepend v-if="search">
-			<tr>
+			<tr class="body-prepend-search">
 				<td v-if="showSelect"></td>
 				<td v-for="(headerItem, index) in headerItems" :key="index">
 					<slot :name="'body.prepend.' + headerItem.key"></slot>
@@ -55,7 +55,7 @@ const items = ref([]);
 function setTableData(data) {
 	items.value = data
 }
-function loadItems({ page, itemsPerPage, sortBy }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])
+function loadItems({ page = 1, itemsPerPage = 10, sortBy }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])
 	loading.value = true;
 	sleep(800).then(() => {
 		if (props.itemsUrl === undefined) {
@@ -70,8 +70,14 @@ function loadItems({ page, itemsPerPage, sortBy }) { // 页数(1)，每页数量
 		});
 	})
 }
+defineExpose({
+  loadItems
+})
 </script>
 
 <style lang="scss" scoped>
-
+.body-prepend-search{
+  box-shadow: none !important;
+  transform: none !important;
+}
 </style>

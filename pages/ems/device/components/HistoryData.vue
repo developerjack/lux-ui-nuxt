@@ -8,7 +8,7 @@
 				</template>
 			</v-list-item>
 		</v-list>
-		<div class="right">
+		<div class="window-item-inner-right">
 			<v-data-table :headers="headers" :items="items" :items-per-page="9999" hide-default-footer>
 				<template v-slot:item.time="{ item }">
 					{{ timeFormat(item.time) }}
@@ -72,7 +72,7 @@ function timeFormat(time:number): String {
 	border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.right {
+.window-item-inner-right {
 	flex: 1;
 	overflow: auto;
 }
