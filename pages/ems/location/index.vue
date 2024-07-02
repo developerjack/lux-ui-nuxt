@@ -1,23 +1,23 @@
 <template>
-	<yhlx-main-container :data-headers="headers" :operationObj="operationObj">
+	<yhlx-main-container :data-headers="headers" :operations="operations">
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server :headers="headers" ref="serverTable" :search="true" :showSelect="true" :items-url="itemUrl" class="emsLocationTable">
+		<yhlx-data-table-server :headers="headers" ref="serverTable" :show-select="true" :items-url="itemUrl" class="emsLocationTable">
 			<template v-slot:body.prepend.name>
-				<v-text-field density="compact" @keyup="delayFilter" variant="outlined" class="itemInput" v-model="searchName" clearable/>
-			</template>
-			<template v-slot:body.prepend.address>
-				<yhlx-time-input ref="multioleTimeInput" :multiple="true" @getPickTime="getPickTime" clearable/>
+				<yhlx-text-field density="compact" v-model="searchName" clearable/>
 			</template>
 			<template v-slot:body.prepend.gatewayCount>
 				<v-autocomplete
 				 	density="compact"
-          v-model="searchgatewayCount"
+          v-model="searchGatewayCount"
 					:items="[1,2,3,4]"
 					variant="outlined"
 					clearable
 				></v-autocomplete>
+			</template>
+			<template v-slot:body.prepend.address>
+				<yhlx-time-input ref="multipleTimeInput" :multiple="true" @getPickTime="getPickTime" clearable/>
 			</template>
 		</yhlx-data-table-server>
 	</yhlx-main-container>
@@ -35,20 +35,19 @@ const itemUrl = ref('/api/ems/location')
 
 // 搜索
 const searchName = ref('');
-const searchgatewayCount = ref();
-const sinpleTimeInput = ref('')
-const multioleTimeInput = ref('')
-
+const searchGatewayCount = ref();
+const simpleTimeInput = ref('')
+const multipleTimeInput = ref('')
 
 // 选择的时间
 function getPickTime(value) {
-  if(value.length === 0) {
-    multioleTimeInput.value = ''
-    filtertableList()
-  }else{
-    multioleTimeInput.value = ''
-    multioleTimeInput.value = '' + value
-    filtertableList()
+  if (value.length === 0) {
+    multipleTimeInput.value = ''
+    searchTableList()
+  } else {
+    multipleTimeInput.value = ''
+    multipleTimeInput.value = '' + value
+    searchTableList()
   }
 }
 
@@ -58,7 +57,7 @@ function resetSort() {
 
 const serverTable = ref()
 
-const operationObj = {
+const operations = {
 	refreshTable,
 	clearFilter,
 	resetSort
@@ -71,34 +70,27 @@ function refreshTable() {
 
 // 清空筛选
 function clearFilter() {
-	searchName.value = ''
-	searchgatewayCount.value = null
-	multioleTimeInput.value.clearInput()
-	sinpleTimeInput.value.clearInput()
+	searchName.value = '';
+	searchGatewayCount.value = null;
+	multipleTimeInput.value.clearInput();
+	simpleTimeInput.value.clearInput();
 }
 
-function filtertableList() {
-  itemUrl.value = itemUrl.value.split('?')[0]
+function searchTableList() {
+  itemUrl.value = itemUrl.value.split('?')[0];
   itemUrl.value = itemUrl.value + '?name=' + searchName.value +
-      '&gatewayCount=' + searchgatewayCount.value +
-      '&address=' + multioleTimeInput.value || ''
-  refreshTable()
+      '&gatewayCount=' + searchGatewayCount.value +
+      '&address=' + multipleTimeInput.value || '';
+  refreshTable();
 }
-const timeId = ref()
-// function delayFilter() {
-//   clearTimeout(timeId.value)
-//   timeId.value = setTimeout(filtertableList,200)
-// }
-// const timeId = ref()
-watch(searchName, ()=>{
-  console.log('searchName')
-  clearTimeout(timeId.value)
-  timeId.value = setTimeout(filtertableList,300)
+const timeId = ref();
+watch(searchName, () => {
+  clearTimeout(timeId.value);
+  timeId.value = setTimeout(searchTableList,300);
 })
-watch(searchgatewayCount, ()=>{
-  console.log('searchgatewayCount')
-  clearTimeout(timeId.value)
-  timeId.value = setTimeout(filtertableList,300)
+watch(searchGatewayCount, ()=> {
+  clearTimeout(timeId.value);
+  timeId.value = setTimeout(searchTableList,300);
 })
 </script>
 <style lang="scss">
