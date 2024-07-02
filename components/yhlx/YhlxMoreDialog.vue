@@ -19,7 +19,7 @@ const props = defineProps({
 		title: string,
 		show?: string
 	}>,
-	operationObj: {
+	operations: {
 		type: Object,
 		default: () => {}
 	}
@@ -52,19 +52,19 @@ const dataHeaderClick = (item: any) => {
 const operatingItems = ref([{
     label: 'Clear Filters',
     click: () => {
-			props.operationObj.clearFilter();
+			props.operations.clearFilter();
 			emits('showMoreDialog');
     }
   }, {
     label: 'Reset Sorting',
 	  click: () => {
-		  props.operationObj.resetSort();
+		  props.operations.resetSort();
 			emits('showMoreDialog');
 	  }
   }, {
 		label: 'Refresh Table',
 		click: () => {
-			props.operationObj.refreshTable();
+			props.operations.refreshTable();
 			emits('showMoreDialog');
 		}
 	},

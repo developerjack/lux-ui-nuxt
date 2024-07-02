@@ -12,7 +12,7 @@
 				<slot name="append" />
 				<v-btn icon="mdi-dots-vertical" @click="showMoreDialog" />
 			</v-toolbar>
-			<yhlx-more-dialog v-show="isHide" :data-headers="props.dataHeaders" :operationObj="props.operationObj" @showMoreDialog="showMoreDialog"/>
+			<yhlx-more-dialog v-show="isHide" :data-headers="props.dataHeaders" :operations="props.operations" @showMoreDialog="showMoreDialog"/>
 			<v-divider />
 			<div class="app-content">
 				<slot />
@@ -32,7 +32,7 @@ const props = defineProps({
 		key: string,
 		show?: string
 	}>,
-	operationObj: {
+	operations: {
 		type: Object,
 		default: () => {}
 	}
