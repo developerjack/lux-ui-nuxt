@@ -5,7 +5,7 @@
 		</template>
 		<yhlx-data-table-server :headers="headers" ref="serverTable" :search="true" :showSelect="true" :items-url="itemUrl" class="emsLocationTable">
 			<template v-slot:body.prepend.name>
-				<v-text-field density="compact" @keyup="delayFilter" variant="outlined" class="itemInput" v-model="searchName" clearable/>
+				<v-text-field density="compact" variant="outlined" class="itemInput" v-model="searchName" clearable/>
 			</template>
 			<template v-slot:body.prepend.address>
 				<yhlx-time-input ref="multioleTimeInput" :multiple="true" @getPickTime="getPickTime" clearable/>
@@ -85,13 +85,7 @@ function filtertableList() {
   refreshTable()
 }
 const timeId = ref()
-// function delayFilter() {
-//   clearTimeout(timeId.value)
-//   timeId.value = setTimeout(filtertableList,200)
-// }
-// const timeId = ref()
 watch(searchName, ()=>{
-  console.log('searchName')
   clearTimeout(timeId.value)
   timeId.value = setTimeout(filtertableList,300)
 })

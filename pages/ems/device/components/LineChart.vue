@@ -8,14 +8,17 @@
 				</template>
 			</v-list-item>
 		</v-list>
-		<div class="window-item-inner-right">
+		<div class="window-item-inner-right" :style="{ 'height': !appStore.isFullScreen ? 'calc(100vh - 224px)' : 'calc(100vh - 163px)' }">
       <p>更新时间: {{"2024-06-05/10:20"}}</p>
       <div class="table-box">
         <DataTableBg :items="leftItems" :headers="leftHeaders"></DataTableBg>
         <DataTableBg :items="rightItems" :headers="rightHeaders"></DataTableBg>
       </div>
-      <div>
-        <apexchart :options="chartOptions" :series="chartOptions.series"></apexchart>
+      <div class="line-chart-box">
+        <div class="time-pick-box">
+          时间范围：<yhlx-time-input :multiple="false"/><span>~</span><yhlx-time-input :multiple="false"/>
+        </div>
+        <apexchart height="300px" :options="chartOptions" :series="chartOptions.series"></apexchart>
       </div>
 		</div>
 	</div>
@@ -24,6 +27,9 @@
 <script setup lang="ts">
 import axios from "axios";
 import DataTableBg from "./DataTableBg.vue";
+import { useAppStore } from "@/stores/app";
+const appStore = useAppStore();
+
 const leftItems = ref([
 {
   name: "电压(V)",
@@ -103,49 +109,22 @@ const rightHeaders = ref([
 
 const chartOptions = {
   series: [
-    { name: "光伏", data: [100, 390, 210, 350, 290, 180, 250] },
-    { name: "储能", data: [100, 250, 125, 215, 150, 310, 170] },
-    { name: "充电桩", data: [150, 213, 165, 215, 130, 210, 470] },
+    { name: "Ua", data: [100, 390, 210, 350, 290, 180, 250] },
+    { name: "Ub", data: [100, 250, 125, 215, 150, 310, 170] },
+    { name: "Uc", data: [150, 213, 165, 215, 130, 210, 470] },
   ],
-  grid: {
-    show: false,
-    borderColor: "transparent",
-    padding: { left: 0, right: 0, bottom: 0 },
-  },
-  plotOptions: {},
-  colors: ['#2FCFFC', '#2B339C', '#1961F9'],
-  fill: {
-    type: "gradient",
-    gradient: {
-      shade: "dark",
-      gradientToColors: ["#0b70fb"],
-      shadeIntensity: 1,
-      type: "horizontal",
-      opacityFrom: 1,
-      opacityTo: 0.9,
-      stops: [0, 100, 100, 100],
-    },
-  },
+  colors: ['#85A4EB', '#88BFC7', '#7DAE77'],
   chart: {
-    type: "line",
-    height: 100,
+    type: "area",
+    height: "300px",
     offsetX: -15,
-    toolbar: { show: false },
-    foreColor: "#adb0bb",
-    fontFamily: `inherit`,
-    dropShadow: {
-      enabled: true,
-      color: "rgba(0,0,0,0.2)",
-      top: 12,
-      left: 4,
-      blur: 3,
-      opacity: 0.4,
-    },
+    toolbar:{
+      show: false
+    }
   },
-
   legend: {
     show: true,
-    position: 'bottom',
+    position: 'top',
     itemMargin: {
       horizontal: 20,
       vertical: 0
@@ -155,20 +134,16 @@ const chartOptions = {
     type: "category",
     categories: ["Jan", "Feb", "Mar", "Jun", "Jul", "Aug", "Sep"],
   },
-  yaxis: {
-    show: true,
-    min: 100,
-    max: 400,
-    tickAmount: 3,
-    labels: {
-      style: {
-        cssClass: "grey--text lighten-2--text fill-color",
-      },
+  dataLabels: {
+    enabled: false
+  },
+  markers: {
+    size: 5,
+    hover: {
+      size: 5
     },
   },
-  stroke: { curve: "smooth", width: "5" },
   tooltip: { theme: "dark" },
-
 }
 
 const menuOpen = ref([0]);
@@ -183,6 +158,13 @@ axios.get("/api/ems/sub-device").then(response => {
   table{
     padding: 0 !important;
     border: 1px solid #c5c5c5 !important;
+  }
+}
+.line-chart-box{
+  .v-input{
+    .v-input__details{
+      display: none;
+    }
   }
 }
 </style>
@@ -213,6 +195,22 @@ axios.get("/api/ems/sub-device").then(response => {
           padding: 0 !important;
           border: 1px solid #f5f5f5 !important;
         }
+      }
+    }
+  }
+  .line-chart-box{
+    margin-top: 60px;
+    position: relative;
+    .time-pick-box{
+      z-index: 3000;
+      position: absolute;
+      right: 26px;
+      top: -10px;
+      display: flex;
+      width: 400px;
+      line-height: 40px;
+      &>span{
+        margin: 0 4px;
       }
     }
   }
