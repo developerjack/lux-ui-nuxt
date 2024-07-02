@@ -13,7 +13,6 @@
 			<template v-slot:body.prepend.gatewayCount>
 				<v-autocomplete
 				 	density="compact"
-          @blur="filtertableList"
           v-model="searchgatewayCount"
 					:items="[1,2,3,4]"
 					variant="outlined"
