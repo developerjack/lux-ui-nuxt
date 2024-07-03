@@ -44,10 +44,6 @@ function getPickTime(value: string) {
   searchTableList()
 }
 
-function resetSort() {
-	console.log('Reset Sorting')
-}
-
 const serverTable = ref()
 
 const operations = [
@@ -71,6 +67,11 @@ const operations = [
     }
   }
 ]
+
+function resetSort() {
+  console.log('Reset Sorting')
+}
+
 // 刷新表格
 function refreshTable(data: Object = {}) {
 	// 获取表格数据接口

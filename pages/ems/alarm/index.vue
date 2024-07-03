@@ -1,10 +1,21 @@
 <template>
-	<yhlx-main-container :data-headers="headers">
-		<yhlx-data-table-server :headers="headers" items-url="/api/ems/alarm" @click:row="(event, { item }) => router.push(`alarm/${item.id}`)" />
+	<yhlx-main-container :data-headers="headers" :operations="operations">
+    <handleAlarmDialog ref="dialog" location="Toolbar" :rowData="rowData" :headers="headers"/>
+		<yhlx-data-table-server
+      @isSelected="getSelectedRow"
+      single-select
+      ref="serverTable"
+      item-value="device"
+      :headers="headers"
+      items-url="/api/ems/alarm"
+      @click:row="(event, { item }) => router.push(`alarm/${item.id}`)"
+    />
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
+import handleAlarmDialog from './components/handleAlarmDialog.vue'
 const router = useRouter();
+
 const headers = ref([
 	{ title: "Content", key: "type" },
 	{ title: "Level", key: "level" },
@@ -14,4 +25,52 @@ const headers = ref([
 	{ title: "Report Time", key: "reportTime" },
 	{ title: "Status", key: "status" },
 ]);
+const dialog = ref()
+const operations = ref([
+  {
+    label: 'Clear Filters',
+    click: () => {
+      clearFilter()
+    }
+  },
+  {
+    label: 'Reset Sorting',
+    click: () => {
+      console.log('reset')
+      // resetSort()
+    }
+  },
+  {
+    label: 'Refresh Table',
+    click: () => {
+      refreshTable()
+    }
+  }
+])
+const rowData = ref()
+function getSelectedRow (value) {
+  rowData.value = value
+}
+const isFirstPush = ref(true)
+watch(rowData, () => {
+  if(rowData.value.length !== 0 && isFirstPush.value){
+    isFirstPush.value = false
+    operations.value.push({
+      label: 'Handle Alarm',
+      click: () => {
+        dialog.value.changeAlarmDialog()
+      }
+    })
+  } else if (rowData.value.length === 0) {
+    operations.value.pop()
+  }
+})
+const serverTable = ref()
+function clearFilter() {
+
+}
+function refreshTable(data: Object = {}) {
+  // 获取表格数据接口
+  serverTable.value.loadItems({page: 1, itemsPerPage: 10, data})
+}
 </script>

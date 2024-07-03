@@ -5,7 +5,7 @@
 		:loading="loading"
 		:items-length="itemsTotal" 
 		:items="items"
-		item-value="name"
+		:item-value="itemValue"
 		@update:options="loadItems"
 		v-model="selected"
 		:show-select="showSelect"
@@ -38,15 +38,27 @@ const props = defineProps({
 	showSelect: {
 		type: Boolean,
 		default: true
-	}
+	},
+  itemValue: {
+    type: String,
+    default: 'name'
+  }
 });
-
+const emits = defineEmits(['isSelected'])
+const selected = ref([]);
+watch(selected,() => {
+  const arr: Array<object> = []
+  items.value.forEach((item, index) => {
+    if(selected.value.includes(item[props.itemValue])){
+      arr.push(item)
+    }
+  })
+  emits('isSelected', arr)
+})
 // 表头
 const headerItems = computed(() => {
 	return props.headers?.filter(item => item.show === undefined || item.key === item.show);
 });
-
-const selected = ref([]);
 // 内容
 const loading = ref(true);
 const itemsTotal = ref(0);
