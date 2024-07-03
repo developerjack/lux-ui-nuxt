@@ -10,7 +10,7 @@
 				<v-spacer />
 				<v-btn :icon="!appStore.isFullScreen ? 'mdi-fullscreen' : 'mdi-fullscreen-exit'" @click="appStore.fullScreen"/>
 				<slot name="append" />
-				<v-btn icon="mdi-dots-vertical" @click="showMoreDialog" />
+				<v-btn icon="mdi-dots-vertical" v-show="props.dataHeaders" @click="showMoreDialog" />
 			</v-toolbar>
 			<yhlx-more-dialog v-show="isHide" :data-headers="props.dataHeaders" :operations="props.operations" @showMoreDialog="showMoreDialog"/>
 			<v-divider />
@@ -32,10 +32,10 @@ const props = defineProps({
 		key: string,
 		show?: string
 	}>,
-	operations: {
-		type: Object,
-		default: () => {}
-	}
+	operations: Array<{
+    label: string,
+    click: () => void,
+  }>
 })
 const menu: NavigationConfig.Menu = mainMenu.getCurrentMenu();
 const isHide = ref(false)

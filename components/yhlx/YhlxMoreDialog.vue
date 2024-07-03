@@ -7,8 +7,8 @@
           <v-checkbox :value="item.key" v-model="item.show" density="compact" hide-details readonly />
         </template>
       </v-list-item>
-      <v-divider v-show="props.dataHeaders" />
-      <v-list-item v-for="item in operatingItems" :key="item.label" color="primary" :title="item.label" @click="item.click()" />
+      <v-divider v-show="props.dataHeaders && props.operations.length !== 0" />
+      <v-list-item v-for="item in (props.operations || [])" :key="item.label" color="primary" :title="item.label" @click="item.click()" />
     </v-list>
   </v-card>
 </template>
@@ -20,9 +20,12 @@ const props = defineProps({
 		show?: string
 	}>,
 	operations: {
-		type: Object,
-		default: () => {}
-	}
+    type: Array<{
+      label: string,
+      click: () => void,
+    }>,
+    default: []
+  }
 });
 const emits = defineEmits(['showMoreDialog']);
 let headersKey = `headers-${useRouter().currentRoute.value.path}`;
@@ -48,27 +51,6 @@ const dataHeaderClick = (item: any) => {
 	const hiddenHeaders = props.dataHeaders?.filter(item => !item.show).map(item=>item.key);
 	localStorage.setItem(headersKey, JSON.stringify(hiddenHeaders));
 }
-
-const operatingItems = ref([{
-    label: 'Clear Filters',
-    click: () => {
-			props.operations.clearFilter();
-			emits('showMoreDialog');
-    }
-  }, {
-    label: 'Reset Sorting',
-	  click: () => {
-		  props.operations.resetSort();
-			emits('showMoreDialog');
-	  }
-  }, {
-		label: 'Refresh Table',
-		click: () => {
-			props.operations.refreshTable();
-			emits('showMoreDialog');
-		}
-	},
-]);
 </script>
 <style lang="scss" scoped>
 .float-card {

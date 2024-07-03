@@ -17,7 +17,7 @@
 				></v-autocomplete>
 			</template>
 			<template v-slot:body.prepend.address>
-				<yhlx-time-input ref="multipleTimeInput" :multiple="true" @getPickTime="getPickTime" clearable/>
+				<yhlx-time-input ref="multipleTimeInput" :multiple="false" @getPickTime="getPickTime" clearable/>
 			</template>
 		</yhlx-data-table-server>
 	</yhlx-main-container>
@@ -36,19 +36,12 @@ const itemUrl = ref('/api/ems/location')
 // 搜索
 const searchName = ref('');
 const searchGatewayCount = ref();
-const simpleTimeInput = ref('')
 const multipleTimeInput = ref('')
 
 // 选择的时间
-function getPickTime(value) {
-  if (value.length === 0) {
-    multipleTimeInput.value = ''
-    searchTableList()
-  } else {
-    multipleTimeInput.value = ''
-    multipleTimeInput.value = '' + value
-    searchTableList()
-  }
+function getPickTime(value: string) {
+  multipleTimeInput.value = value
+  searchTableList()
 }
 
 function resetSort() {
@@ -57,15 +50,31 @@ function resetSort() {
 
 const serverTable = ref()
 
-const operations = {
-	refreshTable,
-	clearFilter,
-	resetSort
-}
+const operations = [
+  {
+    label: 'Clear Filters',
+    click: () => {
+      clearFilter()
+    }
+  },
+  {
+    label: 'Reset Sorting',
+    click: () => {
+      resetSort()
+
+    }
+  },
+  {
+    label: 'Refresh Table',
+    click: () => {
+      refreshTable()
+    }
+  }
+]
 // 刷新表格
-function refreshTable() {
+function refreshTable(data: Object = {}) {
 	// 获取表格数据接口
-  serverTable.value.loadItems({page: 1, itemsPerPage: 10})
+  serverTable.value.loadItems({page: 1, itemsPerPage: 10, data})
 }
 
 // 清空筛选
@@ -73,15 +82,15 @@ function clearFilter() {
 	searchName.value = '';
 	searchGatewayCount.value = null;
 	multipleTimeInput.value.clearInput();
-	simpleTimeInput.value.clearInput();
 }
 
 function searchTableList() {
-  itemUrl.value = itemUrl.value.split('?')[0];
-  itemUrl.value = itemUrl.value + '?name=' + searchName.value +
-      '&gatewayCount=' + searchGatewayCount.value +
-      '&address=' + multipleTimeInput.value || '';
-  refreshTable();
+  const data = {
+    searchName: searchName.value,
+    searchGatewayCount: searchGatewayCount.value,
+    address: multipleTimeInput.value
+  }
+  refreshTable(data);
 }
 const timeId = ref();
 watch(searchName, () => {

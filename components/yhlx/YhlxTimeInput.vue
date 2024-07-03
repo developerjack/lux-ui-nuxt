@@ -30,13 +30,14 @@
   const menu = ref(false)
   const formatDate = ref()
   const confirmPickerTime = () => {
-    formatDate.value = formatterDate(datetime.value)
-    emits('getPickTime',datetime.value)
+    formatDate.value = formatterShowDate(datetime.value)
+    console.log(formatDate.value)
+    emits('getPickTime',formatDate.value)
     menu.value = false
   }
-  function formatterDate (date) {
+  function formatterShowDate (date) {
     if (props.multiple) {
-      const arr = []
+      const arr: Array<string> = []
       date.forEach(element => {
         const { year, month, day } = FormatterDate(element)
         arr.push(`${year}/${month.padStart(2, '0')}/${day.padStart(2, '0')}`)
@@ -47,16 +48,12 @@
       return `${year}/${month.padStart(2, '0')}/${day.padStart(2, '0')}`
     }
   }
-  function FormatterDate (date) {
+  function FormatterDate (date: string) {
     const dateFormatter = new Date(date);
     const year = dateFormatter.getFullYear();
     const month = (dateFormatter.getMonth() + 1).toString().padStart(2, '0');
     const day = dateFormatter.getDate().toString().padStart(2, '0');
-    return {
-      year,
-      month,
-      day
-    }
+    return { year, month, day }
   }
   function clearInput() {
     formatDate.value = ''
