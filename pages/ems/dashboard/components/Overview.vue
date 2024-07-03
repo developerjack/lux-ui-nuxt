@@ -23,7 +23,7 @@
 				<span>Day</span>
 			</div>
 			<div class="overview-card-bottom">
-				<Icon icon="solar:layers-minimalistic-line-duotone" width="65" />
+				<Icon icon="solar:bill-line-duotone" width="65" />
 				<div style="text-align: right;">
 					<p class="text-body-main">0.2 kWh</p>
 					<p class="text-body-caption text-orange-lighten-2">Energy</p>
@@ -58,7 +58,7 @@
 				<span>Day</span>
 			</div>
 			<div class="overview-card-bottom">
-				<Icon icon="solar:layers-minimalistic-line-duotone" width="65" />
+				<Icon icon="solar:users-group-two-rounded-line-duotone" width="65" />
 				<div style="text-align: right;">
 					<p class="text-body-main">0.2 kWh</p>
 					<p class="text-body-caption text-blue-lighten-2">Energy</p>

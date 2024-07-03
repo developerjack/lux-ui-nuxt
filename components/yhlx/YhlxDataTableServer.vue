@@ -38,6 +38,10 @@ const props = defineProps({
 	showSelect: {
 		type: Boolean,
 		default: true
+	},
+	itemsPerPage: {
+		type: Number,
+		default: 10
 	}
 });
 
@@ -50,7 +54,6 @@ const selected = ref([]);
 // 内容
 const loading = ref(true);
 const itemsTotal = ref(0);
-const itemsPerPage = ref(10);
 const items = ref([]);
 function loadItems({ page = 1, itemsPerPage = 10, data = {}, sortBy }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])
 	loading.value = true;
