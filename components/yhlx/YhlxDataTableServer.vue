@@ -52,17 +52,22 @@ const loading = ref(true);
 const itemsTotal = ref(0);
 const itemsPerPage = ref(10);
 const items = ref([]);
-function setTableData(data) {
-	items.value = data
-}
-function loadItems({ page = 1, itemsPerPage = 10, sortBy }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])
+function loadItems({ page = 1, itemsPerPage = 10, data = {}, sortBy }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])
 	loading.value = true;
+  let query = ''
+  if (data !== {}) {
+    query += '?'
+    Object.keys(data).forEach(key => {
+      query += `${key}=${data[key]}&`;
+    })
+    query = query.substring(0, query.length - 1);
+  }
 	sleep(800).then(() => {
 		if (props.itemsUrl === undefined) {
 			loading.value = false;
 			return;
 		}
-		axios.get(props.itemsUrl).then(response => {
+		axios.get(props.itemsUrl + query).then(response => {
 			itemsTotal.value = response.data.data.total;
 			items.value = response.data.data.content;
 		}).finally(() => {
