@@ -1,5 +1,5 @@
 <template>
-	<nuxt-icon :name="iconName" :class="svgClass"/>
+	<nuxt-icon :name="iconName" :class="svgClass" :style="{ color: color, width: width, height: height }"/>
 </template>
 
 <script setup>
@@ -10,8 +10,16 @@ const props = defineProps({
 	},
 	color: {
 		type: String,
-		default: ''
-	}
+		default: 'rgb(var(--v-theme-primary))'
+	},
+	width: {
+		type: String,
+		default: '100%'
+	},
+	height: {
+		type: String,
+		default: '100%'
+	},
 })
 
 const iconName = computed(() => `svg/${props.name}`)
@@ -25,8 +33,9 @@ const svgClass = computed(() => {
 
 <style lang="scss">
 .yhlx-svg-icon {
+	display: inline-block;
 	svg {
-		color: rgb(var(--v-theme-primary));
+		color: currentColor;
 		width: 100% !important;
 		height: 100% !important;
 		margin-bottom: 0;
