@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useAppStore } from "@/stores/app";
+import axios from "axios";
 const appStore = useAppStore();
 const menuOpen = ref([0])
 const menuItems = ref([{
@@ -10,16 +11,42 @@ const menuItems = ref([{
   tag: ""
 },{
   title: "Battery",
-  tag: ""
+  tag: "NO.1"
+},{
+  title: "Battery",
+  tag: "NO.2"
 },{
   title: "charging Station",
-  tag: ""
+  tag: "NO.1"
+},{
+  title: "charging Station",
+  tag: "NO.2"
 }])
+const stationHeaders = [{
+    title: 'Time',
+    value: "time"
+  },{
+  title: "charging Station Charging",
+  align: "center",
+  children: [{
+    title: "Sharp power",
+    value: "selfSharpPower"
+  },{
+    title: "Peak power",
+    value: "selfPeakPower"
+  },{
+    title: "Flat power",
+    value: "selfFlatPower"
+  },{
+    title: "Valley power",
+    value: "selfValleyPower"
+  }]
+}]
 const headers = [{
   title: 'Time',
   value: "time"
 },{
-  title: "PV Self-consumption",
+  title: "Self-consumption",
   align: "center",
   children: [{
     title: "Sharp power",
@@ -35,7 +62,7 @@ const headers = [{
     value: "selfValleyPower"
   }]
 },{
-  title: "PV on-grid electricity",
+  title: "on-grid electricity",
   align: "center",
   children: [{
     title: "Sharp power",
@@ -51,20 +78,62 @@ const headers = [{
     value: "onValleyPower"
   }]
 }]
+const items = ref([])
+onMounted(()=>{
+  axios.get("/api/ems/location/Report").then(response => {
+    items.value = response.data.data.content;
+  });
+})
+const getHeaders = computed(() => {
+  return (selected.value === 4 || selected.value === 5) ? stationHeaders : headers
+})
+const selected = ref(0)
+function changeTable (index) {
+  selected.value = index
+}
+watch(selected, () => {
+  switch (selected.value){
+    case 0:
+      // 充电站表格接口
+      break;
+    case 1:
+      // 光伏表格接口
+      break;
+    case 2:
+      // 电池1表格接口
+      break;
+    case 3:
+      // 电池2表格接口
+      break;
+    case 4:
+      // 充电桩1表格接口
+      break;
+    case 5:
+      // 充电桩2表格接口
+      break;
+  }
+})
 </script>
 
 <template>
   <div class="d-flex">
     <v-list class="left px-1 py-4" v-model:selected="menuOpen">
-      <v-list-item v-for="(item, i) in menuItems" :key="i" :value="i" color="primary">
-        <v-list-item-title class="font-weight-bold" v-text="item.title" />
+      <v-list-item v-for="(item, i) in menuItems" :key="i" :value="i" color="primary" @click="changeTable(i)">
+        <v-list-item-title class="font-weight-bold" v-text="item.title"/>
         <template v-if="item.tag" v-slot:append>
           <v-chip label density="comfortable" color="primary">{{ item.tag }}</v-chip>
         </template>
       </v-list-item>
     </v-list>
     <div class="window-item-inner-right" :style="{ 'height': !appStore.isFullScreen ? 'calc(100vh - 224px)' : 'calc(100vh - 163px)' }">
-      <v-data-table :headers="headers" hide-default-footer></v-data-table>
+        <div class="table-flex">
+          <p v-if="selected === 0">电量单位：kWh；金额单位：美元</p>
+          <p v-else>电量单位：kWh</p>
+          <div class="time-pick-box">
+            时间范围：<yhlx-time-input :multiple="true"/>
+          </div>
+        </div>
+        <v-data-table :headers="getHeaders" :items="items" hide-default-footer></v-data-table>
     </div>
   </div>
 </template>
@@ -79,6 +148,20 @@ const headers = [{
 }
 .window-item-inner-right{
   flex: 1;
-  height: calc(100vh - 224px) !important;
+  height: calc(100vh - 226px) !important;
 }
+
+.table-flex{
+  display: flex;
+  line-height: 40px;
+  justify-content: space-between;
+  padding: 4px 8px;
+  border-bottom: 1px solid #E0E0E0;
+  .time-pick-box{
+    display: flex;
+    width: 360px;
+    line-height: 40px;
+  }
+}
+
 </style>

@@ -143,3 +143,11 @@ html {
   font-family: "Roboto", sans-serif;
   text-transform: none !important;
 }
+
+.v-table {
+  .v-input {
+    .v-input__details {
+      display: none;
+    }
+  }
+}

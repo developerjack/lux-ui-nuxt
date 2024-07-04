@@ -155,6 +155,24 @@ const MockAPI = [
 		}
 	},
 	{
+		url: "/api/ems/location/Report",
+		method: "get",
+		response: () => {
+			return apiPageResult({
+				"id|+1": 1,
+				"time|+1": 1,
+				"selfSharpPower|1-100": 20,
+				"selfPeakPower|1-100": 20,
+				"selfFlatPower|1-100": 20,
+				"selfValleyPower|1-100": 20,
+				"onSharpPower|1-100": 20,
+				"onPeakPower|1-100": 20,
+				"onFlatPower|1-100": 20,
+				"onValleyPower|1-100": 20,
+			});
+		}
+	},
+	{
 		url: "/api/ems/admin",
 		method: "get",
 		response: () => {

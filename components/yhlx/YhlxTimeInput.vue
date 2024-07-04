@@ -6,7 +6,7 @@
     v-model="menu"
   >
     <template v-slot:activator="{ props }">
-      <yhlx-text-field v-model="formatDate" density="compact" v-bind="props" readonly append-inner-icon="mdi-calendar-month-outline" />
+      <yhlx-text-field v-model="formatDate" density="compact" v-bind="props" readonly append-inner-icon="mdi-calendar-month-outline" hide-details/>
     </template>
     <v-date-picker v-model="datetime" :multiple="!multiple ? multiple : 'range'">
       <template v-slot:title />

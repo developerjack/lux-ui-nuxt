@@ -5,10 +5,10 @@
       @selectedRows="getSelectedRow"
       single-select
       ref="serverTable"
-      item-value="device"
-      :search="false"
+      item-value="id"
       :headers="headers"
       items-url="/api/ems/alarm"
+      v-model="selected"
       @click:row="(event, { item }) => router.push(`alarm/${item.id}`)"
     />
 	</yhlx-main-container>
@@ -46,28 +46,17 @@ const operations = ref([
     click: () => {
       refreshTable()
     }
-  }
+  }, {
+		label: 'Handle Alarm',
+		click: () => {
+			dialog.value.changeAlarmDialog()
+		}
+	}
 ])
-const rowData = ref() // 选中的行信息
-function getSelectedRow (value: Array<object>) { // 获取选中行的信息
+const rowData = ref()
+function getSelectedRow (value) {
   rowData.value = value
 }
-const isFirstPush = ref(true) // 判定是否是第一次加入处理警告操作功能
-watch(rowData, () => {
-  if(rowData.value.length !== 0 && isFirstPush.value){
-    isFirstPush.value = false
-    operations.value.push({
-      label: 'Handle Alarm',
-      click: () => {
-        dialog.value.changeAlarmDialog()
-      }
-    })
-  }
-  if (rowData.value.length === 0) {
-    isFirstPush.value = true
-    operations.value.pop()
-  }
-})
 const serverTable = ref()
 function clearFilter() {
 
@@ -76,4 +65,5 @@ function refreshTable(data: Object = {}) {
   // 获取表格数据接口
   serverTable.value.loadItems({page: 1, itemsPerPage: 10, data})
 }
+const selected = ref([]);
 </script>

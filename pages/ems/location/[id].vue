@@ -9,6 +9,7 @@
 		<v-card-text>
 			<v-tabs-window v-model="tab">
 				<v-tabs-window-item value="1">
+          <img src="../../../assets/images/homeBgImg.png">
 				</v-tabs-window-item>
 				<v-tabs-window-item value="2">
 					<v-row>
@@ -45,5 +46,7 @@ const tab = ref('2');
 </script>
 
 <style scoped lang="scss">
-
+img{
+  width: 100%;
+}
 </style>
