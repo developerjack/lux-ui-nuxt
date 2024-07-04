@@ -6,43 +6,12 @@
       default: () => []
     }
   })
-  const getTitle = function (item) {
-    let title = ''
-    props.headers.forEach(header => {
-      if(header.key === item){
-        title = header.title
-      }
-    })
-    return title
-  }
-  const rowsItems = ref([])
   const alarmDialog = ref(false)
 
   // 开关弹窗
   const changeAlarmDialog = () => {
     alarmDialog.value = !alarmDialog.value
   }
-
-  // 多选时,需要处理的那项下标
-  const rowIndex = ref(0)
-  const selectedRow = ref() // 需要处理警告的id
-  watch(() => props.rowData,() => {
-    rowsItems.value = []
-    props.rowData?.forEach(item => {
-      rowsItems.value.push({
-        title: 'Row: ' + item['device'],
-        value: item['id']
-      })
-    })
-    selectedRow.value = rowsItems.value[0].value
-  })
-  watch(selectedRow, () => {
-    props.rowData?.forEach((item, index) => {
-      if(item['id'] === selectedRow.value) {
-        rowIndex.value = index
-      }
-    })
-  })
   defineExpose({
     changeAlarmDialog
   })
