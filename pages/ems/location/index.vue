@@ -3,9 +3,9 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server ref="serverTable" :headers="headers" :show-select="true" items-url="/api/ems/location" class="emsLocationTable">
+		<yhlx-data-table-server ref="serverTable" :headers="headers" :show-select="true" items-url="/api/ems/location" :params="params">
 			<template v-slot:body.prepend.name>
-				<yhlx-text-field density="compact" v-model="searchName" />
+				<yhlx-text-field density="compact" v-model="params.name" />
 			</template>
 			<template v-slot:body.prepend.gatewayCount>
 				<yhlx-autocomplete density="compact" v-model="searchGatewayCount" :items="[1,2,3,4]" />
@@ -26,7 +26,11 @@ const headers = ref([
 ]);
 
 // 搜索
-const searchName = ref('');
+const params = reactive({
+	name: '',
+	gatewayCount: 0,
+	time: ''
+});
 const searchGatewayCount = ref();
 const multipleTimeInput = ref('');
 
@@ -67,26 +71,21 @@ function resetSort() {
 // 刷新表格
 function refreshTable(params = {}) {
 	// 获取表格数据接口
-  serverTable.value.loadItems({ params })
+  serverTable.value.loadItems();
 }
 
 // 清空筛选
 function clearFilter() {
-	searchName.value = '';
+	params.name = '';
 	searchGatewayCount.value = null;
 	multipleTimeInput.value.clearInput();
 }
 
 function searchTableList() {
-  const params = {
-    searchName: searchName.value,
-    searchGatewayCount: searchGatewayCount.value,
-    address: multipleTimeInput.value
-  }
-  refreshTable(params);
+  refreshTable();
 }
 const timeId = ref();
-watch(searchName, () => {
+watch(() => params.name, () => {
   clearTimeout(timeId.value);
   timeId.value = setTimeout(searchTableList,300);
 })

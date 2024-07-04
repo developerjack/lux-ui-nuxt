@@ -36,6 +36,10 @@ const props = defineProps({
 	showSelect: { // 是否显示选择框
 		type: Boolean,
 		default: true
+	},
+	params: { // 搜索参数
+		type: Object,
+		default: {}
 	}
 });
 // 表头
@@ -47,7 +51,7 @@ const loading = ref(true);
 const itemsPerPage = ref(10);
 const itemsTotal = ref(0);
 const items = ref([]);
-function loadItems({ page = 1, itemsPerPage = 10, params = {}, sortBy = {} }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])
+function loadItems({ page = 1, itemsPerPage = 10, sortBy = {} }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])
 	loading.value = true;
 	sleep(800).then(() => {
 		if (props.itemsUrl === undefined) {
@@ -55,7 +59,7 @@ function loadItems({ page = 1, itemsPerPage = 10, params = {}, sortBy = {} }) { 
 			return;
 		}
 		axios.get(props.itemsUrl, {
-			params: params
+			params: props.params
 		}).then(response => {
 			itemsTotal.value = response.data.data.total;
 			items.value = response.data.data.content;
@@ -70,7 +74,7 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-.body-prepend-search{
+.body-prepend-search {
   box-shadow: none !important;
   transform: none !important;
 }
