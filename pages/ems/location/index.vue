@@ -3,18 +3,12 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server :headers="headers" ref="serverTable" :show-select="true" :items-url="itemUrl" class="emsLocationTable">
+		<yhlx-data-table-server ref="serverTable" :headers="headers" :show-select="true" items-url="/api/ems/location" class="emsLocationTable">
 			<template v-slot:body.prepend.name>
-				<yhlx-text-field density="compact" v-model="searchName" clearable/>
+				<yhlx-text-field density="compact" v-model="searchName" />
 			</template>
 			<template v-slot:body.prepend.gatewayCount>
-				<v-autocomplete
-				 	density="compact"
-          v-model="searchGatewayCount"
-					:items="[1,2,3,4]"
-					variant="outlined"
-					clearable
-				></v-autocomplete>
+				<yhlx-autocomplete density="compact" v-model="searchGatewayCount" :items="[1,2,3,4]" />
 			</template>
 			<template v-slot:body.prepend.address>
 				<yhlx-time-input ref="multipleTimeInput" :multiple="false" @getPickTime="getPickTime" clearable/>
@@ -31,20 +25,18 @@ const headers = ref([
 	{ title: "Notes", key: "notes" },
 ]);
 
-const itemUrl = ref('/api/ems/location')
-
 // 搜索
 const searchName = ref('');
 const searchGatewayCount = ref();
-const multipleTimeInput = ref('')
+const multipleTimeInput = ref('');
 
 // 选择的时间
 function getPickTime(value: string) {
-  multipleTimeInput.value = value
-  searchTableList()
+  multipleTimeInput.value = value;
+  searchTableList();
 }
 
-const serverTable = ref()
+const serverTable = ref();
 
 const operations = [
   {
@@ -73,9 +65,9 @@ function resetSort() {
 }
 
 // 刷新表格
-function refreshTable(data: Object = {}) {
+function refreshTable(params = {}) {
 	// 获取表格数据接口
-  serverTable.value.loadItems({page: 1, itemsPerPage: 10, data})
+  serverTable.value.loadItems({ params })
 }
 
 // 清空筛选
@@ -86,12 +78,12 @@ function clearFilter() {
 }
 
 function searchTableList() {
-  const data = {
+  const params = {
     searchName: searchName.value,
     searchGatewayCount: searchGatewayCount.value,
     address: multipleTimeInput.value
   }
-  refreshTable(data);
+  refreshTable(params);
 }
 const timeId = ref();
 watch(searchName, () => {
@@ -104,11 +96,5 @@ watch(searchGatewayCount, ()=> {
 })
 </script>
 <style lang="scss">
-.v-table{
-	.v-input{
-		.v-input__details{
-			display: none;
-		}
-	}
-}
+
 </style>

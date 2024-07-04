@@ -5,9 +5,7 @@
 		:loading="loading"
 		:items-length="itemsTotal" 
 		:items="items"
-		:item-value="itemValue"
 		@update:options="loadItems"
-		v-model="selected"
 		:show-select="showSelect"
 	>
 		<template v-slot:body.prepend v-if="search">
@@ -31,55 +29,34 @@ const props = defineProps({
 		show?: string
 	}>,
 	itemsUrl: String, // 数据的API地址
-	search: {
-		type: Boolean,
-		default: true
-	}, // 是否显示搜索行
-	showSelect: {
+	search: { // 是否显示搜索行
 		type: Boolean,
 		default: true
 	},
-  itemValue: {
-    type: String,
-    default: 'name'
-  }
+	showSelect: { // 是否显示选择框
+		type: Boolean,
+		default: true
+	}
 });
-const emits = defineEmits(['selectedRows'])
-const selected = ref([]);
-watch(selected,() => {
-  const arr: Array<object> = []
-  items.value.forEach((item, index) => {
-    if(selected.value.includes(item[props.itemValue])){
-      arr.push(item)
-    }
-  })
-  emits('selectedRows', arr)
-})
 // 表头
 const headerItems = computed(() => {
 	return props.headers?.filter(item => item.show === undefined || item.key === item.show);
 });
 // 内容
 const loading = ref(true);
-const itemsPerPage = ref(0)
+const itemsPerPage = ref(10);
 const itemsTotal = ref(0);
 const items = ref([]);
-function loadItems({ page = 1, itemsPerPage = 10, data = {}, sortBy }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])
+function loadItems({ page = 1, itemsPerPage = 10, params = {}, sortBy = {} }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])
 	loading.value = true;
-  let query = ''
-  if (data !== {}) {
-    query += '?'
-    Object.keys(data).forEach(key => {
-      query += `${key}=${data[key]}&`;
-    })
-    query = query.substring(0, query.length - 1);
-  }
 	sleep(800).then(() => {
 		if (props.itemsUrl === undefined) {
 			loading.value = false;
 			return;
 		}
-		axios.get(props.itemsUrl + query).then(response => {
+		axios.get(props.itemsUrl, {
+			params: params
+		}).then(response => {
 			itemsTotal.value = response.data.data.total;
 			items.value = response.data.data.content;
 		}).finally(() => {
