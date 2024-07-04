@@ -2,7 +2,7 @@
 	<yhlx-main-container :data-headers="headers" :operations="operations">
     <handleAlarmDialog ref="dialog" location="Toolbar" :rowData="rowData" :headers="headers"/>
 		<yhlx-data-table-server
-      @isSelected="getSelectedRow"
+      @selectedRows="getSelectedRow"
       single-select
       ref="serverTable"
       item-value="device"
@@ -61,7 +61,9 @@ watch(rowData, () => {
         dialog.value.changeAlarmDialog()
       }
     })
-  } else if (rowData.value.length === 0) {
+  }
+  if (rowData.value.length === 0) {
+    isFirstPush.value = true
     operations.value.pop()
   }
 })

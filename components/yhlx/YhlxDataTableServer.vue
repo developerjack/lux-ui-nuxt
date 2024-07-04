@@ -44,7 +44,7 @@ const props = defineProps({
     default: 'name'
   }
 });
-const emits = defineEmits(['isSelected'])
+const emits = defineEmits(['selectedRows'])
 const selected = ref([]);
 watch(selected,() => {
   const arr: Array<object> = []
@@ -53,7 +53,7 @@ watch(selected,() => {
       arr.push(item)
     }
   })
-  emits('isSelected', arr)
+  emits('selectedRows', arr)
 })
 // 表头
 const headerItems = computed(() => {
@@ -61,6 +61,7 @@ const headerItems = computed(() => {
 });
 // 内容
 const loading = ref(true);
+const itemsPerPage = ref(0)
 const itemsTotal = ref(0);
 const items = ref([]);
 function loadItems({ page = 1, itemsPerPage = 10, data = {}, sortBy }) { // 页数(1)，每页数量(10)，排序规则([{key:'name', order: 'asc|desc'}])

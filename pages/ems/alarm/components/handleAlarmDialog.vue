@@ -6,11 +6,24 @@
       default: () => []
     }
   })
+  const handleType = ref('')
   const alarmDialog = ref(false)
-
+  const alarmDescript = ref('')
   // 开关弹窗
   const changeAlarmDialog = () => {
     alarmDialog.value = !alarmDialog.value
+  }
+  function saveHandleAlarm () {
+    alarmDialog.value = false
+    clearInputValue()
+  }
+  function closeDialog () {
+    alarmDialog.value = false
+    clearInputValue()
+  }
+  function clearInputValue () {
+    alarmDescript.value = ''
+    handleType.value = ''
   }
   defineExpose({
     changeAlarmDialog
@@ -38,21 +51,31 @@
             >
               <yhlx-select
                 label="Handle Type"
-                :items="['misreport', 'resolved', 'other']"
+                v-model="handleType"
+                :items="[{
+                  title: 'misreport',
+                  value: 'misreport'
+                },{
+                  title: 'resolved',
+                  value: 'resolved'
+                },{
+                  title: 'other',
+                  value: 'other'
+                }]"
               ></yhlx-select>
             </v-col>
             <v-col
                 cols="12"
                 sm="12"
             >
-              <v-textarea label="Processing Content" variant="outlined"></v-textarea>
+              <v-textarea label="Processing Content" variant="outlined" v-model="alarmDescript"></v-textarea>
             </v-col>
           </v-row>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <yhlx-btn business-type="Close" variant="text" @click="alarmDialog = false">Close</yhlx-btn>
-          <yhlx-btn business-type="Primary" @click="alarmDialog = false">Save</yhlx-btn>
+          <yhlx-btn business-type="Close" variant="text" @click="closeDialog">Close</yhlx-btn>
+          <yhlx-btn business-type="Primary" @click="saveHandleAlarm">Save</yhlx-btn>
         </v-card-actions>
       </v-container>
     </v-card>
