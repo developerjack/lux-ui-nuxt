@@ -1,34 +1,30 @@
 <template>
-  <v-row class="pa-4">
-    <v-col cols="12" lg="12">
+  <v-row class="pa-4 pb-0">
+    <v-col class="pa-2" cols="12" lg="12">
 	    <Overview />
     </v-col>
-    <v-col cols="12" lg="12">
-      <StatsCard />
+	  <v-col class="pa-2" cols="12" lg="4">
+		  <Installation />
+	  </v-col>
+	  <v-col class="pa-2" cols="12" lg="8">
+		  <DataLine />
+	  </v-col>
+    <v-col class="pa-2" cols="12" lg="4">
+      <DeviceStatus />
     </v-col>
-    <v-col cols="12" lg="8">
-      <VisitsLineCard />
-    </v-col>
-    <v-col cols="12" lg="4">
-      <VisitsCard />
-    </v-col>
-    <v-col cols="12" lg="6">
-      <TicketsCard />
-    </v-col>
-    <v-col cols="12" lg="6">
-      <TableCard />
+    <v-col class="pa-2" cols="12" lg="8">
+      <AlarmTable />
     </v-col>
   </v-row>
 </template>
 <script setup lang="ts">
 import Overview from "./components/Overview.vue";
-
-import StatsCard from "@/components/dashboard/StatsCard.vue";
-import VisitsCard from "~/components/dashboard/VisitsCard.vue";
-import VisitsLineCard from "~/components/dashboard/VisitsLineCard.vue";
-import TableCard from "~/components/dashboard/TableCard.vue";
-import TicketsCard from "~/components/dashboard/TicketsCard.vue";
+import Installation from "./components/Installation.vue";
+import DataLine from "./components/PowerLineChart.vue";
+import DeviceStatus from "~/pages/ems/dashboard/components/DeviceStatus.vue";
+import AlarmTable from "./components/AlarmTable.vue";
 
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+</style>

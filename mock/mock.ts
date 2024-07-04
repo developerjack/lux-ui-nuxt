@@ -27,6 +27,13 @@ export const apiPageResult = (item:any) : any => {
 	});
 }
 
+export const apiPageResult5 = (item:any) : any => {
+	return apiResult({
+		"total": 37,
+		"content|5": [item]
+	});
+}
+
 export const apiPageResultMore = (item:any) : any => {
 	return apiResult({
 		"total": 37,
