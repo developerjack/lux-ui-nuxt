@@ -4,14 +4,20 @@
 			<v-menu open-on-hover>
 				<template v-slot:activator="{ props }">
 					<v-btn v-bind="props" class="px-0">
-						<h4 class="card-title">{{ device.name }}</h4>
-						<v-icon>mdi-chevron-down</v-icon>
+            <div>
+              <div class="flex-box">
+                <h4 class="card-title">{{ device.name }}</h4>
+                <v-icon>mdi-chevron-down</v-icon>
+              </div>
+              <p class="subtitle">副标题</p>
+            </div>
 					</v-btn>
 				</template>
 				<v-list>
 					<v-list-item v-for="(item, index) in devices" :key="index" @click="switchDevice(item.id)">
 						<v-list-item-title>
-							{{ item.name }}
+							<p>{{ item.name }}</p>
+              <p class="subtitle">{{'副标题'}}</p>
 						</v-list-item-title>
 					</v-list-item>
 				</v-list>
@@ -104,5 +110,12 @@ const tab = ref('one');
 <style scoped lang="scss">
 .v-card-text{
   height: calc(100% - 48px);
+}
+.subtitle{
+  text-align: left;
+  font-size: 12px
+}
+.flex-box{
+  display: flex;
 }
 </style>

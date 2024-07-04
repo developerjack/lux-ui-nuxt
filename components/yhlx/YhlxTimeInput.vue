@@ -34,7 +34,7 @@
     emits('getPickTime',formatDate.value)
     menu.value = false
   }
-  function formatterShowDate (date: Array<any>) { // 格式化选中时间
+  function formatterShowDate (date: Array<string>) { // 格式化选中时间
     if (props.multiple) {
       const arr: Array<string> = []
       date.forEach(element => {

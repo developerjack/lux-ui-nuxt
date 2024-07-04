@@ -3,7 +3,7 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server :headers="headers" ref="serverTable" :show-select="true" :items-url="itemUrl" class="emsLocationTable">
+		<yhlx-data-table-server :headers="headers" ref="serverTable" :show-select="true" :items-url="itemUrl" class="emsLocationTable" @click:row="(event, { item }) => router.push(`location/${item.id}`)">
 			<template v-slot:body.prepend.name>
 				<yhlx-text-field density="compact" v-model="searchName" clearable/>
 			</template>
@@ -23,6 +23,7 @@
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
+const router = useRouter();
 import DialogAdd from './Add.vue';
 const headers = ref([	
 	{ title: "Name", key: "name" },

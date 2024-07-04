@@ -4,6 +4,7 @@
 			<v-tab value="1">Overview</v-tab>
 			<v-tab value="2">Info</v-tab>
 			<v-tab value="3">Devices</v-tab>
+      <v-tab value="4">Data Report</v-tab>
 		</v-tabs>
 		<v-card-text>
 			<v-tabs-window v-model="tab">
@@ -28,6 +29,9 @@
 				<v-tabs-window-item value="3">
 					<devices />
 				</v-tabs-window-item>
+        <v-tabs-window-item value="4">
+          <DataReport></DataReport>
+        </v-tabs-window-item>
 			</v-tabs-window>
 		</v-card-text>
 	</yhlx-main-container>
@@ -35,6 +39,7 @@
 
 <script setup lang="ts">
 import Devices from "./components/Devices.vue";
+import DataReport from "./components/DataReport.vue"
 const tab = ref('2');
 
 </script>
