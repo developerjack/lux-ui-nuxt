@@ -34,6 +34,7 @@
         value: item['id']
       })
     })
+    selectedRow.value = rowsItems.value[0].value
   })
   watch(selectedRow, () => {
     props.rowData?.forEach((item, index) => {
@@ -62,30 +63,6 @@
         <v-divider class="mx-4 my-3" />
         <v-card-text>
           <v-row class="form">
-            <v-col
-                cols="12"
-                sm="6"
-            >
-              <yhlx-select
-                  label="Selected Rows"
-                  :items="rowsItems"
-                  v-model="selectedRow"
-              ></yhlx-select>
-            </v-col>
-            <v-col
-              v-for="(item, index) in Object.keys(props.rowData[rowIndex]).filter(item => item !== 'id')"
-              :key="index"
-              cols="12"
-              sm="6"
-            >
-              <v-text-field
-                disabled
-                v-model="props.rowData[rowIndex][item]"
-                :label="getTitle(item)"
-                hide-details
-                required
-              ></v-text-field>
-            </v-col>
             <v-col
               cols="12"
               sm="6"
