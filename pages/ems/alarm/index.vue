@@ -6,6 +6,7 @@
       single-select
       ref="serverTable"
       item-value="device"
+      :search="false"
       :headers="headers"
       items-url="/api/ems/alarm"
       @click:row="(event, { item }) => router.push(`alarm/${item.id}`)"
@@ -47,11 +48,11 @@ const operations = ref([
     }
   }
 ])
-const rowData = ref()
-function getSelectedRow (value) {
+const rowData = ref() // 选中的行信息
+function getSelectedRow (value: Array<object>) { // 获取选中行的信息
   rowData.value = value
 }
-const isFirstPush = ref(true)
+const isFirstPush = ref(true) // 判定是否是第一次加入处理警告操作功能
 watch(rowData, () => {
   if(rowData.value.length !== 0 && isFirstPush.value){
     isFirstPush.value = false

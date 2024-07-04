@@ -31,11 +31,10 @@
   const formatDate = ref()
   const confirmPickerTime = () => {
     formatDate.value = formatterShowDate(datetime.value)
-    console.log(formatDate.value)
     emits('getPickTime',formatDate.value)
     menu.value = false
   }
-  function formatterShowDate (date) {
+  function formatterShowDate (date: Array<any>) { // 格式化选中时间
     if (props.multiple) {
       const arr: Array<string> = []
       date.forEach(element => {
@@ -48,7 +47,7 @@
       return `${year}/${month.padStart(2, '0')}/${day.padStart(2, '0')}`
     }
   }
-  function FormatterDate (date: string) {
+  function FormatterDate (date: string) { // 格式化
     const dateFormatter = new Date(date);
     const year = dateFormatter.getFullYear();
     const month = (dateFormatter.getMonth() + 1).toString().padStart(2, '0');

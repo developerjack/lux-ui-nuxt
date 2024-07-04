@@ -8,7 +8,7 @@
         </template>
       </v-list-item>
       <v-divider v-show="props.dataHeaders && props.operations.length !== 0" />
-      <v-list-item v-for="item in (props.operations || [])" :key="item.label" color="primary" :title="item.label" @click="item.click()" />
+      <v-list-item v-for="item in (props.operations || [])" :key="item.label" color="primary" :title="item.label" @click="handleOperations(item.click)" />
     </v-list>
   </v-card>
 </template>
@@ -41,7 +41,10 @@ watch(() => props.dataHeaders, () => {
 }, {
 	immediate: true
 })
-
+function handleOperations (func: Function) {
+  func()
+  emits('showMoreDialog')
+}
 const dataHeaderClick = (item: any) => {
   if (item.key === item.show) {
     item.show = '';

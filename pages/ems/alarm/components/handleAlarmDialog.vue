@@ -8,7 +8,7 @@
   })
   const handleType = ref('')
   const alarmDialog = ref(false)
-  const alarmDescript = ref('')
+  const alarmDescription = ref('')
   // 开关弹窗
   const changeAlarmDialog = () => {
     alarmDialog.value = !alarmDialog.value
@@ -22,7 +22,7 @@
     clearInputValue()
   }
   function clearInputValue () {
-    alarmDescript.value = ''
+    alarmDescription.value = ''
     handleType.value = ''
   }
   defineExpose({
@@ -62,13 +62,13 @@
                   title: 'other',
                   value: 'other'
                 }]"
-              ></yhlx-select>
+              />
             </v-col>
             <v-col
                 cols="12"
                 sm="12"
             >
-              <v-textarea label="Processing Content" variant="outlined" v-model="alarmDescript"></v-textarea>
+              <v-textarea label="Processing Content" variant="outlined" v-model="alarmDescription" />
             </v-col>
           </v-row>
         </v-card-text>

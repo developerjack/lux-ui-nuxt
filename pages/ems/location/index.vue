@@ -17,7 +17,7 @@
 				></v-autocomplete>
 			</template>
 			<template v-slot:body.prepend.address>
-				<yhlx-time-input ref="multipleTimeInput" :multiple="false" @getPickTime="getPickTime" clearable/>
+				<yhlx-time-input ref="multipleTimeInputRef" :multiple="false" @getPickTime="getPickTime" clearable/>
 			</template>
 		</yhlx-data-table-server>
 	</yhlx-main-container>
@@ -37,6 +37,7 @@ const itemUrl = ref('/api/ems/location')
 const searchName = ref('');
 const searchGatewayCount = ref();
 const multipleTimeInput = ref('')
+const multipleTimeInputRef = ref()
 
 // 选择的时间
 function getPickTime(value: string) {
@@ -74,7 +75,6 @@ function resetSort() {
 
 // 刷新表格
 function refreshTable(data: Object = {}) {
-	// 获取表格数据接口
   serverTable.value.loadItems({page: 1, itemsPerPage: 10, data})
 }
 
@@ -82,7 +82,7 @@ function refreshTable(data: Object = {}) {
 function clearFilter() {
 	searchName.value = '';
 	searchGatewayCount.value = null;
-	multipleTimeInput.value.clearInput();
+  multipleTimeInputRef.value.clearInput();
 }
 
 function searchTableList() {
@@ -94,13 +94,12 @@ function searchTableList() {
   refreshTable(data);
 }
 const timeId = ref();
-watch(searchName, () => {
+watch(searchName, () => { // 防止多次api接口调用
   clearTimeout(timeId.value);
   timeId.value = setTimeout(searchTableList,300);
 })
 watch(searchGatewayCount, ()=> {
-  clearTimeout(timeId.value);
-  timeId.value = setTimeout(searchTableList,300);
+  searchTableList();
 })
 </script>
 <style lang="scss">
