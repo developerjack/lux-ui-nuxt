@@ -3,7 +3,7 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server ref="serverTable" :headers="headers" :show-select="true" items-url="/api/ems/location" :params="params">
+		<yhlx-data-table-server ref="serverTable" :headers="headers" :show-select="true" items-url="/api/ems/location" :params="params" @click:row="(event, { item }) => router.push(`location/${item.id}`)"  >
 			<template v-slot:body.prepend.name>
 				<yhlx-text-field density="compact" v-model="params.name" />
 			</template>
@@ -11,12 +11,13 @@
 				<yhlx-autocomplete density="compact" v-model="searchGatewayCount" :items="[1,2,3,4]" />
 			</template>
 			<template v-slot:body.prepend.address>
-				<yhlx-time-input ref="multipleTimeInput" :multiple="false" @getPickTime="getPickTime" clearable/>
+				<yhlx-time-input ref="multipleTimeInputRef" :multiple="false" @getPickTime="getPickTime" clearable/>
 			</template>
 		</yhlx-data-table-server>
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
+const router = useRouter();
 import DialogAdd from './Add.vue';
 const headers = ref([	
 	{ title: "Name", key: "name" },
@@ -39,7 +40,7 @@ function getPickTime(value: string) {
   multipleTimeInput.value = value;
   searchTableList();
 }
-
+const multipleTimeInputRef = ref()
 const serverTable = ref();
 
 const operations = [
@@ -71,14 +72,14 @@ function resetSort() {
 // 刷新表格
 function refreshTable(params = {}) {
 	// 获取表格数据接口
-  serverTable.value.loadItems();
+  serverTable.value.loadItems({});
 }
 
 // 清空筛选
 function clearFilter() {
 	params.name = '';
 	searchGatewayCount.value = null;
-	multipleTimeInput.value.clearInput();
+  multipleTimeInputRef.value.clearInput();
 }
 
 function searchTableList() {
@@ -86,12 +87,12 @@ function searchTableList() {
 }
 const timeId = ref();
 watch(() => params.name, () => {
+  console.log(params);
   clearTimeout(timeId.value);
   timeId.value = setTimeout(searchTableList,300);
 })
 watch(searchGatewayCount, ()=> {
-  clearTimeout(timeId.value);
-  timeId.value = setTimeout(searchTableList,300);
+  searchTableList();
 })
 </script>
 <style lang="scss">

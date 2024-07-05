@@ -16,7 +16,7 @@
       </div>
       <div class="line-chart-box">
         <div class="time-pick-box">
-          时间范围：<yhlx-time-input :multiple="false"/><span>~</span><yhlx-time-input :multiple="false"/>
+          时间范围：<yhlx-time-input :multiple="true"/>
         </div>
         <apexchart height="300px" :options="chartOptions" :series="chartOptions.series"></apexchart>
       </div>
@@ -117,14 +117,20 @@ const chartOptions = {
   chart: {
     type: "area",
     height: "300px",
-    offsetX: -15,
+    offsetX: 0,
+    offsetY: 0,
     toolbar:{
       show: false
     }
   },
+  grid: {
+    show: false,
+    borderColor: "transparent",
+    padding: { left: 10, right: 0, bottom: 0 },
+  },
   legend: {
     show: true,
-    position: 'top',
+    position: 'bottom',
     itemMargin: {
       horizontal: 20,
       vertical: 0
@@ -160,13 +166,6 @@ axios.get("/api/ems/sub-device").then(response => {
     border: 1px solid #c5c5c5 !important;
   }
 }
-.line-chart-box{
-  .v-input{
-    .v-input__details{
-      display: none;
-    }
-  }
-}
 </style>
 
 <style scoped lang="scss">
@@ -188,24 +187,20 @@ axios.get("/api/ems/sub-device").then(response => {
   }
   .table-box{
     display: flex;
-    margin: 16px 8px 0;
-    &>.v-data-table{
-      .v-table__wrapper{
-        &>table{
-          padding: 0 !important;
-          border: 1px solid #f5f5f5 !important;
-        }
-      }
+    padding: 16px 8px 0;
+    &>.v-data-table:first-child{
+      margin-right: 8px;
     }
   }
   .line-chart-box{
     margin-top: 60px;
+    padding: 0 8px;
     position: relative;
     .time-pick-box{
       z-index: 3000;
       position: absolute;
       right: 26px;
-      top: -10px;
+      top: -20px;
       display: flex;
       width: 400px;
       line-height: 40px;
