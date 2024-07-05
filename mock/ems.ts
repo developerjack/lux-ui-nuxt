@@ -155,6 +155,28 @@ const MockAPI = [
 		}
 	},
 	{
+		url: "/api/ems/grid-price",
+		method: "get",
+		response: () => {
+			return apiPageResult({
+				"name": "@name",
+				"updateTime": "@datetime('yyyy-MM-dd HH:mm:ss')",
+				"status|1": statusNameEnums,
+			});
+		}
+	},
+	{
+		url: "/api/ems/home-price",
+		method: "get",
+		response: () => {
+			return apiPageResult({
+				"name": "@name",
+				"updateTime": "@datetime('yyyy-MM-dd HH:mm:ss')",
+				"status|1": statusNameEnums,
+			});
+		}
+	},
+	{
 		url: "/api/ems/admin",
 		method: "get",
 		response: () => {
