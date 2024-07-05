@@ -500,7 +500,7 @@ const displayLessons = computed(() => {
 
 <style scoped lang="scss">
 .app-wrapper {
-  height: calc(100vh - 64px);
+  //height: calc(100vh - 64px);
   padding: 20px;
 }
 
@@ -511,7 +511,7 @@ const displayLessons = computed(() => {
 
 .right {
   flex: 1;
-  height: calc(100vh - 280px);
+  //height: calc(100vh - 280px);
   overflow: auto;
 }
 

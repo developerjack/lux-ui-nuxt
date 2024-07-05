@@ -52,11 +52,11 @@ const showMoreDialog = () => {
 }
 .app-content{
 	overflow: auto;
-	height: calc(100% - 48px);
+	//height: calc(100% - 48px);
 	.v-table{
 		height: 100%;
 		&>.v-table__wrapper{
-			height: calc(100% - 62px);
+			//height: calc(100% - 62px);
 		}
 	}
 }

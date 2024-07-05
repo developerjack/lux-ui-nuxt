@@ -137,7 +137,6 @@ const chartOptions = {
     },
     stroke: { curve: "smooth", width: "5" },
     tooltip: { theme: "dark" },
-
   }
 onMounted(() => {
   const chart = new ApexCharts(document.querySelector("#lineChart"), chartOptions);

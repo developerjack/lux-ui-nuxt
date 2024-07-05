@@ -79,4 +79,7 @@ defineExpose({
   box-shadow: none !important;
   transform: none !important;
 }
+.v-data-table{
+  border-bottom: 1px solid #E0E0E0 !important;
+}
 </style>
