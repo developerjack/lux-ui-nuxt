@@ -78,12 +78,7 @@ const headers = [{
     value: "onValleyPower"
   }]
 }]
-const items = ref([])
-onMounted(()=>{
-  axios.get("/api/ems/location/Report").then(response => {
-    items.value = response.data.data.content;
-  });
-})
+const serverTable = ref()
 const getHeaders = computed(() => {
   return (selected.value === 4 || selected.value === 5) ? stationHeaders : headers
 })
@@ -95,21 +90,27 @@ watch(selected, () => {
   switch (selected.value){
     case 0:
       // 充电站表格接口
+        serverTable.value.loadItems({})
       break;
     case 1:
       // 光伏表格接口
+      serverTable.value.loadItems({})
       break;
     case 2:
       // 电池1表格接口
+      serverTable.value.loadItems({})
       break;
     case 3:
       // 电池2表格接口
+      serverTable.value.loadItems({})
       break;
     case 4:
       // 充电桩1表格接口
+      serverTable.value.loadItems({})
       break;
     case 5:
       // 充电桩2表格接口
+      serverTable.value.loadItems({})
       break;
   }
 })
@@ -133,7 +134,7 @@ watch(selected, () => {
             时间范围：<yhlx-time-input :multiple="true"/>
           </div>
         </div>
-        <v-data-table :headers="getHeaders" :items="items" hide-default-footer></v-data-table>
+        <yhlx-data-table-server ref="serverTable" items-url="/api/ems/location/Report" :headers="getHeaders" :search="false" :showSelect="false" hide-default-footer></yhlx-data-table-server>
     </div>
   </div>
 </template>

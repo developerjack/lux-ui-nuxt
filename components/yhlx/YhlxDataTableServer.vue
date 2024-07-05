@@ -63,6 +63,7 @@ function loadItems({ page = 1, itemsPerPage = 10, sortBy = {} }) { // 页数(1)�
 		}).then(response => {
 			itemsTotal.value = response.data.data.total;
 			items.value = response.data.data.content;
+      console.log(items.value)
 		}).finally(() => {
 			loading.value = false;
 		});
