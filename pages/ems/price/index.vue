@@ -1,13 +1,13 @@
 <template>
 	<yhlx-main-container :data-headers="headers">
 		<template v-slot:append>
-			<DialogAdd location="Toolbar"/>
+			<yhlx-btn business-type="Add" location="Toolbar" density="comfortable" @click="router.push(`home-price/add`)">Add</yhlx-btn>
 		</template>
-		<yhlx-data-table-server :headers="headers" items-url="/api/ems/grid-price" />
+		<yhlx-data-table-server :headers="headers" items-url="/api/ems/home-price" />
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
-import DialogAdd from './Add.vue';
+const router = useRouter();
 const headers = ref([
 	{ title: "Name", key: "name" },
 	{ title: "Update Time", key: "updateTime" },

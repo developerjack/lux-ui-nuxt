@@ -1,6 +1,6 @@
 <template>
 	<div class="app-wrapper" :style="{ 'height': !appStore.isFullScreen ? 'calc(100vh - 64px)' : '100%' }">
-		<v-card class="h-full app-card" rounded="xl" style="border-radius: 2px !important;" >
+		<v-card class="h-full app-card" >
 			<v-toolbar class="px-3 main-toolbar">
 				<Icon v-if="menu.icon" width="24" class="text-primary header-icon" :icon="menu.icon"/>
 				<!-- Title Start -->
@@ -8,9 +8,9 @@
 				<slot v-else name="title" />
 				<!-- Title End -->
 				<v-spacer />
-				<v-btn :icon="!appStore.isFullScreen ? 'mdi-fullscreen' : 'mdi-fullscreen-exit'" @click="appStore.fullScreen"/>
 				<slot name="append" />
-				<v-btn icon="mdi-dots-vertical" v-show="props.dataHeaders" @click="showMoreDialog" />
+				<v-btn :icon="!appStore.isFullScreen ? 'mdi-fullscreen' : 'mdi-fullscreen-exit'" density="comfortable" @click="appStore.fullScreen"/>
+				<v-btn icon="mdi-dots-vertical" v-show="props.dataHeaders" density="comfortable" @click="showMoreDialog" />
 			</v-toolbar>
 			<yhlx-more-dialog v-show="isHide" :data-headers="props.dataHeaders" :operations="props.operations" @showMoreDialog="showMoreDialog"/>
 			<v-divider />
@@ -38,7 +38,7 @@ const props = defineProps({
   }>
 })
 const menu: NavigationConfig.Menu = mainMenu.getCurrentMenu();
-const isHide = ref(false)
+const isHide = ref(false);
 const showMoreDialog = () => {
 	isHide.value = !isHide.value
 }
@@ -46,16 +46,16 @@ const showMoreDialog = () => {
 <style lang="scss">
 .main-toolbar {
 	height: 48px !important;
-	&>.v-toolbar__content{
+	& > .v-toolbar__content {
 		height: 48px !important;
 	}
 }
-.app-content{
+.app-content {
 	overflow: auto;
 	height: calc(100% - 48px);
-	.v-table{
+	.v-table {
 		height: 100%;
-		&>.v-table__wrapper{
+		& > .v-table__wrapper {
 			height: calc(100% - 62px);
 		}
 	}
@@ -64,18 +64,13 @@ const showMoreDialog = () => {
 <style lang="scss" scoped>
 .app-wrapper {
 	padding: 16px;
-	.header-icon{
+	.header-icon {
 		margin: 0 8px;
 	}
 }
-.v-btn{
-	width: 36px !important;
-	height: 36px !important;
-}
-.full-screen{
+.full-screen {
 	font-size: 18px;
 	cursor: pointer;
 }
-
 
 </style>
