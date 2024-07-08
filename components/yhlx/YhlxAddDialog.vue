@@ -1,7 +1,7 @@
 <template>
 	<v-dialog v-model="dialog" persistent max-width="800" max-height="600">
 		<template v-slot:activator="{ props }">
-			<yhlx-btn business-type="Add" :location="location" v-bind="props" style="width: 36px;height: 36px">{{ title }}</yhlx-btn>
+			<yhlx-btn business-type="Add" :location="location" v-bind="props" density="comfortable">{{ title }}</yhlx-btn>
 		</template>
 		<v-card class="overflow-auto">
 			<v-container>

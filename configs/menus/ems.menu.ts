@@ -35,6 +35,16 @@ export default [
 		]
 	},
 	{
+		text:'Decision',
+		items: [
+			{
+				icon: "solar:slider-minimalistic-horizontal-line-duotone",
+				text: "Price",
+				link: "/ems/price",
+			}
+		]
+	},
+	{
 		text:'System',
 		items:[{
 			icon: "solar:streets-bold-duotone",
