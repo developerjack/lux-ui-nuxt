@@ -49,4 +49,15 @@ const tab = ref('2');
 img{
   width: 100%;
 }
+.v-card-text{
+  height: calc(100% - 48px);
+  .v-tabs-window{
+    height: 100%;
+    .v-tabs-window-item{
+      height: 100%;
+    }
+  }
+}
+
+
 </style>

@@ -8,7 +8,7 @@
 				</template>
 			</v-list-item>
 		</v-list>
-		<div class="window-item-inner-right" :style="{ 'height': !appStore.isFullScreen ? 'calc(100vh - 224px)' : 'calc(100vh - 163px)' }">
+		<div class="window-item-inner-right"> <!--  :style="{ 'height': !appStore.isFullScreen ? 'calc(100vh - 224px)' : 'calc(100vh - 163px)' }" -->
       <p>更新时间: {{"2024-06-05/10:20"}}</p>
       <div class="table-box">
         <DataTableBg :items="leftItems" :headers="leftHeaders"></DataTableBg>

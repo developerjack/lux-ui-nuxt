@@ -161,14 +161,16 @@ const MockAPI = [
 			return apiPageResult({
 				"id|+1": 1,
 				"time|+1": 1,
-				"selfSharpPower|1-100": 20,
-				"selfPeakPower|1-100": 20,
-				"selfFlatPower|1-100": 20,
-				"selfValleyPower|1-100": 20,
-				"onSharpPower|1-100": 20,
-				"onPeakPower|1-100": 20,
-				"onFlatPower|1-100": 20,
-				"onValleyPower|1-100": 20,
+				"PVIncome|100-1000": 200,
+				"PVElectricity|1-100": 20,
+				"batteryChargingIncome|100-1000": 200,
+				"batteryChargingElectricity|1-100": 20,
+				"batteryProceeds|100-1000": 200,
+				"batteryDischargeElectricity|1-100": 20,
+				"serviceFee|50-1000": 100,
+				"serviceElectricity|1-100": 20,
+				"gridIncome|100-1000": 150,
+				"servicePower|1-100": 20
 			});
 		}
 	},

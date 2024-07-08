@@ -77,21 +77,29 @@ const serverTable = ref()
 
 <template>
   <div class="d-flex">
-    <div class="window-item-inner-right" :style="{ 'height': !appStore.isFullScreen ? 'calc(100vh - 224px)' : 'calc(100vh - 163px)' }">
+    <div class="window-item-inner-right">
         <div class="table-flex">
           <p>电量单位：kWh；金额单位：美元</p>
           <div class="time-pick-box">
             时间范围：<yhlx-time-input :multiple="true"/>
           </div>
         </div>
-        <yhlx-data-table-server ref="serverTable" items-url="/api/ems/location/Report" :headers="headers" :search="false" :showSelect="false" hide-default-footer></yhlx-data-table-server>
+        <yhlx-data-table-server ref="serverTable" items-url="/api/ems/location/Report" :headers="headers" :search="false" :showSelect="false" hide-default-footer />
     </div>
   </div>
 </template>
+<style lang="scss">
+.window-item-inner-right{
+  td{
+    text-align: center;
+  }
+}
 
+</style>
 <style scoped lang="scss">
 .d-flex {
   border: 1px solid rgba(0, 0, 0, 0.12);
+  height: 100%;
 }
 .left {
   width: 240px;
@@ -100,7 +108,9 @@ const serverTable = ref()
 .window-item-inner-right{
   flex: 1;
   overflow-x: auto;
-  //height: calc(100vh - 226px) !important;
+  .v-table{
+    height: calc(100% - 49px);
+  }
 }
 
 .table-flex{
@@ -108,7 +118,6 @@ const serverTable = ref()
   line-height: 40px;
   justify-content: space-between;
   padding: 4px 8px;
-  border-bottom: 1px solid #E0E0E0;
   .time-pick-box{
     display: flex;
     width: 360px;
