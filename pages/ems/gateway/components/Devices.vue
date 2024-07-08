@@ -1,6 +1,6 @@
 <template>
 	<div class="device-list">
-		<v-btn v-for="i in 30" color="primary" size="large" @click="() => router.push(`../device/${i}`)">{{ 'Device No.' + i }}</v-btn>
+		<v-btn v-for="i in 6" color="primary" size="large" @click="() => router.push(`../device/${i}`)">{{ 'Device No.' + i }}</v-btn>
 	</div>
 </template>
 
