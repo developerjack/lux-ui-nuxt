@@ -9,11 +9,6 @@
 		<v-card-text>
 			<v-tabs-window v-model="tab">
 				<v-tabs-window-item value="1">
-					<SmallCardList></SmallCardList>
-					<div style="display: flex;margin-top: 20px">
-						<PieCardMes />
-						<LineTableShare />
-					</div>
 				</v-tabs-window-item>
 				<v-tabs-window-item value="2">
 					<v-row>
@@ -55,9 +50,6 @@
 
 <script setup lang="ts">
 import Devices from "./components/Devices.vue";
-import SmallCardList from "./components/SmallCardList.vue";
-import PieCardMes from "./components/PieCardMes.vue";
-import LineTableShare from "./components/LineTableShare.vue";
 const tab = ref('one');
 
 const configs = [
