@@ -102,6 +102,7 @@ function switchDevice(itemId: string) {
 
 const tab = ref('one');
 </script>
+
 <style scoped lang="scss">
 .v-card-text{
   height: calc(100% - 48px);

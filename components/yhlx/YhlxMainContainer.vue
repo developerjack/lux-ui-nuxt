@@ -1,5 +1,5 @@
 <template>
-	<div class="app-wrapper">
+	<div class="app-wrapper" :style="{ 'height': !appStore.isFullScreen ? 'calc(100vh - 64px)' : '100vh' }">
 		<v-card class="h-full app-card" rounded="xl" style="border-radius: 2px !important;" >
 			<v-toolbar class="px-3 main-toolbar">
 				<Icon v-if="menu.icon" width="24" class="text-primary header-icon" :icon="menu.icon"/>
@@ -55,16 +55,21 @@ const showMoreDialog = () => {
   height: calc(100% - 48px);
 	.v-table{
 		height: 100%;
-		&>.v-table__wrapper{
-			//height: calc(100% - 62px);
-		}
 	}
+}
+.v-tabs-window{
+  height: 100%;
+  .v-tabs-window-item{
+    height: 100%;
+    .d-flex{
+      height: 100%;
+    }
+  }
 }
 </style>
 <style lang="scss" scoped>
 .app-wrapper {
 	padding: 16px;
-  height: 100%;
 	.header-icon{
 		margin: 0 8px;
 	}

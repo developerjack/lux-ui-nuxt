@@ -50,7 +50,7 @@ img{
   width: 100%;
 }
 .v-card-text{
-  height: calc(100% - 48px);
+  height: calc(100% - 49px);
   .v-tabs-window{
     height: 100%;
     .v-tabs-window-item{
@@ -58,6 +58,4 @@ img{
     }
   }
 }
-
-
 </style>

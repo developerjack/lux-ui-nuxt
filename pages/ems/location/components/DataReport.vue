@@ -23,53 +23,53 @@ const menuItems = ref([{
   tag: "NO.2"
 }])
 const headers = [{
-    title: 'Time',
+    title: 'Date',
     value: "time"
   },{
   title: "PV",
   align: "center",
   children: [{
-    title: "PV Income",
-    value: "PVIncome"
-  },{
-    title: "PV Electricity",
+    title: "Energy",
     value: "PVElectricity"
+  },{
+    title: "Income",
+    value: "PVIncome"
   }]
 },{
   title: "Battery",
   align: "center",
   children: [{
-    title: "Battery Charging Income",
-    value: "batteryChargingIncome"
-  },{
-    title: "Battery Charging Electricity",
+    title: "Charging Energy",
     value: "batteryChargingElectricity"
   },{
-    title: "Battery Discharge Income",
-    value: "batteryProceeds"
+    title: "Charging Income",
+    value: "batteryChargingIncome"
   },{
-    title: "Battery Discharge Electricity",
+    title: "Discharge Energy",
     value: "batteryDischargeElectricity"
+  },{
+    title: "Discharge Income",
+    value: "batteryProceeds"
   }]
 },{
   title: "Charging Station",
   align: "center",
   children: [{
-    title: "Station Service Fee",
-    value: "serviceFee"
-  },{
-    title: "Station Charging Electricity",
+    title: "Charging Energy",
     value: "serviceElectricity"
+  },{
+    title: "Income",
+    value: "serviceFee"
   }]
 },{
   title: "on The Grid",
   align: "center",
   children: [{
-    title: "Grid Income",
-    value: "gridIncome"
-  },{
-    title: "Grid Electricity",
+    title: "Electricity",
     value: "servicePower"
+  },{
+    title: "Income",
+    value: "gridIncome"
   }]
 }]
 const serverTable = ref()
@@ -79,23 +79,16 @@ const serverTable = ref()
   <div class="d-flex">
     <div class="window-item-inner-right">
         <div class="table-flex">
-          <p>电量单位：kWh；金额单位：美元</p>
+          <p>Energy Unit：kWh；Monetary Unit：dollar</p>
           <div class="time-pick-box">
-            时间范围：<yhlx-time-input :multiple="true"/>
+            Date Range：<yhlx-time-input :multiple="true"/>
           </div>
         </div>
         <yhlx-data-table-server ref="serverTable" items-url="/api/ems/location/Report" :headers="headers" :search="false" :showSelect="false" hide-default-footer />
     </div>
   </div>
 </template>
-<style lang="scss">
-.window-item-inner-right{
-  td{
-    text-align: center;
-  }
-}
 
-</style>
 <style scoped lang="scss">
 .d-flex {
   border: 1px solid rgba(0, 0, 0, 0.12);

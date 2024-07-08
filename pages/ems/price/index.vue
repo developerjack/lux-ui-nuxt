@@ -1,5 +1,5 @@
 <template>
-	<yhlx-main-container :data-headers="headers">
+	<yhlx-main-container  items-url="/api/ems/price" :data-headers="headers">
 		<template v-slot:append>
 			<yhlx-btn business-type="Add" location="Toolbar" density="comfortable" @click="router.push(`home-price/add`)">Add</yhlx-btn>
 		</template>
@@ -13,4 +13,7 @@ const headers = ref([
 	{ title: "Update Time", key: "updateTime" },
 	{ title: "Status", key: "status" },
 ]);
+onMounted(() => {
+
+})
 </script>

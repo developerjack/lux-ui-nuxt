@@ -84,5 +84,7 @@ const configs = [
 </script>
 
 <style scoped lang="scss">
-
+.v-row{
+  margin-bottom: 0;
+}
 </style>
