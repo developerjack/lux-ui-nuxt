@@ -3,22 +3,26 @@
 		<template v-slot:title>
 			<v-menu open-on-hover>
 				<template v-slot:activator="{ props }">
-					<v-btn v-bind="props" class="px-0">
-            <div>
-              <div class="flex-box">
-                <h4 class="card-title">{{ device.name }}</h4>
-                <v-icon>mdi-chevron-down</v-icon>
-              </div>
-              <p class="subtitle">副标题</p>
-            </div>
-					</v-btn>
+					<v-list style="background: none;" class="pa-0 cursor-pointer" v-bind="props">
+						<v-list-item>
+							<v-list-item-title class="d-flex">
+								<h4 class="card-title">{{ device.name }}</h4>
+								<v-icon>mdi-chevron-down</v-icon>
+							</v-list-item-title>
+							<v-list-item-subtitle>
+								{{'副标题'}}
+							</v-list-item-subtitle>
+						</v-list-item>
+					</v-list>
 				</template>
 				<v-list>
 					<v-list-item v-for="(item, index) in devices" :key="index" @click="switchDevice(item.id)">
 						<v-list-item-title>
-							<p>{{ item.name }}</p>
-              <p class="subtitle">{{'副标题'}}</p>
+							{{ item.name }}
 						</v-list-item-title>
+						<v-list-item-subtitle>
+							{{'副标题'}}
+						</v-list-item-subtitle>
 					</v-list-item>
 				</v-list>
 			</v-menu>
@@ -104,14 +108,7 @@ const tab = ref('one');
 </script>
 
 <style scoped lang="scss">
-.v-card-text{
+.v-card-text {
   height: calc(100% - 48px);
-}
-.subtitle{
-  text-align: left;
-  font-size: 12px
-}
-.flex-box{
-  display: flex;
 }
 </style>
