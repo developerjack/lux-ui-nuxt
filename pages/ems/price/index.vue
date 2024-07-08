@@ -3,7 +3,7 @@
 		<template v-slot:append>
 			<yhlx-btn business-type="Add" location="Toolbar" density="comfortable" @click="router.push(`home-price/add`)">Add</yhlx-btn>
 		</template>
-		<yhlx-data-table-server :headers="headers" items-url="/api/ems/home-price" />
+		<yhlx-data-table-server :headers="headers" items-url="/api/ems/price" @click:row="(event, { item }) => router.push(`price/${item.id}`)"/>
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
@@ -13,7 +13,4 @@ const headers = ref([
 	{ title: "Update Time", key: "updateTime" },
 	{ title: "Status", key: "status" },
 ]);
-onMounted(() => {
-
-})
 </script>
