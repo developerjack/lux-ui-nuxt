@@ -59,6 +59,8 @@ function formatterSeries () {
         <v-radio label="现货市场电价" value="two" color="primary"></v-radio>
       </v-radio-group>
       <v-btn color="primary" @click="openDialog">设置金额系数</v-btn>
+      <v-btn color="primary">保存模板</v-btn>
+      <v-btn color="primary">选择模板</v-btn>
     </div>
 
     <v-card-text v-if="selected === 'one'">
@@ -87,11 +89,8 @@ function formatterSeries () {
   display: flex;
   padding: 8px;
   justify-content: normal;
-  .v-checkbox{
-    margin-right: 16px;
-    .v-label{
-      height: 25px;
-    }
+  .v-btn{
+    margin-right: 8px;
   }
 }
 .form-chart-box{
