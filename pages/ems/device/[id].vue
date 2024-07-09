@@ -1,31 +1,7 @@
 <template>
 	<yhlx-main-container :key="$route.fullPath">
 		<template v-slot:title>
-			<v-menu open-on-hover>
-				<template v-slot:activator="{ props }">
-					<v-list style="background: none;" class="pa-0 cursor-pointer" v-bind="props">
-						<v-list-item>
-							<v-list-item-title class="d-flex">
-								<h4 class="card-title">{{ device.name }}</h4>
-								<v-icon>mdi-chevron-down</v-icon>
-							</v-list-item-title>
-							<v-list-item-subtitle>
-								{{'副标题'}}
-							</v-list-item-subtitle>
-						</v-list-item>
-					</v-list>
-				</template>
-				<v-list>
-					<v-list-item v-for="(item, index) in devices" :key="index" @click="switchDevice(item.id)">
-						<v-list-item-title>
-							{{ item.name }}
-						</v-list-item-title>
-						<v-list-item-subtitle>
-							{{'副标题'}}
-						</v-list-item-subtitle>
-					</v-list-item>
-				</v-list>
-			</v-menu>
+			<yhlx-main-container-title :itemList="devices" :itemObj="device" @switchDevice="switchDevice"/>
 		</template>
 		<v-tabs v-model="tab">
 			<v-tab value="1">Overview</v-tab>
@@ -99,9 +75,9 @@ watch(id, () => {
 	immediate: true
 })
 
-function switchDevice(itemId: string) {
-	id.value = itemId;
-	router.push(`./${itemId}`);
+function switchDevice(value: string) {
+  id.value = value;
+  router.push(`./${value}`);
 }
 
 const tab = ref('one');
