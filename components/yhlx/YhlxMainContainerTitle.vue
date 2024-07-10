@@ -22,7 +22,7 @@ const emits = defineEmits(['switchDevice'])
             <v-icon>mdi-chevron-down</v-icon>
           </v-list-item-title>
           <v-list-item-subtitle>
-            {{'副标题'}}
+            {{'Software park'}}
           </v-list-item-subtitle>
         </v-list-item>
       </v-list>
@@ -33,7 +33,7 @@ const emits = defineEmits(['switchDevice'])
           {{ item.name }}
         </v-list-item-title>
         <v-list-item-subtitle>
-          {{'副标题'}}
+	        {{'Airport'}}
         </v-list-item-subtitle>
       </v-list-item>
     </v-list>
