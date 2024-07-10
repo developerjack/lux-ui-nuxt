@@ -31,8 +31,8 @@ const svgClass = computed(() => {
 })
 </script>
 
-<style lang="scss">
-.yhlx-svg-icon {
+<style scoped lang="scss">
+:deep.yhlx-svg-icon {
 	display: inline-block;
 	svg {
 		color: currentColor;

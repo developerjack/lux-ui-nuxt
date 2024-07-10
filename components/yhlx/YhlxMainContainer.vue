@@ -44,12 +44,6 @@ const showMoreDialog = () => {
 }
 </script>
 <style lang="scss">
-.main-toolbar {
-	height: 48px !important;
-	& > .v-toolbar__content {
-		height: 48px !important;
-	}
-}
 .app-content {
 	overflow: auto;
   height: calc(100% - 48px);
@@ -68,6 +62,12 @@ const showMoreDialog = () => {
 }
 </style>
 <style lang="scss" scoped>
+.main-toolbar {
+  height: 48px !important;
+  & > :deep.v-toolbar__content {
+    height: 48px !important;
+  }
+}
 .app-wrapper {
 	padding: 16px;
 	.header-icon{

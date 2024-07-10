@@ -18,7 +18,7 @@ const onlyStation = ref()
       <v-row>
         <v-col cols="6">并网上行功率设置开关</v-col>
         <v-col cols="6">
-          <v-switch color="primary" hide-details></v-switch>
+          <v-switch color="primary" hide-details density="compact" />
         </v-col>
         <v-col cols="6">并网上行功率百分比设置</v-col>
         <v-col cols="6" style="display: flex">
@@ -36,11 +36,11 @@ const onlyStation = ref()
       <v-row>
         <v-col cols="6">控制开关</v-col>
         <v-col cols="6">
-          <v-switch color="primary" hide-details></v-switch>
+          <v-switch color="primary" hide-details density="compact" />
         </v-col>
         <v-col cols="6">功率设置值</v-col>
         <v-col cols="6" class="d-flex">
-          <yhlx-text-field max-width="200px"/>
+          <yhlx-text-field max-width="200px" density="compact"/>
           <span style="line-height: 32px;font-size: 16px;margin-left: 8px">kVA</span>
         </v-col>
       </v-row>
@@ -62,6 +62,7 @@ const onlyStation = ref()
         </v-col>
         <v-col cols="6" class="pl-6">
           <yhlx-select
+              density="compact"
               max-width="200px"
               :items="['光伏优先，储能其次，市电最低']"
           ></yhlx-select>
@@ -131,7 +132,7 @@ const onlyStation = ref()
       <v-row>
         <v-col cols="6">控制开关</v-col>
         <v-col cols="6">
-          <v-switch color="primary" hide-details></v-switch>
+          <v-switch color="primary" hide-details density="compact" />
         </v-col>
       </v-row>
     </v-col>
@@ -149,7 +150,7 @@ const onlyStation = ref()
         </v-col>
         <v-col cols="6">功率设置值</v-col>
         <v-col cols="6" style="display: flex">
-          <yhlx-text-field max-width="200px"/>
+          <yhlx-text-field max-width="200px" density="compact"/>
           <span class="unit-class">kVA</span>
         </v-col>
       </v-row>
@@ -159,28 +160,6 @@ const onlyStation = ref()
     </v-col><v-col cols="3"/>
   </v-row>
 </template>
-<style lang="scss">
-.v-switch{
-  height: 32px;
-  .v-selection-control{
-    min-height: 32px !important;
-  }
-  .v-selection-control--density-default{
-    --v-selection-control-size: 32px !important;
-  }
-}
-.v-field{
-  height: 32px;
-  .v-field__input{
-    height: 32px;
-    min-height: 32px !important;
-    padding: 0 16px;
-  }
-}
-.v-selection-control--density-default{
-  --v-selection-control-size: 32px;
-}
-</style>
 <style scoped lang="scss">
 .v-row{
   .v-col{

@@ -1,7 +1,7 @@
 <template>
 	<yhlx-main-container :key="$route.fullPath">
 		<template v-slot:title>
-			<yhlx-main-container-title :itemList="devices" :itemObj="device" @switchDevice="switchDevice"/>
+			<yhlx-main-container-title :titleList="devices" :titleItem="device" @switchDevice="switchDevice"/>
 		</template>
 		<v-tabs v-model="tab">
 			<v-tab value="1">Overview</v-tab>
@@ -53,13 +53,13 @@ import HistoryData from "./components/HistoryData.vue";
 import LineChart from "./components/LineChart.vue";
 const router = useRouter();
 
-const device = ref({ id: "1", name: "Device NO.1" });
+const device = ref({ id: "1", name: "Device NO.1", subtitle: 'asdasd' });
 const devices = ref([
-	{ id: "1", name: "Device NO.1" },
-	{ id: "2", name: "Device NO.2" },
-	{ id: "3", name: "Device NO.3" },
-	{ id: "4", name: "Device NO.4" },
-	{ id: "5", name: "Device NO.5" },
+	{ id: "1", name: "Device NO.1", subtitle: 'test' },
+	{ id: "2", name: "Device NO.2", subtitle: 'test' },
+	{ id: "3", name: "Device NO.3", subtitle: 'test' },
+	{ id: "4", name: "Device NO.4", subtitle: 'test' },
+	{ id: "5", name: "Device NO.5", subtitle: 'test' },
 ]);
 
 const id = ref(router.currentRoute.value.params.id);

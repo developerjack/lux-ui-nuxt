@@ -158,16 +158,6 @@ axios.get("/api/ems/sub-device").then(response => {
 	menuItems.value = response.data.data.content;
 });
 </script>
-
-<style lang="scss">
-.table-box{
-  table{
-    padding: 0 !important;
-    border: 1px solid #c5c5c5 !important;
-  }
-}
-</style>
-
 <style scoped lang="scss">
 .d-flex {
 	border: 1px solid rgba(0, 0, 0, 0.12);
@@ -190,6 +180,10 @@ axios.get("/api/ems/sub-device").then(response => {
     padding: 16px 8px 0;
     &>.v-data-table:first-child{
       margin-right: 8px;
+    }
+    :deep table{
+      padding: 0 !important;
+      border: 1px solid #c5c5c5 !important;
     }
   }
   .line-chart-box{

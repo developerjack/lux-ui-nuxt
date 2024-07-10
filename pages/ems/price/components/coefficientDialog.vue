@@ -16,39 +16,24 @@ function getFormData() {
 const formList: formType = reactive({
   gridEnergyPrice: {
     value: '',
-    label: '上网电价',
-    description: ''
+    label: '光伏发电电价比例（%）',
+    description: '默认值为100，与电网电价对比'
   },
   PVEnergyPrice: {
     value: '',
-    label: '光伏电价折扣',
+    label: '储能充电电价比例（%）',
     description: '默认值为100，与电网电价对比'
   },
   batteryChargingEnergy: {
     value: '',
-    label: '储能充电价价格比例（%）',
+    label: '储能放电电价比例（%）',
     description: '默认值为100，与电网电价对比'
   },
   batteryDischargingEnergy: {
     value: '',
-    label: '储能放电价格折扣',
+    label: '充电桩充电电价比例（%）',
     description: '默认值为100，与电网电价对比'
-  },
-  batterySchedulingFee: {
-    value: '',
-    label: '储能调度服务费',
-    description: "(1)在谷时电价时段利用储能放电，收取的服务费。\n(2)在尖峰和峰时电价时段不收服务费。"
-  },
-  batteryServiceFee: {
-    value: '',
-    label: '储能备电服务费',
-    description: ''
-  },
-  stationServiceFee: {
-    value: '',
-    label: '充电桩充电服务费',
-    description: ''
-  },
+  }
 })
 defineExpose({
   getFormData
