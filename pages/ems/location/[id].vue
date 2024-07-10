@@ -60,7 +60,7 @@ img{
     height: 100%;
     .v-tabs-window-item{
       height: 100%;
-      overflow-y: scroll;
+      overflow-y: auto;
       overflow-x: hidden;
     }
   }

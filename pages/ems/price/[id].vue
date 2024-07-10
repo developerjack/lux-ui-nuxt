@@ -8,7 +8,6 @@ import CoefficientDialog from './components/coefficientDialog.vue'
 import timePriceChart from './components/timePriceChart.vue'
 const selected = ref('one')
 const coefficientDialog = ref()
-const timeInput = ref()
 const rowList= ref([{
   id: 0,
   value: '',
@@ -55,7 +54,7 @@ function formatterSeries () {
 
 <template>
   <yhlx-main-container :key="$route.fullPath">
-    <div class="check-box">
+    <div class="pa-2 d-flex justify-content-between ">
       <v-radio-group inline hide-details v-model="selected">
         <v-radio label="固定电网电价" value="one" color="primary"></v-radio>
         <v-radio label="现货市场电价" value="two" color="primary"></v-radio>
@@ -64,13 +63,11 @@ function formatterSeries () {
     </div>
     <v-divider></v-divider>
     <v-card-text>
-      <CoefficientDialog class="mb-4" ref="coefficientDialog"/>
-      <v-divider class="mb-4"></v-divider>
-      <div class="form-chart-box" v-if="selected === 'one'">
+      <div class="d-flex" v-if="selected === 'one'">
         <div class="form-box">
           <v-row>
-            <v-col cols="12" class="time-price-box" v-for="item in rowList" :key="item.id">
-              <yhlx-check-time-input ref="timeInput" :timeRange="item" @getTimeRange="getTimeRange"/>
+            <v-col cols="12" class="d-flex" v-for="item in rowList" :key="item.id">
+              <yhlx-check-time-input :timeRange="item" @getTimeRange="getTimeRange"/>
               <yhlx-text-field v-model="item.value"/>
               <v-btn icon="mdi-plus" size="small" @click="addRowList"></v-btn>
               <v-btn icon="mdi-minus" size="small" @click="minusRowList(item.id)" :disabled="rowList.length === 1" ></v-btn>
@@ -81,36 +78,22 @@ function formatterSeries () {
           <timePriceChart :series="series"/>
         </div>
       </div>
+      <CoefficientDialog class="mb-4" ref="coefficientDialog"/>
+
     </v-card-text>
   </yhlx-main-container>
 </template>
 
 <style scoped lang="scss">
-.check-box{
+.form-box {
+  width: 30%;
   display: flex;
-  padding: 8px;
-  justify-content: normal;
-}
-.form-chart-box{
-  display: flex;
-  .form-box{
-    width: 30%;
-    display: flex;
-    .v-row{
-      height: 72px;
-    }
-    .time-price-box{
-      display: flex;
-      .v-text-field{
-        margin: 0 8px;
-      }
-    }
-  }
-
-  .chart-box{
-    width: 70%;
-    margin-left: 16px;
+  .v-text-field {
+    margin: 0 8px;
   }
 }
-
+.chart-box{
+  width: 70%;
+  margin-left: 16px;
+}
 </style>

@@ -1,14 +1,19 @@
 <script setup lang="ts">
-// const form:{ [key: string]: string } = reactive({})
-// function saveForm() {
-//   Object.keys(formList).forEach(item => {
-//
-//     form[item] = formList[item].value
-//     console.log(form)
-//   })
-//   changeDialog()
-// }
-const formList = reactive({
+interface formType {
+  [key: string]: {
+    value: string,
+    label: string,
+    description: string,
+  }
+}
+const form:{ [key: string]: string } = reactive({})
+function getFormData() {
+  Object.keys(formList).forEach(item => {
+    form[item] = formList[item].value
+    console.log(form)
+  })
+}
+const formList: formType = reactive({
   gridEnergyPrice: {
     value: '',
     label: '上网电价',
@@ -45,6 +50,9 @@ const formList = reactive({
     description: ''
   },
 })
+defineExpose({
+  getFormData
+})
 </script>
 
 <template>
@@ -53,13 +61,10 @@ const formList = reactive({
       <v-col cols="12" sm="6" >
         <yhlx-text-field :label="key.label" v-model="key.value"/>
       </v-col>
-      <v-col cols="12" sm="6" class="description">{{ key.description }}</v-col>
+      <v-col cols="12" sm="6">{{ key.description }}</v-col>
     </template>
   </v-row>
 </template>
 
 <style scoped lang="scss">
-.description{
-  line-height: 32px;
-}
 </style>
