@@ -1,10 +1,13 @@
 <script setup lang="ts">
-const rate = ref(0)
-watch(rate, () => {
-  console.log(rate)
-})
-const includeFiles = ref()
-const radios = ref('one')
+const onGridRate = ref(0)
+const batteryRate = ref(0)
+const PRate = ref(0)
+const stationMax = ref()
+const stationMid = ref()
+const batteryMax = ref()
+const batteryMid = ref()
+const batteryMin = ref()
+const onlyStation = ref()
 </script>
 
 <template>
@@ -19,8 +22,8 @@ const radios = ref('one')
         </v-col>
         <v-col cols="6">并网上行功率百分比设置</v-col>
         <v-col cols="6" style="display: flex">
-          <v-slider v-model="rate" hide-details max-width="200px" color="primary"/>
-          <span style="line-height: 32px;font-size: 16px">{{ Math.round(rate) + '%' }}</span>
+          <v-slider v-model="onGridRate" hide-details max-width="200px" color="primary"/>
+          <span style="line-height: 32px;font-size: 16px">{{ Math.round(onGridRate) + '%' }}</span>
         </v-col>
       </v-row>
     </v-col>
@@ -51,7 +54,7 @@ const radios = ref('one')
       <v-row class="m-left-0">
         <v-col cols="6" class="p-left-0">
           <v-checkbox-btn
-              v-model="includeFiles"
+              v-model="stationMax"
               color="primary"
               class="pe-2"
               label="最大功率充电"
@@ -65,7 +68,7 @@ const radios = ref('one')
         </v-col>
         <v-col cols="12" class="p-left-0">
           <v-checkbox-btn
-              v-model="includeFiles"
+              v-model="stationMid"
               color="primary"
               label="经济模式(光伏先充，未充满则峰时用储能，谷时用市电)"
           ></v-checkbox-btn>
@@ -81,7 +84,7 @@ const radios = ref('one')
       <v-row class="m-left-0">
         <v-col cols="12" class="p-left-0">
           <v-checkbox-btn
-              v-model="includeFiles"
+              v-model="batteryMax"
               color="primary"
               class="pe-2"
               label="最大功率充电(光伏优先，市电不分时段)"
@@ -89,21 +92,21 @@ const radios = ref('one')
         </v-col>
         <v-col cols="12" class="p-left-0">
           <v-checkbox-btn
-              v-model="includeFiles"
+              v-model="batteryMid"
               color="primary"
               label="经济模式(光伏优先，其次市电谷时充电)"
           ></v-checkbox-btn>
         </v-col>
         <v-col cols="6" class="p-left-0">
           <v-checkbox-btn
-              v-model="includeFiles"
+              v-model="batteryMin"
               color="primary"
               label="备电SOC模式(光伏优先，其次市电不分时段备电至50%，再次市电谷时充电)"
           ></v-checkbox-btn>
         </v-col>
         <v-col style="display: flex">
-          <v-slider v-model="rate" hide-details max-width="200px" color="primary"/>
-          <span style="line-height: 48px;font-size: 16px">{{ Math.round(rate) + '%' }}</span>
+          <v-slider v-model="batteryRate" hide-details max-width="200px" color="primary"/>
+          <span style="line-height: 48px;font-size: 16px">{{ Math.round(batteryRate) + '%' }}</span>
         </v-col>
       </v-row>
     </v-col>
@@ -114,7 +117,7 @@ const radios = ref('one')
     <v-col cols="2" style="padding-left: 32px">储能放电</v-col>
     <v-col cols="6" >
       <v-checkbox-btn
-          v-model="includeFiles"
+          v-model="onlyStation"
           color="primary"
           label="只给充电桩"
       ></v-checkbox-btn>
@@ -141,8 +144,8 @@ const radios = ref('one')
       <v-row>
         <v-col cols="6">控制开关</v-col>
         <v-col cols="6" style="display: flex">
-          <v-slider v-model="rate" hide-details max-width="200px" color="primary"/>
-          <span style="line-height: 32px;font-size: 16px">{{ Math.round(rate) + '%' }}</span>
+          <v-slider v-model="PRate" hide-details max-width="200px" color="primary"/>
+          <span style="line-height: 32px;font-size: 16px">{{ Math.round(PRate) + '%' }}</span>
         </v-col>
         <v-col cols="6">功率设置值</v-col>
         <v-col cols="6" style="display: flex">

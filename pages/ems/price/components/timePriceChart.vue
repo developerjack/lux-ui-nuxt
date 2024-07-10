@@ -1,15 +1,14 @@
 <script setup lang="ts">
   const props = defineProps({
     series:{
-      type: Array,
+      type: Array<number>,
       default: () => []
     }
   })
   watch(() => props.series,() => {
-    console.log('111111111',series)
-    series.value[0].data = props.series
+    series[0].data = props.series
   },{ deep: true })
-  const series = ref([{
+  const series: { data: number[] }[] = reactive([{
     data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   }])
   const chartOptions = ref({
@@ -18,6 +17,9 @@
       type: 'line',
       zoom: {
         enabled: false
+      },
+      toolbar: {
+        show: false
       }
     },
     dataLabels: {
@@ -27,7 +29,7 @@
       curve: 'straight'
     },
     title: {
-      text: 'Product Trends by Month',
+      text: '时段电费曲线',
       align: 'left'
     },
     xaxis: {

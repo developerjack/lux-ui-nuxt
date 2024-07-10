@@ -1,34 +1,36 @@
 <script setup lang="ts">
+interface rowType {
+  id: number,
+  value: string,
+  timeRange: number[]
+}
 import CoefficientDialog from './components/coefficientDialog.vue'
 import timePriceChart from './components/timePriceChart.vue'
 const selected = ref('one')
 const coefficientDialog = ref()
 const timeInput = ref()
-const rowList = ref([{
+const rowList= ref([{
   id: 0,
   value: '',
-  timeRange: ''
+  timeRange: []
 }])
 watch(rowList,() => {
   formatterSeries()
 },{ deep: true })
 const series = ref([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
-function getTimeRange ({item, value}) {
-  value.sort((a, b) => a - b)
+function getTimeRange ({item, value}: { item: rowType,value: number[] }) {
+  value.sort((a: number, b: number) => a - b)
   item.timeRange = value // 第一次修改timeRange
-}
-function openDialog () {
-  coefficientDialog.value.changeDialog()
 }
 function addRowList () {
   const index = rowList.value.length
   rowList.value.push({
     id: index,
     value: '',
-    timeRange: ''
+    timeRange: []
   })
 }
-function minusRowList (id) {
+function minusRowList (id: number) {
   rowList.value.forEach((item,index) => {
     if (item.id === id) {
       rowList.value.splice(index, 1)
@@ -37,8 +39,8 @@ function minusRowList (id) {
   })
 }
 function formatterSeries () {
-  rowList.value.forEach((item,index) => { // 遍历表单,将item中的value填到item.timeRange与series对应的index上
-    if (item.timeRange !== '') {
+  rowList.value.forEach((item) => { // 遍历表单,将item中的value填到item.timeRange与series对应的index上
+    if (item.timeRange.length !== 0) {
       for (let i = item.timeRange[0]; i <= item.timeRange[1]; i++) {
         series.value[i] = Number(item.value)
       }
@@ -58,13 +60,13 @@ function formatterSeries () {
         <v-radio label="固定电网电价" value="one" color="primary"></v-radio>
         <v-radio label="现货市场电价" value="two" color="primary"></v-radio>
       </v-radio-group>
-      <v-btn color="primary" @click="openDialog">设置金额系数</v-btn>
-      <v-btn color="primary">保存模板</v-btn>
-      <v-btn color="primary">选择模板</v-btn>
+      <v-btn class="mr-2" color="primary">保存</v-btn>
     </div>
-
-    <v-card-text v-if="selected === 'one'">
-      <div class="form-chart-box">
+    <v-divider></v-divider>
+    <v-card-text>
+      <CoefficientDialog class="mb-4" ref="coefficientDialog"/>
+      <v-divider class="mb-4"></v-divider>
+      <div class="form-chart-box" v-if="selected === 'one'">
         <div class="form-box">
           <v-row>
             <v-col cols="12" class="time-price-box" v-for="item in rowList" :key="item.id">
@@ -80,7 +82,6 @@ function formatterSeries () {
         </div>
       </div>
     </v-card-text>
-    <CoefficientDialog ref="coefficientDialog"/>
   </yhlx-main-container>
 </template>
 
@@ -89,9 +90,6 @@ function formatterSeries () {
   display: flex;
   padding: 8px;
   justify-content: normal;
-  .v-btn{
-    margin-right: 8px;
-  }
 }
 .form-chart-box{
   display: flex;

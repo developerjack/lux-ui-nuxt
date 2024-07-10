@@ -1,28 +1,5 @@
 <script setup lang="ts">
-import TotalTable from './TotalTable.vue'
-import { useAppStore } from "@/stores/app";
-const appStore = useAppStore();
-const menuOpen = ref([0])
-const menuItems = ref([{
-  title: "Location",
-  tag: ""
-},{
-  title: "PV",
-  tag: ""
-},{
-  title: "Battery",
-  tag: "NO.1"
-},{
-  title: "Battery",
-  tag: "NO.2"
-},{
-  title: "charging Station",
-  tag: "NO.1"
-},{
-  title: "charging Station",
-  tag: "NO.2"
-}])
-const headers = [{
+const headers: any[] = [{
     title: 'Date',
     value: "time"
   },{

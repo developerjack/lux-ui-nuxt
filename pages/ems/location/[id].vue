@@ -10,7 +10,7 @@
 		<v-card-text>
 			<v-tabs-window v-model="tab">
 				<v-tabs-window-item value="1">
-          <img src="../../../assets/images/homeBgImg.png">
+          <img alt="" src="../../../assets/images/homeBgImg.png">
 				</v-tabs-window-item>
 				<v-tabs-window-item value="2">
 					<v-row>
