@@ -1,15 +1,33 @@
 <script setup lang="ts">
+const router = useRouter();
 const prop = defineProps({
   titleList: {
-    type: Array<{ name: string; subtitle: string; id: string }>,
+    type: Array<{ name: string; subtitle?: string; id: string }>,
     default: () => []
-  },
-  titleItem: {
-    type: Object,
-    default: () => {}
   }
 })
-const emits = defineEmits(['switchDevice'])
+const titleItem = ref({ name: '',subtitle: '', id: '' });
+const id = ref('');
+
+function switchDevice(value: string) {
+  id.value = value;
+  router.push(`./${value}`);
+}
+
+onMounted(() => {
+  id.value = router.currentRoute.value.params.id
+})
+watch(id, () => {
+  for (let i = 0; i < prop.titleList.length; i++) {
+    const item = prop.titleList[i];
+    if (item.id === id.value) {
+      titleItem.value = item;
+      break;
+    }
+  }
+}, {
+  immediate: true
+})
 </script>
 
 <template>
@@ -18,17 +36,17 @@ const emits = defineEmits(['switchDevice'])
       <v-list style="background: none;" class="pa-0 cursor-pointer" v-bind="props">
         <v-list-item>
           <v-list-item-title class="d-flex">
-            <h4 class="card-title">{{ prop.titleItem.name }}</h4>
+            <h4 class="card-title">{{ titleItem.name }}</h4>
             <v-icon>mdi-chevron-down</v-icon>
           </v-list-item-title>
           <v-list-item-subtitle>
-            {{ prop.titleItem.subtitle }}
+            {{ titleItem.subtitle }}
           </v-list-item-subtitle>
         </v-list-item>
       </v-list>
     </template>
     <v-list>
-      <v-list-item v-for="(item, index) in prop.titleList" :key="index" @click="emits('switchDevice',item.id)">
+      <v-list-item v-for="(item, index) in prop.titleList" :key="index" @click="switchDevice(item.id)">
         <v-list-item-title>
           {{ item.name }}
         </v-list-item-title>

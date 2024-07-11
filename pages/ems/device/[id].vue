@@ -1,7 +1,7 @@
 <template>
 	<yhlx-main-container :key="$route.fullPath">
 		<template v-slot:title>
-			<yhlx-main-container-title :titleList="devices" :titleItem="device" @switchDevice="switchDevice"/>
+			<yhlx-main-container-title :titleList="devices" @switchDevice="switchDevice"/>
 		</template>
 		<v-tabs v-model="tab">
 			<v-tab value="1">Overview</v-tab>
@@ -51,34 +51,15 @@
 import RealData from "./components/RealData.vue";
 import HistoryData from "./components/HistoryData.vue";
 import LineChart from "./components/LineChart.vue";
-const router = useRouter();
 
-const device = ref({ id: "1", name: "Device NO.1", subtitle: 'asdasd' });
 const devices = ref([
-	{ id: "1", name: "Device NO.1", subtitle: 'test' },
-	{ id: "2", name: "Device NO.2", subtitle: 'test' },
-	{ id: "3", name: "Device NO.3", subtitle: 'test' },
-	{ id: "4", name: "Device NO.4", subtitle: 'test' },
-	{ id: "5", name: "Device NO.5", subtitle: 'test' },
+	{ id: "1", name: "Device NO.1", subtitle: 'test1' },
+	{ id: "2", name: "Device NO.2", subtitle: 'test2' },
+	{ id: "3", name: "Device NO.3", subtitle: 'test3' },
+	{ id: "4", name: "Device NO.4", subtitle: 'test4' },
+	{ id: "5", name: "Device NO.5", subtitle: 'test5' },
 ]);
 
-const id = ref(router.currentRoute.value.params.id);
-watch(id, () => {
-	for (let i = 0; i < devices.value.length; i++) {
-		const item = devices.value[i];
-		if (item.id === id.value) {
-			device.value = item;
-			break;
-		}
-	}
-}, {
-	immediate: true
-})
-
-function switchDevice(value: string) {
-  id.value = value;
-  router.push(`./${value}`);
-}
 
 const tab = ref('one');
 </script>
