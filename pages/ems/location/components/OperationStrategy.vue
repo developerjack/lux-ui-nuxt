@@ -161,6 +161,13 @@ const onlyStation = ref()
   </v-row>
 </template>
 <style scoped lang="scss">
+.v-checkbox-btn{
+  :deep .v-label{
+    opacity: 1 !important;
+    font-size: 14px !important;
+  }
+
+}
 .v-row{
   .v-col{
     line-height: 32px;

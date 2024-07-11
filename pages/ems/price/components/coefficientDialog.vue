@@ -43,10 +43,10 @@ defineExpose({
 <template>
   <v-row class="form">
     <template v-for="key of formList" :key="key.label">
-      <v-col cols="12" sm="6" >
+      <v-col cols="6" >
         <yhlx-text-field :label="key.label" v-model="key.value"/>
       </v-col>
-      <v-col cols="12" sm="6">{{ key.description }}</v-col>
+      <v-col cols="6">{{ key.description }}</v-col>
     </template>
   </v-row>
 </template>

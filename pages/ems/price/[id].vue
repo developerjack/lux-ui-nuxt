@@ -65,14 +65,14 @@ function formatterSeries () {
     <v-card-text>
       <div class="d-flex" v-if="selected === 'one'">
         <div class="form-box">
-          <v-row>
-            <v-col cols="12" class="d-flex" v-for="item in rowList" :key="item.id">
+<!--          <v-row>-->
+            <div class="d-flex mb-2" v-for="item in rowList" :key="item.id">
               <yhlx-check-time-input :timeRange="item" @getTimeRange="getTimeRange"/>
               <yhlx-text-field v-model="item.value"/>
               <v-btn icon="mdi-plus" size="small" @click="addRowList"></v-btn>
               <v-btn icon="mdi-minus" size="small" @click="minusRowList(item.id)" :disabled="rowList.length === 1" ></v-btn>
-            </v-col>
-          </v-row>
+            </div>
+<!--          </v-row>-->
         </div>
         <div class="chart-box">
           <timePriceChart :series="series"/>
@@ -87,7 +87,6 @@ function formatterSeries () {
 <style scoped lang="scss">
 .form-box {
   width: 30%;
-  display: flex;
   .v-text-field {
     margin: 0 8px;
   }
