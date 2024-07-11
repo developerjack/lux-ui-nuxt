@@ -1,7 +1,7 @@
 <template>
 	<yhlx-main-container>
 		<template v-slot:append>
-			<yhlx-btn business-type="Add" location="Toolbar" />
+			<yhlx-btn business-type="Add" location="Toolbar" density="comfortable" />
 		</template>
 		<div class="h-full d-flex">
 			<v-list class="left px-1 py-4">
