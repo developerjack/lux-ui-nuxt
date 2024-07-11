@@ -32,7 +32,7 @@ const svgClass = computed(() => {
 </script>
 
 <style scoped lang="scss">
-:deep.yhlx-svg-icon {
+:deep(.yhlx-svg-icon) {
 	display: inline-block;
 	svg {
 		color: currentColor;

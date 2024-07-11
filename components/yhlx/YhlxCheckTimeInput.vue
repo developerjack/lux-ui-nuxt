@@ -33,7 +33,6 @@ function addSelected (i) {
   }
 }
 const colsNum = computed(()=>{
-  console.log(12 / Math.ceil(Number(props.width) / 60))
   return 12 / Math.floor(Number(props.width) / 60)
 })
 //

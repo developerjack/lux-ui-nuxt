@@ -25,7 +25,7 @@
 						<v-col cols="10">This is charging location biggest in China.</v-col>
 						<v-col cols="2" class="font-weight-bold">Map</v-col>
 						<v-col cols="12">
-							<map-container></map-container>
+							<map-container />
 						</v-col>
 					</v-row>
 				</template>

@@ -162,7 +162,7 @@ const onlyStation = ref()
 </template>
 <style scoped lang="scss">
 .v-checkbox-btn{
-  :deep .v-label{
+  :deep(.v-label){
     opacity: 1 !important;
     font-size: 14px !important;
   }

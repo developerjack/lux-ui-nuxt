@@ -12,11 +12,12 @@
           <yhlx-text-field label="Notes" />
         </v-col>
         <v-col cols="12">
-          <map-container :height="400"></map-container>
+          <map-container :height="400" />
         </v-col>
       </v-row>
     </template>
   </yhlx-add-dialog>
 </template>
 <script setup lang="ts">
+import MapContainer from '@/components/common/MapContainer.vue'
 </script>

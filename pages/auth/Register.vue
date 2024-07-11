@@ -32,8 +32,6 @@ const handleLogin = async () => {
     isSignInDisabled.value = true;
     loginWithEmailAndPassword(email.value, password.value);
 
-  } else {
-    console.log("no");
   }
 };
 

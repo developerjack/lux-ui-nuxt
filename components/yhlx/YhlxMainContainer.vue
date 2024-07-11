@@ -64,7 +64,7 @@ const showMoreDialog = () => {
 <style lang="scss" scoped>
 .main-toolbar {
   height: 48px !important;
-  & > :deep.v-toolbar__content {
+  & > :deep(.v-toolbar__content) {
     height: 48px !important;
   }
 }

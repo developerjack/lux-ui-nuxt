@@ -37,9 +37,7 @@ demoList.value.push([{label:'Day',value:'Monday'},
 	{label:'ParkingTime Price',value:'5', suffix:'CNY/hour' },
 	{label:'Time Price',value:'20', suffix:'CNY/hour' },
 ])
-onMounted(()=>{
-	console.log('demoList',demoList)
-})
+
 const items = ref([]);
 const save = (value)=> {
 	demoList.value.push(value.map(obj => ({ ...obj })))
@@ -49,7 +47,6 @@ const openDialog = ()=> {
 	ReDialog.value = true
 }
 const removeItem = (index)=> {
-	console.log(index)
 	demoList.value.splice(index,1)
 }
 const close = ()=>{

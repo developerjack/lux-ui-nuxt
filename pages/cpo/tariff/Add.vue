@@ -39,7 +39,7 @@
 									<v-row>
 										<v-col cols="4" class="font-weight-bold">Restrictions</v-col>
 										<v-col cols="8">
-											<b v-if="item[0].start !='' && item[0].end != ''">Day:</b><span class="restriction-item">{{item[0].value}}</span> 
+											<b>Day:</b><span class="restriction-item">{{item[0].value}}</span>
 											<b v-if="item[1].start !='' && item[1].end != ''">Time:</b><span class="restriction-item">{{getFinalString(item[1])}}</span><br/>
 											<b v-if="item[2].start !='' && item[2].end != ''">Energy:</b><span class="restriction-item">{{getFinalString(item[2])}}</span>
 											<b v-if="item[3].start !='' && item[3].end != ''">Duration:</b><span class="restriction-item">{{getFinalString(item[3])}}</span><br/>
@@ -94,7 +94,6 @@ const props = defineProps({
 })
 const selected = ref(0)
 watch(props.demoList,()=>{
-	console.log('props.demoList',props.demoList)
 	selected.value = 0
 })
 const removeItem = () => {
@@ -103,8 +102,8 @@ const removeItem = () => {
 const openDialog = () => {
 	emits('openDialog')
 }
-const getFinalString = (obj)=>{
-	return obj.start !='' && obj.end != '' ? obj.start + ' to ' + obj.end + ' ' + obj.suffix : ''
+const getFinalString = (obj) => {
+	return obj.start !='' && obj.end != '' ? obj.start + ' to ' + obj.end + ' ' + (obj.suffix ? obj.suffix : '') : ''
 }
 </script>
 <style lang="scss" scoped>

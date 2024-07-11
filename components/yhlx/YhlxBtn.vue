@@ -1,5 +1,5 @@
 <template>
-	<v-btn v-if="location === 'Toolbar' && icon.length > 0" icon>
+	<v-btn v-if="location === 'Toolbar' && icon.length > 0">
 		<v-icon :color="color" :icon="icon" size="large" />
 	</v-btn>
 	<v-btn v-else :color="color" :variant="variant" class="px-4" v-bind="props">
@@ -21,7 +21,7 @@ const props = defineProps({
 });
 const color = ref("");
 const icon = ref("");
-const variant = ref("");
+const variant = ref("elevated");
 
 onMounted(() => {
 	if (props.businessType === "Add") {

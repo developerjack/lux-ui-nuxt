@@ -72,7 +72,6 @@ const status = ref()
 const handleProvinceChange = () => {
 	selectedCity.value = ''
 	cities.value = ChineseProvince.find(item=>item.province == selectedProvince.value).cities
-	console.log()
 }
 const Location = ref('')
 const getLocationName = (selectedAddress) => {

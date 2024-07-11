@@ -23,9 +23,7 @@ watch(()=>appStore.isLogin,()=>{
     <AppBar v-if="isLogin"/>
     <v-main class="fill-height">
       <div class="fill-height">
-        <transition name="fade">
-          <RouterView />
-        </transition>
+        <NuxtPage />
       </div>
     </v-main>
   </v-app>

@@ -7,7 +7,7 @@ try {
   const { 0: browserLang } = navigator.language.split("-");
   if (supported.includes(browserLang)) locale = browserLang;
 } catch (e) {
-  console.log(e);
+
 }
 
 export default {

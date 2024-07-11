@@ -37,7 +37,6 @@ const operations = ref([
   {
     label: 'Reset Sorting',
     click: () => {
-      console.log('reset')
       // resetSort()
     }
   },

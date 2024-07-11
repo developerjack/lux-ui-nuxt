@@ -1,9 +1,9 @@
 <template>
-	<div style="display: grid; grid-column-gap: 16px; grid-template-columns:3fr 3fr 4fr 3fr 3fr; height: 140px;">
+	<div class="unselect">
 		<v-card class="overview-card pa-4 primary bg-indigo-lighten-5 text-indigo">
 			<div class="overview-card-top">
 				<span>Total Revenue</span>
-				<span>Day</span>
+				<span class="cursor-pointer" @click="changeUnit">{{ unit }}</span>
 			</div>
 			<div class="overview-card-bottom">
 				<div>
@@ -20,7 +20,7 @@
 		<v-card class="overview-card pa-4 bg-orange-lighten-5 text-orange">
 			<div class="overview-card-top">
 				<span>Solar Energy</span>
-				<span>Day</span>
+				<span class="cursor-pointer" @click="changeUnit">{{ unit }}</span>
 			</div>
 			<div class="overview-card-bottom">
 				<Icon icon="solar:bill-line-duotone" width="65" />
@@ -35,7 +35,7 @@
 		<v-card class="overview-card pa-4 bg-deep-orange-lighten-5 text-deep-orange">
 			<div class="overview-card-top">
 				<span>Battery</span>
-				<span>Day</span>
+				<span class="cursor-pointer" @click="changeUnit">{{ unit }}</span>
 			</div>
 			<div class="overview-card-bottom">
 				<Icon icon="solar:layers-minimalistic-line-duotone" width="65" />
@@ -55,7 +55,7 @@
 		<v-card class="overview-card pa-4 bg-blue-lighten-5 text-blue">
 			<div class="overview-card-top">
 				<span>Charging Station</span>
-				<span>Day</span>
+				<span class="cursor-pointer" @click="changeUnit">{{ unit }}</span>
 			</div>
 			<div class="overview-card-bottom">
 				<Icon icon="solar:users-group-two-rounded-line-duotone" width="65" />
@@ -70,7 +70,7 @@
 		<v-card class="overview-card pa-4 bg-teal-lighten-5 text-teal">
 			<div class="overview-card-top">
 				<span>Grid</span>
-				<span>Day</span>
+				<span class="cursor-pointer" @click="changeUnit">{{ unit }}</span>
 			</div>
 			<div class="overview-card-bottom">
 				<Icon icon="solar:layers-minimalistic-line-duotone" width="65" />
@@ -86,6 +86,17 @@
 </template>
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
+const unit = ref('Day')
+const unitList = ref(['Day','Month','Year'])
+function changeUnit () {
+  let index = unitList.value.findIndex(item => item === unit.value)
+  if (index < 2){
+    index += 1
+  } else {
+    index = 0
+  }
+  unit.value = unitList.value[index]
+}
 </script>
 <style lang="scss" scoped>
 .overview-card {
@@ -101,4 +112,16 @@ import { Icon } from "@iconify/vue";
 		justify-content: space-between;
 	}
 }
+.unselect {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+
+  display: grid;
+  grid-column-gap: 16px;
+  grid-template-columns:3fr 3fr 4fr 3fr 3fr;
+  height: 140px;
+}
+
 </style>

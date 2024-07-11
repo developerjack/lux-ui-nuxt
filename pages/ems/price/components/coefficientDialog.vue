@@ -10,7 +10,6 @@ const form:{ [key: string]: string } = reactive({})
 function getFormData() {
   Object.keys(formList).forEach(item => {
     form[item] = formList[item].value
-    console.log(form)
   })
 }
 const formList: formType = reactive({

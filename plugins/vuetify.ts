@@ -15,7 +15,9 @@ const i18n = createI18n({
   locale: 'en',
   messages: messages,
   silentTranslationWarn: true,
-  silentFallbackWarn: true
+  missingWarn: false,
+  silentFallbackWarn: true,
+  fallbackWarn: false
 });
 
 const light = {

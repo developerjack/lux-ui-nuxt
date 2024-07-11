@@ -1,7 +1,7 @@
 <template>
 	<yhlx-main-container :key="$route.fullPath">
 		<template v-slot:title>
-			<yhlx-main-container-title :titleList="devices" @switchDevice="switchDevice"/>
+			<yhlx-main-container-title :titleList="devices"/>
 		</template>
 		<v-tabs v-model="tab">
 			<v-tab value="1">Overview</v-tab>

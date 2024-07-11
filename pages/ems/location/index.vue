@@ -87,7 +87,6 @@ function searchTableList() {
 }
 const timeId = ref();
 watch(() => params.name, () => {
-  console.log(params);
   clearTimeout(timeId.value);
   timeId.value = setTimeout(searchTableList,300);
 })

@@ -181,7 +181,7 @@ axios.get("/api/ems/sub-device").then(response => {
     &>.v-data-table:first-child{
       margin-right: 8px;
     }
-    :deep table{
+    :deep(table){
       padding: 0 !important;
       border: 1px solid #c5c5c5 !important;
     }

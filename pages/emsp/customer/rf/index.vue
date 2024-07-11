@@ -28,7 +28,6 @@ axios.get('/api/rf').then(response => {
 });
 const arr = ref([])
 watch(appStore.Columns,()=>{
-	console.log(appStore.Columns)
 	headers.value = []
 	appStore.Columns.forEach(item=>{
 		const index = arr.value.findIndex(header=>header.key===item)
