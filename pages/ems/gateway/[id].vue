@@ -1,5 +1,8 @@
 <template>
 	<yhlx-main-container>
+    <template v-slot:title>
+      <yhlx-main-container-title :titleList="gateways"/>
+    </template>
 		<v-tabs v-model="tab">
 			<v-tab value="1">Overview</v-tab>
 			<v-tab value="2">Info</v-tab>
@@ -51,7 +54,13 @@
 <script setup lang="ts">
 import Devices from "./components/Devices.vue";
 const tab = ref('one');
-
+const gateways = ref([
+  { id: "1", title: "Gateway NO.1", subtitle: 'test1' },
+  { id: "2", title: "Gateway NO.2", subtitle: 'test2' },
+  { id: "3", title: "Gateway NO.3", subtitle: 'test3' },
+  { id: "4", title: "Gateway NO.4", subtitle: 'test4' },
+  { id: "5", title: "Gateway NO.5", subtitle: 'test5' },
+])
 const configs = [
 	{ key: "ID", value: "1"},
 	{ key: "SerialNumber", value: "IOC001"},

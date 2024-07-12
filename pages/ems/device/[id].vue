@@ -53,11 +53,11 @@ import HistoryData from "./components/HistoryData.vue";
 import LineChart from "./components/LineChart.vue";
 
 const devices = ref([
-	{ id: "1", name: "Device NO.1", subtitle: 'test1' },
-	{ id: "2", name: "Device NO.2", subtitle: 'test2' },
-	{ id: "3", name: "Device NO.3", subtitle: 'test3' },
-	{ id: "4", name: "Device NO.4", subtitle: 'test4' },
-	{ id: "5", name: "Device NO.5", subtitle: 'test5' },
+	{ id: "1", title: "Device NO.1", subtitle: 'test1' },
+	{ id: "2", title: "Device NO.2", subtitle: 'test2' },
+	{ id: "3", title: "Device NO.3", subtitle: 'test3' },
+	{ id: "4", title: "Device NO.4", subtitle: 'test4' },
+	{ id: "5", title: "Device NO.5", subtitle: 'test5' },
 ]);
 
 

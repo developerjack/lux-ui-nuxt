@@ -2,11 +2,11 @@
 const router = useRouter();
 const prop = defineProps({
   titleList: {
-    type: Array<{ name: string; subtitle?: string; id: string }>,
+    type: Array<{  id: string; title: string; subtitle?: string; }>,
     default: () => []
   }
 })
-const titleItem = ref({ name: '',subtitle: '', id: '' });
+const titleItem = ref({ title: '',subtitle: '', id: '' });
 const id = ref('');
 
 function switchDevice(value: string) {
@@ -36,7 +36,7 @@ watch(id, () => {
       <v-list style="background: none;" class="pa-0 cursor-pointer" v-bind="props">
         <v-list-item>
           <v-list-item-title class="d-flex">
-            <h4 class="card-title">{{ titleItem.name }}</h4>
+            <h4 class="card-title">{{ titleItem.title }}</h4>
             <v-icon>mdi-chevron-down</v-icon>
           </v-list-item-title>
           <v-list-item-subtitle>
@@ -48,7 +48,7 @@ watch(id, () => {
     <v-list>
       <v-list-item v-for="(item, index) in prop.titleList" :key="index" @click="switchDevice(item.id)">
         <v-list-item-title>
-          {{ item.name }}
+          {{ item.title }}
         </v-list-item-title>
         <v-list-item-subtitle>
           {{ item.subtitle }}

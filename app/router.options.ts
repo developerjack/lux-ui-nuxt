@@ -1,4 +1,4 @@
-import type RouterConfig from '@nuxt/schema'
+import type { RouterConfig } from '@nuxt/schema'
 
 export default <RouterConfig> {
     routes: (_routes) => [
@@ -141,8 +141,8 @@ export default <RouterConfig> {
         },
         {
             name: 'EMS-price-add',
-            path: '/ems/price/add',
-            component: () => import('~/pages/ems/price/add.vue').then(r => r.default || r)
+            path: '/ems/price/Add',
+            component: () => import('~/pages/ems/price/Add.vue').then(r => r.default || r)
         },
         {
             name: 'EMSP-agreement',
@@ -282,8 +282,8 @@ export default <RouterConfig> {
         },
         {
             name: 'UI-chip',
-            path: '/ui/chip',
-            component: () => import('~/pages/ui/chip.vue').then(r => r.default || r)
+            path: '/ui/Chip',
+            component: () => import('~/pages/ui/Chip.vue').then(r => r.default || r)
         },
         {
             name: 'UI-Dialog',
