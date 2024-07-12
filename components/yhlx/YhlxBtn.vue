@@ -1,5 +1,5 @@
 <template>
-	<v-btn v-if="location === 'Toolbar' && icon.length > 0">
+	<v-btn v-if="location === 'Toolbar' && icon.length > 0" icon>
 		<v-icon :color="color" :icon="icon" size="large" />
 	</v-btn>
 	<v-btn v-else :color="color" :variant="variant" class="px-4" v-bind="props">

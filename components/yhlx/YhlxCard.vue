@@ -8,6 +8,7 @@ const props = defineProps<{
 	<v-card>
 		<v-card-title class="card-title">
 			<span> {{ props.title }}</span>
+      <slot name="title"></slot>
 			<v-spacer></v-spacer>
 		</v-card-title>
 		<v-divider></v-divider>

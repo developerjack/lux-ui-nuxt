@@ -4,7 +4,6 @@
 * @Description: 
 -->
 <script setup lang="ts">
-import { RouterView } from "vue-router";
 import MainSiderbar from "@/components/app/main-sidebar/MainSiderbar.vue";
 import AppBar from "@/components/app/app-bar/AppBar.vue";
 import { useAppStore } from "@/stores/app";
