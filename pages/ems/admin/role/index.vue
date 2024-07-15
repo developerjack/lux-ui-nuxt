@@ -1,15 +1,19 @@
 <template>
 	<yhlx-main-container>
-		<template v-slot:append>
-			<yhlx-btn business-type="Add" location="Toolbar" density="comfortable" />
-		</template>
 		<div class="h-full d-flex">
-			<v-list class="left px-1 py-4">
-
-				<v-list-item v-for="(item, i) in menuItems" :key="i" :value="item" color="primary" rounded="shaped" @click="changeType('Detail',item)">
-					<v-list-item-title class="font-weight-bold" v-text="item.title" />
+			<v-list class="left px-1 py-4" :key="headerTitle">
+				<v-list-item
+          v-for="({ menuItem }, i) in roleItems"
+          :key="i"
+          :value="menuItem"
+          color="primary"
+          rounded="shaped"
+          @click="changeType('Detail', i)"
+          :class="{ ' v-list-item--active': selectedId === i, 'text-primary': selectedId === i }"
+        >
+					<v-list-item-title class="font-weight-bold" v-text="menuItem.title" />
 					<template v-slot:append>
-						<v-chip label density="comfortable" color="primary">{{ item.count }}</v-chip>
+						<v-chip label density="comfortable" color="primary">{{ menuItem.count }}</v-chip>
 					</template>
 				</v-list-item>
         <div class="border-dashed">
@@ -23,7 +27,7 @@
               <p style="line-height: 36px">{{ headerTitle }}</p>
               <div>
                 <yhlx-btn color="primary" class="width-limit" @click="saveForm">save</yhlx-btn>
-                <yhlx-btn v-if="headerTitle !== 'Add'" color="red" class="ml-2 width-limit">delete</yhlx-btn>
+                <yhlx-btn v-if="headerTitle !== 'Add'" color="red" class="ml-2 width-limit" @click="deleteRoleItem">delete</yhlx-btn>
               </div>
             </div>
           </template>
@@ -42,7 +46,6 @@
 							<v-text-field v-model="searchStr" variant="solo-filled" append-inner-icon="mdi-magnify" hide-details clearable placeholder="Search" />
 						</v-card>
 					</div>
-					
 					<template v-for="(permission, index) in filterPermissions" :key="index">
 						<h1 class="mt-8 mb-6">{{ permission.moduleName }}</h1>
 						<div class="mt-5 module-checkbox-wrapper">
@@ -56,8 +59,14 @@
 </template>
 
 <script setup lang="ts">
-
-const headerTitle = ref('Detail')
+const roleItems: Array<{ roleId: number,menuItem: { title: string, count: number },RoleName: string,Note: string,selected: string[] }> = reactive([])
+const formData: { RoleName: string, Note: string, selected: string[] } = reactive({
+  RoleName: '',
+  Note: '',
+  selected: []
+})
+const selectedId = ref()
+const headerTitle = ref('Add')
 const searchStr = ref('');
 const menuItems = ref([
 	{
@@ -108,15 +117,21 @@ const permissions = ref([
 		]
 	}
 ]);
-
-const formData: { RoleName: string;Note: string; selected: Array<string> } = reactive({
-  RoleName: '',
-  Note: '',
-  selected: []
-})
-
 onMounted(() => {
-  formData.selected = ['Create Location', 'Create Charging Station', 'Create User', 'Create Group', 'Create Customer','Send Hard Reset', 'Send Soft Reset', 'Send Unlock Connector']
+  menuItems.value.forEach((item,index) => {
+    roleItems.push({
+      roleId: index,
+      menuItem: {
+        title: item.title,
+        count: item.count
+      },
+      RoleName: item.title,
+      Note: item.title + 'count: ' + item.count,
+      selected: ['Create Location','Create Customer','Send Soft Reset']
+    })
+  })
+  selectedId.value = 0
+  changeType('Detail')
 })
 const filterPermissions = computed(():{ moduleName:string; items: string[] }[] => {
   const arr: Array<{moduleName:string; items: string[]}> = []
@@ -129,20 +144,43 @@ const filterPermissions = computed(():{ moduleName:string; items: string[] }[] =
   return arr
 })
 function saveForm () {
-  menuItems.value.push({
-    title: 'test',
-    count: 66
-  })
+  if (headerTitle.value === 'Add') {
+    roleItems.push({
+      roleId: roleItems.length,
+      menuItem: {
+        title: formData.RoleName,
+        count: roleItems.length + 1
+      },
+      RoleName: formData.RoleName,
+      Note: formData.Note,
+      selected: formData.selected
+    })
+    selectedId.value = 0
+    changeType('Detail')
+  } else {
+    roleItems[selectedId.value].menuItem.title = formData.RoleName
+    roleItems[selectedId.value].RoleName = formData.RoleName
+    roleItems[selectedId.value].Note = formData.Note
+    roleItems[selectedId.value].selected = formData.selected
+  }
   headerTitle.value = 'Detail'
 }
-function changeType (titleName: string, item: { title?:string; Note?: string; selected?: Array<string> } = {}) {
+function changeType (titleName: string, index: any = null) {
   clearInput()
   headerTitle.value = titleName
-  if (Object.keys(item).length !== 0) {
-    formData.RoleName = item.title || ''
-    formData.Note = 'test'
-    formData.selected = ['Create Location','Create Customer','Send Soft Reset']
+  if (titleName === 'Detail' && index !== null) {
+    selectedId.value = index
+    formData.RoleName = roleItems[selectedId.value].RoleName
+    formData.Note = roleItems[selectedId.value].Note
+    formData.selected = roleItems[selectedId.value].selected
+  } else if (titleName === 'Add') {
+    selectedId.value = null
   }
+}
+function deleteRoleItem () {
+  roleItems.splice(selectedId.value, 1)
+  selectedId.value = 0
+  changeType('Detail')
 }
 function clearInput () {
   searchStr.value = ''
@@ -157,12 +195,10 @@ function clearInput () {
 	width: 240px;
 	border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
-
 .right {
 	flex: 1;
 	overflow: auto;
 }
-
 .width-limit{
   width: 80px;
 }

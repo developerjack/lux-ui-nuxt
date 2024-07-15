@@ -11,7 +11,7 @@
 					<p class="text-body-caption">Compared
 						<span style="color:red;">
 							565
-							<yhlx-svg-icon name="trending-up" color="red" width="14px" height="14px" />
+							<yhlx-svg-icon class="d-inline-block" name="trending-up" color="red" width="14px" height="14px" />
 						</span>
 					</p>
 				</div>
