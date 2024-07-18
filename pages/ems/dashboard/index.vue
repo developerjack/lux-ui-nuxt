@@ -23,7 +23,6 @@ import Installation from "./components/Installation.vue";
 import DataLine from "./components/PowerLineChart.vue";
 import DeviceStatus from "~/pages/ems/dashboard/components/DeviceStatus.vue";
 import AlarmTable from "./components/AlarmTable.vue";
-
 </script>
 
 <style scoped lang="scss">

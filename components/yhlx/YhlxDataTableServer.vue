@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import axios from "axios";
+import { request } from "@/utils/request";
 import { sleep } from "@antfu/utils";
 const props = defineProps({
 	headers: Array<{ // 表头
@@ -58,11 +58,9 @@ function loadItems({ page = 1, itemsPerPage = 10, sortBy = {} }) { // 页数(1)�
 			loading.value = false;
 			return;
 		}
-		axios.get(props.itemsUrl, {
-			params: props.params
-		}).then(response => {
-			itemsTotal.value = response.data.data.total;
-			items.value = response.data.data.content;
+    request.get(props.itemsUrl).then(response => {
+			itemsTotal.value = response.data.total;
+			items.value = response.data.content;
 		}).finally(() => {
 			loading.value = false;
 		});

@@ -15,7 +15,7 @@
 				<v-card-actions>
 					<v-spacer></v-spacer>
 					<yhlx-btn business-type="Close" variant="text" @click="dialog = false">Close</yhlx-btn>
-					<yhlx-btn business-type="Primary" @click="dialog = false">Save</yhlx-btn>
+					<yhlx-btn business-type="Primary" @click="submit">Save</yhlx-btn>
 				</v-card-actions>
 			</v-container>
 		</v-card>
@@ -26,5 +26,10 @@ const props = defineProps({
 	location: String, // 参考YhlxBtn
 	title: String, // 按钮标题
 });
+const emits = defineEmits(['submit'])
+function submit() {
+  emits('submit')
+  dialog.value = false
+}
 const dialog = ref(false);
 </script>

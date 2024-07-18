@@ -9,7 +9,7 @@ const shortTitle = "Lux Admin";
 const description = "Lux-Admin,Awesome Nuxt3-Vuetify3 Admin";
 const image = "https://github.com/yangjiakai/lux-nuxt3/blob/main/assets/images/banner.png";
 const url = "https://lux-vuetify3-nuxt3.netlify.app/";
-
+const apiUrl = 'http://192.168.2.132:9001'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: true,
@@ -27,8 +27,16 @@ export default defineNuxtConfig({
 	// 		pathPrefix: false,
 	// 	},
 	// ],
+  nitro: {
+    devProxy: {
+      "/netApi": {
+        target: apiUrl, // 这里是接口地址
+        changeOrigin: true
+      },
+    },
+  },
   modules: [
-		"nuxt-icons",
+    "nuxt-icons",
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     async (options, nuxt) => {
@@ -58,7 +66,15 @@ export default defineNuxtConfig({
       }
     }],
   ],
-
+  // axios: {
+  //   proxy: true
+  // },
+  // proxy: {
+  //   '/user': {
+  //     target: apiUrl,
+  //     changeOrigin: true
+  //   }
+  // },
   vite: {
     vue: {
       template: {

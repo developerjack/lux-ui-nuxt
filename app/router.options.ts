@@ -1,4 +1,4 @@
-import type RouterConfig from '@nuxt/schema'
+import type { RouterConfig } from '@nuxt/schema'
 
 export default <RouterConfig> {
     routes: (_routes) => [
@@ -78,6 +78,11 @@ export default <RouterConfig> {
             name: 'EMS-admin',
             path: '/ems/admin/admin',
             component: () => import('~/pages/ems/admin/admin/index.vue').then(r => r.default || r)
+        },
+        {
+            name: 'EMS-admin-detail',
+            path: '/ems/admin/admin/:id',
+            component: () => import('~/pages/ems/admin/admin/[id].vue').then(r => r.default || r)
         },
         {
             name: 'EMS-role',
@@ -421,6 +426,6 @@ export default <RouterConfig> {
             name: 'Chart-TableChart',
             path: '/chart/TableChart',
             component: () => import('~/pages/chart/TableChart.vue').then(r => r.default || r)
-        },
+        }
     ],
 }

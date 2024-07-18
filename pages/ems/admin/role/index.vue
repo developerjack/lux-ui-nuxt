@@ -3,18 +3,17 @@
 		<div class="h-full d-flex">
 			<v-list class="left px-1 py-4" :key="headerTitle">
 				<v-list-item
-          v-for="({ menuItem }, i) in roleItems"
+          v-for="(menuItem, i) in menuItems"
           :key="i"
           :value="menuItem"
           color="primary"
           rounded="shaped"
-          @click="changeType('Detail', i)"
-          :class="{ ' v-list-item--active': selectedId === i, 'text-primary': selectedId === i }"
+          @click="changeType('Detail', menuItem.value)"
         >
 					<v-list-item-title class="font-weight-bold" v-text="menuItem.title" />
-					<template v-slot:append>
-						<v-chip label density="comfortable" color="primary">{{ menuItem.count }}</v-chip>
-					</template>
+<!--					<template v-slot:append>-->
+<!--						<v-chip label density="comfortable" color="primary">{{ menuItem.count }}</v-chip>-->
+<!--					</template>-->
 				</v-list-item>
         <div class="border-dashed">
           <nuxt-icon name="svg/add-plus" style="font-size: 32px;" @click="changeType('Add')"></nuxt-icon>
@@ -40,16 +39,16 @@
 						</v-col>
 					</v-row>
 				</yhlx-card>
-				<yhlx-card title="Permissions" class="mt-4">
+				<yhlx-card title="Permissions" class="mt-4" style="height: calc(100% - 165px)">
 					<div class="my-6">
 						<v-card variant="outlined">
 							<v-text-field v-model="searchStr" variant="solo-filled" append-inner-icon="mdi-magnify" hide-details clearable placeholder="Search" />
 						</v-card>
 					</div>
-					<template v-for="(permission, index) in filterPermissions" :key="index">
+					<template v-for="(permission, index) in permissions" :key="index">
 						<h1 class="mt-8 mb-6">{{ permission.moduleName }}</h1>
 						<div class="mt-5 module-checkbox-wrapper">
-							<v-checkbox v-for="item in permission.items" :key="item" v-model="formData.selected" :label="item" :value="item" />
+							<v-checkbox v-for="item in permission.items" :key="item.value" v-model="formData.selected" :label="item.label" :value="item.value" />
 						</div>
 					</template>
 				</yhlx-card>
@@ -59,6 +58,8 @@
 </template>
 
 <script setup lang="ts">
+import { login } from "@/api/login";
+import { getPermission, getRoleDetail, createRole, updateRole, logicDeleteRole, getRoleList } from '@/api/ems/admin/roleManage'
 const roleItems: Array<{ roleId: number,menuItem: { title: string, count: number },RoleName: string,Note: string,selected: string[] }> = reactive([])
 const formData: { RoleName: string, Note: string, selected: string[] } = reactive({
   RoleName: '',
@@ -68,125 +69,113 @@ const formData: { RoleName: string, Note: string, selected: string[] } = reactiv
 const selectedId = ref()
 const headerTitle = ref('Add')
 const searchStr = ref('');
-const menuItems = ref([
-	{
-		title: "Admin",
-		count: 123,
-	},
-	{
-		title: "Operator",
-		count: 10,
-	},
-	{
-		title: "Maintainer",
-		count: 145,
-	},
-	{
-		title: "Accountant",
-		count: 23,
-	},
-	{
-		title: "Device Manager",
-		count: 13,
-	},
-	{
-		title: "Auditor",
-		count: 3,
-	},
-	{
-		title: "operator Manager",
-		count: 118,
-	},
-]);
-
-const permissions = ref([
+const menuItems: Ref<{ title: string,value: string }[]> = ref([]);
+watch(() => formData.selected, () => {
+  console.log(formData.selected)
+})
+const permissions: { moduleName: string, items: { value: string, label: string }[] }[] = reactive([
 	{
 		moduleName: 'Command',
-		items: [
-			'Send Hard Reset', 'Send Soft Reset', 'Send Unlock Connector', 'Send Start Transaction', 'Send Stop Transaction', 'Send Update Firmware',
-			'Send Get Configuration', 'Send Change Configuration', 'Send Get Diagnostics', 'Send Change Availability', 'Send Clear Cache'
-		]
+		items: []
 	},
 	{
 		moduleName: 'Create',
-		items: [
-			'Create Location', 'Create Charging Station', 'Create User', 'Create Group', 'Create Customer', 'Create Driver',
-			'Create Token', 'Create Package', 'Create Coupon', 'Create Smart Charging Group', 'Create Charge Tariff', 'Create Reimbursement Tariff',
-			'Create Wholesale Billing Rule', 'Create Reimbursement Billing Rule', 'Create Retail Billing Rule', 'Create Charge Assist Web User', 'Create Energy Mix Profile', 'Create Role',
-			'Create exception groups', 'Create exceptions'
-		]
+		items: []
 	}
 ]);
+
 onMounted(() => {
-  menuItems.value.forEach((item,index) => {
-    roleItems.push({
-      roleId: index,
-      menuItem: {
-        title: item.title,
-        count: item.count
-      },
-      RoleName: item.title,
-      Note: item.title + 'count: ' + item.count,
-      selected: ['Create Location','Create Customer','Send Soft Reset']
+  const token = localStorage.getItem('access_token');
+  if (!token) {
+    const formData = new FormData();
+    formData.append('grant_type', 'authorization_password');
+    formData.append('username', 'yhlx1028');
+    formData.append('password', 'yhlx1028');
+    login(formData).then(res => {
+      const { data } = res
+      ApiGetPermission()
     })
-  })
-  selectedId.value = 0
-  changeType('Detail')
-})
-const filterPermissions = computed(():{ moduleName:string; items: string[] }[] => {
-  const arr: Array<{moduleName:string; items: string[]}> = []
-  permissions.value.forEach(item => {
-    arr.push({
-      moduleName: item.moduleName,
-      items: (item.items.filter(element => searchStr.value === null ? true : element.includes(searchStr.value)))
-    })
-  })
-  return arr
-})
-function saveForm () {
-  if (headerTitle.value === 'Add') {
-    roleItems.push({
-      roleId: roleItems.length,
-      menuItem: {
-        title: formData.RoleName,
-        count: roleItems.length + 1
-      },
-      RoleName: formData.RoleName,
-      Note: formData.Note,
-      selected: formData.selected
-    })
-    selectedId.value = 0
-    changeType('Detail')
   } else {
-    roleItems[selectedId.value].menuItem.title = formData.RoleName
-    roleItems[selectedId.value].RoleName = formData.RoleName
-    roleItems[selectedId.value].Note = formData.Note
-    roleItems[selectedId.value].selected = formData.selected
+    ApiGetPermission()
+    getMenuList()
   }
-  headerTitle.value = 'Detail'
-}
+})
 function changeType (titleName: string, index: any = null) {
   clearInput()
   headerTitle.value = titleName
+  selectedId.value = index
   if (titleName === 'Detail' && index !== null) {
-    selectedId.value = index
-    formData.RoleName = roleItems[selectedId.value].RoleName
-    formData.Note = roleItems[selectedId.value].Note
-    formData.selected = roleItems[selectedId.value].selected
+    ApiGetRoleDetail(index)
   } else if (titleName === 'Add') {
     selectedId.value = null
   }
 }
 function deleteRoleItem () {
-  roleItems.splice(selectedId.value, 1)
-  selectedId.value = 0
+  logicDeleteRole(selectedId.value).then(res => {
+    getMenuList()
+  })
   changeType('Detail')
+}
+function saveForm() {
+  const obj = {
+    id: selectedId.value,
+    name: formData.RoleName,
+    notes: formData.Note,
+    permissionsIdList: formData.selected
+  }
+  if (headerTitle.value === 'Detail') {
+    updateRole(obj).then((res) => {
+      console.log(res)
+    })
+  } else {
+    createRole(obj).then(res => {
+      console.log(res)
+    })
+  }
 }
 function clearInput () {
   searchStr.value = ''
   formData.RoleName = ''
   formData.Note = ''
   formData.selected = []
+}
+function ApiGetPermission () {
+  getPermission().then(response => {
+    response.data.forEach(item => {
+      if (item.groupName === 'Command') {
+        permissions[0].items.push({
+          label: item.code,
+          value: item.id
+        })
+      } else {
+        permissions[1].items.push({
+          label: item.code,
+          value: item.id
+        })
+      }
+    })
+  })
+}
+function ApiGetRoleDetail (id: any) {
+  getRoleDetail(id).then(response => {
+    formData.RoleName = response.data.name
+    formData.Note = response.data.notes
+    response.data.permissionList.forEach(item => {
+      formData.selected.push(item.id)
+    })
+  })
+}
+function getMenuList () {
+  getRoleList().then(res => {
+    menuItems.value = []
+    res.data.forEach(item => {
+      menuItems.value.push({
+        title: item.name,
+        value: item.id,
+      })
+    })
+    changeType('Detail',res.data.content[0].id)
+  })
 }
 </script>
 

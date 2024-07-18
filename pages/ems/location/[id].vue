@@ -6,6 +6,7 @@
 			<v-tab value="3">Devices</v-tab>
       <v-tab value="4">Data Report</v-tab>
       <v-tab value="5">Operation Strategy</v-tab>
+      <v-tab value="6">Data Analysis</v-tab>
 		</v-tabs>
 		<v-card-text>
 			<v-tabs-window v-model="tab">
@@ -32,10 +33,13 @@
 					<devices />
 				</v-tabs-window-item>
         <v-tabs-window-item value="4">
-          <DataReport></DataReport>
+          <DataReport />
         </v-tabs-window-item>
         <v-tabs-window-item value="5">
-          <OperationStrategy></OperationStrategy>
+          <OperationStrategy />
+        </v-tabs-window-item>
+        <v-tabs-window-item value="6">
+          <DataAnalysis />
         </v-tabs-window-item>
 			</v-tabs-window>
 		</v-card-text>
@@ -46,6 +50,7 @@
 import Devices from "./components/Devices.vue";
 import OperationStrategy from "./components/OperationStrategy.vue"
 import DataReport from "./components/DataReport.vue"
+import DataAnalysis from "./components/DataAnalysis.vue"
 const tab = ref('2');
 
 </script>
