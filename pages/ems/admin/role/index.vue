@@ -121,7 +121,7 @@ function saveForm() {
     id: selectedId.value,
     name: formData.RoleName,
     notes: formData.Note,
-    permissionsIdList: formData.selected
+    permissionIdList: formData.selected
   }
   if (headerTitle.value === 'Detail') {
     updateRole(obj).then((res) => {
