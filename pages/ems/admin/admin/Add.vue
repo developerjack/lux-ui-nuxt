@@ -15,10 +15,7 @@
 					<yhlx-text-field v-model="phone" label="Phone Number" hint="example of persistent helper text" required />
 				</v-col>
 				<v-col cols="12">
-					<yhlx-select :items="[
-            'Admin', 'Operator', 'Maintainer', 'Accountant', 'Device Manager',
-            'Auditor', 'operator Manager',
-          ]" label="Role" multiple v-model="roleIdList"/>
+					<yhlx-select :items="props.roleList" label="Role" multiple v-model="roleIdList"/>
 				</v-col>
 			</v-row>
 		</template>
@@ -26,6 +23,12 @@
 </template>
 <script setup lang="ts">
 import { createAccount } from '@/api/ems/admin/adminManage'
+const props = defineProps({
+  roleList:{
+    type: Array,
+    default: () => []
+  }
+})
 const emits = defineEmits(['refreshTable'])
 const email = ref('')
 const password = ref('')
@@ -38,7 +41,7 @@ function submit() {
     password: password.value,
     email: email.value,
     phone: phone.value,
-    roleIdList: [0,2,5]
+    roleIdList: roleIdList.value
   }
   createAccount(obj).then(res => {
     emits('refreshTable')

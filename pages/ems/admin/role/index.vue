@@ -9,11 +9,9 @@
           color="primary"
           rounded="shaped"
           @click="changeType('Detail', menuItem.value)"
+          :class="{ 'v-list-item--active': selectedId == menuItem.value,'text-primary': selectedId == menuItem.value }"
         >
-					<v-list-item-title class="font-weight-bold" v-text="menuItem.title" />
-<!--					<template v-slot:append>-->
-<!--						<v-chip label density="comfortable" color="primary">{{ menuItem.count }}</v-chip>-->
-<!--					</template>-->
+					<v-list-item-title class="font-weight-bold" v-text="menuItem.title"/>
 				</v-list-item>
         <div class="border-dashed">
           <nuxt-icon name="svg/add-plus" style="font-size: 32px;" @click="changeType('Add')"></nuxt-icon>
@@ -39,7 +37,7 @@
 						</v-col>
 					</v-row>
 				</yhlx-card>
-				<yhlx-card title="Permissions" class="mt-4" style="height: calc(100% - 165px)">
+				<yhlx-card title="Permissions" class="mt-4" style="height: calc(100% - 165px);overflow-y: auto">
 					<div class="my-6">
 						<v-card variant="outlined">
 							<v-text-field v-model="searchStr" variant="solo-filled" append-inner-icon="mdi-magnify" hide-details clearable placeholder="Search" />
@@ -60,7 +58,6 @@
 <script setup lang="ts">
 import { login } from "@/api/login";
 import { getPermission, getRoleDetail, createRole, updateRole, logicDeleteRole, getRoleList } from '@/api/ems/admin/roleManage'
-const roleItems: Array<{ roleId: number,menuItem: { title: string, count: number },RoleName: string,Note: string,selected: string[] }> = reactive([])
 const formData: { RoleName: string, Note: string, selected: string[] } = reactive({
   RoleName: '',
   Note: '',
@@ -70,9 +67,6 @@ const selectedId = ref()
 const headerTitle = ref('Add')
 const searchStr = ref('');
 const menuItems: Ref<{ title: string,value: string }[]> = ref([]);
-watch(() => formData.selected, () => {
-  console.log(formData.selected)
-})
 const permissions: { moduleName: string, items: { value: string, label: string }[] }[] = reactive([
 	{
 		moduleName: 'Command',
@@ -84,7 +78,7 @@ const permissions: { moduleName: string, items: { value: string, label: string }
 	}
 ]);
 
-onMounted(() => {
+onMounted(async () => {
   const token = localStorage.getItem('access_token');
   if (!token) {
     const formData = new FormData();
@@ -106,30 +100,27 @@ function changeType (titleName: string, index: any = null) {
   selectedId.value = index
   if (titleName === 'Detail' && index !== null) {
     ApiGetRoleDetail(index)
-  } else if (titleName === 'Add') {
-    selectedId.value = null
   }
 }
 function deleteRoleItem () {
   logicDeleteRole(selectedId.value).then(res => {
     getMenuList()
   })
-  changeType('Detail')
 }
 function saveForm() {
   const obj = {
-    id: selectedId.value,
     name: formData.RoleName,
     notes: formData.Note,
     permissionIdList: formData.selected
   }
   if (headerTitle.value === 'Detail') {
-    updateRole(obj).then((res) => {
-      console.log(res)
+    obj.id = selectedId.value
+    updateRole(obj).then(() => {
+      getMenuList()
     })
   } else {
-    createRole(obj).then(res => {
-      console.log(res)
+    createRole(obj).then(() => {
+      getMenuList()
     })
   }
 }
@@ -174,7 +165,7 @@ function getMenuList () {
         value: item.id,
       })
     })
-    changeType('Detail',res.data.content[0].id)
+    changeType('Detail',res.data[0].id)
   })
 }
 </script>
