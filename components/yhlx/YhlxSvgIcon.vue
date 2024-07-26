@@ -1,5 +1,5 @@
 <template>
-	<nuxt-icon :name="iconName" :class="svgClass" :style="{ color: color, width: width, height: height }"/>
+	<nuxt-icon :name="iconName" :class="svgClass" :style="{ color: color, width: width, height: height, display: 'inline-block' }"/>
 </template>
 
 <script setup>
@@ -32,12 +32,10 @@ const svgClass = computed(() => {
 </script>
 
 <style scoped lang="scss">
-:deep(.yhlx-svg-icon) {
-	display: inline-block;
+.nuxt-icon {
+  display: inline-block;
 	svg {
 		color: currentColor;
-		width: 100% !important;
-		height: 100% !important;
 		margin-bottom: 0;
 	}
 }

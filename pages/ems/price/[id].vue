@@ -78,7 +78,6 @@ function formatterSeries () {
       </div>
       <v-divider class="mb-4" v-if="selected === 'one'"></v-divider>
       <CoefficientDialog class="mb-4" ref="coefficientDialog"/>
-
     </v-card-text>
   </yhlx-main-container>
 </template>

@@ -1,7 +1,7 @@
-import type { RouterConfig } from '@nuxt/schema'
+// import type { RouterConfig } from '@nuxt/schema'
 
-export default <RouterConfig> {
-    routes: (_routes) => [
+export default {
+    routes: () => [
         {
             name: 'home',
             path: '/',
@@ -32,6 +32,11 @@ export default <RouterConfig> {
             name: 'CPO-agreement-detail',
             path: '/cpo/agreement/:id',
             component: () => import('~/pages/cpo/agreement/[id].vue').then(r => r.default || r)
+        },
+        {
+            name: 'test',
+            path: '/ems/test',
+            component: () => import('~/pages/ems/test/test.vue').then(r => r.default || r)
         },
         {
             name: 'CPO-charging-station',

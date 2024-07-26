@@ -32,6 +32,11 @@ export default [
 				text: "Alarm",
 				link: "/ems/alarm",
 			},
+			{
+				icon: "solar:library-bold-duotone",
+				text: "Test",
+				link: "/ems/test",
+			},
 		]
 	},
 	{
