@@ -107,12 +107,8 @@ watch(selectedType, (val) => {
 onMounted(() => {
   init()
 })
-watch(panning, () => {
-  refreshGraph()
-})
 
 watch(strokeDasharray , () => {
-  console.log(graph.value.toJSON())
   refreshGraph()
 })
 watch(() => targetMarker, () => {
@@ -124,6 +120,11 @@ watch(sourceMarker, () => {
 
 function saveData() {
   graph.value.toJSON().cells // 获取节点及连线
+}
+
+function changePanning() {
+  panning.value = !panning.value
+  graph.value.togglePanning()
 }
 
 function refreshGraph() {
@@ -141,6 +142,8 @@ function refreshGraph() {
       graph.value.addNode({ ...cell })
     }
   })
+  panning.value = false
+  graph.value.centerContent()
 }
 
 function init() {
@@ -148,7 +151,7 @@ function init() {
   graph.value = new Graph({
     container: document.getElementById('graph-container')!,
     grid: true,
-    panning: panning.value,
+    panning: false,
     mousewheel: {
       enabled: true,
       zoomAtMousePosition: true,
@@ -182,16 +185,6 @@ function init() {
             },
           },
           zIndex: 0,
-        }).addTools({
-          name:'edge-editor',
-          args: {
-            event: this,
-            attrs: {
-              fontSize: 34,
-              color: '#fefe32',
-              backgroundColor: '#000',
-            },
-          },
         })
       },
       validateConnection({ targetMagnet }) {
@@ -255,25 +248,48 @@ function init() {
     },
   })
   document.getElementById('stencil')!.appendChild(stencil.container)
-  graph.value.on('edge:labels:added', (e) => {
-    e.added[0].attrs = {
-      label: {
-        ...e.added[0].attrs.label,
-        fontSize: 34,
-        fill: '#fff',
-      },
-      rect: {
-        fill: '#000',
-      },
-    }
+  // graph.value.on('edge:labels:added', (e) => {
+  //   e.added[0].attrs = {
+  //     label: {
+  //       ...e.added[0].attrs.label,
+  //       fontSize: 34,
+  //       fill: '#fff',
+  //     },
+  //     rect: {
+  //       fill: '#000',
+  //     },
+  //   }
+  // })
+  graph.value.on('edge:dblclick', ({ edge, e }) => {
+    console.log('edge:dblclick', edge)
+    edge.addTools({
+      name: 'edge-editor',
+      args: {
+        event: e
+      }
+    })
   })
   graph.value.on('edge:mouseenter', ({ cell }) => {
     cell.addTools([
       {
-        name: 'source-arrowhead'
+        name: 'source-arrowhead',
+        args: {
+          attrs: {
+            d: 'M 10 -5 L 0 0 L 10 5 Z',
+            fill: '#A2B1C3',
+            stroke: '#A2B1C3',
+          }
+        }
       },
       {
         name: 'target-arrowhead',
+        args: {
+          attrs: {
+            d: 'M -10 -5 L 0 0 L -10 5 Z',
+            fill: '#A2B1C3',
+            stroke: '#A2B1C3',
+          }
+        }
       },
       {
         name: 'button-remove',
@@ -283,7 +299,8 @@ function init() {
   })
 
   graph.value.on('edge:mouseleave', ({ cell }) => {
-    cell.removeTools()
+    cell.removeTools('button-remove')
+    cell.removeTools('source-arrowhead')
   })
 
   // #region 快捷键与事件
@@ -690,8 +707,8 @@ function init() {
   <div id="container">
     <div class="operation">
       <yhlx-select style="margin-right: 8px;" v-model="selectedType" :items="[{ title: '虚线',value: 0 }, { title: '虚线单向箭头',value: 1 }, { title: '虚线双向箭头',value: 2 }, { title: '实线',value: 3 }, { title: '实线单向箭头',value: 4 }, { title: '实线双向箭头',value: 5 }]"></yhlx-select>
-      <nuxt-icon v-show="!panning" name="svg/move" style="font-size: 30px;" @click="panning = !panning" />
-      <nuxt-icon v-show="panning" name="svg/move" class="active-icon" style="font-size: 30px;" @click="panning = !panning" />
+      <nuxt-icon v-show="!panning" name="svg/move" style="font-size: 30px;" @click="changePanning" />
+      <nuxt-icon v-show="panning" name="svg/move" class="active-icon" style="font-size: 30px;" @click="changePanning" />
       <yhlx-btn @click="saveData">save</yhlx-btn>
     </div>
     <div id="stencil" />
