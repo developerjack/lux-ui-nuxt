@@ -167,6 +167,8 @@ function init() {
           radius: 8,
         },
       },
+      allowMulti: false,
+      allowLoop: false,
       anchor: 'center',
       connectionPoint: 'anchor',
       allowBlank: false,
@@ -248,18 +250,6 @@ function init() {
     },
   })
   document.getElementById('stencil')!.appendChild(stencil.container)
-  // graph.value.on('edge:labels:added', (e) => {
-  //   e.added[0].attrs = {
-  //     label: {
-  //       ...e.added[0].attrs.label,
-  //       fontSize: 34,
-  //       fill: '#fff',
-  //     },
-  //     rect: {
-  //       fill: '#000',
-  //     },
-  //   }
-  // })
   graph.value.on('edge:dblclick', ({ edge, e }) => {
     console.log('edge:dblclick', edge)
     edge.addTools({
