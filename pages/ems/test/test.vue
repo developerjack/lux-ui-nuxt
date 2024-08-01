@@ -19,8 +19,15 @@ let targetMarker = ref({
   width: 0,
   height: 0,
 })
+const items = ref([{ title: '虚线',value: 0 },
+  { title: '虚线单向箭头',value: 1 },
+  { title: '虚线双向箭头',value: 2 },
+  { title: '实线',value: 3 },
+  { title: '实线单向箭头',value: 4 },
+  { title: '实线双向箭头',value: 5 }])
 const panning = ref(false)
 const graph = ref()
+const selectedEdge = ref([])
 const selectedType = ref(4)
 watch(selectedType, (val) => {
   switch (val) {
@@ -133,17 +140,29 @@ function refreshGraph() {
   init()
   graph.value.zoom(zoom - 1)
   cells.forEach(cell => {
-    if (cell.shape === 'edge') {
+    if (cell.shape === 'edge' && selectedEdge.value.indexOf(cell.id) !== -1) {
       cell.attrs.line.sourceMarker = { ...sourceMarker.value }
       cell.attrs.line.targetMarker = { ...targetMarker.value }
       cell.attrs.line.strokeDasharray = strokeDasharray.value
       graph.value.addEdge({ ...cell })
-    } else {
+    } else if (cell.shape !== 'edge') {
       graph.value.addNode({ ...cell })
+    } else {
+      graph.value.addEdge({ ...cell })
     }
   })
+  selectedEdge.value = []
   panning.value = false
   graph.value.centerContent()
+}
+
+function changeZoom(type) {
+  const zoom = graph.value.zoom()
+  if (type === 1 && zoom < 1.5) {
+      graph.value.zoom(0.1)
+  } else if (type === -1 && zoom > 0.5) {
+    graph.value.zoom(-0.1)
+  }
 }
 
 function init() {
@@ -181,9 +200,17 @@ function init() {
             line: {
               stroke: '#A2B1C3',
               strokeWidth: 2,
-              strokeDasharray: strokeDasharray.value,
-              targetMarker: targetMarker.value,
-              sourceMarker: sourceMarker.value
+              strokeDasharray: '',
+              targetMarker: {
+                name: 'block',
+                width: 12,
+                height: 8,
+              },
+              sourceMarker: {
+                name: '',
+                width: 0,
+                height: 0,
+              }
             },
           },
           zIndex: 0,
@@ -258,6 +285,9 @@ function init() {
         event: e
       }
     })
+  })
+  graph.value.on('edge:click', ({ cell }) => {
+    selectedEdge.value.push(cell.id)
   })
   graph.value.on('edge:mouseenter', ({ cell }) => {
     cell.addTools([
@@ -694,9 +724,11 @@ function init() {
 </script>
 
 <template>
-  <div id="container">
+  <div id="container" :style="{ width: '100%', height: '100%' }">
     <div class="operation">
-      <yhlx-select style="margin-right: 8px;" v-model="selectedType" :items="[{ title: '虚线',value: 0 }, { title: '虚线单向箭头',value: 1 }, { title: '虚线双向箭头',value: 2 }, { title: '实线',value: 3 }, { title: '实线单向箭头',value: 4 }, { title: '实线双向箭头',value: 5 }]"></yhlx-select>
+      <yhlx-select v-if="selectedEdge.length !== 0" style="margin-right: 8px;" v-model="selectedType" :items="items" />
+      <nuxt-icon name="svg/setBig" style="font-size: 30px;" @click="changeZoom(1)" />
+      <nuxt-icon name="svg/setSmall" style="font-size: 30px;" @click="changeZoom(-1)" />
       <nuxt-icon v-show="!panning" name="svg/move" style="font-size: 30px;" @click="changePanning" />
       <nuxt-icon v-show="panning" name="svg/move" class="active-icon" style="font-size: 30px;" @click="changePanning" />
       <yhlx-btn @click="saveData">save</yhlx-btn>
@@ -708,15 +740,13 @@ function init() {
 
 <style scoped lang="scss">
 #container {
-  width: 100%;
-  height: 100%;
   display: flex;
   position: relative;
   .operation{
     position: absolute;
     top: 0;
     right: 16px;
-    width: 20%;
+    width: 22%;
     height: 52px;
     display: flex;
     align-items: center;
