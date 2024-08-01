@@ -186,7 +186,6 @@ function init() {
           radius: 8,
         },
       },
-      allowMulti: false,
       allowLoop: false,
       anchor: 'center',
       connectionPoint: 'anchor',
