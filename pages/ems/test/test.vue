@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Graph, Shape } from '@antv/x6'
+import { Graph, Shape} from '@antv/x6'
 import { Stencil } from '@antv/x6-plugin-stencil'
 import { Transform } from '@antv/x6-plugin-transform'
 import { Selection } from '@antv/x6-plugin-selection'
@@ -27,6 +27,7 @@ const items = ref([{ title: '虚线',value: 0 },
   { title: '实线双向箭头',value: 5 }])
 const panning = ref(false)
 const graph = ref()
+const selectedNode = ref([])
 const selectedEdge = ref([])
 const selectedType = ref(4)
 watch(selectedType, (val) => {
@@ -186,7 +187,6 @@ function init() {
           radius: 8,
         },
       },
-      allowMulti: false,
       allowLoop: false,
       anchor: 'center',
       connectionPoint: 'anchor',
@@ -277,6 +277,18 @@ function init() {
     },
   })
   document.getElementById('stencil')!.appendChild(stencil.container)
+
+  graph.value.on('cell:added', (e) => {
+    selectedNode.value.push(e.cell.label)
+    stencil.load(group2.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group2')
+    stencil.load(group1.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group1')
+  });
+  graph.value.on('cell:removed', ({ cell }) => {
+    selectedNode.value = selectedNode.value.filter(item => item !== cell.label)
+    stencil.load(group2.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group2')
+    stencil.load(group1.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group1')
+  });
+
   graph.value.on('edge:dblclick', ({ edge, e }) => {
     console.log('edge:dblclick', edge)
     edge.addTools({
@@ -673,7 +685,8 @@ function init() {
     shape: 'custom-circle',
     label: '连接',
   })
-  stencil.load([r1, r2, r3, r4, r5, r6], 'group1')
+  const group1 = [r1, r2, r3, r4, r5, r6]
+  stencil.load(group1, 'group1')
 
   // 左侧菜单的图片选项
   const imageShapes = [
@@ -708,7 +721,7 @@ function init() {
         'https://gw.alipayobjects.com/zos/bmw-prod/2010ac9f-40e7-49d4-8c4a-4fcf2f83033b.svg',
     },
   ]
-  const imageNodes = imageShapes.map((item) =>
+  const group2 = imageShapes.map((item) =>
     graph.value.createNode({
       shape: 'custom-image',
       label: item.label,
@@ -719,7 +732,7 @@ function init() {
       },
     }),
   )
-  stencil.load(imageNodes, 'group2')
+  stencil.load(group2, 'group2')
 }
 </script>
 
