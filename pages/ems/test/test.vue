@@ -278,8 +278,12 @@ function init() {
   })
   document.getElementById('stencil')!.appendChild(stencil.container)
   graph.value.on('cell:added', (e) => {
-    console.log('元素添加到画布', stencil);
     selectedNode.value.push(e.cell.label)
+    stencil.load(group2.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group2')
+    stencil.load(group1.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group1')
+  });
+  graph.value.on('cell:removed', ({ cell }) => {
+    selectedNode.value = selectedNode.value.filter(item => item !== cell.label)
     stencil.load(group2.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group2')
     stencil.load(group1.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group1')
   });
