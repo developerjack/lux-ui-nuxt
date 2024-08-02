@@ -31,7 +31,7 @@ const panning = ref(false)
 const graph = ref()
 const selectedNode = ref([])
 const selectedEdge = ref([])
-const selectedType = ref(4)
+const selectedType = ref()
 watch(selectedType, (val) => {
   switch (val) {
     case 0:
@@ -113,19 +113,10 @@ watch(selectedType, (val) => {
       strokeDasharray.value = '0,0'
       break
   }
+  refreshEdgeAttrs()
 })
 onMounted(() => {
   init()
-})
-
-watch(strokeDasharray , () => {
-  refreshGraph()
-})
-watch(() => targetMarker, () => {
-  refreshGraph()
-})
-watch(sourceMarker, () => {
-  refreshGraph()
 })
 
 function saveData() {
@@ -137,27 +128,36 @@ function changePanning() {
   graph.value.togglePanning()
 }
 
-function refreshGraph() {
-  const cells = graph.value.toJSON().cells
+function refreshEdgeAttrs() {
+  const edges = graph.value.getEdges()
   const zoom = graph.value.zoom()
-  init()
+  // init()
   graph.value.zoom(zoom - 1)
-  cells.forEach(cell => {
-    if (cell.shape === 'edge' && selectedEdge.value.indexOf(cell.id) !== -1) {
-      cell.attrs.line.sourceMarker = { ...sourceMarker.value }
-      cell.attrs.line.targetMarker = { ...targetMarker.value }
-      cell.attrs.line.strokeDasharray = strokeDasharray.value
-      cell.attrs.line.stroke = '#A2B1C3'
-      graph.value.addEdge({ ...cell })
-    } else if (cell.shape !== 'edge') {
-      graph.value.addNode({ ...cell })
+  edges.forEach(edge => {
+    if (selectedEdge.value.indexOf(edge.id) !== -1) {
+      edge.setAttrs({
+        line: {
+          stroke: '#A2B1C3', // 更新颜色
+          sourceMarker: {
+            ...sourceMarker.value
+          },
+          targetMarker: {
+            ...targetMarker.value
+          },
+          strokeDasharray: strokeDasharray.value
+        },
+      });
+      graph.value.addEdge({ ...edge })
+    } else if (edge.shape !== 'edge') {
+      graph.value.addNode({ ...edge })
     } else {
-      graph.value.addEdge({ ...cell })
+      graph.value.addEdge({ ...edge })
     }
   })
   selectedEdge.value = []
+  selectedType.value = null
   panning.value = false
-  graph.value.centerContent()
+  // graph.value.centerContent()
 }
 
 function changeZoom(type) {
@@ -170,6 +170,7 @@ function changeZoom(type) {
 }
 
 function init() {
+  selectedNode.value = []
   graph.value && graph.value.dispose()
   graph.value = new Graph({
     container: document.getElementById('graph-container')!,
@@ -306,7 +307,6 @@ function init() {
       },
     });
     selectedEdge.value.push(edge.id)
-
   })
   graph.value.on('edge:mouseenter', ({ cell }) => {
     cell.addTools([
@@ -384,16 +384,20 @@ function init() {
   })
 
 // delete
-  graph.value.bindKey('backspace', () => {
+  graph.value.bindKey(['backspace','Delete'], () => {
     const cells = graph.value.getSelectedCells()
+    const edges = graph.value.getEdges()
     if (cells.length) {
-      graph.value.removeCells(cells)
-    }
-  })
-  graph.value.bindKey('Delete', () => {
-    const cells = graph.value.getSelectedCells()
-    if (cells.length) {
-      graph.value.removeCells(cells)
+      cells.forEach((cell) => {
+        if (cell.port) {
+          graph.value.removeNode(cell)
+        }
+      })
+      edges.forEach((edge) => {
+        if (selectedEdge.value.indexOf(edge.id) !== -1) {
+          graph.value.removeEdge(edge)
+        }
+      })
     }
   })
 
@@ -430,6 +434,7 @@ function init() {
     ) as NodeListOf<SVGElement>
     showPorts(ports, false)
   })
+
   graph.value.on('blank:click', () => {
     const edges = graph.value.getEdges()
     edges.forEach(edge => {
@@ -442,6 +447,7 @@ function init() {
       }
     })
     selectedEdge.value = []
+    selectedType.value = null
   })
   // #region 初始化图形   四个连接桩的样式配置
   const ports = {
@@ -749,8 +755,9 @@ function init() {
   <div id="container" :style="{ width: '100%', height: '100%' }">
     <div class="operation">
       <yhlx-select v-if="selectedEdge.length !== 0" style="margin-right: 8px;" v-model="selectedType" :items="items" />
-      <yhlx-text-field v-model="graphWidth" placeholder="画布宽度" style="max-width: 120px;min-width: 120px"></yhlx-text-field>
-      <yhlx-text-field v-model="graphHeight" placeholder="画布高度" style="max-width: 120px;min-width: 120px"></yhlx-text-field>
+      <yhlx-text-field v-model="graphWidth" placeholder="画布宽度" style="max-width: 120px;min-width: 120px" @blur="init"></yhlx-text-field>
+      <span style="font-size: 24px">X</span>
+      <yhlx-text-field v-model="graphHeight" placeholder="画布高度" style="max-width: 120px;min-width: 120px" @blur="init"></yhlx-text-field>
       <nuxt-icon name="svg/setBig" style="font-size: 30px;" @click="changeZoom(1)" />
       <nuxt-icon name="svg/setSmall" style="font-size: 30px;" @click="changeZoom(-1)" />
       <nuxt-icon v-show="!panning" name="svg/move" style="font-size: 30px;" @click="changePanning" />
