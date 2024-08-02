@@ -19,6 +19,8 @@ let targetMarker = ref({
   width: 0,
   height: 0,
 })
+const graphWidth = ref('100%')
+const graphHeight = ref('100%')
 const items = ref([{ title: '虚线',value: 0 },
   { title: '虚线单向箭头',value: 1 },
   { title: '虚线双向箭头',value: 2 },
@@ -145,6 +147,7 @@ function refreshGraph() {
       cell.attrs.line.sourceMarker = { ...sourceMarker.value }
       cell.attrs.line.targetMarker = { ...targetMarker.value }
       cell.attrs.line.strokeDasharray = strokeDasharray.value
+      cell.attrs.line.stroke = '#A2B1C3'
       graph.value.addEdge({ ...cell })
     } else if (cell.shape !== 'edge') {
       graph.value.addNode({ ...cell })
@@ -296,8 +299,14 @@ function init() {
       }
     })
   })
-  graph.value.on('edge:click', ({ cell }) => {
-    selectedEdge.value.push(cell.id)
+  graph.value.on('edge:click', ({ edge }) => {
+    edge.setAttrs({
+      line: {
+        stroke: '#5F95FF', // 更新颜色
+      },
+    });
+    selectedEdge.value.push(edge.id)
+
   })
   graph.value.on('edge:mouseenter', ({ cell }) => {
     cell.addTools([
@@ -320,16 +329,11 @@ function init() {
             stroke: '#A2B1C3',
           }
         }
-      },
-      {
-        name: 'button-remove',
-        args: { distance: -40 },
-      },
+      }
     ])
   })
 
   graph.value.on('edge:mouseleave', ({ cell }) => {
-    cell.removeTools('button-remove')
     cell.removeTools('source-arrowhead')
   })
 
@@ -386,6 +390,12 @@ function init() {
       graph.value.removeCells(cells)
     }
   })
+  graph.value.bindKey('Delete', () => {
+    const cells = graph.value.getSelectedCells()
+    if (cells.length) {
+      graph.value.removeCells(cells)
+    }
+  })
 
 // zoom
   graph.value.bindKey(['ctrl+1', 'meta+1'], () => {
@@ -400,7 +410,6 @@ function init() {
       graph.value.zoom(-0.1)
     }
   })
-
   // 控制连接桩显示/隐藏
   const showPorts = (ports: NodeListOf<SVGElement>, show: boolean) => {
     for (let i = 0, len = ports.length; i < len; i += 1) {
@@ -408,14 +417,6 @@ function init() {
     }
   }
   graph.value.on('node:mouseenter', ({ node }) => {
-    node.addTools([{
-      name: 'button-remove',
-      args: {
-        x: 0,
-        y: 0,
-        offset: { x: 10, y: 10 },
-      },
-    },])
     const container = document.getElementById('graph-container')!
     const ports = container.querySelectorAll(
         '.x6-port-body',
@@ -423,15 +424,25 @@ function init() {
     showPorts(ports, true)
   })
   graph.value.on('node:mouseleave', ({ node }) => {
-    node.removeTools()
     const container = document.getElementById('graph-container')!
     const ports = container.querySelectorAll(
         '.x6-port-body',
     ) as NodeListOf<SVGElement>
     showPorts(ports, false)
   })
-// #endregion
-
+  graph.value.on('blank:click', () => {
+    const edges = graph.value.getEdges()
+    edges.forEach(edge => {
+      if (selectedEdge.value.indexOf(edge.id) !== -1) {
+        edge.setAttrs({
+          line: {
+            stroke: '#A2B1C3', // 更新颜色
+          },
+        });
+      }
+    })
+    selectedEdge.value = []
+  })
   // #region 初始化图形   四个连接桩的样式配置
   const ports = {
     groups: {
@@ -738,6 +749,8 @@ function init() {
   <div id="container" :style="{ width: '100%', height: '100%' }">
     <div class="operation">
       <yhlx-select v-if="selectedEdge.length !== 0" style="margin-right: 8px;" v-model="selectedType" :items="items" />
+      <yhlx-text-field v-model="graphWidth" placeholder="画布宽度" style="max-width: 120px;min-width: 120px"></yhlx-text-field>
+      <yhlx-text-field v-model="graphHeight" placeholder="画布高度" style="max-width: 120px;min-width: 120px"></yhlx-text-field>
       <nuxt-icon name="svg/setBig" style="font-size: 30px;" @click="changeZoom(1)" />
       <nuxt-icon name="svg/setSmall" style="font-size: 30px;" @click="changeZoom(-1)" />
       <nuxt-icon v-show="!panning" name="svg/move" style="font-size: 30px;" @click="changePanning" />
@@ -745,7 +758,7 @@ function init() {
       <yhlx-btn @click="saveData">save</yhlx-btn>
     </div>
     <div id="stencil" />
-    <div id="graph-container" />
+    <div id="graph-container" :style="{ width: graphWidth || '100%', height: graphHeight || '100%' }" />
   </div>
 </template>
 
@@ -757,7 +770,7 @@ function init() {
     position: absolute;
     top: 0;
     right: 16px;
-    width: 22%;
+    width: 35%;
     height: 52px;
     display: flex;
     align-items: center;
@@ -771,9 +784,10 @@ function init() {
   }
   #stencil {
     width: 200px;
-    height: 100%;
+    height: calc(100vh - 64px);
     position: relative;
     border-right: 1px solid #dfe3e8;
+    z-index: 666;
   }
   #graph-container {
     width: 100%;
@@ -782,5 +796,8 @@ function init() {
 }
 .active-icon{
   color: rgb(var(--v-theme-primary));
+}
+:deep(.x6-widget-stencil){
+  width: 200px !important;
 }
 </style>
