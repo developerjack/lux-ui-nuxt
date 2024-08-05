@@ -19,6 +19,7 @@ let targetMarker = ref({
   width: 0,
   height: 0,
 })
+const dialog = ref(false)
 const graphWidth = ref('100%')
 const graphHeight = ref('100%')
 const items = ref([{ title: '虚线',value: 0 },
@@ -32,6 +33,9 @@ const graph = ref()
 const selectedNode = ref([])
 const selectedEdge = ref([])
 const selectedType = ref()
+const fold = ref(false)
+const width = ref('100%')
+const height = ref('100%')
 watch(selectedType, (val) => {
   switch (val) {
     case 0:
@@ -749,19 +753,58 @@ function init() {
   )
   stencil.load(group2, 'group2')
 }
+
+function confirmDialog() {
+  graphWidth.value = width.value
+  graphHeight.value = height.value
+  dialog.value = false
+}
 </script>
 
 <template>
   <div id="container" :style="{ width: '100%', height: '100%' }">
     <div class="operation">
-      <yhlx-select v-if="selectedEdge.length !== 0" style="margin-right: 8px;" v-model="selectedType" :items="items" />
-      <yhlx-text-field v-model="graphWidth" placeholder="画布宽度" style="max-width: 120px;min-width: 120px" @blur="init"></yhlx-text-field>
-      <span style="font-size: 24px">X</span>
-      <yhlx-text-field v-model="graphHeight" placeholder="画布高度" style="max-width: 120px;min-width: 120px" @blur="init"></yhlx-text-field>
-      <nuxt-icon name="svg/setBig" style="font-size: 30px;" @click="changeZoom(1)" />
-      <nuxt-icon name="svg/setSmall" style="font-size: 30px;" @click="changeZoom(-1)" />
-      <nuxt-icon v-show="!panning" name="svg/move" style="font-size: 30px;" @click="changePanning" />
-      <nuxt-icon v-show="panning" name="svg/move" class="active-icon" style="font-size: 30px;" @click="changePanning" />
+      <nuxt-icon v-show="!fold" name="svg/fold" class="icon-size" @click="fold = true"/>
+      <nuxt-icon v-show="fold" name="svg/unfold" class="icon-size" @click="fold = false"/>
+      <div class="d-flex" v-if="!fold">
+        <nuxt-icon name="svg/setting" class="icon-size" @click="dialog = true"/>
+        <v-dialog
+            v-model="dialog"
+            max-width="400"
+        >
+          <v-card>
+            <v-container>
+              <v-card-title class="pa-5">
+                <span class="text-h5">设置画布宽高</span>
+              </v-card-title>
+              <v-card-text>
+                <v-row>
+                  <v-col>
+                    <v-text-field label="画布宽度" clearable hide-details variant="underlined" v-model="width" placeholder="% 或 px" style="max-width: 120px;min-width: 120px"></v-text-field>
+                  </v-col>
+                  <v-col>
+                    <v-text-field label="画布高度" clearable hide-details variant="underlined" v-model="height" placeholder="% 或 px" style="max-width: 120px;min-width: 120px"></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn @click="dialog = false">
+                  取消
+                </v-btn>
+                <v-btn @click="confirmDialog">
+                  确定
+                </v-btn>
+              </v-card-actions>
+            </v-container>
+          </v-card>
+        </v-dialog>
+        <nuxt-icon name="svg/setBig" class="icon-size" @click="changeZoom(1)" />
+        <nuxt-icon name="svg/setSmall" class="icon-size" @click="changeZoom(-1)" />
+        <nuxt-icon v-show="!panning" name="svg/move" class="icon-size" @click="changePanning" />
+        <nuxt-icon v-show="panning" name="svg/move" class="active-icon icon-size" @click="changePanning" />
+      </div>
+      <yhlx-select v-if="selectedEdge.length !== 0" class="mr-2" style="width: 120px" variant="underlined" v-model="selectedType" :items="items" placeholder="线的类型"/>
       <yhlx-btn @click="saveData">save</yhlx-btn>
     </div>
     <div id="stencil" />
@@ -773,16 +816,21 @@ function init() {
 #container {
   display: flex;
   position: relative;
+  justify-content: center;
+  align-items: center;
   .operation{
     position: absolute;
-    top: 0;
+    top: 8px;
     right: 16px;
-    width: 35%;
     height: 52px;
     display: flex;
     align-items: center;
     justify-content: end;
-    z-index: 666;
+    z-index: 6666;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 8px;
+    border: 1px solid #dfe3e8;
     .nuxt-icon{
       display: inline-block;
       cursor: pointer;
@@ -793,12 +841,14 @@ function init() {
     width: 200px;
     height: calc(100vh - 64px);
     position: relative;
-    border-right: 1px solid #dfe3e8;
+    border-right: 1px solid #e9e9e9;
     z-index: 666;
   }
   #graph-container {
     width: 100%;
     height: 100%;
+    margin: 0 auto;
+    background-color: #e9e9e9;
   }
 }
 .active-icon{
@@ -806,5 +856,8 @@ function init() {
 }
 :deep(.x6-widget-stencil){
   width: 200px !important;
+}
+.icon-size{
+  font-size: 30px;
 }
 </style>
