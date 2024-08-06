@@ -7,7 +7,9 @@ import { Snapline } from '@antv/x6-plugin-snapline'
 import { Keyboard } from '@antv/x6-plugin-keyboard'
 import { Clipboard } from '@antv/x6-plugin-clipboard'
 import { History } from '@antv/x6-plugin-history'
+import {useAppStore} from "~/stores/app";
 
+const appStore = useAppStore();
 const strokeDasharray = ref('0,0')
 let sourceMarker = ref({
   name: '',
@@ -20,8 +22,8 @@ let targetMarker = ref({
   height: 0,
 })
 const dialog = ref(false)
-const graphWidth = ref('100%')
-const graphHeight = ref('100%')
+const graphWidth = ref('794px')
+const graphHeight = ref('1143px')
 const items = ref([{ title: '虚线',value: 0 },
   { title: '虚线单向箭头',value: 1 },
   { title: '虚线双向箭头',value: 2 },
@@ -34,8 +36,8 @@ const selectedNode = ref([])
 const selectedEdge = ref([])
 const selectedType = ref()
 const fold = ref(false)
-const width = ref('100%')
-const height = ref('100%')
+const width = ref(794)
+const height = ref(1143)
 watch(selectedType, (val) => {
   switch (val) {
     case 0:
@@ -161,9 +163,7 @@ function refreshEdgeAttrs() {
   selectedEdge.value = []
   selectedType.value = null
   panning.value = false
-  // graph.value.centerContent()
 }
-
 function changeZoom(type) {
   const zoom = graph.value.zoom()
   if (type === 1 && zoom < 1.5) {
@@ -171,6 +171,9 @@ function changeZoom(type) {
   } else if (type === -1 && zoom > 0.5) {
     graph.value.zoom(-0.1)
   }
+  const zoomed = graph.value.zoom()
+  graphWidth.value = width.value * zoomed + 'px'
+  graphHeight.value = height.value * zoomed + 'px'
 }
 
 function init() {
@@ -180,9 +183,10 @@ function init() {
     container: document.getElementById('graph-container')!,
     grid: true,
     panning: false,
+    virtual: true,
     mousewheel: {
       enabled: true,
-      zoomAtMousePosition: true,
+      zoomAtMousePosition: false,
       modifiers: 'ctrl',
       minScale: 0.5,
       maxScale: 3,
@@ -259,19 +263,20 @@ function init() {
     .use(new History())
 
   const stencil = new Stencil({
-    title: '流程图',
+    title: '基础流程图',
     target: graph.value,
     stencilGraphWidth: 200,
     stencilGraphHeight: 180,
-    collapsable: true,
+    collapsable: false,
     groups: [
       {
-        title: '基础流程图',
         name: 'group1',
+        collapsable: false,
       },
       {
         title: '系统设计图',
         name: 'group2',
+        collapsable: false,
         graphHeight: 250,
         layoutOptions: {
           rowHeight: 70,
@@ -290,13 +295,13 @@ function init() {
     stencil.load(group2.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group2')
     stencil.load(group1.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group1')
   });
+
   graph.value.on('cell:removed', ({ cell }) => {
     selectedNode.value = selectedNode.value.filter(item => item !== cell.label)
     stencil.load(group2.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group2')
     stencil.load(group1.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group1')
   });
   graph.value.on('edge:dblclick', ({ edge, e }) => {
-    console.log('edge:dblclick', edge)
     edge.addTools({
       name: 'edge-editor',
       args: {
@@ -405,19 +410,6 @@ function init() {
     }
   })
 
-// zoom
-  graph.value.bindKey(['ctrl+1', 'meta+1'], () => {
-    const zoom = graph.value.zoom()
-    if (zoom < 1.5) {
-      graph.value.zoom(0.1)
-    }
-  })
-  graph.value.bindKey(['ctrl+2', 'meta+2'], () => {
-    const zoom = graph.value.zoom()
-    if (zoom > 0.5) {
-      graph.value.zoom(-0.1)
-    }
-  })
   // 控制连接桩显示/隐藏
   const showPorts = (ports: NodeListOf<SVGElement>, show: boolean) => {
     for (let i = 0, len = ports.length; i < len; i += 1) {
@@ -755,19 +747,18 @@ function init() {
 }
 
 function confirmDialog() {
-  graphWidth.value = width.value
-  graphHeight.value = height.value
+  graphWidth.value = width.value + 'px'
+  graphHeight.value = height.value + 'px'
   dialog.value = false
 }
 </script>
 
 <template>
   <div id="container" :style="{ width: '100%', height: '100%' }">
-    <div class="operation">
+    <div class="operation" :style="{ top: !appStore.isFullScreen ? '72px' : '8px' }">
       <nuxt-icon v-show="!fold" name="svg/fold" class="icon-size" @click="fold = true"/>
       <nuxt-icon v-show="fold" name="svg/unfold" class="icon-size" @click="fold = false"/>
       <div class="d-flex" v-if="!fold">
-        <nuxt-icon name="svg/setting" class="icon-size" @click="dialog = true"/>
         <v-dialog
             v-model="dialog"
             max-width="400"
@@ -780,10 +771,10 @@ function confirmDialog() {
               <v-card-text>
                 <v-row>
                   <v-col>
-                    <v-text-field label="画布宽度" clearable hide-details variant="underlined" v-model="width" placeholder="% 或 px" style="max-width: 120px;min-width: 120px"></v-text-field>
+                    <v-text-field label="画布宽度" clearable hide-details variant="underlined" v-model="width" placeholder="请输入数字" style="max-width: 120px;min-width: 120px"></v-text-field>
                   </v-col>
                   <v-col>
-                    <v-text-field label="画布高度" clearable hide-details variant="underlined" v-model="height" placeholder="% 或 px" style="max-width: 120px;min-width: 120px"></v-text-field>
+                    <v-text-field label="画布高度" clearable hide-details variant="underlined" v-model="height" placeholder="请输入数字" style="max-width: 120px;min-width: 120px"></v-text-field>
                   </v-col>
                 </v-row>
               </v-card-text>
@@ -799,16 +790,18 @@ function confirmDialog() {
             </v-container>
           </v-card>
         </v-dialog>
-        <nuxt-icon name="svg/setBig" class="icon-size" @click="changeZoom(1)" />
-        <nuxt-icon name="svg/setSmall" class="icon-size" @click="changeZoom(-1)" />
+        <nuxt-icon :name="!appStore.isFullScreen ? 'svg/fullscreen' : 'svg/fullscreen-exit'" class="icon-size" @click="appStore.fullScreen"/>
         <nuxt-icon v-show="!panning" name="svg/move" class="icon-size" @click="changePanning" />
         <nuxt-icon v-show="panning" name="svg/move" class="active-icon icon-size" @click="changePanning" />
+        <nuxt-icon name="svg/setBig" class="icon-size" @click="changeZoom(1)" />
+        <nuxt-icon name="svg/setSmall" class="icon-size" @click="changeZoom(-1)" />
+        <nuxt-icon name="svg/setting" class="icon-size" @click="dialog = true"/>
       </div>
       <yhlx-select v-if="selectedEdge.length !== 0" class="mr-2" style="width: 120px" variant="underlined" v-model="selectedType" :items="items" placeholder="线的类型"/>
       <yhlx-btn @click="saveData">save</yhlx-btn>
     </div>
-    <div id="stencil" />
-    <div id="graph-container" :style="{ width: graphWidth || '100%', height: graphHeight || '100%' }" />
+    <div id="stencil" :style="{ top: !appStore.isFullScreen ? 'calc(50vh - 333px)' : 'calc(50vh - 365px)',left: appStore.mainSidebar && !appStore.isFullScreen ? '255px' : '0' }"/>
+    <div id="graph-container" :style="{ width: graphWidth || '794px', height: graphHeight || '1143px' }" />
   </div>
 </template>
 
@@ -817,10 +810,10 @@ function confirmDialog() {
   display: flex;
   position: relative;
   justify-content: center;
+  background-color: #fefefe;
   align-items: center;
   .operation{
-    position: absolute;
-    top: 8px;
+    position: fixed;
     right: 16px;
     height: 52px;
     display: flex;
@@ -839,14 +832,15 @@ function confirmDialog() {
   }
   #stencil {
     width: 200px;
-    height: calc(100vh - 64px);
-    position: relative;
-    border-right: 1px solid #e9e9e9;
+    height: 666px;
+    top: 64px;
+    position: fixed;
+    border-right: 1px solid #fefefe;
     z-index: 666;
   }
   #graph-container {
-    width: 100%;
-    height: 100%;
+    width: 794px;
+    height: 1123px;
     margin: 0 auto;
     background-color: #e9e9e9;
   }
