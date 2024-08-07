@@ -8,9 +8,11 @@ import { Keyboard } from '@antv/x6-plugin-keyboard'
 import { Clipboard } from '@antv/x6-plugin-clipboard'
 import { History } from '@antv/x6-plugin-history'
 import {useAppStore} from "~/stores/app";
+import {target} from "@vue/devtools-shared";
 
 const appStore = useAppStore();
 const strokeDasharray = ref('0,0')
+const showStencil = ref(true)
 let sourceMarker = ref({
   name: '',
   width: 0,
@@ -38,6 +40,8 @@ const selectedType = ref()
 const fold = ref(false)
 const width = ref(794)
 const height = ref(1143)
+const zoomed = ref(1)
+let cellsAdded: any = reactive([])
 watch(selectedType, (val) => {
   switch (val) {
     case 0:
@@ -136,9 +140,6 @@ function changePanning() {
 
 function refreshEdgeAttrs() {
   const edges = graph.value.getEdges()
-  const zoom = graph.value.zoom()
-  // init()
-  graph.value.zoom(zoom - 1)
   edges.forEach(edge => {
     if (selectedEdge.value.indexOf(edge.id) !== -1) {
       edge.setAttrs({
@@ -165,15 +166,47 @@ function refreshEdgeAttrs() {
   panning.value = false
 }
 function changeZoom(type) {
-  const zoom = graph.value.zoom()
-  if (type === 1 && zoom < 1.5) {
-      graph.value.zoom(0.1)
-  } else if (type === -1 && zoom > 0.5) {
-    graph.value.zoom(-0.1)
-  }
-  const zoomed = graph.value.zoom()
-  graphWidth.value = width.value * zoomed + 'px'
-  graphHeight.value = height.value * zoomed + 'px'
+  // const zoom = graph.value.zoom()
+    if (type === 1 && zoomed.value < 1.5) {
+      // graph.value.zoom(0.1)
+      zoomed.value = zoomed.value + 0.1
+      resizeCells()
+    } else if (type === -1 && zoomed.value > 1) {
+      // graph.value.zoom(-0.1)
+      zoomed.value = zoomed.value - 0.1
+      resizeCells()
+    }
+    // const zoomed = graph.value.zoom()
+}
+
+function cellChanged() {
+  const cells = graph.value.toJSON().cells
+  cells.forEach(cell => {
+    if (cell.position) {
+      cell.position.x = cell.position.x / zoomed.value
+      cell.position.y = cell.position.y / zoomed.value
+      cell.size.width = cell.size.width / zoomed.value
+      cell.size.height = cell.size.height / zoomed.value
+    }
+  })
+  cellsAdded = cells
+}
+
+function resizeCells() {
+  const cells = structuredClone(cellsAdded)
+  cells.forEach(cell => {
+    if (cell.position) {
+      cell.position.x = cell.position.x * zoomed.value
+      cell.position.y = cell.position.y * zoomed.value
+      cell.size.width = cell.size.width * zoomed.value
+      cell.size.height = cell.size.height * zoomed.value
+    } else {
+
+    }
+  })
+  graph.value.fromJSON(cells)
+  graphWidth.value = width.value * zoomed.value + 'px'
+  graphHeight.value = height.value * zoomed.value + 'px'
 }
 
 function init() {
@@ -189,7 +222,7 @@ function init() {
       zoomAtMousePosition: false,
       modifiers: 'ctrl',
       minScale: 0.5,
-      maxScale: 3,
+      maxScale: 1.5,
     },
     connecting: {
       router: 'manhattan',
@@ -267,7 +300,7 @@ function init() {
     target: graph.value,
     stencilGraphWidth: 200,
     stencilGraphHeight: 180,
-    collapsable: false,
+    collapsable: true,
     groups: [
       {
         name: 'group1',
@@ -292,6 +325,17 @@ function init() {
   document.getElementById('stencil')!.appendChild(stencil.container)
   graph.value.on('cell:added', (e) => {
     selectedNode.value.push(e.cell.label)
+    const cells = graph.value.toJSON().cells
+    cells.forEach(cell => {
+      if (cell.position && cell.id === e.cell.id) {
+        cell.size.width = cell.size.width * zoomed.value
+        cell.size.height = cell.size.height * zoomed.value
+      } else {
+        console.log('cell', cell)
+      }
+    })
+    graph.value.fromJSON(cells)
+    cellChanged()
     stencil.load(group2.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group2')
     stencil.load(group1.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group1')
   });
@@ -341,7 +385,9 @@ function init() {
       }
     ])
   })
-
+  graph.value.on('cell:mouseup', ({ cell }) => {
+    cellChanged()
+  })
   graph.value.on('edge:mouseleave', ({ cell }) => {
     cell.removeTools('source-arrowhead')
   })
@@ -408,6 +454,7 @@ function init() {
         }
       })
     }
+    cellChanged()
   })
 
   // 控制连接桩显示/隐藏
@@ -751,6 +798,10 @@ function confirmDialog() {
   graphHeight.value = height.value + 'px'
   dialog.value = false
 }
+
+function changeShowStencil() {
+  showStencil.value = !showStencil.value
+}
 </script>
 
 <template>
@@ -800,7 +851,14 @@ function confirmDialog() {
       <yhlx-select v-if="selectedEdge.length !== 0" class="mr-2" style="width: 120px" variant="underlined" v-model="selectedType" :items="items" placeholder="线的类型"/>
       <yhlx-btn @click="saveData">save</yhlx-btn>
     </div>
-    <div id="stencil" :style="{ top: !appStore.isFullScreen ? 'calc(50vh - 333px)' : 'calc(50vh - 365px)',left: appStore.mainSidebar && !appStore.isFullScreen ? '255px' : '0' }"/>
+    <v-btn class="stencil-button"
+     :icon="showStencil ? 'mdi-unfold-less-vertical' : 'mdi-unfold-more-vertical'"
+     @click="changeShowStencil"
+     :style="{ top: !appStore.isFullScreen ? '90px' : '60px',left: appStore.mainSidebar && !appStore.isFullScreen ? '263px' : '8px' }"
+    ></v-btn>
+    <v-expand-x-transition>
+      <div v-show="showStencil" id="stencil" :style="{ top: !appStore.isFullScreen ? 'calc(50vh - 333px)' : 'calc(50vh - 365px)',left: appStore.mainSidebar && !appStore.isFullScreen ? '255px' : '0' }"/>
+    </v-expand-x-transition>
     <div id="graph-container" :style="{ width: graphWidth || '794px', height: graphHeight || '1143px' }" />
   </div>
 </template>
@@ -853,5 +911,10 @@ function confirmDialog() {
 }
 .icon-size{
   font-size: 30px;
+}
+.stencil-button{
+  position: fixed;
+  top: 90px;
+  left: 263px;
 }
 </style>
