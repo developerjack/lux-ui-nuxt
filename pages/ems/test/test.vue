@@ -192,6 +192,8 @@ function cellChanged() {
   const cells = graph.value.toJSON().cells
   cells.forEach(cell => {
     if (cell.position) {
+      cell.attrs.image && (cell.attrs.image.width = cell.attrs.image.width / zoomed.value)
+      cell.attrs.image && (cell.attrs.image.height = cell.attrs.image.height / zoomed.value)
       cell.position.x = cell.position.x / zoomed.value
       cell.position.y = cell.position.y / zoomed.value
       cell.size.width = cell.size.width / zoomed.value
@@ -202,11 +204,12 @@ function cellChanged() {
 }
 
 function resizeCells() {
-  console.log(graph.value)
   if (cellsAdded.length !== 0) {
     const cells = structuredClone(cellsAdded)
     cells.forEach(cell => {
       if (cell.position) {
+        cell.attrs.image && (cell.attrs.image.width = cell.attrs.image.width * zoomed.value)
+        cell.attrs.image && (cell.attrs.image.height = cell.attrs.image.height * zoomed.value)
         cell.position.x = cell.position.x * zoomed.value
         cell.position.y = cell.position.y * zoomed.value
         cell.size.width = cell.size.width * zoomed.value
@@ -343,6 +346,8 @@ function init() {
       if (cell.position && cell.id === e.cell.id) {
         cell.size.width = cell.size.width * zoomed.value
         cell.size.height = cell.size.height * zoomed.value
+        cell.attrs.image && (cell.attrs.image.width = cell.attrs.image.width * zoomed.value)
+        cell.attrs.image && (cell.attrs.image.height = cell.attrs.image.height * zoomed.value)
         graph.value.fromJSON(cells)
         cellChanged()
         stencil.load(group2.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group2')
@@ -794,8 +799,11 @@ function init() {
     graph.value.createNode({
       shape: 'custom-image',
       label: item.label,
+
       attrs: {
         image: {
+          width: 32,
+          height: 32,
           'xlink:href': item.image,
         },
       },
