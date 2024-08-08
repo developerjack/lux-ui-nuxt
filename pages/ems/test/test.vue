@@ -857,7 +857,7 @@ function changeLineStyle(type) {
      :style="{ top: !appStore.isFullScreen ? '90px' : '60px',left: appStore.mainSidebar && !appStore.isFullScreen ? '263px' : '8px' }"
     ></v-btn>
     <v-expand-x-transition>
-      <div v-show="showStencil" id="stencil" :style="{ top: !appStore.isFullScreen ? '148px' : '118px',left: appStore.mainSidebar && !appStore.isFullScreen ? '255px' : '0' }"/>
+      <div v-show="showStencil" id="stencil" :style="{ top: !appStore.isFullScreen ? '148px' : '118px',left: appStore.mainSidebar && !appStore.isFullScreen ? '263px' : '8px' }"/>
     </v-expand-x-transition>
     <div id="graph-container" :style="{ width: graphWidth || '794px', height: graphHeight || '1143px' }" />
     <v-dialog
