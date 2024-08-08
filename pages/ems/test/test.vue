@@ -823,8 +823,8 @@ function changeShowStencil() {
       <v-expand-x-transition>
         <div class="d-flex" v-show="!fold">
           <nuxt-icon v-show="showIcon" :name="!appStore.isFullScreen ? 'svg/fullscreen' : 'svg/fullscreen-exit'" class="icon-size" @click="appStore.fullScreen"/>
-<!--          <nuxt-icon v-show="!panning" name="svg/move" class="icon-size" @click="changePanning" />-->
-<!--          <nuxt-icon v-show="panning" name="svg/move" class="active-icon icon-size" @click="changePanning" />-->
+          <nuxt-icon v-show="!panning" name="svg/move" class="icon-size" @click="changePanning" />
+          <nuxt-icon v-show="panning" name="svg/move" class="active-icon icon-size" @click="changePanning" />
           <nuxt-icon v-show="showIcon" name="svg/setBig" class="icon-size" @click="changeZoom(1)" />
           <nuxt-icon v-show="showIcon" name="svg/setSmall" class="icon-size" @click="changeZoom(-1)" />
           <nuxt-icon v-show="showIcon" name="svg/setting" class="icon-size" @click="dialog = true"/>
