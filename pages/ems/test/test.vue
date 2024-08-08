@@ -176,11 +176,11 @@ function refreshEdgeAttrs() {
 }
 function changeZoom(type) {
   // const zoom = graph.value.zoom()
-    if (type === 1 && zoomed.value < 1.5) {
+    if (type === 1 && zoomed.value < 1.4) {
       // graph.value.zoom(0.1)
       zoomed.value = zoomed.value + 0.1
       resizeCells()
-    } else if (type === -1 && zoomed.value > 1) {
+    } else if (type === -1 && zoomed.value > 0.8) {
       // graph.value.zoom(-0.1)
       zoomed.value = zoomed.value - 0.1
       resizeCells()
@@ -202,8 +202,8 @@ function cellChanged() {
 }
 
 function resizeCells() {
+  console.log(graph.value)
   if (cellsAdded.length !== 0) {
-    console
     const cells = structuredClone(cellsAdded)
     cells.forEach(cell => {
       if (cell.position) {
@@ -217,6 +217,8 @@ function resizeCells() {
   }
   graphWidth.value = width.value * zoomed.value + 'px'
   graphHeight.value = height.value * zoomed.value + 'px'
+  graph.value.size.options.height = height.value * zoomed.value + 1
+  graph.value.size.options.width = width.value * zoomed.value + 1
   graph.value.resize()
 }
 
@@ -821,8 +823,8 @@ function changeShowStencil() {
       <v-expand-x-transition>
         <div class="d-flex" v-show="!fold">
           <nuxt-icon v-show="showIcon" :name="!appStore.isFullScreen ? 'svg/fullscreen' : 'svg/fullscreen-exit'" class="icon-size" @click="appStore.fullScreen"/>
-  <!--        <nuxt-icon v-show="!panning" name="svg/move" class="icon-size" @click="changePanning" />-->
-  <!--        <nuxt-icon v-show="panning" name="svg/move" class="active-icon icon-size" @click="changePanning" />-->
+<!--          <nuxt-icon v-show="!panning" name="svg/move" class="icon-size" @click="changePanning" />-->
+<!--          <nuxt-icon v-show="panning" name="svg/move" class="active-icon icon-size" @click="changePanning" />-->
           <nuxt-icon v-show="showIcon" name="svg/setBig" class="icon-size" @click="changeZoom(1)" />
           <nuxt-icon v-show="showIcon" name="svg/setSmall" class="icon-size" @click="changeZoom(-1)" />
           <nuxt-icon v-show="showIcon" name="svg/setting" class="icon-size" @click="dialog = true"/>
