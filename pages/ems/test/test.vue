@@ -26,12 +26,12 @@ const showIcon = ref(true)
 const dialog = ref(false)
 const graphWidth = ref('794px')
 const graphHeight = ref('1143px')
-const items = ref([{ title: '虚线',value: 0 },
-  { title: '虚线单向箭头',value: 1 },
-  { title: '虚线双向箭头',value: 2 },
-  { title: '实线',value: 3 },
-  { title: '实线单向箭头',value: 4 },
-  { title: '实线双向箭头',value: 5 }])
+// const items = ref([{ title: '虚线',value: 0 },
+//   { title: '虚线单向箭头',value: 1 },
+//   { title: '虚线双向箭头',value: 2 },
+//   { title: '实线',value: 3 },
+//   { title: '实线单向箭头',value: 4 },
+//   { title: '实线双向箭头',value: 5 }])
 const panning = ref(false)
 const graph = ref()
 const selectedNode = ref([])
@@ -141,12 +141,10 @@ onMounted(() => {
 function saveData() {
   graph.value.toJSON().cells // 获取节点及连线
 }
-
-function changePanning() {
-  panning.value = !panning.value
-  graph.value.togglePanning()
-}
-
+// function changePanning() {
+//   panning.value = !panning.value
+//   graph.value.togglePanning()
+// }
 function refreshEdgeAttrs() {
   const edges = graph.value.getEdges()
   edges.forEach(edge => {
@@ -185,7 +183,6 @@ function changeZoom(type) {
       zoomed.value = zoomed.value - 0.1
       resizeCells()
     }
-    // const zoomed = graph.value.zoom()
 }
 
 function cellChanged() {
@@ -479,14 +476,14 @@ function init() {
       ports[i].style.visibility = show ? 'visible' : 'hidden'
     }
   }
-  graph.value.on('node:mouseenter', ({ node }) => {
+  graph.value.on('node:mouseenter', () => {
     const container = document.getElementById('graph-container')!
     const ports = container.querySelectorAll(
         '.x6-port-body',
     ) as NodeListOf<SVGElement>
     showPorts(ports, true)
   })
-  graph.value.on('node:mouseleave', ({ node }) => {
+  graph.value.on('node:mouseleave', () => {
     const container = document.getElementById('graph-container')!
     const ports = container.querySelectorAll(
         '.x6-port-body',
@@ -799,7 +796,6 @@ function init() {
     graph.value.createNode({
       shape: 'custom-image',
       label: item.label,
-
       attrs: {
         image: {
           width: 32,
@@ -821,6 +817,10 @@ function confirmDialog() {
 function changeShowStencil() {
   showStencil.value = !showStencil.value
 }
+
+function changeLineStyle(type) {
+  selectedType.value = type
+}
 </script>
 
 <template>
@@ -838,9 +838,19 @@ function changeShowStencil() {
           <nuxt-icon v-show="showIcon" name="svg/setting" class="icon-size" @click="dialog = true"/>
         </div>
       </v-expand-x-transition>
-      <yhlx-select v-if="selectedEdge.length !== 0" class="mr-2" style="width: 120px" variant="underlined" v-model="selectedType" :items="items" placeholder="线的类型"/>
+<!--      <yhlx-select v-if="selectedEdge.length !== 0" class="mr-2" style="width: 120px" variant="underlined" v-model="selectedType" :items="items" placeholder="线的类型"/>-->
       <yhlx-btn @click="saveData">save</yhlx-btn>
     </div>
+    <v-expand-x-transition>
+      <div class="line-check" :style="{ top: !appStore.isFullScreen ? '128px' : '72px' }" v-show="selectedEdge.length !== 0">
+        <nuxt-icon name="svg/bidirectionalDashed" class="line-icon-size" @click="changeLineStyle(2)"/>
+        <nuxt-icon name="svg/bidirectionalLine" class="line-icon-size" @click="changeLineStyle(5)"/>
+        <nuxt-icon name="svg/dashed" class="line-icon-size" @click="changeLineStyle(0)"/>
+        <nuxt-icon name="svg/straightLine" class="line-icon-size" @click="changeLineStyle(3)"/>
+        <nuxt-icon name="svg/unidirectionalDashed" class="line-icon-size" @click="changeLineStyle(1)"/>
+        <nuxt-icon name="svg/unidirectionalLine" class="line-icon-size" @click="changeLineStyle(4)"/>
+      </div>
+    </v-expand-x-transition>
     <v-btn class="stencil-button"
      :icon="showStencil ? 'mdi-unfold-less-vertical' : 'mdi-unfold-more-vertical'"
      @click="changeShowStencil"
@@ -892,6 +902,24 @@ function changeShowStencil() {
   justify-content: center;
   background-color: #fefefe;
   align-items: center;
+  .line-check{
+    position: fixed;
+    right: 16px;
+    background-color: #fff;
+    border: 1px solid #dfe3e8;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    border-radius: 10px;
+    padding: 8px;
+    .line-icon-size{
+      font-size: 24px;
+      margin-right: 8px;
+    }
+    .line-icon-size:hover{
+      background-color: #e9e9e9;
+    }
+  }
   .operation{
     position: fixed;
     right: 16px;
