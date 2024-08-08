@@ -8,7 +8,6 @@ import { Keyboard } from '@antv/x6-plugin-keyboard'
 import { Clipboard } from '@antv/x6-plugin-clipboard'
 import { History } from '@antv/x6-plugin-history'
 import {useAppStore} from "~/stores/app";
-import {target} from "@vue/devtools-shared";
 
 const appStore = useAppStore();
 const strokeDasharray = ref('0,0')
@@ -23,6 +22,7 @@ let targetMarker = ref({
   width: 0,
   height: 0,
 })
+const showIcon = ref(true)
 const dialog = ref(false)
 const graphWidth = ref('794px')
 const graphHeight = ref('1143px')
@@ -125,6 +125,15 @@ watch(selectedType, (val) => {
   }
   refreshEdgeAttrs()
 })
+watch(fold, () => {
+  showIcon.value = true
+  if (fold.value === true) { // 若让fold为true,showIcon不管则收缩栏被撑开,使用v-if时候dom被摧毁后,动画也消失
+    const itemId = setTimeout(()=>{
+      showIcon.value = false
+      clearTimeout(itemId)
+    },100)
+  }
+})
 onMounted(() => {
   init()
 })
@@ -193,20 +202,22 @@ function cellChanged() {
 }
 
 function resizeCells() {
-  const cells = structuredClone(cellsAdded)
-  cells.forEach(cell => {
-    if (cell.position) {
-      cell.position.x = cell.position.x * zoomed.value
-      cell.position.y = cell.position.y * zoomed.value
-      cell.size.width = cell.size.width * zoomed.value
-      cell.size.height = cell.size.height * zoomed.value
-    } else {
-
-    }
-  })
-  graph.value.fromJSON(cells)
+  if (cellsAdded.length !== 0) {
+    console
+    const cells = structuredClone(cellsAdded)
+    cells.forEach(cell => {
+      if (cell.position) {
+        cell.position.x = cell.position.x * zoomed.value
+        cell.position.y = cell.position.y * zoomed.value
+        cell.size.width = cell.size.width * zoomed.value
+        cell.size.height = cell.size.height * zoomed.value
+      }
+    })
+    graph.value.fromJSON(cells)
+  }
   graphWidth.value = width.value * zoomed.value + 'px'
   graphHeight.value = height.value * zoomed.value + 'px'
+  graph.value.resize()
 }
 
 function init() {
@@ -218,7 +229,7 @@ function init() {
     panning: false,
     virtual: true,
     mousewheel: {
-      enabled: true,
+      enabled: false,
       zoomAtMousePosition: false,
       modifiers: 'ctrl',
       minScale: 0.5,
@@ -330,14 +341,12 @@ function init() {
       if (cell.position && cell.id === e.cell.id) {
         cell.size.width = cell.size.width * zoomed.value
         cell.size.height = cell.size.height * zoomed.value
-      } else {
-        console.log('cell', cell)
+        graph.value.fromJSON(cells)
+        cellChanged()
+        stencil.load(group2.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group2')
+        stencil.load(group1.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group1')
       }
     })
-    graph.value.fromJSON(cells)
-    cellChanged()
-    stencil.load(group2.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group2')
-    stencil.load(group1.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group1')
   });
 
   graph.value.on('cell:removed', ({ cell }) => {
@@ -809,45 +818,16 @@ function changeShowStencil() {
     <div class="operation" :style="{ top: !appStore.isFullScreen ? '72px' : '8px' }">
       <nuxt-icon v-show="!fold" name="svg/fold" class="icon-size" @click="fold = true"/>
       <nuxt-icon v-show="fold" name="svg/unfold" class="icon-size" @click="fold = false"/>
-      <div class="d-flex" v-if="!fold">
-        <v-dialog
-            v-model="dialog"
-            max-width="400"
-        >
-          <v-card>
-            <v-container>
-              <v-card-title class="pa-5">
-                <span class="text-h5">设置画布宽高</span>
-              </v-card-title>
-              <v-card-text>
-                <v-row>
-                  <v-col>
-                    <v-text-field label="画布宽度" clearable hide-details variant="underlined" v-model="width" placeholder="请输入数字" style="max-width: 120px;min-width: 120px"></v-text-field>
-                  </v-col>
-                  <v-col>
-                    <v-text-field label="画布高度" clearable hide-details variant="underlined" v-model="height" placeholder="请输入数字" style="max-width: 120px;min-width: 120px"></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn @click="dialog = false">
-                  取消
-                </v-btn>
-                <v-btn @click="confirmDialog">
-                  确定
-                </v-btn>
-              </v-card-actions>
-            </v-container>
-          </v-card>
-        </v-dialog>
-        <nuxt-icon :name="!appStore.isFullScreen ? 'svg/fullscreen' : 'svg/fullscreen-exit'" class="icon-size" @click="appStore.fullScreen"/>
-<!--        <nuxt-icon v-show="!panning" name="svg/move" class="icon-size" @click="changePanning" />-->
-<!--        <nuxt-icon v-show="panning" name="svg/move" class="active-icon icon-size" @click="changePanning" />-->
-        <nuxt-icon name="svg/setBig" class="icon-size" @click="changeZoom(1)" />
-        <nuxt-icon name="svg/setSmall" class="icon-size" @click="changeZoom(-1)" />
-        <nuxt-icon name="svg/setting" class="icon-size" @click="dialog = true"/>
-      </div>
+      <v-expand-x-transition>
+        <div class="d-flex" v-show="!fold">
+          <nuxt-icon v-show="showIcon" :name="!appStore.isFullScreen ? 'svg/fullscreen' : 'svg/fullscreen-exit'" class="icon-size" @click="appStore.fullScreen"/>
+  <!--        <nuxt-icon v-show="!panning" name="svg/move" class="icon-size" @click="changePanning" />-->
+  <!--        <nuxt-icon v-show="panning" name="svg/move" class="active-icon icon-size" @click="changePanning" />-->
+          <nuxt-icon v-show="showIcon" name="svg/setBig" class="icon-size" @click="changeZoom(1)" />
+          <nuxt-icon v-show="showIcon" name="svg/setSmall" class="icon-size" @click="changeZoom(-1)" />
+          <nuxt-icon v-show="showIcon" name="svg/setting" class="icon-size" @click="dialog = true"/>
+        </div>
+      </v-expand-x-transition>
       <yhlx-select v-if="selectedEdge.length !== 0" class="mr-2" style="width: 120px" variant="underlined" v-model="selectedType" :items="items" placeholder="线的类型"/>
       <yhlx-btn @click="saveData">save</yhlx-btn>
     </div>
@@ -857,9 +837,41 @@ function changeShowStencil() {
      :style="{ top: !appStore.isFullScreen ? '90px' : '60px',left: appStore.mainSidebar && !appStore.isFullScreen ? '263px' : '8px' }"
     ></v-btn>
     <v-expand-x-transition>
-      <div v-show="showStencil" id="stencil" :style="{ top: !appStore.isFullScreen ? 'calc(50vh - 333px)' : 'calc(50vh - 365px)',left: appStore.mainSidebar && !appStore.isFullScreen ? '255px' : '0' }"/>
+      <div v-show="showStencil" id="stencil" :style="{ top: !appStore.isFullScreen ? '148px' : '118px',left: appStore.mainSidebar && !appStore.isFullScreen ? '255px' : '0' }"/>
     </v-expand-x-transition>
     <div id="graph-container" :style="{ width: graphWidth || '794px', height: graphHeight || '1143px' }" />
+    <v-dialog
+        v-model="dialog"
+        max-width="400"
+    >
+      <v-card>
+        <v-container>
+          <v-card-title class="pa-5">
+            <span class="text-h5">设置画布宽高</span>
+          </v-card-title>
+          <v-card-text>
+            <v-row>
+              <v-col>
+                <v-text-field label="画布宽度" clearable hide-details variant="underlined" v-model="width" placeholder="请输入数字" style="max-width: 120px;min-width: 120px"></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field label="画布高度" clearable hide-details variant="underlined" v-model="height" placeholder="请输入数字" style="max-width: 120px;min-width: 120px"></v-text-field>
+              </v-col>
+            </v-row>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn @click="dialog = false">
+              取消
+            </v-btn>
+            <v-btn @click="confirmDialog">
+              确定
+            </v-btn>
+          </v-card-actions>
+        </v-container>
+      </v-card>
+    </v-dialog>
+
   </div>
 </template>
 
@@ -890,7 +902,7 @@ function changeShowStencil() {
   }
   #stencil {
     width: 200px;
-    height: 666px;
+    height: 60%;
     top: 64px;
     position: fixed;
     border-right: 1px solid #fefefe;
