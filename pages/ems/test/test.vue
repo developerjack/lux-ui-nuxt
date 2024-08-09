@@ -943,8 +943,9 @@ function changeLineStyle(type) {
     height: 60%;
     top: 64px;
     position: fixed;
-    border-right: 1px solid #fefefe;
+    border: 1px solid #fefefe;
     z-index: 666;
+    box-shadow: 2px 2px 4px #dfe3e8;
   }
   #graph-container {
     width: 794px;
@@ -966,5 +967,19 @@ function changeLineStyle(type) {
   position: fixed;
   top: 90px;
   left: 263px;
+}
+:deep(.x6-widget-stencil-title){
+  background-color: #fefefe;
+  border-bottom: 1px solid #f5f5f5;
+}
+:deep(.x6-widget-stencil-group){
+  background-color: #fff;
+}
+:deep(.x6-widget-stencil){
+  background-color: #fefefe;
+}
+:deep(.x6-widget-stencil-group-title){
+  background-color: #fefefe;
+  border-top: 1px solid #f5f5f5;
 }
 </style>
