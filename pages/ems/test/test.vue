@@ -8,7 +8,7 @@ import { Keyboard } from '@antv/x6-plugin-keyboard'
 import { Clipboard } from '@antv/x6-plugin-clipboard'
 import { History } from '@antv/x6-plugin-history'
 import {useAppStore} from "~/stores/app";
-
+import { Scroller } from '@antv/x6-plugin-scroller'
 const appStore = useAppStore();
 const strokeDasharray = ref('0,0')
 const showStencil = ref(true)
@@ -135,7 +135,13 @@ watch(fold, () => {
   }
 })
 onMounted(() => {
-  init()
+  init({
+    enabled: true,
+    pageVisible: true,
+    pageBreak: true,
+    pannable: true,
+    modifiers: 'ctrl'
+  })
 })
 
 function saveData() {
@@ -172,18 +178,18 @@ function refreshEdgeAttrs() {
   selectedType.value = null
   panning.value = false
 }
-function changeZoom(type) {
-  // const zoom = graph.value.zoom()
-    if (type === 1 && zoomed.value < 1.4) {
-      // graph.value.zoom(0.1)
-      zoomed.value = zoomed.value + 0.1
-      resizeCells()
-    } else if (type === -1 && zoomed.value > 0.8) {
-      // graph.value.zoom(-0.1)
-      zoomed.value = zoomed.value - 0.1
-      resizeCells()
-    }
-}
+// function changeZoom(type) {
+//   // const zoom = graph.value.zoom()
+//     if (type === 1 && zoomed.value < 1.4) {
+//       // graph.value.zoom(0.1)
+//       zoomed.value = zoomed.value + 0.1
+//       resizeCells()
+//     } else if (type === -1 && zoomed.value > 0.8) {
+//       // graph.value.zoom(-0.1)
+//       zoomed.value = zoomed.value - 0.1
+//       resizeCells()
+//     }
+// }
 
 function cellChanged() {
   const cells = graph.value.toJSON().cells
@@ -222,16 +228,19 @@ function resizeCells() {
   graph.value.resize()
 }
 
-function init() {
+function init(option) {
   selectedNode.value = []
   graph.value && graph.value.dispose()
   graph.value = new Graph({
     container: document.getElementById('graph-container')!,
+    // autoResize: true,
     grid: true,
+    width: 1050,
+    height: 1500,
     panning: false,
     virtual: true,
     mousewheel: {
-      enabled: false,
+      enabled: true,
       zoomAtMousePosition: false,
       modifiers: 'ctrl',
       minScale: 0.5,
@@ -290,7 +299,9 @@ function init() {
       },
     },
   })
+  const scroller = new Scroller( { ...option })
   graph.value
+    .use(scroller)
     .use(
       new Transform({
         resizing: true,
@@ -348,7 +359,7 @@ function init() {
         graph.value.fromJSON(cells)
         cellChanged()
         stencil.load(group2.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group2')
-        stencil.load(group1.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group1')
+        // stencil.load(group1.filter(item => selectedNode.value.indexOf(item.label) === -1), 'group1')
       }
     })
   });
@@ -809,9 +820,27 @@ function init() {
 }
 
 function confirmDialog() {
-  graphWidth.value = width.value + 'px'
-  graphHeight.value = height.value + 'px'
+  // graphWidth.value = width.value + 'px'
+  // graphHeight.value = height.value + 'px'
   dialog.value = false
+  graph.value.height = height.value - 0
+  graph.value.width = width.value - 0
+  init({
+    enabled: true,
+    pageVisible: true,
+    minVisibleHeight: height.value - 0,
+    minVisibleWidth: width.value - 0,
+    pageHeight: height.value - 0,
+    pageWidth: width.value - 0,
+    height: height.value - 0,
+    width: width.value - 0,
+    pageBreak: true,
+    pannable: true,
+    modifiers: 'ctrl'
+  })
+  resizeCells()
+  refreshEdgeAttrs()
+  graph.value.resize(width.value - 0, height.value - 0)
 }
 
 function changeShowStencil() {
@@ -831,10 +860,6 @@ function changeLineStyle(type) {
       <v-expand-x-transition>
         <div class="d-flex" v-show="!fold">
           <nuxt-icon v-show="showIcon" :name="!appStore.isFullScreen ? 'svg/fullscreen' : 'svg/fullscreen-exit'" class="icon-size" @click="appStore.fullScreen"/>
-<!--          <nuxt-icon v-show="!panning" name="svg/move" class="icon-size" @click="changePanning" />-->
-<!--          <nuxt-icon v-show="panning" name="svg/move" class="active-icon icon-size" @click="changePanning" />-->
-          <nuxt-icon v-show="showIcon" name="svg/setBig" class="icon-size" @click="changeZoom(1)" />
-          <nuxt-icon v-show="showIcon" name="svg/setSmall" class="icon-size" @click="changeZoom(-1)" />
           <nuxt-icon v-show="showIcon" name="svg/setting" class="icon-size" @click="dialog = true"/>
         </div>
       </v-expand-x-transition>
@@ -859,7 +884,7 @@ function changeLineStyle(type) {
     <v-expand-x-transition>
       <div v-show="showStencil" id="stencil" :style="{ top: !appStore.isFullScreen ? '148px' : '118px',left: appStore.mainSidebar && !appStore.isFullScreen ? '263px' : '8px' }"/>
     </v-expand-x-transition>
-    <div id="graph-container" :style="{ width: graphWidth || '794px', height: graphHeight || '1143px' }" />
+    <div id="graph-container" />
     <v-dialog
         v-model="dialog"
         max-width="400"
@@ -948,8 +973,7 @@ function changeLineStyle(type) {
     box-shadow: 2px 2px 4px #dfe3e8;
   }
   #graph-container {
-    width: 794px;
-    height: 1123px;
+    height: calc(100vh - 64px);
     margin: 0 auto;
     background-color: #e9e9e9;
   }
@@ -981,5 +1005,8 @@ function changeLineStyle(type) {
 :deep(.x6-widget-stencil-group-title){
   background-color: #fefefe;
   border-top: 1px solid #f5f5f5;
+}
+:deep(.x6-graph-scroller){
+  overflow: hidden;
 }
 </style>
