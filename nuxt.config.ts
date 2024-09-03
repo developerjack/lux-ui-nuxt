@@ -44,6 +44,7 @@ export default defineNuxtConfig({
         config.plugins.push(
           vuetify({
             styles: { configFile: resolve("/assets/scss/variables.scss") },
+            autoImport: true,
           }));
         config.plugins.push(viteMockServe({
           logger: false,
