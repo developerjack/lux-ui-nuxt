@@ -1,9 +1,7 @@
 import '@mdi/font/css/materialdesignicons.css'
 import "@/assets/scss/main.scss";
 import { createVuetify } from 'vuetify'
-import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
-import * as labsComponents from 'vuetify/labs/components';
 import { createVueI18nAdapter } from "vuetify/locale/adapters/vue-i18n";
 import { createI18n, useI18n } from "vue-i18n";
 import messages from '@/locales/messages';
@@ -125,11 +123,7 @@ const dark = {
 export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
     ssr: true,
-    directives,
-    components: {
-      ...labsComponents,
-      ...components,
-    },
+
     theme: {
       defaultTheme: "light",
       themes: {
