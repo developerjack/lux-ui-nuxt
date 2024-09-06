@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 const props = defineProps({
-	businessType: { // Add, Submit, Cancel
+	businessType: { // Add, Submit, Close, Cancel
 		type: String,
 		default: 'Submit'
 	},
@@ -33,6 +33,10 @@ onMounted(() => {
 		variant.value = "elevated";
 	}
 	else if (props.businessType === "Close") {
+		color.value = "error";
+		variant.value = "tonal";
+	}
+	else if (props.businessType === "Cancel") {
 		color.value = "error";
 		variant.value = "tonal";
 	}

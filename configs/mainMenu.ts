@@ -10,6 +10,7 @@ import menuSaaS from "./menus/saas.menu";
 import menuEMSP from "./menus/emsp.menu";
 import menuCPO from "./menus/cpo.menu";
 import menuEMS from "./menus/ems.menu";
+import menuEMSSaas from "./menus/ems-saas";
 import Menu = NavigationConfig.Menu;
 
 function getCurrentMenu(items: Menu[], path: string) : Menu {
@@ -32,6 +33,7 @@ export default {
 	  ...menuEMSP,
 	  ...menuCPO,
 	  ...menuEMS,
+	  ...menuEMSSaas,
     ...menuLanding,
     ...menuUI,
     ...menuAuth,
@@ -63,6 +65,8 @@ export default {
 				return menuEMSP;
 			case "EMS":
 				return menuEMS;
+			case "EMS SaaS":
+				return menuEMSSaas;
 			case "Demo":
 				return this.menu;
 			default:
@@ -73,6 +77,9 @@ export default {
 		return [{
 			title: 'Ioc EMS',
 			type: 'EMS'
+		}, {
+			title: 'EMS SaaS',
+			type: 'EMS SaaS'
 		}, {
 			title:'Iocharger',
 			type:'SAAS'
