@@ -9,8 +9,9 @@ import menuChart from "./menus/chart.menu";
 import menuSaaS from "./menus/saas.menu";
 import menuEMSP from "./menus/emsp.menu";
 import menuCPO from "./menus/cpo.menu";
-import menuEMS from "./menus/ems.menu";
 import menuEMSSaas from "./menus/ems-saas";
+import menuEMSOperator from "./menus/ems-operator";
+import menuEMSStation from "./menus/ems-station";
 import Menu = NavigationConfig.Menu;
 
 function getCurrentMenu(items: Menu[], path: string) : Menu {
@@ -32,9 +33,10 @@ export default {
 	  ...menuSaaS,
 	  ...menuEMSP,
 	  ...menuCPO,
-	  ...menuEMS,
 	  ...menuEMSSaas,
-    ...menuLanding,
+	  ...menuEMSOperator,
+	  ...menuEMSStation,
+	  ...menuLanding,
     ...menuUI,
     ...menuAuth,
     ...menuWidget,
@@ -57,16 +59,18 @@ export default {
 	},
 	getMenus(menuType: string) {
 		switch (menuType) {
-			case "SAAS":
+			case "OCPI SAAS":
 				return menuSaaS;
-			case "CPO":
-				return menuCPO;
-			case "eMSP":
+			case "OCPI eMSP":
 				return menuEMSP;
-			case "EMS":
-				return menuEMS;
+			case "OCPI CPO":
+				return menuCPO;
 			case "EMS SaaS":
 				return menuEMSSaas;
+			case "EMS Operator":
+				return menuEMSOperator;
+			case "EMS Station":
+				return menuEMSStation;
 			case "Demo":
 				return this.menu;
 			default:
@@ -74,25 +78,43 @@ export default {
 		}
 	},
 	getCompanies() {
-		return [{
-			title: 'Ioc EMS',
-			type: 'EMS'
-		}, {
-			title: 'EMS SaaS',
-			type: 'EMS SaaS'
-		}, {
-			title:'Iocharger',
-			type:'SAAS'
-		}, {
-			title:'EMES',
-			type:'eMSP'
-		}, {
-			title:'ICS',
-			type:'CPO'
-		}, {
-			title:'Demo',
-			type:'Demo'
-		}];
+		return [
+			{
+				title: 'SaaS',
+				type: 'EMS SaaS',
+				typeName: 'SaaS'
+			},
+			{
+				title: 'Iocharger',
+				type: 'EMS Operator',
+				typeName: 'Operator'
+			},
+			{
+				title: 'Software Park',
+				type: 'EMS Station',
+				typeName: 'Station'
+			},
+			// {
+			// 	title:'Iocharger',
+			// 	type:'OCPI SAAS',
+			// 	typeName: 'SaaS'
+			// },
+			// {
+			// 	title:'EMES',
+			// 	type:'OCPI eMSP',
+			// 	typeName: 'eMSP'
+			// },
+			// {
+			// 	title:'ICS',
+			// 	type:'OCPI CPO',
+			// 	typeName: 'CPO'
+			// },
+			// {
+			// 	title:'Demo',
+			// 	type:'Demo',
+			// 	typeName: 'Demo'
+			// }
+		];
 	},
 	getDefaultLink(menus:any): string | undefined {
 	let link:string | undefined;

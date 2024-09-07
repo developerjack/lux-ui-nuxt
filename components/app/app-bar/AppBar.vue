@@ -15,13 +15,15 @@ const appStore = useAppStore();
 const list = ref(menu.getCompanies());
 let title = ref(list.value[0].title);
 let type = ref(list.value[0].type);
+let typeName = ref(list.value[0].typeName);
 
 onMounted(() => {
 	if (appStore.menuType) {
 		type.value = appStore.menuType;
 		list.value.forEach(item => {
 			if(item.type === type.value){
-				title.value = item.title
+				title.value = item.title;
+				typeName.value = item.typeName;
 			}
 		})
 	} else {
@@ -31,7 +33,7 @@ onMounted(() => {
 
 // 选项
 const options = computed(() => {
-	return list.value.filter(item => item.title !== title.value);
+	return list.value;
 });
 
 const changeTitle = (item) => {
@@ -52,7 +54,7 @@ const changeTitle = (item) => {
       <template v-slot:activator="{ props }">
         <v-btn v-bind="props">
           {{ title }}
-          <v-chip label density="comfortable" color="primary ml-1" size="x-small">{{ type }}</v-chip>
+          <v-chip label density="comfortable" color="primary ml-1" size="x-small">{{ typeName }}</v-chip>
           <v-icon>mdi-chevron-down</v-icon>
         </v-btn>
       </template>
@@ -60,7 +62,7 @@ const changeTitle = (item) => {
         <v-list-item v-for="(item, index) in options" :key="index" @click="changeTitle(item)">
           <v-list-item-title>
             {{ item.title }}
-            <v-chip label density="comfortable" color="primary" size="x-small">{{ item.type }}</v-chip>
+            <v-chip label density="comfortable" color="primary" size="x-small">{{ item.typeName }}</v-chip>
           </v-list-item-title>
         </v-list-item>
       </v-list>

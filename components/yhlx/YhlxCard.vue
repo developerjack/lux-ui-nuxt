@@ -29,6 +29,6 @@ const customerStyle = props.density === 'compact' ? {
 
 <style scoped lang="scss">
 .v-card-title {
-	padding: 1rem;
+	padding: 0.8rem;
 }
 </style>
