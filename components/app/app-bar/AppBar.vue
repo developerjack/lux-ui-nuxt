@@ -39,6 +39,7 @@ const options = computed(() => {
 const changeTitle = (item) => {
   title.value = item.title;
   type.value = item.type;
+	typeName.value = item.typeName;
 	const link = menu.getDefaultLink(menu.getMenus(type.value));
 	if (!!link) {
 		router.push(link);

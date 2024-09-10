@@ -172,17 +172,18 @@ const MockAPI = [
 		response: () => {
 			return apiPageResult({
 				"id|+1": 1,
-				"time|+1": 1,
 				"PVIncome|100-1000": 200,
-				"PVElectricity|1-100": 20,
+				"PVEnergy|1-100": 20,
 				"batteryChargingIncome|100-1000": 200,
-				"batteryChargingElectricity|1-100": 20,
+				"batteryChargingEnergy|1-100": 20,
 				"batteryProceeds|100-1000": 200,
-				"batteryDischargeElectricity|1-100": 20,
-				"serviceFee|50-1000": 100,
-				"serviceElectricity|1-100": 20,
+				"batteryDischargeEnergy|1-100": 20,
+				"chargingStationIncome|50-1000": 100,
+				"chargingStationEnergy|1-100": 20,
 				"gridIncome|100-1000": 150,
-				"servicePower|1-100": 20
+				"gridEnergyInput|1-100": 20,
+				"gridOutgo|100-1000": 150,
+				"gridEnergyOutput|1-100": 20
 			});
 		}
 	},

@@ -7,11 +7,11 @@
 			<v-tab value="1">Overview</v-tab>
 			<v-tab value="2">Info</v-tab>
 			<v-tab value="3">Config</v-tab>
-			<v-tab value="4">Devices</v-tab>
 		</v-tabs>
 		<v-card-text>
 			<v-tabs-window v-model="tab">
 				<v-tabs-window-item value="1">
+					<img alt="" src="@/assets/images/homeBgImg.png" style="width: 80%">
 				</v-tabs-window-item>
 				<v-tabs-window-item value="2">
 					<v-row>
@@ -43,23 +43,19 @@
 						</template>
 					</v-row>
 				</v-tabs-window-item>
-				<v-tabs-window-item value="4">
-					<devices />
-				</v-tabs-window-item>
 			</v-tabs-window>
 		</v-card-text>
 	</yhlx-main-container>
 </template>
 
 <script setup lang="ts">
-import Devices from "./components/Devices.vue";
 const tab = ref('one');
 const gateways = ref([
-  { id: "1", title: "Gateway NO.1", subtitle: 'test1' },
-  { id: "2", title: "Gateway NO.2", subtitle: 'test2' },
-  { id: "3", title: "Gateway NO.3", subtitle: 'test3' },
-  { id: "4", title: "Gateway NO.4", subtitle: 'test4' },
-  { id: "5", title: "Gateway NO.5", subtitle: 'test5' },
+  { id: "1", title: "Gateway NO.1"},
+  { id: "2", title: "Gateway NO.2"},
+  { id: "3", title: "Gateway NO.3"},
+  { id: "4", title: "Gateway NO.4"},
+  { id: "5", title: "Gateway NO.5"},
 ])
 const configs = [
 	{ key: "ID", value: "1"},

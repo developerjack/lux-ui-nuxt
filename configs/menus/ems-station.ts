@@ -10,12 +10,12 @@ export default [
 		],
 	},
 	{
-		text:'Location',
+		text:'Station',
 		items:[
 			{
 				icon: "solar:library-bold-duotone",
-				text: "Location",
-				link: "/ems-station/location",
+				text: "Station",
+				link: "/ems-station/station",
 			},
 			{
 				icon: "solar:library-bold-duotone",
@@ -37,16 +37,26 @@ export default [
 				text: "Test",
 				link: "/ems-station/test",
 			},
+			{
+				icon: "solar:library-bold-duotone",
+				text: "Strategy",
+				link: "/ems-station/strategy",
+			},
 		]
 	},
 	{
-		text:'Decision',
-		items: [
+		text:'Analysis',
+		items:[
 			{
-				icon: "solar:slider-minimalistic-horizontal-line-duotone",
-				text: "Price",
-				link: "/ems-station/price",
-			}
+				icon: "solar:library-bold-duotone",
+				text: "Overview",
+				link: "/ems-station/overview",
+			},
+			{
+				icon: "solar:library-bold-duotone",
+				text: "Report",
+				link: "/ems-station/report",
+			},
 		]
 	},
 	{
@@ -54,13 +64,8 @@ export default [
 		items:[
 			{
 				icon: "solar:slider-minimalistic-horizontal-line-duotone",
-				text: "Admin",
-				link: "/common/admin",
-			},
-			{
-				icon: "solar:list-up-bold-duotone",
-				text: "Role",
-				link: "/common/role",
+				text: "Price",
+				link: "/ems-station/price",
 			},
 			{
 				icon: "solar:list-up-bold-duotone",

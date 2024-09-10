@@ -35,7 +35,7 @@ watch(id, () => {
     <template v-slot:activator="{ props }">
       <v-list style="background: none;" class="pa-0 cursor-pointer" v-bind="props">
         <v-list-item>
-          <v-list-item-title class="d-flex">
+          <v-list-item-title class="d-flex" style="height: 20px;">
             <h4 class="card-title">{{ titleItem.title }}</h4>
             <v-icon>mdi-chevron-down</v-icon>
           </v-list-item-title>

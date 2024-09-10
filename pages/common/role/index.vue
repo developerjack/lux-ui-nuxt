@@ -3,8 +3,8 @@
 		<template v-slot:append>
 			<yhlx-btn business-type="Add" location="Toolbar" />
 		</template>
-		<div class="h-full d-flex">
-			<v-list class="left px-1 py-4">
+		<div class="window-full">
+			<v-list class="window-left">
 				<v-list-item v-for="(item, i) in menuItems" :key="i" :value="item" color="primary" rounded="shaped">
 					<v-list-item-title class="font-weight-bold" v-text="item.title" />
 					<template v-slot:append>
@@ -12,8 +12,7 @@
 					</template>
 				</v-list-item>
 			</v-list>
-			<div class="right pa-5">
-	
+			<div class="window-right pa-5">
 				<yhlx-card title="Detail">
 					<v-row>
 						<v-col cols="12" sm="6">
@@ -98,14 +97,4 @@ const permissions = ref([
 </script>
 
 <style scoped lang="scss">
-.left {
-	width: 240px;
-	border-right: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-.right {
-	flex: 1;
-	overflow: auto;
-}
-
 </style>
