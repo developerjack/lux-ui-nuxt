@@ -22,7 +22,7 @@
   const props = defineProps ({
     multiple: {
       type: Boolean,
-      default: true
+      default: false
     }
   })
   const emits = defineEmits(["getPickTime"])

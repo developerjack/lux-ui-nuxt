@@ -43,12 +43,14 @@
 				<div style="text-align: right;">
 					<p class="text-body-main">0.4 kWh</p>
 					<p class="text-body-caption text-deep-orange-lighten-2">Charge</p>
-					<p class="text-body-main">$ 100.00</p>
+					<p class="text-body-main">2.4 kWh</p>
 					<p class="text-body-caption text-deep-orange-lighten-2">Discharge</p>
 				</div>
 				<div style="text-align: right;">
 					<p class="text-body-main">$ 100.00</p>
 					<p class="text-body-caption text-deep-orange-lighten-2">Income</p>
+					<p class="text-body-main">$ 1220.00</p>
+					<p class="text-body-caption text-deep-orange-lighten-2">Outgo</p>
 				</div>
 			</div>
 		</v-card>

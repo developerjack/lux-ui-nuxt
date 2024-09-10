@@ -53,7 +53,6 @@ const MockAPI = [
 			return apiResult({
 				"total": 8,
 				"content": [
-					{ title: "Gateway", },
 					{ title: "PV", tag: 'NO.1', },
 					{ title: "Grid", },
 					{ title: "Battery", tag: 'NO.1', },

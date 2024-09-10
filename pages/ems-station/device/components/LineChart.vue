@@ -1,6 +1,6 @@
 <template>
-	<div class="d-flex">
-		<v-list class="left px-1 py-4" v-model:selected="menuOpen">
+	<div class="window-full">
+		<v-list class="window-left" v-model:selected="menuOpen">
 			<v-list-item v-for="(item, i) in menuItems" :key="i" :value="i" color="primary">
 				<v-list-item-title class="font-weight-bold" v-text="item.title" />
 				<template v-if="item.tag" v-slot:append>
@@ -8,110 +8,47 @@
 				</template>
 			</v-list-item>
 		</v-list>
-		<div class="window-item-inner-right"> <!--  :style="{ 'height': !appStore.isFullScreen ? 'calc(100vh - 224px)' : 'calc(100vh - 163px)' }" -->
-      <p>更新时间: {{"2024-06-05/10:20"}}</p>
-      <div class="table-box">
-        <DataTableBg :items="leftItems" :headers="leftHeaders"></DataTableBg>
-        <DataTableBg :items="rightItems" :headers="rightHeaders"></DataTableBg>
-      </div>
+		<div class="window-right pa-2">
       <div class="line-chart-box">
-        <div class="time-pick-box">
-          时间范围：<yhlx-time-input :multiple="true"/>
-        </div>
-        <apexchart height="300px" :options="chartOptions" :series="chartOptions.series"></apexchart>
+	      <div class="time-pick-box">
+		      <yhlx-time-input />
+	      </div>
+	      <apexchart height="300px" :options="chartOptions" :series="chartOptions.series"></apexchart>
       </div>
+			<v-row class="form">
+				<v-col cols="2"><v-checkbox label="A相电压" hide-details /></v-col>
+				<v-col cols="2"><v-checkbox label="B相电压" hide-details /></v-col>
+				<v-col cols="2"><v-checkbox label="C相电压" hide-details /></v-col>
+				
+				<v-col cols="2"><v-checkbox label="A相电流" hide-details /></v-col>
+				<v-col cols="2"><v-checkbox label="B相电流" hide-details /></v-col>
+				<v-col cols="2"><v-checkbox label="C相电流" hide-details /></v-col>
+				
+				<v-col cols="2"><v-checkbox label="A相功率" hide-details /></v-col>
+				<v-col cols="2"><v-checkbox label="B相功率" hide-details /></v-col>
+				<v-col cols="2"><v-checkbox label="C相功率" hide-details /></v-col>
+				
+				<v-col cols="2"><v-checkbox label="充电电量" hide-details /></v-col>
+				<v-col cols="2"><v-checkbox label="放电电量" hide-details /></v-col>
+				
+				<v-col cols="2"><v-checkbox label="SOC" hide-details /></v-col>
+				<v-col cols="2"><v-checkbox label="温度" hide-details /></v-col>
+				<v-col cols="2"><v-checkbox label="频率" hide-details /></v-col>
+				<v-col cols="2"><v-checkbox label="温度" hide-details /></v-col>
+				<v-col cols="2"><v-checkbox label="湿度" hide-details /></v-col>
+			</v-row>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import axios from "axios";
-import DataTableBg from "./DataTableBg.vue";
-import { useAppStore } from "@/stores/app";
-const appStore = useAppStore();
-
-const leftItems = ref([
-{
-  name: "电压(V)",
-  total: "",
-  AGroup: "220",
-  BGroup: "220",
-  CGroup: "220",
-},{
-  name: "电流(A)",
-  total: "",
-  AGroup: "10",
-  BGroup: "10",
-  CGroup: "10",
-},{
-  name: "有功功率(KW)",
-  total: "6.6",
-  AGroup: "2.2",
-  BGroup: "2.2",
-  CGroup: "2.2",
-},{
-  name: "无功功率(KW)",
-  total: "0.1",
-  AGroup: "0",
-  BGroup: "0",
-  CGroup: "0",
-},{
-  name: "Pf",
-  total: "1",
-  AGroup: "",
-  BGroup: "",
-  CGroup: "",
-},{
-  name: "F(Hz)",
-  total: "50",
-  AGroup: "",
-  BGroup: "",
-  CGroup: "",
-}])
-const rightItems = ref([
-  {
-    name: "直流电压(V)",
-    total: "",
-    PV1: "830",
-    PV2: "830",
-    PV3: "830",
-    PV4: "830",
-  },{
-    name: "直流电流(A)",
-    total: "",
-    PV1: "5.1",
-    PV2: "5.0",
-    PV3: "5.3",
-    PV4: "5.2",
-  },{
-    name: "有功功率(KW)",
-    total: "17",
-    PV1: "4.2",
-    PV2: "4.2",
-    PV3: "4.3",
-    PV4: "4.3",
-  }])
-const leftHeaders = ref([
-  { title: "", key: "name" },
-  { title: "Total", key: "total" },
-  { title: "A组", key: "AGroup" },
-  { title: "B组", key: "BGroup" },
-  { title: "C组", key: "CGroup" }
-])
-const rightHeaders = ref([
-  { title: "", key: "name" },
-  { title: "Total", key: "total" },
-  { title: "PV1", key: "PV1" },
-  { title: "PV2", key: "PV2" },
-  { title: "PV3", key: "PV3" },
-  { title: "PV4", key: "PV4" },
-])
 
 const chartOptions = {
   series: [
-    { name: "Ua", data: [100, 390, 210, 350, 290, 180, 250] },
-    { name: "Ub", data: [100, 250, 125, 215, 150, 310, 170] },
-    { name: "Uc", data: [150, 213, 165, 215, 130, 210, 470] },
+    { name: "Ua", data: [100, 290, 210, 250, 290, 180, 250, 150, 213, 165, 215, 130, 210, 270] },
+    { name: "Ub", data: [100, 250, 125, 215, 150, 310, 170, 100, 290, 210, 250, 290, 180, 250] },
+    { name: "Uc", data: [150, 213, 165, 215, 130, 210, 270, 100, 250, 125, 215, 150, 310, 170] },
   ],
   colors: ['#85A4EB', '#88BFC7', '#7DAE77'],
   chart: {
@@ -138,7 +75,7 @@ const chartOptions = {
   },
   xaxis: {
     type: "category",
-    categories: ["Jan", "Feb", "Mar", "Jun", "Jul", "Aug", "Sep"],
+    categories: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "70:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00"],
   },
   dataLabels: {
     enabled: false
@@ -167,25 +104,7 @@ axios.get("/api/ems/sub-device").then(response => {
 	border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.window-item-inner-right {
-	flex: 1;
-	overflow: auto;
-  p{
-    margin-top: 8px;
-    margin-right: 10%;
-    text-align: right;
-  }
-  .table-box{
-    display: flex;
-    padding: 16px 8px 0;
-    &>.v-data-table:first-child{
-      margin-right: 8px;
-    }
-    :deep(table){
-      padding: 0 !important;
-      border: 1px solid #c5c5c5 !important;
-    }
-  }
+.window-right {
   .line-chart-box{
     margin-top: 60px;
     padding: 0 8px;

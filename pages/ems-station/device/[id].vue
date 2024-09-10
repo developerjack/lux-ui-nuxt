@@ -6,8 +6,8 @@
 		<v-tabs v-model="tab">
 			<v-tab value="1">Overview</v-tab>
 			<v-tab value="2">Info</v-tab>
-			<v-tab value="3">Real Data</v-tab>
-			<v-tab value="4">Line Chart</v-tab>
+			<v-tab value="3">Line Chart</v-tab>
+			<v-tab value="4">Real Data</v-tab>
 			<v-tab value="5">History Data</v-tab>
 		</v-tabs>
 		<v-card-text>
@@ -34,10 +34,10 @@
 					</v-row>
 				</v-tabs-window-item>
 				<v-tabs-window-item value="3">
-					<real-data />
+					<line-chart />
 				</v-tabs-window-item>
 				<v-tabs-window-item value="4">
-					<line-chart />
+					<real-data />
 				</v-tabs-window-item>
 				<v-tabs-window-item value="5">
 					<history-data />

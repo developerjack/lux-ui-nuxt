@@ -32,20 +32,14 @@ export default [
 				text: "Alarm",
 				link: "/ems-station/alarm",
 			},
-			{
-				icon: "solar:library-bold-duotone",
-				text: "Test",
-				link: "/ems-station/test",
-			},
-			{
-				icon: "solar:library-bold-duotone",
-				text: "Strategy",
-				link: "/ems-station/strategy",
-			},
+			// {
+			// 	icon: "solar:library-bold-duotone",
+			// 	text: "Test",
+			// 	link: "/ems-station/test",
+			// },
 		]
 	},
-	{
-		text:'Analysis',
+	{		text:'Analysis',
 		items:[
 			{
 				icon: "solar:library-bold-duotone",
@@ -66,6 +60,11 @@ export default [
 				icon: "solar:slider-minimalistic-horizontal-line-duotone",
 				text: "Price",
 				link: "/ems-station/price",
+			},
+			{
+				icon: "solar:library-bold-duotone",
+				text: "Strategy",
+				link: "/ems-station/strategy",
 			},
 			{
 				icon: "solar:list-up-bold-duotone",

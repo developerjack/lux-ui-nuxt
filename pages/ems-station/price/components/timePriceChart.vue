@@ -44,7 +44,7 @@
 
 <template>
   <div id="chart">
-    <apexchart type="line" height="690" :options="chartOptions" :series="series"></apexchart>
+    <apexchart type="line" height="380" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
 
