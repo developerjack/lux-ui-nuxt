@@ -1,5 +1,5 @@
 <template>
-	<v-text-field variant="outlined" density="comfortable" clearable/>
+	<v-text-field variant="outlined" density="comfortable" hide-details clearable/>
 </template>
 
 <script setup lang="ts">

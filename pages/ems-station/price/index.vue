@@ -1,13 +1,42 @@
+<template>
+	<yhlx-main-container>
+		<div class="pa-2 text-right">
+			<v-btn class="mr-2" color="primary">保存</v-btn>
+		</div>
+		<v-divider />
+		<v-card-text>
+			<v-row>
+				<v-col cols="4">
+					<v-checkbox label="Nord Pool" />
+					<div class="d-flex mb-2" v-for="item in rowList" :key="item.id">
+						<yhlx-check-time-input :timeRange="item" @getTimeRange="getTimeRange" />
+						<yhlx-text-field class="ml-2" v-model="item.value" />
+						<v-btn class="ml-2" icon="mdi-plus" size="small" @click="addRowList"></v-btn>
+						<v-btn class="ml-2" icon="mdi-minus" size="small" @click="minusRowList(item.id)" :disabled="rowList.length === 1" ></v-btn>
+					</div>
+				</v-col>
+				<v-col cols="8">
+<!--					<timePriceChart :series="series"/>-->
+					<apexchart type="line" height="380" :options="chartOptions" :series="series2" />
+				</v-col>
+			</v-row>
+			<v-row class="form">
+				<template v-for="config of configs" :key="config">
+					<v-col cols="4" >
+						<yhlx-text-field :label="config" />
+					</v-col>
+					<v-col class="align-content-center" cols="6">默认值为100，与电网电价对比</v-col>
+				</template>
+			</v-row>
+		</v-card-text>
+	</yhlx-main-container>
+</template>
 <script setup lang="ts">
 interface rowType {
 	id: number,
 	value: string,
 	timeRange: number[]
 }
-import CoefficientDialog from './components/coefficientDialog.vue'
-import timePriceChart from './components/timePriceChart.vue'
-const selected = ref('one')
-const coefficientDialog = ref()
 const rowList= ref([{
 	id: 0,
 	value: '',
@@ -50,47 +79,49 @@ function formatterSeries () {
 		}
 	})
 }
+
+const configs = ["光伏发电电价比例（%）", "储能充电电价比例（%）", "储能放电电价比例（%）", "充电桩充电电价比例（%）"];
+
+
+watch(() => series,() => {
+	series2[0].data = series.value
+},{ deep: true });
+
+const series2: { data: number[] }[] = reactive([{
+	data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+}])
+const chartOptions = ref({
+	chart: {
+		height: 690,
+		type: 'line',
+		zoom: {
+			enabled: false
+		},
+		toolbar: {
+			show: false
+		}
+	},
+	dataLabels: {
+		enabled: false
+	},
+	stroke: {
+		curve: 'straight'
+	},
+	title: {
+		text: '时段电费曲线',
+		align: 'left'
+	},
+	xaxis: {
+		categories: ['00:00','01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00','09:00','10:00',
+			'11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00']
+	},
+	yaxis: {
+		min: 0
+	}
+})
+
+
 </script>
 
-<template>
-	<yhlx-main-container :key="$route.fullPath">
-		<div class="pa-2 d-flex justify-content-between ">
-			<v-radio-group inline hide-details v-model="selected">
-				<v-radio label="固定电网电价" value="one" color="primary"></v-radio>
-				<v-radio label="现货市场电价" value="two" color="primary"></v-radio>
-			</v-radio-group>
-			<v-btn class="mr-2" color="primary">保存</v-btn>
-		</div>
-		<v-divider></v-divider>
-		<v-card-text>
-			<div class="d-flex" v-if="selected === 'one'">
-				<div class="form-box">
-					<div class="d-flex mb-2" v-for="item in rowList" :key="item.id">
-						<yhlx-check-time-input :timeRange="item" @getTimeRange="getTimeRange"/>
-						<yhlx-text-field v-model="item.value"/>
-						<v-btn icon="mdi-plus" size="small" @click="addRowList"></v-btn>
-						<v-btn icon="mdi-minus" size="small" @click="minusRowList(item.id)" :disabled="rowList.length === 1" ></v-btn>
-					</div>
-				</div>
-				<div class="chart-box">
-					<timePriceChart :series="series"/>
-				</div>
-			</div>
-			<v-divider class="mb-4" v-if="selected === 'one'"></v-divider>
-			<CoefficientDialog class="mb-4" ref="coefficientDialog"/>
-		</v-card-text>
-	</yhlx-main-container>
-</template>
-
 <style scoped lang="scss">
-.form-box {
-	width: 30%;
-	.v-text-field {
-		margin: 0 8px;
-	}
-}
-.chart-box{
-	width: 70%;
-	margin-left: 16px;
-}
 </style>

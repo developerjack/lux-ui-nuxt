@@ -48,8 +48,13 @@ export default [
 			},
 			{
 				icon: "solar:library-bold-duotone",
-				text: "Report",
-				link: "/ems-station/report",
+				text: "Run Report",
+				link: "/ems-station/run-report",
+			},
+			{
+				icon: "solar:library-bold-duotone",
+				text: "Line Report",
+				link: "/ems-station/line-report",
 			},
 		]
 	},

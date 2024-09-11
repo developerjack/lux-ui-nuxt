@@ -1,19 +1,14 @@
 <template>
-	<yhlx-main-container :key="$route.fullPath">
-		<template v-slot:title>
-			<yhlx-main-container-title :titleList="devices"/>
-		</template>
+	<yhlx-main-container>
 		<v-tabs v-model="tab">
-			<v-tab value="1">Overview</v-tab>
+			<v-tab value="1">Real Data</v-tab>
 			<v-tab value="2">Info</v-tab>
-			<v-tab value="3">Line Chart</v-tab>
-			<v-tab value="4">Real Data</v-tab>
-			<v-tab value="5">History Data</v-tab>
+			<v-tab value="3">History Data</v-tab>
 		</v-tabs>
 		<v-card-text>
 			<v-tabs-window v-model="tab">
 				<v-tabs-window-item value="1">
-					One
+					<real-data />
 				</v-tabs-window-item>
 				<v-tabs-window-item value="2">
 					<v-row>
@@ -34,12 +29,6 @@
 					</v-row>
 				</v-tabs-window-item>
 				<v-tabs-window-item value="3">
-					<line-chart />
-				</v-tabs-window-item>
-				<v-tabs-window-item value="4">
-					<real-data />
-				</v-tabs-window-item>
-				<v-tabs-window-item value="5">
 					<history-data />
 				</v-tabs-window-item>
 			</v-tabs-window>
@@ -50,18 +39,8 @@
 <script setup lang="ts">
 import RealData from "./components/RealData.vue";
 import HistoryData from "./components/HistoryData.vue";
-import LineChart from "./components/LineChart.vue";
 
-const devices = ref([
-	{ id: "1", title: "Device NO.1", subtitle: 'gateway 1' },
-	{ id: "2", title: "Device NO.2", subtitle: 'gateway 2' },
-	{ id: "3", title: "Device NO.3", subtitle: 'gateway 3' },
-	{ id: "4", title: "Device NO.4", subtitle: 'gateway 4' },
-	{ id: "5", title: "Device NO.5", subtitle: 'gateway 5' },
-]);
-
-
-const tab = ref('one');
+const tab = ref('1');
 </script>
 
 <style scoped lang="scss">

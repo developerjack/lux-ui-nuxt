@@ -53,7 +53,7 @@ function formatterSeries () {
 </script>
 
 <template>
-  <yhlx-main-container :key="$route.fullPath">
+  <yhlx-main-container>
     <div class="pa-2 d-flex justify-content-between ">
       <v-radio-group inline hide-details v-model="selected">
         <v-radio label="固定电网电价" value="one" color="primary"></v-radio>
