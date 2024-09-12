@@ -1,9 +1,5 @@
 <template>
 	<yhlx-main-container>
-		<div class="pa-2 text-right">
-			<v-btn class="mr-2" color="primary">保存</v-btn>
-		</div>
-		<v-divider />
 		<v-card-text>
 			<v-row>
 				<v-col cols="4">
@@ -16,7 +12,6 @@
 					</div>
 				</v-col>
 				<v-col cols="8">
-<!--					<timePriceChart :series="series"/>-->
 					<apexchart type="line" height="380" :options="chartOptions" :series="series2" />
 				</v-col>
 			</v-row>
@@ -28,6 +23,9 @@
 					<v-col class="align-content-center" cols="6">默认值为100，与电网电价对比</v-col>
 				</template>
 			</v-row>
+		</v-card-text>
+		<v-card-text>
+			<v-btn color="primary">保存</v-btn>
 		</v-card-text>
 	</yhlx-main-container>
 </template>

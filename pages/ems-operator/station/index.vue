@@ -3,7 +3,7 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server ref="serverTable" :headers="headers" :show-select="true" items-url="/api/ems/location" :params="params" @click:row="(event, { item }) => router.push(`location/${item.id}`)">
+		<yhlx-data-table-server ref="serverTable" :headers="headers" :show-select="true" items-url="/api/ems/station" :params="params" @click:row="(event, { item }) => router.push(`station/${item.id}`)">
 			<template v-slot:body.prepend.name>
 				<yhlx-text-field density="compact" v-model="params.name" />
 			</template>

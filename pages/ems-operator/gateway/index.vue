@@ -12,7 +12,7 @@ const router = useRouter();
 const headers = ref([
 	{ title: "Serial Number", key: "serialNumber" },
 	{ title: "Name", key: "name" },
-	{ title: "Location", key: "location" },
+	{ title: "Station", key: "station" },
 	{ title: "Model", key: "model" },
 	{ title: "Firmware Version", key: "firmwareVersion" },
 	{ title: "Last Connect", key: "lastConnectTime" },

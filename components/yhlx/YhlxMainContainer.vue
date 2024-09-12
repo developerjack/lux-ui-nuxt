@@ -51,13 +51,10 @@ const showMoreDialog = () => {
 		height: 100%;
 	}
 }
-.v-tabs-window{
+.v-tabs-window {
   height: 100%;
-  .v-tabs-window-item{
+  .v-tabs-window-item {
     height: 100%;
-    .d-flex{
-      height: 100%;
-    }
   }
 }
 </style>

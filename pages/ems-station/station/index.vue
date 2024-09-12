@@ -13,7 +13,7 @@
 				<v-col cols="2" class="font-weight-bold">Status</v-col>
 				<v-col cols="10">Activated</v-col>
 				<v-col cols="2" class="font-weight-bold">Notes</v-col>
-				<v-col cols="10">This is test location.</v-col>
+				<v-col cols="10">This is test station.</v-col>
 			</v-row>
 		</v-card-text>
 	</yhlx-main-container>

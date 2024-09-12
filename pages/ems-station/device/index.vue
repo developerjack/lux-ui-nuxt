@@ -7,9 +7,8 @@
 const router = useRouter();
 const headers = ref([
 	{ title: "Name", key: "name" },
-	{ title: "Location", key: "location" },
+	{ title: "Type", key: "type" },
 	{ title: "Gateway Serial Number", key: "gatewaySerialNumber" },
 	{ title: "Gateway Name", key: "gatewayName" },
-	{ title: "Model", key: "model" },
 ]);
 </script>

@@ -28,8 +28,8 @@ onMounted(() => {
 		color.value = "warning";
 		icon.value = "mdi-plus";
 	}
-	else if (props.businessType === "Primary") {
-		color.value = "success";
+	else if (props.businessType === "Submit") {
+		color.value = "primary";
 		variant.value = "elevated";
 	}
 	else if (props.businessType === "Close") {
@@ -41,7 +41,7 @@ onMounted(() => {
 		variant.value = "tonal";
 	}
 	else {
-		color.value = 'success'
+		color.value = 'primary'
 	}
 })
 

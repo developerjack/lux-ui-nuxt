@@ -3,7 +3,7 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server :headers="headers" items-url="/api/ems/gateway" @click:row="(event, { item }) => router.push(`gateway/${item.id}`)" />
+		<yhlx-data-table-server :headers="headers" items-url="/api/ems-station/gateway" @click:row="(event, { item }) => router.push(`gateway/${item.id}`)" />
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
@@ -12,7 +12,6 @@ const router = useRouter();
 const headers = ref([
 	{ title: "Serial Number", key: "serialNumber" },
 	{ title: "Name", key: "name" },
-	{ title: "Location", key: "location" },
 	{ title: "Model", key: "model" },
 	{ title: "Firmware Version", key: "firmwareVersion" },
 	{ title: "Last Connect", key: "lastConnectTime" },

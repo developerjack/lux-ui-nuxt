@@ -1,7 +1,7 @@
 <template>
 	<v-card title="Alarm">
 		<v-divider />
-		<yhlx-data-table-server :headers="headers" items-url="/api/ems/alarm/dashboard"
+		<yhlx-data-table-server :headers="headers" items-url="/api/ems-station/alarm/dashboard"
 		                        :search="false" :show-select="false" :items-per-page="5" density="comfortable"
 		                        @click:row="(event, { item }) => router.push(`alarm/${item.id}`)" />
 	</v-card>
@@ -10,10 +10,9 @@
 <script setup lang="ts">
 const router = useRouter();
 const headers = ref([
-	{ title: "Content", key: "type" },
-	{ title: "Level", key: "level" },
-	{ title: "Location", key: "locationName" },
+	{ title: "Name", key: "name" },
 	{ title: "Device", key: "device" },
+	{ title: "Type", key: "alarmType" },
 	{ title: "Report Time", key: "reportTime" },
 ]);
 </script>

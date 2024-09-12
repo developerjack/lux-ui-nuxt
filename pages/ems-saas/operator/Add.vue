@@ -19,7 +19,7 @@
 				<v-card-actions>
 					<v-spacer></v-spacer>
 					<yhlx-btn business-type="Close" variant="text" @click="dialog = false">Close</yhlx-btn>
-					<yhlx-btn business-type="Primary" @click="dialog = false">Send</yhlx-btn>
+					<yhlx-btn @click="dialog = false">Send</yhlx-btn>
 				</v-card-actions>
 			</v-container>
 		</v-card>

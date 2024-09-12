@@ -18,9 +18,9 @@ import handleAlarmDialog from './components/handleAlarmDialog.vue'
 const router = useRouter();
 
 const headers = ref([
-	{ title: "Content", key: "type" },
-	{ title: "Level", key: "level" },
-	{ title: "Location", key: "locationName" },
+	{ title: "Name", key: "name" },
+	{ title: "Type", key: "alarmType" },
+	{ title: "Station", key: "stationName" },
 	{ title: "Gateway", key: "gateway" },
 	{ title: "Device", key: "device" },
 	{ title: "Report Time", key: "reportTime" },

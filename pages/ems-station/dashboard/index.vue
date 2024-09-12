@@ -3,16 +3,16 @@
     <v-col class="pa-2" cols="12" lg="12">
 	    <Overview />
     </v-col>
-	  <v-col class="pa-2" cols="12" lg="4">
+	  <v-col class="pa-2" cols="12" lg="3">
 		  <Installation />
 	  </v-col>
-	  <v-col class="pa-2" cols="12" lg="8">
+	  <v-col class="pa-2" cols="12" lg="9">
 		  <DataLine />
 	  </v-col>
-    <v-col class="pa-2" cols="12" lg="4">
+    <v-col class="pa-2" cols="12" lg="3">
       <DeviceStatus />
     </v-col>
-    <v-col class="pa-2" cols="12" lg="8">
+    <v-col class="pa-2" cols="12" lg="9">
       <AlarmTable />
     </v-col>
   </v-row>

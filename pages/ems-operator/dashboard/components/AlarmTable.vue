@@ -10,10 +10,10 @@
 <script setup lang="ts">
 const router = useRouter();
 const headers = ref([
-	{ title: "Content", key: "type" },
-	{ title: "Level", key: "level" },
-	{ title: "Location", key: "locationName" },
+	{ title: "Name", key: "name" },
+	{ title: "Station", key: "stationName" },
 	{ title: "Device", key: "device" },
+	{ title: "Type", key: "type" },
 	{ title: "Report Time", key: "reportTime" },
 ]);
 </script>

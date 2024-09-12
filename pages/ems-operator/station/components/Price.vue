@@ -1,33 +1,31 @@
 <template>
-	<yhlx-main-container>
-		<v-card-text>
-			<v-row>
-				<v-col cols="4">
-					<v-checkbox label="Nord Pool" />
-					<div class="d-flex mb-2" v-for="item in rowList" :key="item.id">
-						<yhlx-check-time-input :timeRange="item" @getTimeRange="getTimeRange" />
-						<yhlx-text-field class="ml-2" v-model="item.value" />
-						<v-btn class="ml-2" icon="mdi-plus" size="small" @click="addRowList"></v-btn>
-						<v-btn class="ml-2" icon="mdi-minus" size="small" @click="minusRowList(item.id)" :disabled="rowList.length === 1" ></v-btn>
-					</div>
+	<v-card-text>
+		<v-row>
+			<v-col cols="4">
+				<v-checkbox label="Nord Pool" />
+				<div class="d-flex mb-2" v-for="item in rowList" :key="item.id">
+					<yhlx-check-time-input :timeRange="item" @getTimeRange="getTimeRange" />
+					<yhlx-text-field class="ml-2" v-model="item.value" />
+					<v-btn class="ml-2" icon="mdi-plus" size="small" @click="addRowList"></v-btn>
+					<v-btn class="ml-2" icon="mdi-minus" size="small" @click="minusRowList(item.id)" :disabled="rowList.length === 1" ></v-btn>
+				</div>
+			</v-col>
+			<v-col cols="8">
+				<apexchart type="line" height="380" :options="chartOptions" :series="series2" />
+			</v-col>
+		</v-row>
+		<v-row class="form">
+			<template v-for="config of configs" :key="config">
+				<v-col cols="4" >
+					<yhlx-text-field :label="config" />
 				</v-col>
-				<v-col cols="8">
-					<apexchart type="line" height="380" :options="chartOptions" :series="series2" />
-				</v-col>
-			</v-row>
-			<v-row class="form">
-				<template v-for="config of configs" :key="config">
-					<v-col cols="4" >
-						<yhlx-text-field :label="config" />
-					</v-col>
-					<v-col class="align-content-center" cols="6">默认值为100，与电网电价对比</v-col>
-				</template>
-			</v-row>
-		</v-card-text>
-		<v-card-text>
-			<v-btn color="primary">保存</v-btn>
-		</v-card-text>
-	</yhlx-main-container>
+				<v-col class="align-content-center" cols="6">默认值为100，与电网电价对比</v-col>
+			</template>
+		</v-row>
+	</v-card-text>
+	<v-card-text>
+		<v-btn color="primary">保存</v-btn>
+	</v-card-text>
 </template>
 <script setup lang="ts">
 interface rowType {

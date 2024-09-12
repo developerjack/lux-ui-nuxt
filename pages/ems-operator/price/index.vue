@@ -9,8 +9,8 @@
 <script setup lang="ts">
 const router = useRouter();
 const headers = ref([
-	{ title: "Name", key: "name" },
+	{ title: "Station", key: "stationName" },
+	{ title: "Nord Pool", key: "nordPool" },
 	{ title: "Update Time", key: "updateTime" },
-	{ title: "Status", key: "status" },
 ]);
 </script>

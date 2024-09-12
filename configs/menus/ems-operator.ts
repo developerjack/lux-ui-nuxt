@@ -14,8 +14,8 @@ export default [
 		items:[
 			{
 				icon: "solar:library-bold-duotone",
-				text: "Location",
-				link: "/ems-operator/location",
+				text: "Station",
+				link: "/ems-operator/station",
 			},
 			{
 				icon: "solar:library-bold-duotone",

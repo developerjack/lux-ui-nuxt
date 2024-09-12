@@ -20,7 +20,6 @@ const router = useRouter();
 const headers = ref([
 	{ title: "Content", key: "type" },
 	{ title: "Level", key: "level" },
-	{ title: "Location", key: "locationName" },
 	{ title: "Gateway", key: "gateway" },
 	{ title: "Device", key: "device" },
 	{ title: "Report Time", key: "reportTime" },

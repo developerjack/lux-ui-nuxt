@@ -1,17 +1,3 @@
-<template>
-	<yhlx-main-container>
-		<div class="window-item-inner-right">
-			<div class="table-flex">
-				<p>Unit: kWh | dollar</p>
-				<div class="time-pick-box">
-					<yhlx-time-input :multiple="true"/>
-				</div>
-			</div>
-			<yhlx-data-table-server ref="serverTable" items-url="/api/ems-station/station/run-report" :headers="headers" :search="false" :showSelect="false" hide-default-footer />
-		</div>
-	</yhlx-main-container>
-</template>
-
 <script setup lang="ts">
 const headers: any[] = [{
 	title: 'Date',
@@ -72,32 +58,47 @@ const headers: any[] = [{
 const serverTable = ref()
 </script>
 
+<template>
+  <div class="d-flex">
+    <div class="window-item-inner-right">
+        <div class="table-flex">
+          <p>Energy Unit：kWh；Monetary Unit：dollar</p>
+          <div class="time-pick-box">
+            Date Range：<yhlx-time-input :multiple="true"/>
+          </div>
+        </div>
+        <yhlx-data-table-server ref="serverTable" items-url="/api/ems/station/run-report" :headers="headers" :search="false" :showSelect="false" hide-default-footer />
+    </div>
+  </div>
+</template>
+
 <style scoped lang="scss">
 .d-flex {
-	border: 1px solid rgba(0, 0, 0, 0.12);
-	height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  height: 100%;
 }
 .left {
-	width: 240px;
-	border-right: 1px solid rgba(0, 0, 0, 0.12);
+  width: 240px;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 .window-item-inner-right{
-	flex: 1;
-	overflow-x: auto;
-	.v-table{
-		height: calc(100% - 49px);
-	}
+  flex: 1;
+  overflow-x: auto;
+  .v-table{
+    height: calc(100% - 49px);
+  }
 }
 
 .table-flex{
-	display: flex;
-	line-height: 40px;
-	justify-content: space-between;
-	padding: 4px 8px;
-	.time-pick-box{
-		display: flex;
-		width: 360px;
-		line-height: 40px;
-	}
+  display: flex;
+  line-height: 40px;
+  justify-content: space-between;
+  padding: 4px 8px;
+  .time-pick-box{
+    display: flex;
+    width: 360px;
+    line-height: 40px;
+  }
 }
+
 </style>
