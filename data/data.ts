@@ -2,11 +2,18 @@ export const alarmTypeEnums = ["Warning", "Fault"];
 export const countryNameEnums = ["China", "France", "America", "Germany", "Norway"];
 export const currencyNameEnums = ["China Yuan", "U.S dollar", "Euro"];
 export const statusNameEnums = ['Enable', 'Disable'];
+export const userStatusEnums = ['Inactive', 'Activate', 'Frozen'];
 export const networkRoleEnums = ['eMSP', 'CPO'];
 export const orgRoleEnums = ['eMSP', 'CPO'];
 export const belongTypeEnums = ['Internal', 'External'];
 export const operatorNameEnums = ['Iocharger', 'ICS', 'EMES', 'HBC', 'EVTap', 'Ocular', 'Entratek', 'NEO', 'Prime'];
 export const networkNameEnums = ['Internal', 'Green Flux', 'EVOASIS', 'exploren', 'Incar'];
+export const timeZoneEnums = [
+	'Australia/Darwin', 'Australia/Sydney', 'America/Argentina/Buenos_Aires', 'Africa/Cairo', 'America/Anchorage',
+	'America/Sao_Paulo', 'Asia/Dhaka', 'Africa/Harare', 'America/St_Johns', 'America/Chicago', 'Asia/Shanghai', 'Africa/Addis_Ababa',
+	'Europe/Paris', 'America/Indiana/Indianapolis', 'Asia/Kolkata', 'Asia/Tokyo', 'Pacific/Apia', 'Asia/Yerevan', 'Pacific/Auckland',
+	'Asia/Karachi', 'America/Phoenix', 'America/Puerto_Rico', 'America/Los_Angeles', 'Pacific/Guadalcanal', 'Asia/Ho_Chi_Minh', '-05:00', '-07:00', '-10:00'
+];
 export const moduleImplEnums = [
 	'Locations-Sender', 'Sessions-Sender', 'CDRs-Sender', 'Tariffs-Sender', 'Tokens-Sender', 'Commands-Sender', 'ChargingProfiles-Sender',
 	'Locations-Receiver', 'Sessions-Receiver', 'CDRs-Receiver', 'Tariffs-Receiver', 'Tokens-Receiver', 'Commands-Receiver', 'ChargingProfiles-Receiver'

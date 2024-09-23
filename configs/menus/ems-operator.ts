@@ -43,19 +43,19 @@ export default [
 		text:'System',
 		items:[
 			{
+				icon: "solar:list-up-bold-duotone",
+				text: "Operator",
+				link: "/ems-operator/operator",
+			},
+			{
 				icon: "solar:slider-minimalistic-horizontal-line-duotone",
 				text: "Admin",
-				link: "/common/admin",
+				link: "/ems-operator/admin",
 			},
 			{
 				icon: "solar:list-up-bold-duotone",
 				text: "Role",
 				link: "/common/role",
-			},
-			{
-				icon: "solar:list-up-bold-duotone",
-				text: "Setting",
-				link: "/ems-operator/setting",
 			},
 			{
 				icon: "solar:list-up-bold-duotone",

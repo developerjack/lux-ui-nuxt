@@ -19,7 +19,7 @@
 				<v-card-actions>
 					<v-spacer></v-spacer>
 					<yhlx-btn business-type="Close" variant="text" @click="dialog = false">Close</yhlx-btn>
-					<yhlx-btn @click="dialog = false">Send</yhlx-btn>
+					<yhlx-btn @click="submit">Send</yhlx-btn>
 				</v-card-actions>
 			</v-container>
 		</v-card>
@@ -28,4 +28,8 @@
 
 <script setup lang="ts">
 const dialog = ref(false);
+const router = useRouter();
+function submit() {
+	router.push('invitation/operator')
+}
 </script>

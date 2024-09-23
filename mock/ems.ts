@@ -10,7 +10,6 @@ const MockAPI = [
 				"id|+1": 1,
 				"name": "@name",
 				"address": "@city",
-				"gatewayCount|1-10": 3,
 				"notes": "This is station.",
 			});
 		}
@@ -133,7 +132,7 @@ const MockAPI = [
 				"stationName|1": ['Xiamen', 'Beijing', 'Nanjing', 'Shanghai', '-'],
 				"gateway|1": ['IOC24001 (@name)', 'IOC24002 (@name)', 'IOC24003 (@name)', 'IOC24004 (@name)', 'IOC24005 (@name)', 'IOC24006 (@name)'],
 				"device|1": ["@name (IOC_Store)", "@name (IOC_Light)"],
-				"status|1": ["Undisposed", "Auto Recovery", "Manual Disposed"],
+				"status|1": ["Unprocessed", "Auto Recovery", "Manual Processed"],
 			});
 		}
 	},

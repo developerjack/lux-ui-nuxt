@@ -7,7 +7,6 @@ export const useAppStore = defineStore({
     mainSidebar: true,
     menuType: '',
     isFullScreen: false,
-    isLogin:true,
     addDrawer:false,
   }),
   persist: [
@@ -26,9 +25,6 @@ export const useAppStore = defineStore({
     },
     fullScreen() {
       this.isFullScreen = !this.isFullScreen
-    },
-    setIsLogin(isLogin: boolean) {
-      this.isLogin = isLogin
     },
     setMenuType(menuType: string) {
       this.menuType = menuType

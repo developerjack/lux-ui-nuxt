@@ -45,7 +45,7 @@ export default [
 			{
 				icon: "solar:slider-minimalistic-horizontal-line-duotone",
 				text: "Admin",
-				link: "/common/admin",
+				link: "/ems-saas/admin",
 			},
 			{
 				icon: "solar:list-up-bold-duotone",

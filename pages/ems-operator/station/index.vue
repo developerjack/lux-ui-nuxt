@@ -7,9 +7,6 @@
 			<template v-slot:body.prepend.name>
 				<yhlx-text-field density="compact" v-model="params.name" />
 			</template>
-			<template v-slot:body.prepend.gatewayCount>
-				<yhlx-autocomplete density="compact" v-model="searchGatewayCount" :items="[1,2,3,4]" />
-			</template>
 			<template v-slot:body.prepend.address>
 				<yhlx-time-input ref="multipleTimeInputRef" :multiple="false" @getPickTime="getPickTime" clearable/>
 			</template>
@@ -21,7 +18,6 @@ const router = useRouter();
 import DialogAdd from './Add.vue';
 const headers = ref([	
 	{ title: "Name", key: "name" },
-	{ title: "Gateway Count", key: "gatewayCount" },
 	{ title: "Address", key: "address" },
 	{ title: "Notes", key: "notes" },
 ]);
@@ -29,10 +25,8 @@ const headers = ref([
 // 搜索
 const params = reactive({
 	name: '',
-	gatewayCount: 0,
 	time: ''
 });
-const searchGatewayCount = ref();
 const multipleTimeInput = ref('');
 
 // 选择的时间
@@ -78,7 +72,6 @@ function refreshTable(params = {}) {
 // 清空筛选
 function clearFilter() {
 	params.name = '';
-	searchGatewayCount.value = null;
   multipleTimeInputRef.value.clearInput();
 }
 
@@ -89,9 +82,6 @@ const timeId = ref();
 watch(() => params.name, () => {
   clearTimeout(timeId.value);
   timeId.value = setTimeout(searchTableList,300);
-})
-watch(searchGatewayCount, ()=> {
-  searchTableList();
 })
 </script>
 <style lang="scss">

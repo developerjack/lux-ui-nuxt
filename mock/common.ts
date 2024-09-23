@@ -1,5 +1,5 @@
 import { apiPageResult } from "./mock";
-import { statusNameEnums } from "@/data/data";
+import { userStatusEnums } from "@/data/data";
 
 const MockAPI = [
 	{
@@ -10,7 +10,7 @@ const MockAPI = [
 				"name": "@name",
 				"email": "@email",
 				"phoneNumber": "@phone",
-				"status|1": statusNameEnums,
+				"status|1": userStatusEnums,
 			});
 		}
 	},

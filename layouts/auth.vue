@@ -2,13 +2,13 @@
   <div class="d-flex text-center flex-grow-1 h-screen">
     <v-sheet class="layout-side d-none d-md-flex flex-column justify-space-between">
       <div class="mt-3 mt-md-10 pa-2">
-        <div class="text-primary text-h4 font-weight-bold">
-          Lux Admin Nuxt3
+        <div class="d-flex align-center justify-center">
+	        <img width="240" src="@/assets/images/logo.svg" alt="" style="cursor: pointer;"/>
         </div>
-        <div class="title my-2">
+        <div class="title my-3">
           Welcome! Let's build amazing things together.
         </div>
-        <v-btn color="primary" to="/">Back Home</v-btn>
+        <v-btn class="mt-4" color="primary" to="/">Back Home</v-btn>
       </div>
     </v-sheet>
     <v-card variant="outlined" class="flex-grow-1 d-flex align-center justify-center flex-column">
