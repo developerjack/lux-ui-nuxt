@@ -3,23 +3,30 @@
 		<template v-slot:append>
 			<DialogAdd location="Toolbar"/>
 		</template>
-		<yhlx-data-table-server ref="serverTable" :headers="headers" :show-select="true" items-url="/api/ems/station" :params="params" @click:row="(event, { item }) => router.push(`station/${item.id}`)">
+		<yhlx-data-table-server ref="serverTable" :headers="headers" :show-select="true" items-url="/api/ems/station" :params="params">
 			<template v-slot:body.prepend.name>
 				<yhlx-text-field density="compact" v-model="params.name" />
 			</template>
 			<template v-slot:body.prepend.address>
 				<yhlx-time-input ref="multipleTimeInputRef" :multiple="false" @getPickTime="getPickTime" clearable/>
 			</template>
+
+      <template v-slot:operation="{ item }">
+        <v-btn density="comfortable" icon="mdi-details" @click="handleToStation(item)"></v-btn>
+      </template>
 		</yhlx-data-table-server>
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
+import {useAppStore} from "~/stores/app";
+
 const router = useRouter();
 import DialogAdd from './Add.vue';
 const headers = ref([	
 	{ title: "Name", key: "name" },
 	{ title: "Address", key: "address" },
 	{ title: "Notes", key: "notes" },
+  { title: "Operation", key: "operation", custom: true }
 ]);
 
 // 搜索
@@ -83,6 +90,13 @@ watch(() => params.name, () => {
   clearTimeout(timeId.value);
   timeId.value = setTimeout(searchTableList,300);
 })
+
+const appStore = useAppStore();
+
+const handleToStation = (item) => {
+  appStore.setTargetStation(item.id)
+  window.open('/ems-station/dashboard', '_blank');
+}
 </script>
 <style lang="scss">
 

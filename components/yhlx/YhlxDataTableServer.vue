@@ -16,6 +16,14 @@
 				</td>
 			</tr>
 		</template>
+
+    <template v-for="header in headerItems" :key="header.key" v-slot:[`item.${header.key}`]="{ item }">
+      <slot :name="header.key" :item="item" v-if="header.custom" />
+
+      <template v-else>
+        {{ item[header.key] }}
+      </template>
+    </template>
 	</v-data-table-server>
 </template>
 

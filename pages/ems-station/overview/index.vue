@@ -17,6 +17,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: 'layout-station'
+})
 const menuOpen = ref([0]);
 const menuItems = ref(['PV','Battery','Charging Station','On The Grid']);
 watch(menuOpen,()=>{

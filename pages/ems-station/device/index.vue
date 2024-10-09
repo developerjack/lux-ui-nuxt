@@ -4,6 +4,9 @@
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
+definePageMeta({
+  layout: 'layout-station'
+})
 const router = useRouter();
 const headers = ref([
 	{ title: "Name", key: "name" },

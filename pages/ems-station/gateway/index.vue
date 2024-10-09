@@ -8,6 +8,9 @@
 </template>
 <script setup lang="ts">
 import DialogAdd from './Add.vue';
+definePageMeta({
+  layout: 'layout-station'
+})
 const router = useRouter();
 const headers = ref([
 	{ title: "Serial Number", key: "serialNumber" },

@@ -30,6 +30,10 @@
 	</yhlx-main-container>
 </template>
 <script setup lang="ts">
+definePageMeta({
+  layout: 'layout-station'
+})
+
 interface rowType {
 	id: number,
 	value: string,

@@ -23,6 +23,10 @@ import Installation from "./components/Installation.vue";
 import DataLine from "./components/PowerLineChart.vue";
 import DeviceStatus from "./components/DeviceStatus.vue";
 import AlarmTable from "./components/AlarmTable.vue";
+
+definePageMeta({
+  layout: 'layout-station'
+})
 </script>
 
 <style scoped lang="scss">

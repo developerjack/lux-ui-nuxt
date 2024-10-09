@@ -15,6 +15,10 @@
 </template>
 <script setup lang="ts">
 import handleAlarmDialog from './components/handleAlarmDialog.vue'
+definePageMeta({
+  layout: 'layout-station'
+})
+
 const router = useRouter();
 
 const headers = ref([

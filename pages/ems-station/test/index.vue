@@ -9,6 +9,9 @@ import { Clipboard } from '@antv/x6-plugin-clipboard'
 import { History } from '@antv/x6-plugin-history'
 import {useAppStore} from "~/stores/app";
 import { Scroller } from '@antv/x6-plugin-scroller'
+definePageMeta({
+  layout: 'layout-station'
+})
 const appStore = useAppStore();
 const strokeDasharray = ref('0,0')
 const showStencil = ref(true)

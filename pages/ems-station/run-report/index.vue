@@ -13,6 +13,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: 'layout-station'
+})
 const headers: any[] = [{
 	title: 'Date',
 	value: "id"

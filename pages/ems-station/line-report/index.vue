@@ -38,6 +38,9 @@
 
 <script setup lang="ts">
 import LineChart from "./components/LineChart.vue";
+definePageMeta({
+  layout: 'layout-station'
+})
 
 const menuOpen = ref([0]);
 const devices = ref([

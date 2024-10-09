@@ -19,7 +19,9 @@
 </template>
 
 <script setup lang="ts">
-
+definePageMeta({
+  layout: 'layout-station'
+})
 </script>
 
 <style scoped lang="scss">

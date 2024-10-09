@@ -8,10 +8,11 @@ export const useAppStore = defineStore({
     menuType: '',
     isFullScreen: false,
     addDrawer:false,
+    targetStation: null,
   }),
   persist: [
     {
-      paths: ["theme","menuType"],
+      paths: ["theme","menuType", "targetStation"],
       storage: localStorage,
     },
   ],
@@ -34,6 +35,9 @@ export const useAppStore = defineStore({
     },
     setTheme(theme: string) {
       this.theme = theme
-    }
+    },
+    setTargetStation(targetStation: any) {
+      this.targetStation = targetStation
+    },
   },
 })

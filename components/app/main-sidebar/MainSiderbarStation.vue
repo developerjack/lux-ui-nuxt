@@ -1,0 +1,55 @@
+<!--
+* @Component: 
+* @Maintainer: J.K. Yang
+* @Description: 
+-->
+<script setup lang="ts">
+import GithubCard from "@/components/app/main-sidebar/GithubCard.vue";
+import SystemCard from "@/components/app/main-sidebar/SystemCard.vue";
+import MainMenu from "@/components/app/main-sidebar/MainMenu.vue";
+import configs from "@/configs";
+
+import { useAppStore } from "@/stores/app";
+import { Icon } from "@iconify/vue";
+import MainMenuStation from "~/components/app/main-sidebar/MainMenuStation.vue";
+const router = useRouter();
+const appStore = useAppStore();
+const navigation = ref(configs.mainMenu);
+const goHome = ()=>{
+  router.push('/')
+}
+</script>
+
+<template>
+  <v-navigation-drawer
+    v-model="appStore.mainSidebar"
+    v-if="!appStore.isFullScreen"
+    elevation="10"
+    location="left"
+  >
+    <!-- ---------------------------------------------- -->
+    <!---Top Area -->
+    <!-- ---------------------------------------------- -->
+    <template v-slot:prepend>
+      <v-card height="100" class="d-flex align-center justify-center">
+        <img width="160" src="@/assets/images/logo.svg" alt="" style="cursor: pointer;" @click="goHome"/>
+      </v-card>
+    </template>
+    <!-- ---------------------------------------------- -->
+    <!---Menu Area -->
+    <!-- ---------------------------------------------- -->
+    <main-menu-station :menu="navigation.menu"></main-menu-station>
+
+  </v-navigation-drawer>
+</template>
+
+<style scoped lang="scss">
+.logo-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: rgba(var(--v-theme-primary));
+}
+</style>

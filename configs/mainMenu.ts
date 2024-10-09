@@ -89,11 +89,11 @@ export default {
 				type: 'EMS Operator',
 				typeName: 'Operator'
 			},
-			{
-				title: 'Software Park',
-				type: 'EMS Station',
-				typeName: 'Station'
-			},
+			// {
+			// 	title: 'Software Park',
+			// 	type: 'EMS Station',
+			// 	typeName: 'Station'
+			// },
 			// {
 			// 	title:'Iocharger',
 			// 	type:'OCPI SAAS',

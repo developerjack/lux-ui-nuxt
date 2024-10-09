@@ -154,6 +154,9 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: 'layout-station'
+})
 const onGridRate = ref(0)
 const batteryRate = ref(0)
 const PRate = ref(0)
