@@ -12,7 +12,8 @@
 			</template>
 
       <template v-slot:operation="{ item }">
-        <v-btn density="comfortable" icon="mdi-details" @click="handleToStation(item)"></v-btn>
+        <v-btn density="comfortable" icon="mdi-ev-station" @click="handleToStation(item)"></v-btn>
+        <v-btn density="comfortable" icon="mdi-details" style="margin-left: 20px" @click="handleToStationDetail(item)"></v-btn>
       </template>
 		</yhlx-data-table-server>
 	</yhlx-main-container>
@@ -28,7 +29,7 @@ const headers = ref([
 	{ title: "Notes", key: "notes" },
   { title: "Operation", key: "operation", custom: true }
 ]);
-
+//  @click:row="(event, { item }) => router.push(`station/${item.id}`)"
 // 搜索
 const params = reactive({
 	name: '',
@@ -97,7 +98,12 @@ const handleToStation = (item) => {
   appStore.setTargetStation(item.id)
   window.open('/ems-station/dashboard', '_blank');
 }
+
+const handleToStationDetail = (item) => {
+  router.push(`station/${item.id}`)
+}
 </script>
+
 <style lang="scss">
 
 </style>
