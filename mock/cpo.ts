@@ -1,5 +1,5 @@
 import { apiPageResult } from "./mock";
-import { networkNameEnums, countryNameEnums, currencyNameEnums, statusNameEnums, networkRoleEnums, belongTypeEnums, networkStatusEnums, operatorNameEnums } from "@/data/data";
+import { platformNameEnums, countryNameEnums, currencyNameEnums, statusNameEnums, networkRoleEnums, ocpiPlatformStatusEnums, operatorNameEnums } from "@/data/data";
 
 const MockAPI = [
 	{

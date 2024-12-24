@@ -1,18 +1,17 @@
 import { apiPageResult } from "./mock";
-import { networkNameEnums, countryNameEnums, currencyNameEnums, statusNameEnums, networkRoleEnums, belongTypeEnums, networkStatusEnums, operatorNameEnums } from "@/data/data";
+import { platformNameEnums, countryNameEnums, currencyNameEnums, statusNameEnums, networkRoleEnums, ocpiPlatformStatusEnums, operatorNameEnums } from "@/data/data";
 
 const MockAPI = [
 	{
-		url: "/api/saas/network",
+		url: "/api/ocpi-saas/ocpi-platform",
 		method: "get",
 		response: () => {
 			return apiPageResult({
 				"id|+1": 1,
-				"name|1": networkNameEnums,
-				"belongType|1": belongTypeEnums,
-				"roles|1": ['eMSP', 'CPO', 'eMSP, CPO'],
-				"status|1": networkStatusEnums,
-				"notes": "The network from China.",
+				"name|1": platformNameEnums,
+				"roles|1": ['eMSP', 'CPO', 'eMSP, CPO', '-'],
+				"status|1": ocpiPlatformStatusEnums,
+				"notes": "The platform from China.",
 			});
 		}
 	},

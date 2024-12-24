@@ -1,7 +1,7 @@
 import { apiMergeResult, apiPageResult } from "./mock";
 import saas from "./saas";
 import cpo from "./cpo";
-import { statusNameEnums, networkRoleEnums, operatorNameEnums, networkNameEnums } from "@/data/data";
+import { statusNameEnums, networkRoleEnums, operatorNameEnums, platformNameEnums } from "@/data/data";
 
 const MockAPI = [
 	{

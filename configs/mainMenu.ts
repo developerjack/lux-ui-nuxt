@@ -6,7 +6,7 @@ import menuWidget from "./menus/widget.menu";
 // import menuForm from "./menus/form.menu";
 import menuChart from "./menus/chart.menu";
 // import menuTable from "./menus/table.menu";
-import menuSaaS from "./menus/saas.menu";
+import menuOcpiSaaS from "./menus/ocpi-saas.menu";
 import menuEMSP from "./menus/emsp.menu";
 import menuCPO from "./menus/cpo.menu";
 import menuEMSSaas from "./menus/ems-saas";
@@ -30,7 +30,7 @@ function getCurrentMenu(items: Menu[], path: string) : Menu {
 
 export default {
   menu: [
-	  ...menuSaaS,
+	  ...menuOcpiSaaS,
 	  ...menuEMSP,
 	  ...menuCPO,
 	  ...menuEMSSaas,
@@ -60,7 +60,7 @@ export default {
 	getMenus(menuType: string) {
 		switch (menuType) {
 			case "OCPI SAAS":
-				return menuSaaS;
+				return menuOcpiSaaS;
 			case "OCPI eMSP":
 				return menuEMSP;
 			case "OCPI CPO":
@@ -79,36 +79,36 @@ export default {
 	},
 	getCompanies() {
 		return [
-			{
-				title: 'SaaS',
-				type: 'EMS SaaS',
-				typeName: 'SaaS'
-			},
-			{
-				title: 'Iocharger',
-				type: 'EMS Operator',
-				typeName: 'Operator'
-			},
+			// {
+			// 	title: 'SaaS',
+			// 	type: 'EMS SaaS',
+			// 	typeName: 'SaaS'
+			// },
+			// {
+			// 	title: 'Iocharger',
+			// 	type: 'EMS Operator',
+			// 	typeName: 'Operator'
+			// },
 			// {
 			// 	title: 'Software Park',
 			// 	type: 'EMS Station',
 			// 	typeName: 'Station'
 			// },
-			// {
-			// 	title:'Iocharger',
-			// 	type:'OCPI SAAS',
-			// 	typeName: 'SaaS'
-			// },
-			// {
-			// 	title:'EMES',
-			// 	type:'OCPI eMSP',
-			// 	typeName: 'eMSP'
-			// },
-			// {
-			// 	title:'ICS',
-			// 	type:'OCPI CPO',
-			// 	typeName: 'CPO'
-			// },
+			{
+				title:'Iocharger',
+				type:'OCPI SAAS',
+				typeName: 'SaaS'
+			},
+			{
+				title:'EMES',
+				type:'OCPI eMSP',
+				typeName: 'eMSP'
+			},
+			{
+				title:'ICS',
+				type:'OCPI CPO',
+				typeName: 'CPO'
+			},
 			// {
 			// 	title:'Demo',
 			// 	type:'Demo',

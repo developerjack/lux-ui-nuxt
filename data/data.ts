@@ -5,9 +5,8 @@ export const statusNameEnums = ['Enable', 'Disable'];
 export const userStatusEnums = ['Inactive', 'Activate', 'Frozen'];
 export const networkRoleEnums = ['eMSP', 'CPO'];
 export const orgRoleEnums = ['eMSP', 'CPO'];
-export const belongTypeEnums = ['Internal', 'External'];
 export const operatorNameEnums = ['Iocharger', 'ICS', 'EMES', 'HBC', 'EVTap', 'Ocular', 'Entratek', 'NEO', 'Prime'];
-export const networkNameEnums = ['Internal', 'Green Flux', 'EVOASIS', 'exploren', 'Incar'];
+export const platformNameEnums = ['Internal', 'Green Flux', 'EVOASIS', 'exploren', 'Incar'];
 export const timeZoneEnums = [
 	'Australia/Darwin', 'Australia/Sydney', 'America/Argentina/Buenos_Aires', 'Africa/Cairo', 'America/Anchorage',
 	'America/Sao_Paulo', 'Asia/Dhaka', 'Africa/Harare', 'America/St_Johns', 'America/Chicago', 'Asia/Shanghai', 'Africa/Addis_Ababa',
@@ -18,7 +17,7 @@ export const moduleImplEnums = [
 	'Locations-Sender', 'Sessions-Sender', 'CDRs-Sender', 'Tariffs-Sender', 'Tokens-Sender', 'Commands-Sender', 'ChargingProfiles-Sender',
 	'Locations-Receiver', 'Sessions-Receiver', 'CDRs-Receiver', 'Tariffs-Receiver', 'Tokens-Receiver', 'Commands-Receiver', 'ChargingProfiles-Receiver'
 ];
-export const networkStatusEnums = ['not activated', 'Activated', 'abnormal'];
+export const ocpiPlatformStatusEnums = ['Unactivated', 'Activated', 'Abnormal', 'Disable'];
 export const deviceStatusEnums = ['Activated', "Unaudited", 'Not Activated', 'Forbidden'];
 export const ChineseProvince = [{
     province: "北京市",

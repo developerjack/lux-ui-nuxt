@@ -1,5 +1,5 @@
 <template>
-	<yhlx-add-dialog location="Toolbar" title="Add Network">
+	<yhlx-add-dialog location="Toolbar" title="Add OCPI Platform">
 		<template v-slot:content>
 			<v-row class="form">
 				<v-col cols="12" sm="6">
